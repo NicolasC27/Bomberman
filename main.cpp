@@ -1,5 +1,5 @@
 //
-// Created by root on 29/05/17.
+// Created by nicolas on 29/05/17.
 //
 
 
@@ -11,7 +11,7 @@ int main()
   Map test;
   try
     {
-      test.generate();
+      test.generateObjects();
     }  catch (const Ogre::Exception &exception) {
 
       std::cerr << exception.what() << std::endl;

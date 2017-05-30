@@ -5,23 +5,30 @@ set(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/")
 
 # Bien sûr, pour compiler Ogre, il faut le chercher, et définir le répertoire contenant les includes.
 find_package(OGRE REQUIRED)
-include_directories (${OGRE_INCLUDE_DIRS})
+include_directories(${OGRE_INCLUDE_DIRS})
 
 
 find_package(OIS REQUIRED)
-if(NOT OIS_FOUND)
+if (NOT OIS_FOUND)
     message(SEND_ERROR "Failed to find OIS.")
-endif()
+endif ()
 
 #include
 include_directories(includes)
 
 # On définit les sources qu'on veut compiler
 SET(SOURCES
-        main.cpp src/Map.cpp includes/Map.hpp includes/AGameObject.hpp src/AGameObject.cpp )
+        main.cpp
+        src/Map.cpp
+        src/Objects/Wall.cpp
+        includes/Map.hpp
+        includes/AGameObject.hpp
+        includes/Wall.hpp
+        src/Objects/AGameObject.cpp
+        )
 
 # On les compile
-add_executable (
+add_executable(
         Bomberman ${SOURCES}
 )
 
