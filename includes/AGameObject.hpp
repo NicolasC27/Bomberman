@@ -8,20 +8,34 @@
 #include <OgreVector2.h>
 
 class AGameObject {
-  enum object {
+
+ public:
+  enum Object {
     NOTHING,
+    WALL,
+    BLOCK,
     BOMB,
     ITEM,
-    BLOCK,
     CHARACTER
   };
 
- public:
-  AGameObject(Ogre::Vector2 const &pos, object object = NOTHING);
+  enum State {
+    BREAKABLE,
+    UNBREAKABLE
+  };
 
+  AGameObject();
+  AGameObject(Object object = NOTHING);
   virtual ~AGameObject();
 
  private:
+  Object 		_type;
+
+ public:
+  Object 		getType() const;
+  void 			setType(Object type);
+
+  virtual State getState() const = 0;
 };
 
 #endif //BOMBERMAN_AGAMEOBJECT_HPP
