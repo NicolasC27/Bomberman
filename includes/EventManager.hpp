@@ -6,7 +6,6 @@
 #define BOMBERMAN_EVENTMANAGER_HPP
 
 #include <OgreFrameListener.h>
-#include "InputManager.hpp"
 #include <OgreException.h>
 #include <OIS/OIS.h>
 #include <Ogre.h>
