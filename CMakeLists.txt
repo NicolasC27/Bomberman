@@ -25,6 +25,8 @@ SET(SOURCES
         includes/AGameObject.hpp
         includes/Wall.hpp
         src/Objects/AGameObject.cpp
+        src/Controller/EventManager.cpp
+        includes/EventManager.hpp
         )
 
 # On les compile
