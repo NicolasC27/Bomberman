@@ -13,19 +13,19 @@
 #define ERR_MAPSIZE	"Size map too big"
 #define ERR_NBLINEMAP	"The number of rows does not match the number of rows in the map."
 #define NOT_FOUND	"File not found"
-#define FOLDER_MAP	"media/map"
+#define FOLDER_MAP	"media/map/"
 
 class Map
 {
 
  public:
-  Map(std::string const &filename = "media/map/map1");
+  Map(std::string const &filename = "Media/map/map1");
   virtual ~Map();
 
 
  private:
-  std::map<AGameObject *, Ogre::Vector2> 	_objects;
-  std::map<AGameObject *, Ogre::Vector2> 	_character;
+  std::multimap<Ogre::Vector2, AGameObject *> 	_objects;
+  std::multimap<AGameObject *, Ogre::Vector2> 	_character;
  public:
   void 	addCharacter(const Ogre::Vector2 &vector, AGameObject *character);
 

@@ -23,7 +23,7 @@ Map::~Map()
 
 void Map::addObjects(const Ogre::Vector2 &vector, AGameObject *object)
 {
-  _objects.insert(std::pair<AGameObject *, Ogre::Vector2>(object, vector));
+  _objects.insert(std::pair<Ogre::Vector2, AGameObject *>(vector, object));
 }
 
 void 		Map::generateObjects()
@@ -52,6 +52,14 @@ void 		Map::generateObjects()
   if (count != (_size - 1))
     throw Ogre::Exception(Ogre::Exception::ERR_INVALID_STATE,
 			  ERR_NBLINEMAP, _filename);
+  std::multimap<Ogre::Vector2, AGameObject *>::iterator _test = _objects.begin();
+
+  while (_test != _objects.end())
+    {
+      std::cout << _test->first << " : " << _test->second->getState() << std::endl;
+      (_test)++;
+    }
+
 }
 
 void 		Map::generateSpawn()

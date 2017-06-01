@@ -88,7 +88,9 @@ int 		main()
 {
   try
     {
-      test();
+      Map map;
+      map.generateObjects();
+//      test();
     }  catch (const Ogre::Exception &exception) {
 
       std::cerr << exception.what() << std::endl;
