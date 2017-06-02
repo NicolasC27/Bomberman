@@ -63,15 +63,11 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 endif()
 
 SET(SRCS
-		main.cpp
+		src/main.cpp
 		src/Map.cpp
 		src/Objects/Wall.cpp
-		includes/Map.hpp
-		includes/AGameObject.hpp
-		includes/Wall.hpp
 		src/Objects/AGameObject.cpp
 		src/Controller/EventManager.cpp
-		includes/EventManager.hpp
    )
 
 set(HDRS ${SRCS})
