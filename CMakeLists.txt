@@ -62,12 +62,18 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 	set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
 endif()
 
+include_directories(includes)
+
 SET(SRCS
 		src/main.cpp
 		src/Map.cpp
 		src/Objects/Wall.cpp
 		src/Objects/AGameObject.cpp
 		src/Controller/EventManager.cpp
+        includes/AGameObject.hpp
+        includes/EventManager.hpp
+        includes/Map.hpp
+        includes/Wall.hpp
    )
 
 set(HDRS ${SRCS})
