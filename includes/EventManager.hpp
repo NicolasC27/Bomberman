@@ -11,12 +11,14 @@
 #include <OIS/OIS.h>
 #include <Ogre.h>
 
-class EventManager : public Ogre::FrameListener,  public Ogre::WindowEventListener
+class EventManager : public Ogre::FrameListener,  public Ogre::WindowEventListener,
+		     public OIS::JoyStickListener
 {
  private:
   Ogre::RenderWindow 	*mWindow;
   OIS::InputManager 	*mInputManager;
   OIS::Keyboard 	*mKeyboard;
+  OIS::JoyStickListener *mJoystick;
   OIS::Mouse 		*mMouse;
   Ogre::Camera 		*mCamera;
   float mMovementspeed;
@@ -31,6 +33,14 @@ class EventManager : public Ogre::FrameListener,  public Ogre::WindowEventListen
   bool frameStarted(const Ogre::FrameEvent &evt);
   bool frameEnded(const Ogre::FrameEvent &evt);
   bool frameRenderingQueued(const Ogre::FrameEvent &evt);
+
+  bool axisMoved(const OIS::JoyStickEvent &e, int axis);
+  bool sliderMoved(const OIS::JoyStickEvent &e, int sliderID);
+  bool buttonPressed(const OIS::JoyStickEvent &e, int button);
+  bool buttonReleased(const OIS::JoyStickEvent &e, int button);
+  bool vector3Moved(const OIS::JoyStickEvent &arg, int index);
+  bool povMoved(const OIS::JoyStickEvent &arg, int index);
+
 };
 
 

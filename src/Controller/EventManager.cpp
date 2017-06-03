@@ -26,6 +26,14 @@ EventManager::EventManager(Ogre::RenderWindow *Window, Ogre::Camera *camera)
   mMouse = static_cast<OIS::Mouse *>(mInputManager->createInputObject(
 	  OIS::OISMouse, true));
 
+  //todo debug Joystick
+  //  if (mInputManager->getNumberOfDevices(OIS::OISJoyStick) > 0)
+//    {
+//      mJoystick = static_cast<OIS::JoyStick*>( mInputManager->createInputObject( OIS::OISJoyStick, true ) );
+//      mJoystick = static_cast<OIS::JoyStick*>( mInputManager->createInputObject( OIS::OISJoyStick, true ) );
+//      mJoystick = static_cast<OIS::JoyStick*>( mInputManager->createInputObject( OIS::OISJoyStick, true ) );
+//      mJoystick->setEventCallback(this);
+//    }
   windowResized(mWindow);
   Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
 }
@@ -110,5 +118,62 @@ bool EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
   mCamera->pitch(Ogre::Radian(rotY));
 
   mCamera->moveRelative(translate * evt.timeSinceLastFrame * mMovementspeed);
+  return true;
+}
+
+bool EventManager::axisMoved(const OIS::JoyStickEvent &e, int axis)
+{
+  if( e.state.mAxes[axis].abs > 2500 || e.state.mAxes[axis].abs < -2500 )
+    std::cout << std::endl << e.device->vendor() << ". Axis # " << axis << " Value: " << e.state.mAxes[axis].abs;
+}
+
+bool EventManager::buttonPressed(const OIS::JoyStickEvent &e, int button)
+{
+  std::cout << "buttonPressed : " <<  button << std::endl;
+  return true;
+}
+
+bool EventManager::buttonReleased(const OIS::JoyStickEvent &e, int button)
+{
+  std::cout << "buttonReleased : " <<  button << std::endl;
+
+  return true;
+}
+
+bool EventManager::sliderMoved(const OIS::JoyStickEvent &e, int sliderID)
+{
+  std::cout << "sliderMoved : " <<  sliderID << std::endl;
+
+  return true;
+}
+
+bool EventManager::vector3Moved(const OIS::JoyStickEvent &arg, int index)
+{
+  return true;
+}
+
+bool EventManager::povMoved(const OIS::JoyStickEvent &arg, int index)
+{
+  Ogre::Vector3 translate(0,0,0);
+
+  if (arg.state.mPOV[index].direction == arg.state.mPOV->North)
+    {
+      translate += Ogre::Vector3(0, 0, -10);
+    } else
+    if (arg.state.mPOV[index].direction == arg.state.mPOV->South)
+      {
+	translate += Ogre::Vector3(0, 0, 10);
+      } else
+      if (arg.state.mPOV[index].direction == arg.state.mPOV->East)
+	{
+	  translate += Ogre::Vector3(10, 0, 0);
+	} else
+	if (arg.state.mPOV[index].direction == arg.state.mPOV->West)
+	  {
+	    translate += Ogre::Vector3(-10, 0, 0);
+	  }
+
+  mCamera->moveRelative(translate * 0.5);
+
   return true;
 }
