@@ -21,7 +21,7 @@ class EventManager : public Ogre::FrameListener,  public Ogre::WindowEventListen
   OIS::JoyStickListener *mJoystick;
   OIS::Mouse 		*mMouse;
   Ogre::Camera 		*mCamera;
-  float mMovementspeed;
+  float 		mMovementspeed;
 
  public:
   EventManager(Ogre::RenderWindow *, Ogre::Camera *);
