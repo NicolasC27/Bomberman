@@ -69,9 +69,13 @@ SET(SRCS
 		src/Map.cpp
 		src/Objects/Wall.cpp
 		src/Objects/AGameObject.cpp
+        src/Controller/NodeManager.cpp
 		src/Controller/EventManager.cpp
+        src/Controller/GameManager.cpp
+        includes/Controller/GameManager.hpp
+        includes/Controller/EventManager.hpp
+        includes/Controller/NodeManager.hpp
         includes/AGameObject.hpp
-        includes/EventManager.hpp
         includes/Map.hpp
         includes/Wall.hpp
    )
