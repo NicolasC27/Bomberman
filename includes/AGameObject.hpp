@@ -33,35 +33,31 @@ class AGameObject {
   Object 		_type;
 
  public:
-  Object 		getType() const;
-  void 			setType(Object type);
-
-  virtual State 	getState() const = 0;
   virtual std::string 	getName() const = 0;
-
   virtual void		createEntity() = 0;
-  void		setNode(Ogre::SceneNode *node);
-  void 		setPosition(int x, int y, int z);
-  void 		AttachObject();
-  void setObj(Ogre::MovableObject *obj);
+  virtual State 	getState() const = 0;
+
+  void			setNode(Ogre::SceneNode *node);
+  void 			setPosition(int x, int y, int z);
+
+  void 			AttachObject();
+
+  Object 		getType() const;
+  Ogre::MovableObject 	*getObj() const;
+
+  void 			setType(Object type);
+  void 			setObj(Ogre::MovableObject *obj);
+  void 			setSceneManager(Ogre::SceneManager *SceneManager);
 
  protected:
 
-  /**
-   * Last object id
-   */
-  static int 	objectId;
-  int		_id;
+  static int		objectId;
+  int			_id;
 
   Ogre::MovableObject	*_obj;
- public:
-  Ogre::MovableObject *getObj() const;
-
- protected:
   Ogre::SceneManager 	*SceneManager;
   Ogre::SceneNode	*_node;
- public:
-  void setSceneManager(Ogre::SceneManager *SceneManager);
+
 };
 
 #endif //BOMBERMAN_AGAMEOBJECT_HPP
