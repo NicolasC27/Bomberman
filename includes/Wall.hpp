@@ -16,10 +16,14 @@ class Wall : public AGameObject
 
  private:
   State 	_state;
+  std::string	_name;
 
  public:
-  void	setState(State state);
-  State	getState() const;
+  void		setState(State state);
+  State		getState() const;
+  std::string 	getName() const;
 
+ protected:
+  void		createEntity();
 };
 #endif //BOMBERMAN_WALL_H
