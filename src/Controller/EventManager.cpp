@@ -1,9 +1,9 @@
 // Created by nicolas on 01/06/17.
 
 
-#include "EventManager.hpp"
+#include "Controller/EventManager.hpp"
 
-EventManager::EventManager(Ogre::RenderWindow *Window, Ogre::Camera *camera)
+Controller::EventManager::EventManager(Ogre::RenderWindow *Window, Ogre::Camera *camera)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
 
@@ -38,7 +38,7 @@ EventManager::EventManager(Ogre::RenderWindow *Window, Ogre::Camera *camera)
   Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
 }
 
-EventManager::~EventManager()
+Controller::EventManager::~EventManager()
 {
 
   mInputManager->destroyInputObject(mKeyboard);
@@ -49,7 +49,7 @@ EventManager::~EventManager()
   windowClosed(mWindow);
 }
 
-void EventManager::windowClosed(Ogre::RenderWindow *windows)
+void Controller::EventManager::windowClosed(Ogre::RenderWindow *windows)
 {
   if (windows == mWindow)
     {
@@ -64,7 +64,7 @@ void EventManager::windowClosed(Ogre::RenderWindow *windows)
     }
 }
 
-void EventManager::windowResized(Ogre::RenderWindow *windows)
+void Controller::EventManager::windowResized(Ogre::RenderWindow *windows)
 {
   unsigned int width, height, depth;
   int left, top;
@@ -75,19 +75,19 @@ void EventManager::windowResized(Ogre::RenderWindow *windows)
   ms.height = height;
 }
 
-bool EventManager::frameStarted(const Ogre::FrameEvent &evt)
+bool Controller::EventManager::frameStarted(const Ogre::FrameEvent &evt)
 {
   return true;
 }
 
 
-bool EventManager::frameEnded(const Ogre::FrameEvent &evt)
+bool Controller::EventManager::frameEnded(const Ogre::FrameEvent &evt)
 {
   return true;
 }
 
 
-bool EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
+bool Controller::EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 {
   Ogre::Vector3 translate(0, 0, 0);
 
@@ -121,38 +121,38 @@ bool EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
   return true;
 }
 
-bool EventManager::axisMoved(const OIS::JoyStickEvent &e, int axis)
+bool Controller::EventManager::axisMoved(const OIS::JoyStickEvent &e, int axis)
 {
   if( e.state.mAxes[axis].abs > 2500 || e.state.mAxes[axis].abs < -2500 )
     std::cout << std::endl << e.device->vendor() << ". Axis # " << axis << " Value: " << e.state.mAxes[axis].abs;
 }
 
-bool EventManager::buttonPressed(const OIS::JoyStickEvent &e, int button)
+bool Controller::EventManager::buttonPressed(const OIS::JoyStickEvent &e, int button)
 {
   std::cout << "buttonPressed : " <<  button << std::endl;
   return true;
 }
 
-bool EventManager::buttonReleased(const OIS::JoyStickEvent &e, int button)
+bool Controller::EventManager::buttonReleased(const OIS::JoyStickEvent &e, int button)
 {
   std::cout << "buttonReleased : " <<  button << std::endl;
 
   return true;
 }
 
-bool EventManager::sliderMoved(const OIS::JoyStickEvent &e, int sliderID)
+bool Controller::EventManager::sliderMoved(const OIS::JoyStickEvent &e, int sliderID)
 {
   std::cout << "sliderMoved : " <<  sliderID << std::endl;
 
   return true;
 }
 
-bool EventManager::vector3Moved(const OIS::JoyStickEvent &arg, int index)
+bool Controller::EventManager::vector3Moved(const OIS::JoyStickEvent &arg, int index)
 {
   return true;
 }
 
-bool EventManager::povMoved(const OIS::JoyStickEvent &arg, int index)
+bool Controller::EventManager::povMoved(const OIS::JoyStickEvent &arg, int index)
 {
   Ogre::Vector3 translate(0,0,0);
 
