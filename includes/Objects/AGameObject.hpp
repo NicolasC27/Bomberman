@@ -5,6 +5,8 @@
 #ifndef BOMBERMAN_AGAMEOBJECT_HPP
 #define BOMBERMAN_AGAMEOBJECT_HPP
 
+
+#include <OgreSceneManager.h>
 #include <OgreVector2.h>
 #include <OgreMovableObject.h>
 
@@ -33,10 +35,6 @@ class AGameObject {
   Object 		_type;
 
  public:
-  virtual std::string 	getName() const = 0;
-  virtual void		createEntity() = 0;
-  virtual State 	getState() const = 0;
-
   void			setNode(Ogre::SceneNode *node);
   void 			setPosition(int x, int y, int z);
 
@@ -58,6 +56,17 @@ class AGameObject {
   Ogre::SceneManager 	*SceneManager;
   Ogre::SceneNode	*_node;
 
+ public:
+  virtual void		createEntity() = 0;
+
+  virtual std::string 	getName() const = 0;
+  virtual State 	getState() const = 0;
+  virtual std::string	getMaterialName() const = 0;
+  virtual Ogre::Vector3 getScale() const = 0;
+  virtual double	getPositionY() const = 0;
+
+  virtual Ogre::SceneManager::PrefabType	getMeshPrefab() const = 0;
+  virtual std::string				getMeshName() const = 0;
 };
 
 #endif //BOMBERMAN_AGAMEOBJECT_HPP
