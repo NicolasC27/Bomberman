@@ -3,38 +3,30 @@
 //
 
 
-#include "Map.hpp"
-#include <Ogre.h>
-#include "Controller/EventManager.hpp"
-#include "Controller/GameManager.hpp"
+#include "Common/Manager/GameManager.hpp"
 
-using namespace Controller;
-using namespace Ogre;
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+#define WIN32_LEAN_AND_MEAN
+#include "windows.h"
 
-static int		test()
+
+INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT )
+#else
+int main(int argc, char **argv)
+#endif
 {
-  GameManager		Game;
+  GameManager app;
 
-  Map map("media/map/map1", Game.getMSceneManager(), Game.getNodes());
-  map.generateObjects();
-
-  EventManager* myListener = new EventManager(Game.getMWindow(), Game.getMCamera());
-
-  Game.getMRoot()->addFrameListener(myListener);
-
-  Game.getMRoot()->startRendering();
-
-  delete Game.getMRoot();
-}
-
-int 			main()
-{
   try
     {
-      test();
-    }  catch (const Ogre::Exception &exception) {
-
-      std::cerr << exception.what() << std::endl;
-      return (EXIT_FAILURE);
+      app.run();
     }
+  catch (Ogre::Exception &e) {
+	#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+      		MessageBox( NULL, e.getFullDescription().c_str(), "An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
+	#else
+      		std::cerr << "An exception has occured: " << e.getFullDescription();
+	#endif
+    }
+  return 0;
 }
