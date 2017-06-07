@@ -68,16 +68,22 @@ SET(SRCS
 		src/main.cpp
 		src/Map.cpp
 		src/Objects/Wall.cpp
+        src/Objects/Ground.cpp
 		src/Objects/AGameObject.cpp
-        src/Controller/NodeManager.cpp
-		src/Controller/EventManager.cpp
-        src/Controller/GameManager.cpp
-        includes/Controller/GameManager.hpp
+        src/Common/Manager/NodeManager.cpp
+        src/Common/Manager/CameraManager.cpp
+        src/Common/Manager/GameManager.cpp
+        src/Common/Manager/ConfigManager.cpp
+        src/Controller/EventManager.cpp
+        includes/Common/Manager/GameManager.hpp
+        includes/Common/Manager/NodeManager.hpp
+        includes/Common/Manager/CameraManager.hpp
+        includes/Common/Manager/ConfigManager.hpp
         includes/Controller/EventManager.hpp
-        includes/Controller/NodeManager.hpp
-        includes/AGameObject.hpp
+        includes/Objects/AGameObject.hpp
+        includes/Objects/Ground.hpp
         includes/Map.hpp
-        includes/Wall.hpp
+        includes/Objects/Wall.hpp
    )
 
 set(HDRS ${SRCS})
