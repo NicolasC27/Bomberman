@@ -1,4 +1,3 @@
-
 project(Bomberman)
 cmake_minimum_required(VERSION 2.6)
 
@@ -80,7 +79,8 @@ SET(SRCS
         includes/Common/Manager/CameraManager.hpp
         includes/Common/Manager/ConfigManager.hpp
         includes/Controller/EventManager.hpp
-        includes/Objects/AGameObject.hpp
+        includes/Interfaces/AGameObject.hpp
+        includes/Interfaces/ACharacter.hpp
         includes/Objects/Ground.hpp
         includes/Map.hpp
         includes/Objects/Wall.hpp

@@ -9,7 +9,7 @@
 #include <OgreException.h>
 #include <map>
 
-#include "Objects/AGameObject.hpp"
+#include "Interfaces/AGameObject.hpp"
 #include "Common/Manager/GameManager.hpp"
 #include "Common/Manager/NodeManager.hpp"
 

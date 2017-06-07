@@ -14,13 +14,11 @@ class ConfigManager {
   Ogre::RenderSystem 	*render;
   Ogre::ConfigFile	configFile;
 
-
  public:
   ConfigManager(Ogre::Root *Root);
   virtual ~ConfigManager();
 
   Ogre::Root 		*getRoot() const;
-
 
  private:
   bool 			initializeConfigRender();

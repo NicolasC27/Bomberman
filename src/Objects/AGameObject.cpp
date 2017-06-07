@@ -3,7 +3,7 @@
 //
 
 #include <OgreSceneManager.h>
-#include "Objects/AGameObject.hpp"
+#include "Interfaces/AGameObject.hpp"
 
 int AGameObject::objectId = 1;
 

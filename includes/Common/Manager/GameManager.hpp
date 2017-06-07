@@ -24,8 +24,6 @@ class GameManager
   CameraManager		*Camera;
   NodeManager 		*_nodes;
 
-
-
  public:
   GameManager();
   virtual ~GameManager();

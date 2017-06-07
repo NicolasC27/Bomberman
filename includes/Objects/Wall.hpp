@@ -6,7 +6,7 @@
 #define BOMBERMAN_GROUND_H
 
 #include <OgreSceneManager.h>
-#include "Objects/AGameObject.hpp"
+#include "Interfaces/AGameObject.hpp"
 
 class Wall : public AGameObject
 {
