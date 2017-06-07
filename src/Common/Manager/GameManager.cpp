@@ -12,9 +12,21 @@ using namespace Controller;
 
 GameManager::GameManager()
 {
-  ConfigManager configManager(_Root);
+//  ConfigManager configManager(_Root);
+//
+//  _Root = configManager.getRoot();
+  _Root = new Ogre::Root;
 
-  _Root = configManager.getRoot();
+  // Configures the application
+  if (!_Root->restoreConfig())
+    _Root->showConfigDialog();
+  _Root->saveConfig();
+  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/materials", "FileSystem");
+  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/materials/scripts", "FileSystem");
+  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/materials/textures", "FileSystem");
+  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/models", "FileSystem");
+
+  Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
   createRenderWindow();
   initializeResources();
   setupScene();
