@@ -49,7 +49,7 @@ Controller::EventManager::~EventManager()
   windowClosed(mWindow);
 }
 
-void Controller::EventManager::windowClosed(Ogre::RenderWindow *windows)
+void 			Controller::EventManager::windowClosed(Ogre::RenderWindow *windows)
 {
   if (windows == mWindow)
     {
@@ -64,7 +64,7 @@ void Controller::EventManager::windowClosed(Ogre::RenderWindow *windows)
     }
 }
 
-void Controller::EventManager::windowResized(Ogre::RenderWindow *windows)
+void 			Controller::EventManager::windowResized(Ogre::RenderWindow *windows)
 {
   unsigned int width, height, depth;
   int left, top;
@@ -75,21 +75,21 @@ void Controller::EventManager::windowResized(Ogre::RenderWindow *windows)
   ms.height = height;
 }
 
-bool Controller::EventManager::frameStarted(const Ogre::FrameEvent &evt)
+bool 			Controller::EventManager::frameStarted(const Ogre::FrameEvent &evt)
 {
   return true;
 }
 
 
-bool Controller::EventManager::frameEnded(const Ogre::FrameEvent &evt)
+bool 			Controller::EventManager::frameEnded(const Ogre::FrameEvent &evt)
 {
   return true;
 }
 
 
-bool Controller::EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
+bool 			Controller::EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 {
-  Ogre::Vector3 translate(0, 0, 0);
+  Ogre::Vector3 	translate(0, 0, 0);
 
   if (mWindow->isClosed())
     return false;
@@ -117,42 +117,42 @@ bool Controller::EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
   mCamera->yaw(Ogre::Radian(rotX));
   mCamera->pitch(Ogre::Radian(rotY));
 
-  mCamera->moveRelative(translate * evt.timeSinceLastFrame * mMovementspeed);
+  mCamera->moveRelative(translate * evt.timeSinceLastFrame * mMovementspeed * 5);
   return true;
 }
 
-bool Controller::EventManager::axisMoved(const OIS::JoyStickEvent &e, int axis)
+bool 			Controller::EventManager::axisMoved(const OIS::JoyStickEvent &e, int axis)
 {
   if( e.state.mAxes[axis].abs > 2500 || e.state.mAxes[axis].abs < -2500 )
     std::cout << std::endl << e.device->vendor() << ". Axis # " << axis << " Value: " << e.state.mAxes[axis].abs;
 }
 
-bool Controller::EventManager::buttonPressed(const OIS::JoyStickEvent &e, int button)
+bool 			Controller::EventManager::buttonPressed(const OIS::JoyStickEvent &e, int button)
 {
   std::cout << "buttonPressed : " <<  button << std::endl;
   return true;
 }
 
-bool Controller::EventManager::buttonReleased(const OIS::JoyStickEvent &e, int button)
+bool 			Controller::EventManager::buttonReleased(const OIS::JoyStickEvent &e, int button)
 {
   std::cout << "buttonReleased : " <<  button << std::endl;
 
   return true;
 }
 
-bool Controller::EventManager::sliderMoved(const OIS::JoyStickEvent &e, int sliderID)
+bool 			Controller::EventManager::sliderMoved(const OIS::JoyStickEvent &e, int sliderID)
 {
   std::cout << "sliderMoved : " <<  sliderID << std::endl;
 
   return true;
 }
 
-bool Controller::EventManager::vector3Moved(const OIS::JoyStickEvent &arg, int index)
+bool 			Controller::EventManager::vector3Moved(const OIS::JoyStickEvent &arg, int index)
 {
   return true;
 }
 
-bool Controller::EventManager::povMoved(const OIS::JoyStickEvent &arg, int index)
+bool 			Controller::EventManager::povMoved(const OIS::JoyStickEvent &arg, int index)
 {
   Ogre::Vector3 translate(0,0,0);
 
