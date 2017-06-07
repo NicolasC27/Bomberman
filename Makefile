@@ -150,6 +150,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/Controller/EventManager.o: src/Controller/EventManager.cpp.o
+
+.PHONY : src/Controller/EventManager.o
+
+# target to build an object file
+src/Controller/EventManager.cpp.o:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/src/Controller/EventManager.cpp.o
+.PHONY : src/Controller/EventManager.cpp.o
+
+src/Controller/EventManager.i: src/Controller/EventManager.cpp.i
+
+.PHONY : src/Controller/EventManager.i
+
+# target to preprocess a source file
+src/Controller/EventManager.cpp.i:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/src/Controller/EventManager.cpp.i
+.PHONY : src/Controller/EventManager.cpp.i
+
+src/Controller/EventManager.s: src/Controller/EventManager.cpp.s
+
+.PHONY : src/Controller/EventManager.s
+
+# target to generate assembly for a file
+src/Controller/EventManager.cpp.s:
+	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/src/Controller/EventManager.cpp.s
+.PHONY : src/Controller/EventManager.cpp.s
+
 src/Map.o: src/Map.cpp.o
 
 .PHONY : src/Map.o
@@ -243,6 +270,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/Controller/EventManager.o"
+	@echo "... src/Controller/EventManager.i"
+	@echo "... src/Controller/EventManager.s"
 	@echo "... src/Map.o"
 	@echo "... src/Map.i"
 	@echo "... src/Map.s"
