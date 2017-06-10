@@ -1,9 +1,8 @@
 // Created by nicolas on 01/06/17.
 
-
 #include "Controller/EventManager.hpp"
 
-Controller::EventManager::EventManager(Ogre::RenderWindow *Window, Ogre::Camera *camera)
+EventManager::EventManager(MapManager *map, Ogre::RenderWindow *Window, Ogre::Camera *camera) : _map(map)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
 
@@ -38,7 +37,7 @@ Controller::EventManager::EventManager(Ogre::RenderWindow *Window, Ogre::Camera 
   Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
 }
 
-Controller::EventManager::~EventManager()
+EventManager::~EventManager()
 {
 
   mInputManager->destroyInputObject(mKeyboard);
@@ -49,7 +48,7 @@ Controller::EventManager::~EventManager()
   windowClosed(mWindow);
 }
 
-void 			Controller::EventManager::windowClosed(Ogre::RenderWindow *windows)
+void 			EventManager::windowClosed(Ogre::RenderWindow *windows)
 {
   if (windows == mWindow)
     {
@@ -64,7 +63,7 @@ void 			Controller::EventManager::windowClosed(Ogre::RenderWindow *windows)
     }
 }
 
-void 			Controller::EventManager::windowResized(Ogre::RenderWindow *windows)
+void 			EventManager::windowResized(Ogre::RenderWindow *windows)
 {
   unsigned int width, height, depth;
   int left, top;
@@ -75,19 +74,19 @@ void 			Controller::EventManager::windowResized(Ogre::RenderWindow *windows)
   ms.height = height;
 }
 
-bool 			Controller::EventManager::frameStarted(const Ogre::FrameEvent &evt)
+bool 			EventManager::frameStarted(const Ogre::FrameEvent &evt)
 {
   return true;
 }
 
 
-bool 			Controller::EventManager::frameEnded(const Ogre::FrameEvent &evt)
+bool 			EventManager::frameEnded(const Ogre::FrameEvent &evt)
 {
   return true;
 }
 
 
-bool 			Controller::EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
+bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 {
   Ogre::Vector3 	translate(0, 0, 0);
 
@@ -96,21 +95,61 @@ bool 			Controller::EventManager::frameRenderingQueued(const Ogre::FrameEvent &e
   mKeyboard->capture();
   mMouse->capture();
 
+  float mMoveScale;
+  Ogre::Degree mRotScale;
+  Ogre::Real mTimeUntilNextToggle;
+  Ogre::Real mMoveSpeed;
+  Ogre::Degree mRotateSpeed;
+
+  if (mTimeUntilNextToggle >= 0)
+    mTimeUntilNextToggle -= evt.timeSinceLastFrame;
+
+  mMoveScale = mMoveSpeed * evt.timeSinceLastFrame;
+  mRotScale = mRotateSpeed * evt.timeSinceLastFrame;
+
+  Ogre::Radian mRotX, mRotY;
+  mRotX = 0;
+  mRotY = 0;
+
+  Ogre::Vector3 mTranslateVector;
+  mTranslateVector = Ogre::Vector3::ZERO;
+
 
   if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
     return false;
 
   if (mKeyboard->isKeyDown(OIS::KC_W))
-    translate += Ogre::Vector3(0, 0, -10);
+    _map->move(Ogre::Vector3(0, 0, 1), evt);
 
   if (mKeyboard->isKeyDown(OIS::KC_S))
-    translate += Ogre::Vector3(0, 0, 10);
+    _map->move(Ogre::Vector3(0, 0, -1), evt);
 
   if (mKeyboard->isKeyDown(OIS::KC_A))
-    translate += Ogre::Vector3(-10, 0, 0);
+    _map->move(Ogre::Vector3(1, 0, 0), evt);
 
   if (mKeyboard->isKeyDown(OIS::KC_D))
-    translate += Ogre::Vector3(10, 0, 0);
+    _map->move(Ogre::Vector3(-1, 0, 0), evt);
+
+
+
+//
+//  if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
+//    return false;
+//
+//  if (mKeyboard->isKeyDown(OIS::KC_W))
+//    translate += Ogre::Vector3(0, 0, -10);
+//
+//  if (mKeyboard->isKeyDown(OIS::KC_S))
+//    translate += Ogre::Vector3(0, 0, 10);
+//
+//  if (mKeyboard->isKeyDown(OIS::KC_A))
+//    translate += Ogre::Vector3(-10, 0, 0);
+//
+//  if (mKeyboard->isKeyDown(OIS::KC_D))
+//    translate += Ogre::Vector3(10, 0, 0);
+//
+
+
 
   float rotX = mMouse->getMouseState().X.rel * evt.timeSinceLastFrame * -1;
   float rotY = mMouse->getMouseState().Y.rel * evt.timeSinceLastFrame * -1;
@@ -121,38 +160,38 @@ bool 			Controller::EventManager::frameRenderingQueued(const Ogre::FrameEvent &e
   return true;
 }
 
-bool 			Controller::EventManager::axisMoved(const OIS::JoyStickEvent &e, int axis)
+bool 			EventManager::axisMoved(const OIS::JoyStickEvent &e, int axis)
 {
   if( e.state.mAxes[axis].abs > 2500 || e.state.mAxes[axis].abs < -2500 )
     std::cout << std::endl << e.device->vendor() << ". Axis # " << axis << " Value: " << e.state.mAxes[axis].abs;
 }
 
-bool 			Controller::EventManager::buttonPressed(const OIS::JoyStickEvent &e, int button)
+bool 			EventManager::buttonPressed(const OIS::JoyStickEvent &e, int button)
 {
   std::cout << "buttonPressed : " <<  button << std::endl;
   return true;
 }
 
-bool 			Controller::EventManager::buttonReleased(const OIS::JoyStickEvent &e, int button)
+bool 			EventManager::buttonReleased(const OIS::JoyStickEvent &e, int button)
 {
   std::cout << "buttonReleased : " <<  button << std::endl;
 
   return true;
 }
 
-bool 			Controller::EventManager::sliderMoved(const OIS::JoyStickEvent &e, int sliderID)
+bool 			EventManager::sliderMoved(const OIS::JoyStickEvent &e, int sliderID)
 {
   std::cout << "sliderMoved : " <<  sliderID << std::endl;
 
   return true;
 }
 
-bool 			Controller::EventManager::vector3Moved(const OIS::JoyStickEvent &arg, int index)
+bool 			EventManager::vector3Moved(const OIS::JoyStickEvent &arg, int index)
 {
   return true;
 }
 
-bool 			Controller::EventManager::povMoved(const OIS::JoyStickEvent &arg, int index)
+bool 			EventManager::povMoved(const OIS::JoyStickEvent &arg, int index)
 {
   Ogre::Vector3 translate(0,0,0);
 

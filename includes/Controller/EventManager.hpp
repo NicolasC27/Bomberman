@@ -5,45 +5,48 @@
 #ifndef BOMBERMAN_EVENTMANAGER_HPP
 #define BOMBERMAN_EVENTMANAGER_HPP
 
+class EventManager;
+
 #include <OgreFrameListener.h>
 #include <OgreException.h>
 #include <OIS/OIS.h>
 #include <Ogre.h>
+#include "MapManager.hpp"
 
-namespace Controller
+class EventManager
+	: public Ogre::FrameListener, public Ogre::WindowEventListener,
+	  public OIS::JoyStickListener
 {
-  class EventManager
-	  : public Ogre::FrameListener, public Ogre::WindowEventListener,
-	    public OIS::JoyStickListener
-  {
-   private:
-    Ogre::RenderWindow 		*mWindow;
-    OIS::InputManager		*mInputManager;
-    OIS::Keyboard 		*mKeyboard;
-    OIS::JoyStickListener 	*mJoystick;
-    OIS::Mouse 			*mMouse;
-    Ogre::Camera 		*mCamera;
-    float 			mMovementspeed;
+ private:
+  Ogre::RenderWindow 		*mWindow;
+  OIS::InputManager		*mInputManager;
+  OIS::Keyboard 		*mKeyboard;
+  OIS::JoyStickListener 	*mJoystick;
+  OIS::Mouse 			*mMouse;
+  Ogre::Camera 			*mCamera;
+  float 			mMovementspeed;
+  MapManager			*_map;
 
-   public:
-    EventManager(Ogre::RenderWindow *, Ogre::Camera *);
+ public:
 
-    ~EventManager();
 
-    void windowClosed(Ogre::RenderWindow *windows);
-    void windowResized(Ogre::RenderWindow *wnd);
+  EventManager(MapManager *, Ogre::RenderWindow *, Ogre::Camera *);
 
-    bool frameStarted(const Ogre::FrameEvent &evt);
-    bool frameEnded(const Ogre::FrameEvent &evt);
-    bool frameRenderingQueued(const Ogre::FrameEvent &evt);
+  ~EventManager();
 
-    bool axisMoved(const OIS::JoyStickEvent &e, int axis);
-    bool sliderMoved(const OIS::JoyStickEvent &e, int sliderID);
-    bool buttonPressed(const OIS::JoyStickEvent &e, int button);
-    bool buttonReleased(const OIS::JoyStickEvent &e, int button);
-    bool vector3Moved(const OIS::JoyStickEvent &arg, int index);
-    bool povMoved(const OIS::JoyStickEvent &arg, int index);
-  };
-}
+  void windowClosed(Ogre::RenderWindow *windows);
+  void windowResized(Ogre::RenderWindow *wnd);
+
+  bool frameStarted(const Ogre::FrameEvent &evt);
+  bool frameEnded(const Ogre::FrameEvent &evt);
+  bool frameRenderingQueued(const Ogre::FrameEvent &evt);
+
+  bool axisMoved(const OIS::JoyStickEvent &e, int axis);
+  bool sliderMoved(const OIS::JoyStickEvent &e, int sliderID);
+  bool buttonPressed(const OIS::JoyStickEvent &e, int button);
+  bool buttonReleased(const OIS::JoyStickEvent &e, int button);
+  bool vector3Moved(const OIS::JoyStickEvent &arg, int index);
+  bool povMoved(const OIS::JoyStickEvent &arg, int index);
+};
 
 #endif //BOMBERMAN_EVENTMANAGER_HPP
