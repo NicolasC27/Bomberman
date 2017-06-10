@@ -25,7 +25,7 @@ material Objects/Cube/Block
 
                              texture_unit
                                         {
-                                            texture Crate.jpg
+                                            texture crate.jpg
 
                                         }
                 }
