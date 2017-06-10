@@ -32,7 +32,7 @@ material mutant_M
             depth_check on
             depth_func less_equal
             depth_write on
-            illumination_stage 
+            illumination_stage
             light_clip_planes off
             light_scissor off
             lighting on
@@ -43,14 +43,14 @@ material mutant_M
             shading gouraud
             transparent_sorting on
 
-            texture_unit 
+            texture_unit
             {
                 texture Mutant_diffuse.png
                 tex_address_mode wrap
                 scale 1.0 1.0
                 colour_op modulate
             }
-            texture_unit 
+            texture_unit
             {
                 texture Mutant_normal.png
                 tex_address_mode wrap
