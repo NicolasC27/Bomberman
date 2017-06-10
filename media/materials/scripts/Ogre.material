@@ -66,3 +66,51 @@ material Examples/GrassFloor
         }
 }
 
+
+material tux
+{
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 0.500000 0.500000 0.500000 1.000000
+			diffuse 0.800000 0.800000 0.750068 1.000000
+			specular 0.162957 0.175440 0.206648 1.000000 12.500000
+			emissive 0.000000 0.000000 0.000000 1.000000
+			texture_unit
+			{
+				texture tux_texture_color.png
+				tex_address_mode wrap
+				filtering trilinear
+				colour_op alpha_blend
+
+			}
+			texture_unit Color
+			{
+			}
+			texture_unit
+			{
+				texture tux_texture.png
+				tex_address_mode wrap
+				filtering trilinear
+				//colour_op alpha_blend
+				colour_op_ex add src_current src_texture
+			}
+		}
+	}
+}
+
+material tux_red : tux
+{
+	technique
+ 	{
+	    pass
+	    {
+			texture_unit Color
+			{
+				colour_op_ex modulate  src_current  src_manual 1 0 0 0
+			}
+	    }
+	}
+}
