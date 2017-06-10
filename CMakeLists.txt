@@ -20,7 +20,8 @@ include_directories(includes)
 SET(SOURCES
         main.cpp
         src/Map.cpp
-        src/Objects/Wall.cpp
+	src/collision.cpp
+	src/Objects/Wall.cpp
         includes/Map.hpp
         includes/AGameObject.hpp
         includes/Wall.hpp

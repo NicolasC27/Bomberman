@@ -1,0 +1,25 @@
+00:28:51: Creating resource group General
+00:28:51: Creating resource group Internal
+00:28:51: Creating resource group Autodetect
+00:28:51: SceneManagerFactory for type 'DefaultSceneManager' registered.
+00:28:51: Registering ResourceManager for type Material
+00:28:51: Registering ResourceManager for type Mesh
+00:28:51: Registering ResourceManager for type Skeleton
+00:28:51: MovableObjectFactory for type 'ParticleSystem' registered.
+00:28:51: ArchiveFactory for archive type FileSystem registered.
+00:28:51: ArchiveFactory for archive type Zip registered.
+00:28:51: ArchiveFactory for archive type EmbeddedZip registered.
+00:28:51: DDS codec registering
+00:28:51: FreeImage version: 3.15.3
+00:28:51: This program uses FreeImage, a free, open source image library supporting all common bitmap formats. See http://freeimage.sourceforge.net for details
+00:28:51: Supported formats: bmp,ico,jpg,jif,jpeg,jpe,jng,koa,iff,lbm,mng,pbm,pbm,pcd,pcx,pgm,pgm,png,ppm,ppm,ras,tga,targa,tif,tiff,wap,wbmp,wbm,psd,cut,xbm,xpm,gif,hdr,g3,sgi,exr,j2k,j2c,jp2,pfm,pct,pict,pic
+00:28:51: Registering ResourceManager for type HighLevelGpuProgram
+00:28:51: Registering ResourceManager for type Compositor
+00:28:51: MovableObjectFactory for type 'Entity' registered.
+00:28:51: MovableObjectFactory for type 'Light' registered.
+00:28:51: MovableObjectFactory for type 'BillboardSet' registered.
+00:28:51: MovableObjectFactory for type 'ManualObject' registered.
+00:28:51: MovableObjectFactory for type 'BillboardChain' registered.
+00:28:51: MovableObjectFactory for type 'RibbonTrail' registered.
+00:28:51: Loading library /usr/local/lib/OGRE/RenderSystem_GL
+00:28:51: OGRE EXCEPTION(7:InternalErrorException): Could not load dynamic library /usr/local/lib/OGRE/RenderSystem_GL.  System Error: libboost_thread.so.1.63.0: cannot open shared object file: No such file or directory in DynLib::load at /home/guilbo_m/ogre/OgreMain/src/OgreDynLib.cpp (line 109)

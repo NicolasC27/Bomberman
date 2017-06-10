@@ -6,6 +6,7 @@
 #include "Map.hpp"
 #include <Ogre.h>
 #include "EventManager.hpp"
+#include "collision.hh"
 
 using namespace Ogre;
 
@@ -86,14 +87,20 @@ static int		test()
 
 int 		main()
 {
-  try
+  Collision	cercle(2.0);
+  Collision	parall(Ogre::Vector2(2, 2));
+
+  cercle.setOrigin(Ogre::Vector2(1, 2));
+  parall.setOrigin(Ogre::Vector2(0, 0));
+  std::cout << "collision ? " << (cercle == parall) << std::endl;
+  /*  try
     {
       Map map;
-      map.generateObjects();
-//      test();
+      //      map.generateObjects();
+      //      test();
     }  catch (const Ogre::Exception &exception) {
 
       std::cerr << exception.what() << std::endl;
       return (EXIT_FAILURE);
-    }
+      }*/
 }

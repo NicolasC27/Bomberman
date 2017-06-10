@@ -5,7 +5,7 @@
 // Login   <guilbo_m@epitech.net>
 // 
 // Started on  Wed May 31 13:32:38 2017 Mathis Guilbon
-// Last update Thu Jun  1 19:32:33 2017 Mathis Guilbon
+// Last update Sun Jun 11 00:44:47 2017 Mathis Guilbon
 //
 
 #include "collision.hh"
@@ -56,7 +56,6 @@ bool			Collision::operator==(Collision const &with)
       if (this->collideType[i] == this->_type + with.getType())
 	break;
     }
-  std::cout << "op n°" << i << std::endl;
   if (i < this->collideType.size())
     return ((this->*(this->doesCollide[i]))(with));
   // type inconnue ou non géré ?
@@ -83,7 +82,7 @@ Ogre::Vector2		Collision::getOrigin() const
   return (this->_origin);
 }
 
-void			Collision::setOrigin(Ogre::Vector2 const v)
+void			Collision::setOrigin(Ogre::Vector2 const &v)
 {
   this->_origin = v;
 }

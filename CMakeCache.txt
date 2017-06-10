@@ -280,13 +280,13 @@ OGRE_Plugin_BSPSceneManager_LIBRARY_REL:FILEPATH=/home/guilbo_m/ogre/lib/Plugin_
 OGRE_Plugin_CgProgramManager_INCLUDE_DIR:PATH=OGRE_Plugin_CgProgramManager_INCLUDE_DIR-NOTFOUND
 
 //x
-OGRE_Plugin_CgProgramManager_LIBRARY_DBG:FILEPATH=OGRE_Plugin_CgProgramManager_LIBRARY_DBG-NOTFOUND
+OGRE_Plugin_CgProgramManager_LIBRARY_DBG:FILEPATH=/usr/local/lib/OGRE/Plugin_CgProgramManager.so
 
 //x
 OGRE_Plugin_CgProgramManager_LIBRARY_FWK:STRING=NOTFOUND
 
 //x
-OGRE_Plugin_CgProgramManager_LIBRARY_REL:FILEPATH=OGRE_Plugin_CgProgramManager_LIBRARY_REL-NOTFOUND
+OGRE_Plugin_CgProgramManager_LIBRARY_REL:FILEPATH=/usr/local/lib/OGRE/Plugin_CgProgramManager.so
 
 //x
 OGRE_Plugin_OctreeSceneManager_INCLUDE_DIR:PATH=/usr/local/include/OGRE/Plugins/OctreeSceneManager
@@ -505,7 +505,7 @@ CMAKE_CACHEFILE_DIR:INTERNAL=/home/guilbo_m/rendu/cpp/cpp_indie_studio
 //Major version of cmake used to create the current loaded cache
 CMAKE_CACHE_MAJOR_VERSION:INTERNAL=3
 //Minor version of cmake used to create the current loaded cache
-CMAKE_CACHE_MINOR_VERSION:INTERNAL=6
+CMAKE_CACHE_MINOR_VERSION:INTERNAL=8
 //Patch version of cmake used to create the current loaded cache
 CMAKE_CACHE_PATCH_VERSION:INTERNAL=1
 //ADVANCED property for variable: CMAKE_COLOR_MAKEFILE
@@ -599,6 +599,8 @@ CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
 CMAKE_OBJDUMP-ADVANCED:INTERNAL=1
+//Platform information initialized
+CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_RANLIB
 CMAKE_RANLIB-ADVANCED:INTERNAL=1
 //Path to CMake installation.
@@ -634,7 +636,7 @@ CMAKE_UNAME:INTERNAL=/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding PkgConfig
-FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.29.1()]
+FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.29.2()]
 //ADVANCED property for variable: OGRE_CONFIG_INCLUDE_DIR
 OGRE_CONFIG_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OGRE_INCLUDE_DIR
@@ -885,6 +887,8 @@ _Boost_LIBRARY_DIR_RELEASE_LAST:INTERNAL=/usr/lib64
 _Boost_NAMESPACE_LAST:INTERNAL=boost
 //Last used Boost_USE_MULTITHREADED value.
 _Boost_USE_MULTITHREADED_LAST:INTERNAL=TRUE
+__pkg_config_arguments_OGRE_PKGC:INTERNAL=OGRE
+__pkg_config_arguments_OIS_PKGC:INTERNAL=OIS
 __pkg_config_checked_OGRE_PKGC:INTERNAL=1
 __pkg_config_checked_OIS_PKGC:INTERNAL=1
 prefix_result:INTERNAL=/usr/lib64
