@@ -119,23 +119,22 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
     return false;
 
   if (mKeyboard->isKeyDown(OIS::KC_W))
-    _map->move(Ogre::Vector3(0, 0, 1), evt);
-
-  if (mKeyboard->isKeyDown(OIS::KC_S))
     _map->move(Ogre::Vector3(0, 0, -1), evt);
 
-  if (mKeyboard->isKeyDown(OIS::KC_A))
-    _map->move(Ogre::Vector3(1, 0, 0), evt);
+  if (mKeyboard->isKeyDown(OIS::KC_S))
+    _map->move(Ogre::Vector3(0, 0, 1), evt);
 
-  if (mKeyboard->isKeyDown(OIS::KC_D))
+  if (mKeyboard->isKeyDown(OIS::KC_A))
     _map->move(Ogre::Vector3(-1, 0, 0), evt);
 
+  if (mKeyboard->isKeyDown(OIS::KC_D))
+    _map->move(Ogre::Vector3(1, 0, 0), evt);
 
 
-//
+
+
 //  if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
 //    return false;
-//
 //  if (mKeyboard->isKeyDown(OIS::KC_W))
 //    translate += Ogre::Vector3(0, 0, -10);
 //

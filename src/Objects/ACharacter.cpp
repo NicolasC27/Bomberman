@@ -21,7 +21,7 @@ void ACharacter::createEntity()
 {
   _obj = SceneManager->createEntity(getName(), getMeshName());
   dynamic_cast <Ogre::Entity*>(_obj)->setMaterialName(this->getMaterialName());
-  _node->pitch(Ogre::Degree(90));
+
 }
 
 std::string ACharacter::getName() const
@@ -42,7 +42,7 @@ std::string ACharacter::getMaterialName() const
 Ogre::Vector3 ACharacter::getScale() const
 {
 
-  return Ogre::Vector3(1, 1, 1);
+  return Ogre::Vector3(2, 2,2);
 }
 
 double ACharacter::getPositionY() const
@@ -72,6 +72,24 @@ void ACharacter::move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt)
   Ogre::Real mMoveSpeed  =400;
   Ogre::Vector3 translateVector = evt.timeSinceLastFrame * mMoveSpeed * vector;
 
-  mAnimationState->addTime(evt.timeSinceLastFrame * 1.5);
   _node->translate(translateVector);
+
+  //Rotate the object to the moving direction
+
+  if(translateVector != Ogre::Vector3::ZERO) {
+
+      Ogre::Vector3 src = _node->getOrientation() * Ogre::Vector3::UNIT_Z;
+      Ogre::Vector3 mDirection = vector;
+      mDirection.normalise();
+
+      if ((1.0f + src.dotProduct(mDirection)) < 0.0001f) {
+	  _node->yaw(Ogre::Degree(180));
+	} else {
+	  Ogre::Quaternion quat = src.getRotationTo(mDirection);
+	  _node->rotate(quat);
+
+	} // else
+    }
+  mAnimationState->addTime(evt.timeSinceLastFrame * 1.5);
+
 }
