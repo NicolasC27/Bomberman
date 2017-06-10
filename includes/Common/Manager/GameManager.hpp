@@ -9,13 +9,14 @@
 #include "Controller/EventManager.hpp"
 #include "Common/Manager/CameraManager.hpp"
 #include "NodeManager.hpp"
+#include "MapManager.hpp"
 
 #define NAME_GAME	"Bomberman"
 
 class GameManager
 {
  private:
-  Controller::EventManager	*Listener;
+  EventManager			*Listener;
 
   Ogre::Root 		*_Root;
   Ogre::SceneManager 	*_SceneManager;

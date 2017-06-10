@@ -3,17 +3,13 @@
 //
 
 #include <OgreSceneManager.h>
-#include <tiff.h>
 #include "Common/Manager/ConfigManager.hpp"
 #include "Common/Manager/GameManager.hpp"
-#include "Map.hpp"
-
-using namespace Controller;
 
 GameManager::GameManager()
 {
 //  ConfigManager configManager(_Root);
-//
+
 //  _Root = configManager.getRoot();
   _Root = new Ogre::Root;
 
@@ -40,12 +36,12 @@ GameManager::~GameManager()
 
 void 			GameManager::run()
 {
-  Map 			map("media/map/map1", getSceneManager(), getNodes());
+  MapManager *Map = new MapManager("media/map/map1", getSceneManager(), getNodes());
+  Map->generateObjects();
 
-  map.generateObjects();
-  Camera = new CameraManager(getSceneManager(), getWindow(), map.getSize());
+  Camera = new CameraManager(getSceneManager(), getWindow(), Map->getSize());
 
-  Listener = new EventManager(getWindow(), Camera->getCamera());
+  Listener = new EventManager(Map, getWindow(), Camera->getCamera());
   getRoot()->addFrameListener(Listener);
   getRoot()->startRendering();
 }
