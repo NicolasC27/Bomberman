@@ -8,7 +8,7 @@ material Objects/Cube/Wall
 
                              texture_unit
                                         {
-                                            texture wall.jpg
+                                            texture wall.png
 
                                         }
                 }
