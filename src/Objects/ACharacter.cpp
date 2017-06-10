@@ -47,7 +47,7 @@ Ogre::Vector3 ACharacter::getScale() const
 
 double ACharacter::getPositionY() const
 {
-  return 0;
+  return (-50);
 }
 
 Ogre::SceneManager::PrefabType ACharacter::getMeshPrefab() const
