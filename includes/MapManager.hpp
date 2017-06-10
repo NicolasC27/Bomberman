@@ -5,11 +5,14 @@
 #ifndef CPP_INDIE_STUDIO_MAP_HPP
 #define CPP_INDIE_STUDIO_MAP_HPP
 
+class MapManager;
+
 #include <OgreVector2.h>
 #include <OgreException.h>
 #include <map>
 
 #include "Interfaces/AGameObject.hpp"
+#include "Interfaces/ACharacter.hpp"
 #include "Common/Manager/GameManager.hpp"
 #include "Common/Manager/NodeManager.hpp"
 
@@ -18,7 +21,7 @@
 #define NOT_FOUND	"File not found"
 #define FOLDER_MAP	"media/map/"
 
-class Map
+class MapManager
 {
  private:
   static const int 				boxWidth = 100;
@@ -27,7 +30,7 @@ class Map
   Ogre::SceneManager 				*_SceneManager;
 
   std::multimap<Ogre::Vector2, AGameObject *> 	_objects;
-  std::multimap<AGameObject *, Ogre::Vector2> 	_character;
+  std::vector<ACharacter *>		 	_character;
 
   std::list<Ogre::Vector2> 			_spawns;
   std::string 					_filename;
@@ -36,11 +39,11 @@ class Map
 
  public:
 
-  Map(std::string const &filename = "media/map/map1",
+  MapManager(std::string const &filename = "media/map/map1",
       Ogre::SceneManager *SceneManager = NULL,
       NodeManager *node = NULL);
 
-  virtual ~Map();
+  virtual ~MapManager();
 
   void generateObjects();
   void generateSpawn();
@@ -50,7 +53,9 @@ class Map
   int getSize() const;
 
   void addObjects(const Ogre::Vector2 &, AGameObject *);
-  void addCharacter(const Ogre::Vector2 &vector, AGameObject *character);
+  void addCharacter(const Ogre::Vector2 &vector);
+
+  void move(Ogre::Vector3 const &vector3, const Ogre::FrameEvent &evt);
 };
 
 #endif //CPP_INDIE_STUDIO_MAP_HPP

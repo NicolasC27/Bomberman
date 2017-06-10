@@ -2,12 +2,12 @@
 // Created by nicolas on 29/05/17.
 //
 
-#include "Map.hpp"
-#include "Objects/Ground.hpp"
 #include "Objects/Wall.hpp"
+#include "Objects/Player.hpp"
+#include "MapManager.hpp"
 
 
-Map::Map(std::string const &filename, Ogre::SceneManager *SceneManager,
+MapManager::MapManager(std::string const &filename, Ogre::SceneManager *SceneManager,
 	 NodeManager *node) : _filename(filename), _SceneManager(SceneManager), _nodes(node)
 {
   std::ifstream infile(filename);
@@ -17,21 +17,21 @@ Map::Map(std::string const &filename, Ogre::SceneManager *SceneManager,
 			  NOT_FOUND, FOLDER_MAP);
 }
 
-Map::~Map()
+MapManager::~MapManager()
 {
 
 }
 
-void 		Map::addObjects(const Ogre::Vector2 &vector, AGameObject *object)
+void 		MapManager::addObjects(const Ogre::Vector2 &vector, AGameObject *object)
 {
   _objects.insert(std::pair<Ogre::Vector2, AGameObject *>(vector, object));
   object->setSceneManager(_SceneManager);
   object->createEntity();
-  object->setPosition(Map::boxWidth * (vector.x), object->getPositionY(), Map::boxWidth * vector.y);
+  object->setPosition(vector.x, object->getPositionY(), vector.y);
   object->AttachObject();
 }
 
-void		Map::generatePlan()
+void		MapManager::generatePlan()
 {
   Ogre::Plane 		plane(Ogre::Vector3::UNIT_Y, 0);
   Ogre::Entity		*plan;
@@ -53,7 +53,7 @@ void		Map::generatePlan()
   node->attachObject(plan);
 }
 
-void 		Map::generateObjects()
+void 		MapManager::generateObjects()
 {
   std::ifstream infile(_filename);
   std::string 	line;
@@ -70,9 +70,9 @@ void 		Map::generateObjects()
       for(int z = 0, i = 0; line[i]; i++, z++)
 	{
 	  if ((line[i] - '0') == AGameObject::WALL)
-	    addObjects(Ogre::Vector2(z, x), new Wall(Wall::UNBREAKABLE));
+	    addObjects(Ogre::Vector2(MapManager::boxWidth * z, MapManager::boxWidth * x), new Wall(Wall::UNBREAKABLE));
 	  else if ((line[i] - '0')  == AGameObject::BLOCK)
-	      addObjects(Ogre::Vector2(z, x), new Wall(Wall::BREAKABLE));
+	      addObjects(Ogre::Vector2(MapManager::boxWidth * z, MapManager::boxWidth * x), new Wall(Wall::BREAKABLE));
 //	  else
 //	      addObjects(Ogre::Vector2(z, x), new Ground(Ground::UNBREAKABLE));
 	}
@@ -81,28 +81,41 @@ void 		Map::generateObjects()
   if (count != (_size - 1))
     throw Ogre::Exception(Ogre::Exception::ERR_INVALID_STATE,
 			  ERR_NBLINEMAP, _filename);
+  addCharacter(Ogre::Vector2(500, 500));
   generatePlan();
 }
 
-void 		Map::generateSpawn()
+void 		MapManager::generateSpawn()
 {
-  _spawns.push_front(Ogre::Vector2(0, 0));
-  _spawns.push_front(Ogre::Vector2(0, _size - 1));
-  _spawns.push_front(Ogre::Vector2(_size - 1, 0));
-  _spawns.push_front(Ogre::Vector2(_size - 1, _size - 1));
+  _spawns.push_front(Ogre::Vector2(MapManager::boxWidth, MapManager::boxWidth));
+  _spawns.push_front(Ogre::Vector2(MapManager::boxWidth, (_size * 1000) - MapManager::boxWidth));
+  _spawns.push_front(Ogre::Vector2((_size * 1000) - MapManager::boxWidth, MapManager::boxWidth));
+  _spawns.push_front(Ogre::Vector2((_size * 1000) - MapManager::boxWidth, (_size * 1000) - MapManager::boxWidth));
 }
 
-void 		Map::addCharacter(const Ogre::Vector2 &vector, AGameObject *character)
+void 		MapManager::addCharacter(const Ogre::Vector2 &vector)
 {
-  _character.insert(std::pair<AGameObject *, Ogre::Vector2>(character, vector));
+  ACharacter	*player;
+
+  player = new Player(AGameObject::CHARACTER);
+  _character.push_back(player);
+  player->setSceneManager(_SceneManager);
+  player->createEntity();
+  player->setPosition(vector.x, player->getPositionY(), vector.y);
+  player->AttachObject();
 }
 
-void 		Map::setSize(int size)
+void 		MapManager::setSize(int size)
 {
   _size = size;
 }
 
-int 		Map::getSize() const
+int 		MapManager::getSize() const
 {
   return _size;
+}
+
+void MapManager::move(const Ogre::Vector3 &vector3, const Ogre::FrameEvent &evt)
+{
+  _character.front()->move(vector3, evt);
 }
