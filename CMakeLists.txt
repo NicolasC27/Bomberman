@@ -65,24 +65,27 @@ include_directories(includes)
 
 SET(SRCS
 		src/main.cpp
-		src/Map.cpp
+        src/MapManager.cpp
 		src/Objects/Wall.cpp
         src/Objects/Ground.cpp
 		src/Objects/AGameObject.cpp
+        src/Objects/ACharacter.cpp
+        src/Objects/Player.cpp
         src/Common/Manager/NodeManager.cpp
         src/Common/Manager/CameraManager.cpp
         src/Common/Manager/GameManager.cpp
-        src/Common/Manager/ConfigManager.cpp
+#        src/Common/Manager/ConfigManager.cpp
         src/Controller/EventManager.cpp
         includes/Common/Manager/GameManager.hpp
         includes/Common/Manager/NodeManager.hpp
         includes/Common/Manager/CameraManager.hpp
-        includes/Common/Manager/ConfigManager.hpp
+#        includes/Common/Manager/ConfigManager.hpp
         includes/Controller/EventManager.hpp
         includes/Interfaces/AGameObject.hpp
         includes/Interfaces/ACharacter.hpp
         includes/Objects/Ground.hpp
-        includes/Map.hpp
+        includes/Objects/Player.hpp
+        includes/MapManager.hpp
         includes/Objects/Wall.hpp
    )
 
