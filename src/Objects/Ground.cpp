@@ -5,7 +5,6 @@
 #include "Objects/Ground.hpp"
 #include <OgreEntity.h>
 #include <Ogre.h>
-#include <tiff.h>
 
 Ground::Ground(Ground::State type) : AGameObject(AGameObject::NOTHING), _state(type)
 {
