@@ -60,7 +60,7 @@ void 			GameManager::initializeResources()
 void 			GameManager::setupScene()
 {
   _SceneManager = _Root->createSceneManager(Ogre::ST_GENERIC, "Bomberman Game");
-  _SceneManager->setAmbientLight(Ogre::ColourValue(0.0f, 0.0f, 0.0f));
+  _SceneManager->setAmbientLight(Ogre::ColourValue(0.4f, 0.4f, 0.4f));
 }
 
 Ogre::SceneManager*	GameManager::getSceneManager() const
@@ -72,28 +72,19 @@ void 			GameManager::setupLight()
 {
   Ogre::Light *_Light = _SceneManager->createLight("Light1");
   _Light->setType(Ogre::Light::LT_POINT);
-  _Light->setPosition(Ogre::Vector3(500, 500, 1000));
+  _Light->setPosition(Ogre::Vector3(1100, 500, 1100));
   _Light->setDiffuseColour(Ogre::ColourValue::White);
   _Light->setSpecularColour(Ogre::ColourValue::White);
 
-  _Light->setAttenuation(2000,1,0, 0);
+  _Light->setAttenuation(2000,1,0,0);
 
   _Light = _SceneManager->createLight("Light Red");
   _Light->setType(Ogre::Light::LT_POINT);
-  _Light->setPosition(Ogre::Vector3(0, 500, 0));
+  _Light->setPosition(Ogre::Vector3(250, 500, 1000));
   _Light->setDiffuseColour(Ogre::ColourValue::Red);
   _Light->setSpecularColour(Ogre::ColourValue::Red);
 
-  _Light->setAttenuation(1000,1,0,0);
-
-
-  _Light = _SceneManager->createLight("Light Red 2");
-  _Light->setType(Ogre::Light::LT_POINT);
-  _Light->setPosition(Ogre::Vector3(1100, 500, 0));
-  _Light->setDiffuseColour(Ogre::ColourValue::Red);
-  _Light->setSpecularColour(Ogre::ColourValue::Red);
-
-  _Light->setAttenuation(1000,1,0,0);
+  _Light->setAttenuation(1000,1,0.007,0);
 
 }
 
