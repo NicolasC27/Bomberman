@@ -9,7 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06152835-32f3-4163-9724-f21d01fb6aa4" name="Default" comment="">
+    <list default="true" id="06152835-32f3-4163-9724-f21d01fb6aa4" name="Default" comment="LA MERDE">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CMakeFiles/3.7.1/CMakeDetermineCompilerABI_C.bin" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CMakeFiles/3.7.1/CMakeDetermineCompilerABI_CXX.bin" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CMakeFiles/3.7.1/CompilerIdC/a.out" />
@@ -37,11 +37,6 @@
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CMakeFiles/bomberman.dir/src/Objects/Player.cpp.o" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CMakeFiles/bomberman.dir/src/Objects/Wall.cpp.o" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CMakeFiles/bomberman.dir/src/main.cpp.o" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bin/bomberman_d" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/cpp_indie_studio.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CMakeFiles/3.7.1/CMakeCCompiler.cmake" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CMakeFiles/3.7.1/CMakeCXXCompiler.cmake" />
@@ -611,7 +606,7 @@
       <workItem from="1497217908555" duration="2289000" />
       <workItem from="1497220429679" duration="26000" />
       <workItem from="1497220508783" duration="3289000" />
-      <workItem from="1497223816069" duration="526000" />
+      <workItem from="1497223816069" duration="557000" />
     </task>
     <task id="LOCAL-00001" summary="start map and gameobject">
       <created>1496159385366</created>
@@ -732,11 +727,18 @@
       <option name="project" value="LOCAL" />
       <updated>1497224144722</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="LA MERDE">
+      <created>1497224360527</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1497224360527</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71728000" />
+    <option name="totallyTimeSpent" value="71759000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="79" y="27" width="1841" height="1053" extended-state="6" />
@@ -835,7 +837,8 @@
     <MESSAGE value="change rayon player for collision" />
     <MESSAGE value="change position character" />
     <MESSAGE value="gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="gitignore" />
+    <MESSAGE value="LA MERDE" />
+    <option name="LAST_COMMIT_MESSAGE" value="LA MERDE" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -962,6 +965,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="945">
           <caret line="45" column="34" lean-forward="false" selection-start-line="45" selection-start-column="34" selection-end-line="45" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
