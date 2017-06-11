@@ -1,0 +1,116 @@
+
+material Objects/Cube/Wall
+{
+        technique
+        {
+                pass
+                {
+
+                             texture_unit
+                                        {
+                                            texture wall.png
+
+                                        }
+                }
+        }
+}
+
+
+material Objects/Cube/Block
+{
+        technique
+        {
+                pass
+                {
+
+                             texture_unit
+                                        {
+                                            texture crate.jpg
+
+                                        }
+                }
+        }
+}
+
+
+
+material Objects/Ground/BumpyMetal
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.25 0.25 0.25
+			cull_hardware none
+			cull_software none
+
+			texture_unit
+			{
+				texture BumpyMetal.jpg
+			}
+		}
+	}
+}
+
+material Examples/GrassFloor
+{
+        technique
+        {
+                pass
+                {
+                             texture_unit
+                                        {
+                                            texture grass_1024.jpg
+                                        }
+                }
+        }
+}
+
+
+material tux
+{
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 0.500000 0.500000 0.500000 1.000000
+			diffuse 0.800000 0.800000 0.750068 1.000000
+			specular 0.162957 0.175440 0.206648 1.000000 12.500000
+			emissive 0.000000 0.000000 0.000000 1.000000
+			texture_unit
+			{
+				texture tux_texture_color.png
+				tex_address_mode wrap
+				filtering trilinear
+				colour_op alpha_blend
+
+			}
+			texture_unit Color
+			{
+			}
+			texture_unit
+			{
+				texture tux_texture.png
+				tex_address_mode wrap
+				filtering trilinear
+				//colour_op alpha_blend
+				colour_op_ex add src_current src_texture
+			}
+		}
+	}
+}
+
+material tux_red : tux
+{
+	technique
+ 	{
+	    pass
+	    {
+			texture_unit Color
+			{
+				colour_op_ex modulate  src_current  src_manual 1 0 0 0
+			}
+	    }
+	}
+}
