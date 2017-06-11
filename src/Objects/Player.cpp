@@ -6,7 +6,7 @@
 #include "Interfaces/ACharacter.hpp"
 #include "Objects/Player.hpp"
 
-Player::Player(AGameObject::Object object) : ACharacter(object, 5)
+Player::Player(AGameObject::Object object) : ACharacter(object, 35)
 {
 
 }
