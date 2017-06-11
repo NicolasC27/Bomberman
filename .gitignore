@@ -6,3 +6,6 @@
 /CMakeCache.txt
 /Makefile
 /.idea
+Supprimerait Project.cbp
+Supprimerait assets/
+Supprimerait bin/
