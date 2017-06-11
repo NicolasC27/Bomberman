@@ -6,41 +6,35 @@
 
 #IncludeRegexTransform: 
 
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/main.cpp
+/home/nicolas/rendu/cpp_indie_studio/main.cpp
 Map.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/Map.hpp
+/home/nicolas/rendu/cpp_indie_studio/Map.hpp
 Ogre.h
 -
 EventManager.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/EventManager.hpp
-collision.hh
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/collision.hh
+/home/nicolas/rendu/cpp_indie_studio/EventManager.hpp
 
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Controller/EventManager.cpp
+/home/nicolas/rendu/cpp_indie_studio/src/Controller/EventManager.cpp
 EventManager.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Controller/EventManager.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/Controller/EventManager.hpp
 
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Map.cpp
+/home/nicolas/rendu/cpp_indie_studio/src/Map.cpp
 Map.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Map.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/Map.hpp
 Wall.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Wall.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/Wall.hpp
 iostream
 -
 fstream
 -
 
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Objects/AGameObject.cpp
+/home/nicolas/rendu/cpp_indie_studio/src/Objects/AGameObject.cpp
 AGameObject.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Objects/AGameObject.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/Objects/AGameObject.hpp
 
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Objects/Wall.cpp
+/home/nicolas/rendu/cpp_indie_studio/src/Objects/Wall.cpp
 Wall.hpp
 -
-
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/collision.cpp
-collision.hh
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/collision.hh
 
 /usr/local/include/OGRE/GLX/OgreTimerImp.h
 ../OgrePrerequisites.h
@@ -2907,10 +2901,4 @@ includes/AGameObject.hpp
 includes/Wall.hpp
 AGameObject.hpp
 includes/AGameObject.hpp
-
-includes/collision.hh
-OgreVector2.h
--
-vector
--
 

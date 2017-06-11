@@ -54,45 +54,55 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/guilbo_m/rendu/cpp/cpp_indie_studio
+CMAKE_SOURCE_DIR = /home/nicolas/rendu/cpp_indie_studio
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/guilbo_m/rendu/cpp/cpp_indie_studio
+CMAKE_BINARY_DIR = /home/nicolas/rendu/cpp_indie_studio
 
 #=============================================================================
-# Target rules for target CMakeFiles/Bomberman.dir
+# Target rules for target CMakeFiles/bomberman.dir
 
 # All Build rule for target.
-CMakeFiles/Bomberman.dir/all:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/depend
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/guilbo_m/rendu/cpp/cpp_indie_studio/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target Bomberman"
-.PHONY : CMakeFiles/Bomberman.dir/all
+CMakeFiles/bomberman.dir/all:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/depend
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nicolas/rendu/cpp_indie_studio/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14 "Built target bomberman"
+.PHONY : CMakeFiles/bomberman.dir/all
 
 # Include target in all.
-all: CMakeFiles/Bomberman.dir/all
+all: CMakeFiles/bomberman.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/Bomberman.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/guilbo_m/rendu/cpp/cpp_indie_studio/CMakeFiles 7
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Bomberman.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/guilbo_m/rendu/cpp/cpp_indie_studio/CMakeFiles 0
-.PHONY : CMakeFiles/Bomberman.dir/rule
+CMakeFiles/bomberman.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nicolas/rendu/cpp_indie_studio/CMakeFiles 14
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/bomberman.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nicolas/rendu/cpp_indie_studio/CMakeFiles 0
+.PHONY : CMakeFiles/bomberman.dir/rule
 
 # Convenience name for target.
-Bomberman: CMakeFiles/Bomberman.dir/rule
+bomberman: CMakeFiles/bomberman.dir/rule
 
-.PHONY : Bomberman
+.PHONY : bomberman
+
+# Pre-install relink rule for target.
+CMakeFiles/bomberman.dir/preinstall:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/preinstall
+.PHONY : CMakeFiles/bomberman.dir/preinstall
+
+# Prepare target for install.
+preinstall: CMakeFiles/bomberman.dir/preinstall
+
+.PHONY : preinstall
 
 # clean rule for target.
-CMakeFiles/Bomberman.dir/clean:
-	$(MAKE) -f CMakeFiles/Bomberman.dir/build.make CMakeFiles/Bomberman.dir/clean
-.PHONY : CMakeFiles/Bomberman.dir/clean
+CMakeFiles/bomberman.dir/clean:
+	$(MAKE) -f CMakeFiles/bomberman.dir/build.make CMakeFiles/bomberman.dir/clean
+.PHONY : CMakeFiles/bomberman.dir/clean
 
 # clean rule for target.
-clean: CMakeFiles/Bomberman.dir/clean
+clean: CMakeFiles/bomberman.dir/clean
 
 .PHONY : clean
 

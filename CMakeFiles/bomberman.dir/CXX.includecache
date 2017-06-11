@@ -6,75 +6,77 @@
 
 #IncludeRegexTransform: 
 
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Common/Manager/CameraManager.cpp
+/home/nicolas/rendu/cpp_indie_studio/src/Collision.cpp
+Collision.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/Collision.hpp
+
+/home/nicolas/rendu/cpp_indie_studio/src/Common/Manager/CameraManager.cpp
 Common/Manager/CameraManager.hpp
 -
 
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Common/Manager/GameManager.cpp
+/home/nicolas/rendu/cpp_indie_studio/src/Common/Manager/GameManager.cpp
 OgreSceneManager.h
 -
 Common/Manager/ConfigManager.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Common/Manager/Common/Manager/ConfigManager.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/Common/Manager/Common/Manager/ConfigManager.hpp
 Common/Manager/GameManager.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Common/Manager/Common/Manager/GameManager.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/Common/Manager/Common/Manager/GameManager.hpp
 
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Common/Manager/NodeManager.cpp
+/home/nicolas/rendu/cpp_indie_studio/src/Common/Manager/NodeManager.cpp
 Common/Manager/NodeManager.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Common/Manager/Common/Manager/NodeManager.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/Common/Manager/Common/Manager/NodeManager.hpp
 
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Controller/EventManager.cpp
+/home/nicolas/rendu/cpp_indie_studio/src/Controller/EventManager.cpp
 Controller/EventManager.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Controller/Controller/EventManager.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/Controller/Controller/EventManager.hpp
 
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/MapManager.cpp
+/home/nicolas/rendu/cpp_indie_studio/src/MapManager.cpp
 Objects/Wall.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Objects/Wall.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/Objects/Wall.hpp
 Objects/Player.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Objects/Player.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/Objects/Player.hpp
 MapManager.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/MapManager.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/MapManager.hpp
 
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Objects/ACharacter.cpp
+/home/nicolas/rendu/cpp_indie_studio/src/Objects/ACharacter.cpp
 Interfaces/ACharacter.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Objects/Interfaces/ACharacter.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/Objects/Interfaces/ACharacter.hpp
 OGRE/OgreEntity.h
 -
 
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Objects/AGameObject.cpp
+/home/nicolas/rendu/cpp_indie_studio/src/Objects/AGameObject.cpp
 OgreSceneManager.h
 -
 Interfaces/AGameObject.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Objects/Interfaces/AGameObject.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/Objects/Interfaces/AGameObject.hpp
 
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Objects/Ground.cpp
+/home/nicolas/rendu/cpp_indie_studio/src/Objects/Ground.cpp
 Objects/Ground.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Objects/Objects/Ground.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/Objects/Objects/Ground.hpp
 OgreEntity.h
 -
 Ogre.h
 -
 
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Objects/Player.cpp
+/home/nicolas/rendu/cpp_indie_studio/src/Objects/Player.cpp
 Interfaces/AGameObject.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Objects/Interfaces/AGameObject.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/Objects/Interfaces/AGameObject.hpp
 Interfaces/ACharacter.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Objects/Interfaces/ACharacter.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/Objects/Interfaces/ACharacter.hpp
 Objects/Player.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Objects/Objects/Player.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/Objects/Objects/Player.hpp
 
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Objects/Wall.cpp
+/home/nicolas/rendu/cpp_indie_studio/src/Objects/Wall.cpp
 Objects/Wall.hpp
--
-OgreSceneManager.h
 -
 OgreEntity.h
 -
 
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/main.cpp
+/home/nicolas/rendu/cpp_indie_studio/src/main.cpp
 Common/Manager/GameManager.hpp
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/Common/Manager/GameManager.hpp
+/home/nicolas/rendu/cpp_indie_studio/src/Common/Manager/GameManager.hpp
 windows.h
-/home/guilbo_m/rendu/cpp/cpp_indie_studio/src/windows.h
+/home/nicolas/rendu/cpp_indie_studio/src/windows.h
 
 /usr/local/include/OGRE/GLX/OgreTimerImp.h
 ../OgrePrerequisites.h
@@ -2914,6 +2916,12 @@ OISConfig.h
 unistd.h
 -
 
+includes/Collision.hpp
+OgreVector2.h
+-
+vector
+-
+
 includes/Common/Manager/CameraManager.hpp
 OgreVector3.h
 -
@@ -2965,6 +2973,8 @@ OgreVector2.h
 -
 OgreMovableObject.h
 -
+Collision.hpp
+includes/Interfaces/Collision.hpp
 
 includes/MapManager.hpp
 OgreVector2.h

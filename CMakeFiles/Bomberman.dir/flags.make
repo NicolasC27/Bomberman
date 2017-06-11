@@ -6,5 +6,5 @@ CXX_FLAGS =
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/guilbo_m/ogre/include -I/usr/local/include/OGRE -I/usr/local/include -I/home/guilbo_m/rendu/cpp/cpp_indie_studio/includes 
+CXX_INCLUDES = -I/usr/local/include/OGRE -I/usr/local/include -I/home/nicolas/rendu/cpp_indie_studio/includes 
 

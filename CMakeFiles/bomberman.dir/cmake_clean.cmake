@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/bomberman.dir/src/main.cpp.o"
   "CMakeFiles/bomberman.dir/src/MapManager.cpp.o"
+  "CMakeFiles/bomberman.dir/src/Collision.cpp.o"
   "CMakeFiles/bomberman.dir/src/Objects/Wall.cpp.o"
   "CMakeFiles/bomberman.dir/src/Objects/Ground.cpp.o"
   "CMakeFiles/bomberman.dir/src/Objects/AGameObject.cpp.o"
@@ -10,8 +11,10 @@ file(REMOVE_RECURSE
   "CMakeFiles/bomberman.dir/src/Common/Manager/CameraManager.cpp.o"
   "CMakeFiles/bomberman.dir/src/Common/Manager/GameManager.cpp.o"
   "CMakeFiles/bomberman.dir/src/Controller/EventManager.cpp.o"
-  "bin/bomberman.pdb"
-  "bin/bomberman"
+  "bin/bomberman_d.pdb"
+  "bin/bomberman_d"
+  "bin/bomberman_d.pdb"
+  "CMakeFiles/CMakeRelink.dir/bomberman_d"
 )
 
 # Per-language clean rules from dependency scanning.
