@@ -11,13 +11,11 @@ class ACharacter : public AGameObject
 {
 
  public:
-  ACharacter(Object object);
+  ACharacter(Object object, int r);
 
   virtual ~ACharacter();
 
   void			createEntity();
-
-  void 			move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt);
 
   std::string 		getName() const;
   State 		getState() const;
@@ -27,6 +25,9 @@ class ACharacter : public AGameObject
 
   Ogre::SceneManager::PrefabType	getMeshPrefab() const;
   std::string				getMeshName() const;
+
+
+  void 		move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt);
 
 };
 #endif //BOMBERMAN_ACHARACTER_HPP

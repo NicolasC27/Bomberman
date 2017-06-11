@@ -9,10 +9,17 @@
 #include <OgreSceneManager.h>
 #include <OgreVector2.h>
 #include <OgreMovableObject.h>
+#include "Collision.hpp"
 
 class AGameObject {
 
  public:
+  enum BoundingBoxType
+  {
+    SPHERE,
+    PARALL
+  };
+
   enum Object {
     NOTHING,
     WALL,
@@ -27,8 +34,8 @@ class AGameObject {
     UNBREAKABLE
   };
 
-  AGameObject();
-  AGameObject(Object object = NOTHING);
+  AGameObject(AGameObject::Object object);
+  AGameObject(AGameObject::Object object, double r);
   virtual ~AGameObject();
 
  private:
@@ -55,6 +62,10 @@ class AGameObject {
   Ogre::MovableObject	*_obj;
   Ogre::SceneManager 	*SceneManager;
   Ogre::SceneNode	*_node;
+
+
+  Collision		*_collision;
+
 
  public:
   virtual void		createEntity() = 0;

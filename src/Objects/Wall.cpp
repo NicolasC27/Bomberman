@@ -3,10 +3,9 @@
 //
 
 #include <Objects/Wall.hpp>
-#include <OgreSceneManager.h>
 #include <OgreEntity.h>
 
-Wall::Wall(Wall::State type) : AGameObject(AGameObject::BLOCK), _state(type)
+Wall::Wall(Wall::State type) : AGameObject(BLOCK), _state(type)
 {
 
 }

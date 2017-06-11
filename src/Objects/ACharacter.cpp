@@ -6,7 +6,7 @@
 #include <OGRE/OgreEntity.h>
 
 
-ACharacter::ACharacter(AGameObject::Object object) : AGameObject(object)
+ACharacter::ACharacter(AGameObject::Object object, int r) : AGameObject(object, r)
 {
 
 }
@@ -92,4 +92,5 @@ void ACharacter::move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt)
     }
   mAnimationState->addTime(evt.timeSinceLastFrame * 1.5);
 
+  std::cout << "x : " << _node->getPosition().x << "z: " << _node->getPosition().z << std::endl;
 }

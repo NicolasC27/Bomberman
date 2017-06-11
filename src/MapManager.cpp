@@ -81,7 +81,7 @@ void 		MapManager::generateObjects()
   if (count != (_size - 1))
     throw Ogre::Exception(Ogre::Exception::ERR_INVALID_STATE,
 			  ERR_NBLINEMAP, _filename);
-  addCharacter(Ogre::Vector2(500, 500));
+  addCharacter(Ogre::Vector2(0, 0));
   generatePlan();
 }
 

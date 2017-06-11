@@ -7,12 +7,12 @@
 
 int AGameObject::objectId = 1;
 
-AGameObject::AGameObject(Object object)
+AGameObject::AGameObject(Object object) : _collision(new Collision(0)), _type(object)
 {
   _id = AGameObject::objectId++;
 }
 
-AGameObject::AGameObject()
+AGameObject::AGameObject(AGameObject::Object object, double r) : _collision(new Collision(r)),  _type(object)
 {
   _id = AGameObject::objectId++;
 }
@@ -36,6 +36,7 @@ Ogre::MovableObject 	*AGameObject::getObj() const
 void 			AGameObject::setPosition(int x, int y, int z)
 {
   _node->setPosition(x, y, z);
+  _collision->setOrigin(Ogre::Vector2(x , z));
 }
 
 
@@ -64,6 +65,7 @@ void 			AGameObject::setObj(Ogre::MovableObject *obj)
 {
   _obj = obj;
 }
+
 
 
 
