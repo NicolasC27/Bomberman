@@ -66,6 +66,7 @@ include_directories(includes)
 SET(SRCS
 		src/main.cpp
         src/MapManager.cpp
+        src/Collision.cpp
 		src/Objects/Wall.cpp
         src/Objects/Ground.cpp
 		src/Objects/AGameObject.cpp
@@ -87,6 +88,7 @@ SET(SRCS
         includes/Objects/Player.hpp
         includes/MapManager.hpp
         includes/Objects/Wall.hpp
+        includes/Collision.hpp
    )
 
 set(HDRS ${SRCS})
