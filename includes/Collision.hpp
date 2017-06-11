@@ -44,15 +44,16 @@ class Collision
   Collision();
 
   void     		init();
-  bool			StoS(Collision const &) const;
-  bool			PtoP(Collision const &) const;
-  bool			PtoS(Collision const &) const;
 
   BoundingBoxType	_type;
 
   Ogre::Vector2		_origin;
   Ogre::Vector2		_v;
   double    		_r;
+
+  bool			StoS(Collision const &) const;
+  bool			PtoP(Collision const &) const;
+  bool			PtoS(Collision const &) const;
 
   std::vector<int>  	collideType;
   std::vector<bool (Collision::*)(Collision const &) const>	doesCollide;

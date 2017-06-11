@@ -47,8 +47,7 @@ EventManager::EventManager(Ogre::SceneNode *node, RenderWindow *mWindow, Ogre::C
 
   //
   mKeyboard = static_cast<OIS::Keyboard*>(mInputManager->createInputObject(OIS::OISKeyboard, true ));
-  mMouse = static_cast<OIS::Mouse*>(mInputManager->createInputObject(OIS::OISMouse, true));
-
+  mMouse = static_cast<OIS::Mouse*>(mInputManager->createInputObject(OIS::OISMouse, true));i
 }
 
 //

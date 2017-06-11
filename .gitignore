@@ -1,0 +1,11 @@
+/CMakeFiles
+/ogre.cfg
+/Bomberman.cbp
+/cmake_install.cmake
+/Ogre.log
+/CMakeCache.txt
+/Makefile
+/.idea
+Supprimerait Project.cbp
+Supprimerait assets/
+Supprimerait bin/

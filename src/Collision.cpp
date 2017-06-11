@@ -56,8 +56,11 @@ bool			Collision::operator==(Collision const &with)
 	break;
     }
 
-  return i < this->collideType.size() ? (this->*(this->doesCollide[i]))(with)
-				      : false;
+  if (i < this->collideType.size())
+    {
+      return (this->*(this->doesCollide[i]))(with);
+    }
+  return false;
 // type inconnue ou non géré ?
 }
 
@@ -95,7 +98,13 @@ bool			Collision::StoS(Collision const &with) const
   d = (this->_origin.x - withO.x) * (this->_origin.x - withO.x);
   d += (this->_origin.y - withO.y) * (this->_origin.y - withO.y);
 
-  return d > (this->_r + r) * (this->_r + r) ? false : true;
+  if (d > (this->_r + r) * (this->_r + r))
+    {
+      return false;
+    } else
+    {
+      return true;
+    }
 
 }
 
