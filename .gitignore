@@ -1,9 +1,8 @@
-Supprimerait assets/
-Supprimerait bin/
-Supprimerait CMakeFiles/
+/CMakeFiles
 /ogre.cfg
 /Bomberman.cbp
 /cmake_install.cmake
 /Ogre.log
 /CMakeCache.txt
 /Makefile
+/.idea

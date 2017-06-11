@@ -1,3 +1,4 @@
+/home/nicolas/rendu/cpp_indie_studio/CMakeFiles/install/strip.dir
 /home/nicolas/rendu/cpp_indie_studio/CMakeFiles/install/local.dir
 /home/nicolas/rendu/cpp_indie_studio/CMakeFiles/install.dir
 /home/nicolas/rendu/cpp_indie_studio/CMakeFiles/bomberman.dir

@@ -13,8 +13,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/bomberman.dir/src/Controller/EventManager.cpp.o"
   "bin/bomberman_d.pdb"
   "bin/bomberman_d"
-  "bin/bomberman_d.pdb"
-  "CMakeFiles/CMakeRelink.dir/bomberman_d"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -1,1 +1,114 @@
-CMakeLists.txt not found in /home/nicolas/rendu/cpp_indie_studio
+/home/nicolas/Applications/clion-2017.1.1/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/nicolas/rendu/cpp_indie_studio
+CMake Warning (dev) in CMakeLists.txt:
+  A logical block opening on the line
+
+    /home/nicolas/rendu/cpp_indie_studio/CMakeLists.txt:12 (if)
+
+  closes on the line
+
+    /home/nicolas/rendu/cpp_indie_studio/CMakeLists.txt:23 (endif)
+
+  with mis-matching arguments.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Looking for OGRE...
+-- Checking for module 'OGRE'
+--   No package 'OGRE' found
+-- Found Ogre Ghadamon (1.9.0)
+-- Found OGRE: optimized;/usr/local/lib/libOgreMain.so;debug;/usr/local/lib/libOgreMain.so
+CMake Warning at /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:744 (message):
+  Imported targets not available for Boost version 106300
+Call Stack (most recent call first):
+  /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:848 (_Boost_COMPONENT_DEPENDENCIES)
+  /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:1435 (_Boost_MISSING_DEPENDENCIES)
+  /usr/local/lib/OGRE/cmake/FindOGRE.cmake:313 (find_package)
+  CMakeLists.txt:33 (find_package)
+
+
+CMake Warning at /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:744 (message):
+  Imported targets not available for Boost version 106300
+Call Stack (most recent call first):
+  /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:848 (_Boost_COMPONENT_DEPENDENCIES)
+  /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:1435 (_Boost_MISSING_DEPENDENCIES)
+  /usr/local/lib/OGRE/cmake/FindOGRE.cmake:313 (find_package)
+  CMakeLists.txt:33 (find_package)
+
+
+CMake Warning at /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:744 (message):
+  Imported targets not available for Boost version 106300
+Call Stack (most recent call first):
+  /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:848 (_Boost_COMPONENT_DEPENDENCIES)
+  /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:1435 (_Boost_MISSING_DEPENDENCIES)
+  /usr/local/lib/OGRE/cmake/FindOGRE.cmake:322 (find_package)
+  CMakeLists.txt:33 (find_package)
+
+
+CMake Warning at /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:744 (message):
+  Imported targets not available for Boost version 106300
+Call Stack (most recent call first):
+  /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:848 (_Boost_COMPONENT_DEPENDENCIES)
+  /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:1435 (_Boost_MISSING_DEPENDENCIES)
+  /usr/local/lib/OGRE/cmake/FindOGRE.cmake:322 (find_package)
+  CMakeLists.txt:33 (find_package)
+
+
+CMake Warning at /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:744 (message):
+  Imported targets not available for Boost version 106300
+Call Stack (most recent call first):
+  /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:848 (_Boost_COMPONENT_DEPENDENCIES)
+  /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:1435 (_Boost_MISSING_DEPENDENCIES)
+  /usr/local/lib/OGRE/cmake/FindOGRE.cmake:322 (find_package)
+  CMakeLists.txt:33 (find_package)
+
+
+CMake Warning at /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:744 (message):
+  Imported targets not available for Boost version 106300
+Call Stack (most recent call first):
+  /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:848 (_Boost_COMPONENT_DEPENDENCIES)
+  /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:1435 (_Boost_MISSING_DEPENDENCIES)
+  /usr/local/lib/OGRE/cmake/FindOGRE.cmake:322 (find_package)
+  CMakeLists.txt:33 (find_package)
+
+
+CMake Warning at /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:744 (message):
+  Imported targets not available for Boost version 106300
+Call Stack (most recent call first):
+  /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:848 (_Boost_COMPONENT_DEPENDENCIES)
+  /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:1435 (_Boost_MISSING_DEPENDENCIES)
+  /usr/local/lib/OGRE/cmake/FindOGRE.cmake:322 (find_package)
+  CMakeLists.txt:33 (find_package)
+
+
+-- Looking for OGRE_Paging...
+-- Found OGRE_Paging: optimized;/usr/local/lib/libOgrePaging.so;debug;/usr/local/lib/libOgrePaging.so
+-- Looking for OGRE_Terrain...
+-- Found OGRE_Terrain: optimized;/usr/local/lib/libOgreTerrain.so;debug;/usr/local/lib/libOgreTerrain.so
+-- Looking for OGRE_Property...
+-- Found OGRE_Property: optimized;/usr/local/lib/libOgreProperty.so;debug;/usr/local/lib/libOgreProperty.so
+-- Looking for OGRE_RTShaderSystem...
+-- Found OGRE_RTShaderSystem: optimized;/usr/local/lib/libOgreRTShaderSystem.so;debug;/usr/local/lib/libOgreRTShaderSystem.so
+-- Looking for OGRE_Volume...
+-- Found OGRE_Volume: optimized;/usr/local/lib/libOgreVolume.so;debug;/usr/local/lib/libOgreVolume.so
+-- Looking for OGRE_Overlay...
+-- Found OGRE_Overlay: optimized;/usr/local/lib/libOgreOverlay.so;debug;/usr/local/lib/libOgreOverlay.so
+-- Looking for OIS...
+-- Found OIS: optimized;/usr/local/lib/libOIS.so;debug;/usr/local/lib/libOIS.so
+CMake Warning at /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:744 (message):
+  Imported targets not available for Boost version 106300
+Call Stack (most recent call first):
+  /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:848 (_Boost_COMPONENT_DEPENDENCIES)
+  /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:1435 (_Boost_MISSING_DEPENDENCIES)
+  CMakeLists.txt:52 (find_package)
+
+
+CMake Warning at /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:744 (message):
+  Imported targets not available for Boost version 106300
+Call Stack (most recent call first):
+  /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:848 (_Boost_COMPONENT_DEPENDENCIES)
+  /home/nicolas/Applications/clion-2017.1.1/bin/cmake/share/cmake-3.7/Modules/FindBoost.cmake:1435 (_Boost_MISSING_DEPENDENCIES)
+  CMakeLists.txt:52 (find_package)
+
+
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/nicolas/rendu/cpp_indie_studio

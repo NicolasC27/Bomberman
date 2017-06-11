@@ -377,11 +377,11 @@ bin/bomberman_d: CMakeFiles/bomberman.dir/src/Common/Manager/GameManager.cpp.o
 bin/bomberman_d: CMakeFiles/bomberman.dir/src/Controller/EventManager.cpp.o
 bin/bomberman_d: CMakeFiles/bomberman.dir/build.make
 bin/bomberman_d: /usr/local/lib/libOgreMain.so
-bin/bomberman_d: /usr/lib/libboost_thread.so
-bin/bomberman_d: /usr/lib/libboost_date_time.so
-bin/bomberman_d: /usr/lib/libboost_system.so
-bin/bomberman_d: /usr/lib/libboost_atomic.so
-bin/bomberman_d: /usr/lib/libboost_chrono.so
+bin/bomberman_d: /usr/lib64/libboost_thread.so
+bin/bomberman_d: /usr/lib64/libboost_date_time.so
+bin/bomberman_d: /usr/lib64/libboost_system.so
+bin/bomberman_d: /usr/lib64/libboost_atomic.so
+bin/bomberman_d: /usr/lib64/libboost_chrono.so
 bin/bomberman_d: /usr/local/lib/libOIS.so
 bin/bomberman_d: /usr/local/lib/libOgreOverlay.so
 bin/bomberman_d: CMakeFiles/bomberman.dir/link.txt
@@ -392,54 +392,6 @@ bin/bomberman_d: CMakeFiles/bomberman.dir/link.txt
 CMakeFiles/bomberman.dir/build: bin/bomberman_d
 
 .PHONY : CMakeFiles/bomberman.dir/build
-
-# Object files for target bomberman
-bomberman_OBJECTS = \
-"CMakeFiles/bomberman.dir/src/main.cpp.o" \
-"CMakeFiles/bomberman.dir/src/MapManager.cpp.o" \
-"CMakeFiles/bomberman.dir/src/Collision.cpp.o" \
-"CMakeFiles/bomberman.dir/src/Objects/Wall.cpp.o" \
-"CMakeFiles/bomberman.dir/src/Objects/Ground.cpp.o" \
-"CMakeFiles/bomberman.dir/src/Objects/AGameObject.cpp.o" \
-"CMakeFiles/bomberman.dir/src/Objects/ACharacter.cpp.o" \
-"CMakeFiles/bomberman.dir/src/Objects/Player.cpp.o" \
-"CMakeFiles/bomberman.dir/src/Common/Manager/NodeManager.cpp.o" \
-"CMakeFiles/bomberman.dir/src/Common/Manager/CameraManager.cpp.o" \
-"CMakeFiles/bomberman.dir/src/Common/Manager/GameManager.cpp.o" \
-"CMakeFiles/bomberman.dir/src/Controller/EventManager.cpp.o"
-
-# External object files for target bomberman
-bomberman_EXTERNAL_OBJECTS =
-
-CMakeFiles/CMakeRelink.dir/bomberman_d: CMakeFiles/bomberman.dir/src/main.cpp.o
-CMakeFiles/CMakeRelink.dir/bomberman_d: CMakeFiles/bomberman.dir/src/MapManager.cpp.o
-CMakeFiles/CMakeRelink.dir/bomberman_d: CMakeFiles/bomberman.dir/src/Collision.cpp.o
-CMakeFiles/CMakeRelink.dir/bomberman_d: CMakeFiles/bomberman.dir/src/Objects/Wall.cpp.o
-CMakeFiles/CMakeRelink.dir/bomberman_d: CMakeFiles/bomberman.dir/src/Objects/Ground.cpp.o
-CMakeFiles/CMakeRelink.dir/bomberman_d: CMakeFiles/bomberman.dir/src/Objects/AGameObject.cpp.o
-CMakeFiles/CMakeRelink.dir/bomberman_d: CMakeFiles/bomberman.dir/src/Objects/ACharacter.cpp.o
-CMakeFiles/CMakeRelink.dir/bomberman_d: CMakeFiles/bomberman.dir/src/Objects/Player.cpp.o
-CMakeFiles/CMakeRelink.dir/bomberman_d: CMakeFiles/bomberman.dir/src/Common/Manager/NodeManager.cpp.o
-CMakeFiles/CMakeRelink.dir/bomberman_d: CMakeFiles/bomberman.dir/src/Common/Manager/CameraManager.cpp.o
-CMakeFiles/CMakeRelink.dir/bomberman_d: CMakeFiles/bomberman.dir/src/Common/Manager/GameManager.cpp.o
-CMakeFiles/CMakeRelink.dir/bomberman_d: CMakeFiles/bomberman.dir/src/Controller/EventManager.cpp.o
-CMakeFiles/CMakeRelink.dir/bomberman_d: CMakeFiles/bomberman.dir/build.make
-CMakeFiles/CMakeRelink.dir/bomberman_d: /usr/local/lib/libOgreMain.so
-CMakeFiles/CMakeRelink.dir/bomberman_d: /usr/lib/libboost_thread.so
-CMakeFiles/CMakeRelink.dir/bomberman_d: /usr/lib/libboost_date_time.so
-CMakeFiles/CMakeRelink.dir/bomberman_d: /usr/lib/libboost_system.so
-CMakeFiles/CMakeRelink.dir/bomberman_d: /usr/lib/libboost_atomic.so
-CMakeFiles/CMakeRelink.dir/bomberman_d: /usr/lib/libboost_chrono.so
-CMakeFiles/CMakeRelink.dir/bomberman_d: /usr/local/lib/libOIS.so
-CMakeFiles/CMakeRelink.dir/bomberman_d: /usr/local/lib/libOgreOverlay.so
-CMakeFiles/CMakeRelink.dir/bomberman_d: CMakeFiles/bomberman.dir/relink.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nicolas/rendu/cpp_indie_studio/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable CMakeFiles/CMakeRelink.dir/bomberman_d"
-	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/bomberman.dir/relink.txt --verbose=$(VERBOSE)
-
-# Rule to relink during preinstall.
-CMakeFiles/bomberman.dir/preinstall: CMakeFiles/CMakeRelink.dir/bomberman_d
-
-.PHONY : CMakeFiles/bomberman.dir/preinstall
 
 CMakeFiles/bomberman.dir/requires: CMakeFiles/bomberman.dir/src/main.cpp.o.requires
 CMakeFiles/bomberman.dir/requires: CMakeFiles/bomberman.dir/src/MapManager.cpp.o.requires
