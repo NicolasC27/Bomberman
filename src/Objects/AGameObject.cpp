@@ -3,6 +3,7 @@
 //
 
 #include <OgreSceneManager.h>
+#include <OGRE/OgreEntity.h>
 #include "Interfaces/AGameObject.hpp"
 
 int AGameObject::objectId = 1;

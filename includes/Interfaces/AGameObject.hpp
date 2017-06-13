@@ -9,6 +9,7 @@
 #include <OgreSceneManager.h>
 #include <OgreVector2.h>
 #include <OgreMovableObject.h>
+#include <OgreEntity.h>
 #include "Collision.hpp"
 
 class AGameObject {
