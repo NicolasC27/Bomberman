@@ -6,7 +6,7 @@
 #define BOMBERMAN_ACHARACTER_HPP
 
 #include <OIS/OIS.h>
-#include "Controller/KeyController.hpp"
+//#include "Controller/KeyController.hpp"
 #include "AGameObject.hpp"
 
 class ACharacter : public AGameObject

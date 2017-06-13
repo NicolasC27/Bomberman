@@ -1,5 +1,6 @@
 // Created by nicolas on 01/06/17.
 
+#include "Objects/Player.hpp"
 #include "Controller/EventManager.hpp"
 
 EventManager::EventManager(MapManager *map, Ogre::RenderWindow *Window, Ogre::Camera *camera) : _map(map)
@@ -24,6 +25,7 @@ EventManager::EventManager(MapManager *map, Ogre::RenderWindow *Window, Ogre::Ca
 	  OIS::OISKeyboard, true));
   mMouse = static_cast<OIS::Mouse *>(mInputManager->createInputObject(
 	  OIS::OISMouse, true));
+
 
   //todo debug Joystick
   //  if (mInputManager->getNumberOfDevices(OIS::OISJoyStick) > 0)
@@ -95,44 +97,23 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
   mKeyboard->capture();
   mMouse->capture();
 
-  float mMoveScale;
-  Ogre::Degree mRotScale;
-  Ogre::Real mTimeUntilNextToggle;
-  Ogre::Real mMoveSpeed;
-  Ogre::Degree mRotateSpeed;
+  Player *player;
+  std::vector<AGameObject *> Character = _map->getCharacter();
 
-  if (mTimeUntilNextToggle >= 0)
-    mTimeUntilNextToggle -= evt.timeSinceLastFrame;
+  for (std::vector<AGameObject *>::const_iterator  characterit = Character.begin(); characterit != Character.end(); ++characterit)
+    {
 
-  mMoveScale = mMoveSpeed * evt.timeSinceLastFrame;
-  mRotScale = mRotateSpeed * evt.timeSinceLastFrame;
+      player = dynamic_cast<Player *>(*characterit);
 
-  Ogre::Radian mRotX, mRotY;
-  mRotX = 0;
-  mRotY = 0;
-
-  Ogre::Vector3 mTranslateVector;
-  mTranslateVector = Ogre::Vector3::ZERO;
-
-
-  if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
-    return false;
-
-  if (mKeyboard->isKeyDown(OIS::KC_W))
-    _map->move(Ogre::Vector3(0, 0, -1), evt);
-
-  if (mKeyboard->isKeyDown(OIS::KC_S))
-    _map->move(Ogre::Vector3(0, 0, 1), evt);
-
-  if (mKeyboard->isKeyDown(OIS::KC_A))
-    _map->move(Ogre::Vector3(-1, 0, 0), evt);
-
-  if (mKeyboard->isKeyDown(OIS::KC_D))
-    _map->move(Ogre::Vector3(1, 0, 0), evt);
-
-
-
-
+      for(std::map<OIS::KeyCode, Player::ActionKeyCode>::const_iterator keyit = player->getKeyCodeType().begin();
+	      keyit != player->getKeyCodeType().end(); keyit++)
+	{
+	  if (mKeyboard->isKeyDown(keyit->first))
+	      player->action(keyit->second, evt);
+	  else if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
+	      return false;
+	}
+    }
 //  if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
 //    return false;
 //  if (mKeyboard->isKeyDown(OIS::KC_W))
@@ -147,7 +128,6 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 //  if (mKeyboard->isKeyDown(OIS::KC_D))
 //    translate += Ogre::Vector3(10, 0, 0);
 //
-
 
 
   float rotX = mMouse->getMouseState().X.rel * evt.timeSinceLastFrame * -1;
