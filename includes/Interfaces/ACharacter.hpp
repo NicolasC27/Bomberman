@@ -5,15 +5,28 @@
 #ifndef BOMBERMAN_ACHARACTER_HPP
 #define BOMBERMAN_ACHARACTER_HPP
 
+#include <OIS/OIS.h>
+#include "Controller/KeyController.hpp"
 #include "AGameObject.hpp"
 
 class ACharacter : public AGameObject
 {
 
  public:
+  enum ActionKeyCode {
+    AT_UP,
+    AT_DOWN,
+    AT_LEFT,
+    AT_RIGHT,
+    AT_FIRE,
+  };
+
   ACharacter(Object object, int r);
 
   virtual ~ACharacter();
+
+  virtual void	move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt) = 0;
+  virtual void	action(ActionKeyCode, const Ogre::FrameEvent &evt) = 0;
 
   void			createEntity();
 
@@ -26,8 +39,13 @@ class ACharacter : public AGameObject
   Ogre::SceneManager::PrefabType	getMeshPrefab() const;
   std::string				getMeshName() const;
 
+  virtual const std::map<OIS::KeyCode, ActionKeyCode>	&getKeyCodeType() const = 0;
 
-  void 		move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt);
 
+ protected:
+  static int		objectId;
+
+  std::map<OIS::KeyCode, ActionKeyCode> keyCodeType;
 };
+
 #endif //BOMBERMAN_ACHARACTER_HPP
