@@ -6,17 +6,11 @@
 #define CPP_INDIE_STUDIO_MAP_HPP
 
 class MapManager;
-
 #include <OgreVector2.h>
 #include <OgreException.h>
 #include <map>
 #include "Common/Manager/NodeManager.hpp"
-#include "Objects/Player.hpp"
-
 #include "Interfaces/AGameObject.hpp"
-#include "Interfaces/ACharacter.hpp"
-#include "Common/Manager/GameManager.hpp"
-#include "Common/Manager/NodeManager.hpp"
 
 #define ERR_MAPSIZE	"Size map too big"
 #define ERR_NBLINEMAP	"The number of rows does not match the number of rows in the map."
@@ -32,7 +26,7 @@ class MapManager
   Ogre::SceneManager 				*_SceneManager;
 
   std::multimap<Ogre::Vector2, AGameObject *> 	_objects;
-  std::vector<AGameObject *>			 _character;
+  std::vector<AGameObject *>			_character;
  public:
   const std::vector<AGameObject *> &getCharacter() const;
 
