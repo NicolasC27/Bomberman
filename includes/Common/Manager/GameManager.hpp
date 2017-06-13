@@ -5,10 +5,11 @@
 #ifndef BOMBERMAN_GAMEMANAGER_HPP
 #define BOMBERMAN_GAMEMANAGER_HPP
 
+class GameManager;
+
 #include <Ogre.h>
 #include "Controller/EventManager.hpp"
 #include "Common/Manager/CameraManager.hpp"
-#include "NodeManager.hpp"
 #include "MapManager.hpp"
 
 #define NAME_GAME	"Bomberman"
@@ -25,20 +26,29 @@ class GameManager
   CameraManager		*Camera;
   NodeManager 		*_nodes;
 
+  float 		_timer = 120;
+
  public:
   GameManager();
   virtual ~GameManager();
 
   void 			initializeResources();
+
   void 			createRenderWindow();
+
   void 			setupScene();
   void 			setupLight();
+
   void 			run();
+
+  void 			update(MapManager *map, Ogre::Real dt);
 
   Ogre::Root 		*getRoot() const;
   Ogre::SceneManager 	*getSceneManager() const;
   Ogre::RenderWindow 	*getWindow() const;
   NodeManager 		*getNodes() const;
+
+  void 			WallFalling(MapManager *map, Ogre::Real dt);
 };
 
 #endif //BOMBERMAN_GAMEMANAGER_HPP
