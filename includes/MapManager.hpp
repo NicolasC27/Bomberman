@@ -10,6 +10,8 @@ class MapManager;
 #include <OgreVector2.h>
 #include <OgreException.h>
 #include <map>
+#include "Common/Manager/NodeManager.hpp"
+#include "Objects/Player.hpp"
 
 #include "Interfaces/AGameObject.hpp"
 #include "Interfaces/ACharacter.hpp"
@@ -30,7 +32,11 @@ class MapManager
   Ogre::SceneManager 				*_SceneManager;
 
   std::multimap<Ogre::Vector2, AGameObject *> 	_objects;
-  std::vector<ACharacter *>		 	_character;
+  std::vector<AGameObject *>			 _character;
+ public:
+  const std::vector<AGameObject *> &getCharacter() const;
+
+ private:
 
   std::list<Ogre::Vector2> 			_spawns;
   std::string 					_filename;
@@ -45,17 +51,16 @@ class MapManager
 
   virtual ~MapManager();
 
-  void generateObjects();
-  void generateSpawn();
-  void generatePlan();
+  void			generateObjects();
+  void			generateSpawn();
+  void			generatePlan();
 
-  void setSize(int size);
-  int getSize() const;
+  void			setSize(int size);
+  int			getSize() const;
 
-  void addObjects(const Ogre::Vector2 &, AGameObject *);
-  void addCharacter(const Ogre::Vector2 &vector);
-
-  void move(Ogre::Vector3 const &vector3, const Ogre::FrameEvent &evt);
+  void 			addObjects(const Ogre::Vector2 &, AGameObject *);
+  void 			addCharacter(const Ogre::Vector2 &vector);
+  void 			addBomb(const Ogre::Vector2 &vector);
 };
 
 #endif //CPP_INDIE_STUDIO_MAP_HPP

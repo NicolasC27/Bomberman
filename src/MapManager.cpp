@@ -4,6 +4,7 @@
 
 #include "Objects/Wall.hpp"
 #include "Objects/Player.hpp"
+#include "Objects/Bomb.hpp"
 #include "MapManager.hpp"
 
 
@@ -73,8 +74,6 @@ void 		MapManager::generateObjects()
 	    addObjects(Ogre::Vector2(MapManager::boxWidth * z, MapManager::boxWidth * x), new Wall(Wall::UNBREAKABLE));
 	  else if ((line[i] - '0')  == AGameObject::BLOCK)
 	      addObjects(Ogre::Vector2(MapManager::boxWidth * z, MapManager::boxWidth * x), new Wall(Wall::BREAKABLE));
-//	  else
-//	      addObjects(Ogre::Vector2(z, x), new Ground(Ground::UNBREAKABLE));
 	}
       count = x;
   }
@@ -82,20 +81,29 @@ void 		MapManager::generateObjects()
     throw Ogre::Exception(Ogre::Exception::ERR_INVALID_STATE,
 			  ERR_NBLINEMAP, _filename);
   addCharacter(Ogre::Vector2(100, 100));
+  addCharacter(Ogre::Vector2(900, 900));
+
+  addBomb(Ogre::Vector2(900, 900));
   generatePlan();
 }
 
 void 		MapManager::generateSpawn()
 {
   _spawns.push_front(Ogre::Vector2(MapManager::boxWidth, MapManager::boxWidth));
-  _spawns.push_front(Ogre::Vector2(MapManager::boxWidth, (_size * 1000) - MapManager::boxWidth));
-  _spawns.push_front(Ogre::Vector2((_size * 1000) - MapManager::boxWidth, MapManager::boxWidth));
-  _spawns.push_front(Ogre::Vector2((_size * 1000) - MapManager::boxWidth, (_size * 1000) - MapManager::boxWidth));
+  _spawns.push_front(Ogre::Vector2(MapManager::boxWidth,
+				   (_size * MapManager::boxWidth) -
+				   (MapManager::boxWidth * 2)));
+  _spawns.push_front(Ogre::Vector2(
+	  (_size * MapManager::boxWidth) - (MapManager::boxWidth * 2),
+	  MapManager::boxWidth));
+  _spawns.push_front(Ogre::Vector2(
+	  (_size * MapManager::boxWidth) - (MapManager::boxWidth * 2),
+	  (_size * MapManager::boxWidth) - (MapManager::boxWidth * 2)));
 }
 
 void 		MapManager::addCharacter(const Ogre::Vector2 &vector)
 {
-  ACharacter	*player;
+  AGameObject	*player;
 
   player = new Player(AGameObject::CHARACTER);
   _character.push_back(player);
@@ -103,6 +111,11 @@ void 		MapManager::addCharacter(const Ogre::Vector2 &vector)
   player->createEntity();
   player->setPosition(vector.x, player->getPositionY(), vector.y);
   player->AttachObject();
+}
+
+void 		MapManager::addBomb(const Ogre::Vector2 &vector)
+{
+  addObjects(Ogre::Vector2(vector.x, vector.y), new Bomb(AGameObject::BOMB));
 }
 
 void 		MapManager::setSize(int size)
@@ -115,7 +128,7 @@ int 		MapManager::getSize() const
   return _size;
 }
 
-void MapManager::move(const Ogre::Vector3 &vector3, const Ogre::FrameEvent &evt)
+const std::vector<AGameObject *> &MapManager::getCharacter() const
 {
-  _character.front()->move(vector3, evt);
+  return _character;
 }
