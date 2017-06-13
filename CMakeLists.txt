@@ -71,7 +71,7 @@ SET(SRCS
         src/Objects/AGameObject.cpp
         src/Objects/ACharacter.cpp
         src/Objects/Player.cpp
-#        src/Objects/Bomb.cpp
+        src/Objects/Bomb.cpp
         src/Common/Manager/ConfigManager.cpp
 #        src/Controller/KeyController.cpp
         src/Common/Manager/NodeManager.cpp
@@ -91,7 +91,7 @@ SET(SRCS
         includes/Objects/Player.hpp
         includes/MapManager.hpp
         includes/Objects/Wall.hpp
-#        includes/Objects/Bomb.hpp
+        includes/Objects/Bomb.hpp
         includes/Collision.hpp
         )
 
