@@ -20,8 +20,6 @@ class Player : public ACharacter
 
   const std::map<OIS::KeyCode, ActionKeyCode>	&getKeyCodeType() const;
 
-  KeyController		*key;
-
  protected:
   int			_ID;
   static int		_playerID;
