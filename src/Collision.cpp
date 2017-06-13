@@ -5,26 +5,39 @@
 // Login   <guilbo_m@epitech.net>
 //
 // Started on  Wed May 31 13:32:38 2017 Mathis Guilbon
-// Last update Thu Jun  1 19:32:33 2017 Mathis Guilbon
+// Last update Tue Jun 13 18:15:44 2017 chalie_a
 //
 
 #include "Collision.hpp"
 
-Collision::Collision(Ogre::Vector2 v) : _type(PARALL), _v(v), _origin(0, 0)
+std::ostream	&operator<<(std::ostream &os, Collision const &coll)
+{
+  std::cout << "origin(" << coll.getOrigin().x << "," << coll.getOrigin().y << ") ";
+  if (coll.getType() == Collision::SPHERE)
+    std::cout << "type(SPHERE) radius(" << coll.getR() << ")";
+  else
+    std::cout << "type(PARALL) size(" << coll.getV().x << "," << coll.getV().y << ")";
+  std::cout << std::endl;
+  return (os);
+}
+
+Collision::Collision(Ogre::Vector2 v)
+  : _type(Collision::PARALL), _v(v), _origin(0, 0)
 {
   this->init();
 }
 
-Collision::Collision(double r) : _type(SPHERE), _r(r), _origin(0, 0)
+Collision::Collision(double r)
+  : _type(Collision::SPHERE), _r(r), _origin(0, 0)
 {
   this->init();
 }
 
 void		Collision::init()
 {
-  this->collideType.push_back(SPHERE + SPHERE);
-  this->collideType.push_back(PARALL + PARALL);
-  this->collideType.push_back(PARALL + SPHERE);
+  this->collideType.push_back(Collision::SPHERE + Collision::SPHERE);
+  this->collideType.push_back(Collision::PARALL + Collision::PARALL);
+  this->collideType.push_back(Collision::PARALL + Collision::SPHERE);
   this->doesCollide.push_back(&Collision::StoS);
   this->doesCollide.push_back(&Collision::PtoP);
   this->doesCollide.push_back(&Collision::PtoS);
@@ -39,7 +52,7 @@ Collision		&Collision::operator=(Collision const &with)
 {
   this->_type = with.getType();
 
-  if (this->_type == PARALL)
+  if (this->_type == Collision::PARALL)
     this->_v = with.getV();
   else
     this->_r = with.getR();
@@ -47,21 +60,20 @@ Collision		&Collision::operator=(Collision const &with)
   this->_origin = with.getOrigin();
 }
 
-bool			Collision::operator==(Collision const &with)
+bool			Collision::operator==(Collision const &with) const
 {
   unsigned int 		i;
+
   for (i = 0; i < this->collideType.size(); ++i)
     {
       if (this->collideType[i] == this->_type + with.getType())
 	break;
     }
-
+  std::cout << *this << with << std::endl;
   if (i < this->collideType.size())
-    {
-      return (this->*(this->doesCollide[i]))(with);
-    }
-  return false;
-// type inconnue ou non géré ?
+    return ((this->*this->doesCollide[i])(with));
+  // type inconnue ou non géré ?
+  return (false);
 }
 
 Collision::BoundingBoxType	Collision::getType() const
@@ -99,13 +111,9 @@ bool			Collision::StoS(Collision const &with) const
   d += (this->_origin.y - withO.y) * (this->_origin.y - withO.y);
 
   if (d > (this->_r + r) * (this->_r + r))
-    {
-      return false;
-    } else
-    {
-      return true;
-    }
-
+    return false;
+  else
+    return true;
 }
 
 bool			Collision::PtoP(Collision const &with) const
@@ -113,11 +121,10 @@ bool			Collision::PtoP(Collision const &with) const
   Ogre::Vector2 	withO(with.getOrigin());
   Ogre::Vector2 	withV(with.getV());
 
-  return (withO.x >= this->_origin.x + this->_v.x)
-	 || (withO.x + withV.x <= this->_origin.x)
-	 || (withO.y >= this->_origin.y + this->_v.y)
-	 || (withO.y + withV.y <= this->_origin.y) ? false : true;
-
+  return (((withO.x >= this->_origin.x + this->_v.x) ||
+	   (withO.x + withV.x <= this->_origin.x) ||
+	   (withO.y >= this->_origin.y + this->_v.y) ||
+	   (withO.y + withV.y <= this->_origin.y)) ? false : true);
 }
 
 bool			Collision::PtoS(Collision const &with) const
@@ -129,7 +136,7 @@ bool			Collision::PtoS(Collision const &with) const
   double		sR;
   double		d;
 
-  if (this->_type == SPHERE)
+  if (this->_type == Collision::SPHERE)
     {
       sO = this->getOrigin();
       sR = this->getR();
@@ -148,5 +155,5 @@ bool			Collision::PtoS(Collision const &with) const
   near.y = fabs(pO.y - sO.y) > fabs(pO.y + pV.y - sO.y) ? pO.y + pV.y : pO.y;
   d = (sO.x - near.x) * (sO.x - near.x) + (sO.y - near.y) * (sO.y - near.y);
 
-  return d > sR * sR ? false : true;
+  return ((d > sR * sR) ? false : true);
 }
