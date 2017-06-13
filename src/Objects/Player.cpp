@@ -56,35 +56,42 @@ void 				Player::move(Ogre::Vector3 const &vector,
 
     test = new Collision((Ogre::Vector2(100, 100)));
 
-    test->setOrigin(Ogre::Vector2(100, 100));
+    test->setOrigin(Ogre::Vector2(200, 200));
+
+
+  if (*_collision == *test)
+    std::cout << "COLLISION" << std::endl;
+  else
+    {
+
     mAnimationState->setLoop(true);
     mAnimationState->setEnabled(true);
 
     _node->translate(translateVector);
     //Rotate the object to the moving direction
+      _collision->setOrigin(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z));
 
-    _collision->setOrigin(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z));
-    if (_collision == test)
-      std::cout << "COLLISION" << std::endl;
-    if (translateVector != Ogre::Vector3::ZERO)
-      {
+      if (translateVector != Ogre::Vector3::ZERO)
+	{
 
-	Ogre::Vector3 src = _node->getOrientation() * Ogre::Vector3::UNIT_Z;
-	Ogre::Vector3 mDirection = vector;
-	mDirection.normalise();
+	  Ogre::Vector3 src = _node->getOrientation() * Ogre::Vector3::UNIT_Z;
+	  Ogre::Vector3 mDirection = vector;
+	  mDirection.normalise();
 
-	if ((1.0f + src.dotProduct(mDirection)) < 0.0001f)
-	  {
-	    _node->yaw(Ogre::Degree(180));
-	  } else
-	  {
-	    Ogre::Quaternion quat = src.getRotationTo(mDirection);
-	    _node->rotate(quat);
+	  if ((1.0f + src.dotProduct(mDirection)) < 0.0001f)
+	    {
+	      _node->yaw(Ogre::Degree(180));
+	    } else
+	    {
+	      Ogre::Quaternion quat = src.getRotationTo(mDirection);
+	      _node->rotate(quat);
 
-	  } // else
-      }
-    mAnimationState->addTime(evt.timeSinceLastFrame * 1.5);
-    std::cout << "x : " << _node->getPosition().x << "z: " << _node->getPosition().z << std::endl;
+	    } // else
+	}
+      mAnimationState->addTime(evt.timeSinceLastFrame * 1.5);
+      std::cout << "x : " << _node->getPosition().x << "z: " << _node->getPosition().z
+		<< std::endl;
+    }
 }
 
 void Player::action(ActionKeyCode action, const Ogre::FrameEvent &evt)
