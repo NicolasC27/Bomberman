@@ -5,7 +5,7 @@
 // Login   <guilbo_m@epitech.net>
 //
 // Started on  Wed May 31 13:32:38 2017 Mathis Guilbon
-// Last update Tue Jun 13 18:15:44 2017 chalie_a
+// Last update Tue Jun 13 18:43:42 2017 chalie_a
 //
 
 #include "Collision.hpp"
@@ -69,11 +69,16 @@ bool			Collision::operator==(Collision const &with) const
       if (this->collideType[i] == this->_type + with.getType())
 	break;
     }
-  std::cout << *this << with << std::endl;
+  std::cout << *this << with;
   if (i < this->collideType.size())
     return ((this->*this->doesCollide[i])(with));
   // type inconnue ou non géré ?
   return (false);
+}
+
+bool			Collision::operator!=(Collision const &with) const
+{
+  return (!(*this == with));
 }
 
 Collision::BoundingBoxType	Collision::getType() const
@@ -111,9 +116,9 @@ bool			Collision::StoS(Collision const &with) const
   d += (this->_origin.y - withO.y) * (this->_origin.y - withO.y);
 
   if (d > (this->_r + r) * (this->_r + r))
-    return false;
+    return (false);
   else
-    return true;
+    return (true);
 }
 
 bool			Collision::PtoP(Collision const &with) const
@@ -154,6 +159,8 @@ bool			Collision::PtoS(Collision const &with) const
   near.x = fabs(pO.x - sO.x) > fabs(pO.x + pV.x - sO.x) ? pO.x + pV.x : pO.x;
   near.y = fabs(pO.y - sO.y) > fabs(pO.y + pV.y - sO.y) ? pO.y + pV.y : pO.y;
   d = (sO.x - near.x) * (sO.x - near.x) + (sO.y - near.y) * (sO.y - near.y);
-
+  std::cout << "point le plus proche (" << near.x << "," << near.y << ") " <<
+    "distance-to-center: " << d <<
+    " r²: " << sR * sR << std::endl << std::endl;
   return ((d > sR * sR) ? false : true);
 }

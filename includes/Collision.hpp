@@ -5,7 +5,7 @@
 // Login   <guilbo_m@epitech.net>
 //
 // Started on  Sun Jun 11 00:30:24 2017 Mathis Guilbon
-// Last update Tue Jun 13 18:12:45 2017 chalie_a
+// Last update Tue Jun 13 18:40:02 2017 chalie_a
 //
 
 #ifndef BOMBERMAN_COLLISION_HPP
@@ -31,6 +31,7 @@ class Collision
 
   Collision		&operator=(Collision const &);
   bool			operator==(Collision const &) const;
+  bool			operator!=(Collision const &) const;
 
   Collision::BoundingBoxType	getType() const;
 
