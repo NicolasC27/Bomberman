@@ -15,6 +15,20 @@ material Objects/Cube/Wall
         }
 }
 
+material Objects/Bomb
+{
+        technique
+        {
+                pass
+                {
+
+                             texture_unit
+                                        {
+						bomb_texture.tga.png
+                                        }
+                }
+        }
+}
 
 material Objects/Cube/Block
 {
