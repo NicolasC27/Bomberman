@@ -25,6 +25,7 @@ class Wall : public AGameObject
   Ogre::Vector3 	getScale() const;
   double	 	getPositionY() const;
 
+  void			update();
 
   Ogre::SceneManager::PrefabType	getMeshPrefab() const;
   std::string				getMeshName() const;
