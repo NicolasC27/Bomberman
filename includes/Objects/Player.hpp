@@ -5,7 +5,6 @@
 #ifndef BOMBERMAN_PLAYER_HPP
 #define BOMBERMAN_PLAYER_HPP
 
-#include "Controller/KeyController.hpp"
 #include "Interfaces/ACharacter.hpp"
 
 class Player : public ACharacter
