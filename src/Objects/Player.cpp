@@ -64,7 +64,7 @@ void 				Player::move(Ogre::Vector3 const &vector,
     //Rotate the object to the moving direction
 
     _collision->setOrigin(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z));
-    if (_collision == test)
+    if (*_collision == *test)
       std::cout << "COLLISION" << std::endl;
     if (translateVector != Ogre::Vector3::ZERO)
       {
@@ -84,7 +84,7 @@ void 				Player::move(Ogre::Vector3 const &vector,
 	  } // else
       }
     mAnimationState->addTime(evt.timeSinceLastFrame * 1.5);
-    std::cout << "x : " << _node->getPosition().x << "z: " << _node->getPosition().z << std::endl;
+    //    std::cout << "x : " << _node->getPosition().x << "z: " << _node->getPosition().z << std::endl;
 }
 
 void Player::action(ActionKeyCode action, const Ogre::FrameEvent &evt)
