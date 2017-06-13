@@ -37,7 +37,7 @@ std::string ACharacter::getMaterialName() const
 Ogre::Vector3 ACharacter::getScale() const
 {
 
-  return Ogre::Vector3(0.8, 0.8, 0.8);
+  return Ogre::Vector3(0.7, 0.7, 0.7);
 }
 
 double ACharacter::getPositionY() const
