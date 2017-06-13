@@ -9,18 +9,18 @@ if(WIN32)
 endif(WIN32)
 
 if(UNIX)
-    if(EXISTS "/usr/local/lib/OGRE/cmake")
-        set(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
-        set(OGRE_SAMPLES_INCLUDEPATH "/usr/local/share/OGRE/samples/Common/include/") # We could just *assume* that developers uses this basepath : /usr/local
-    elseif(EXISTS "/usr/share/local/lib/OGRE/cmake")
-        set(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
-        set(OGRE_SAMPLES_INCLUDEPATH "/usr/local/share/OGRE/samples/Common/include/") # We could just *assume* that developers uses this basepath : /usr/local
-    elseif(EXISTS "/usr/lib/OGRE/cmake")
-        set(CMAKE_MODULE_PATH "/usr/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
-        set(OGRE_SAMPLES_INCLUDEPATH "/usr/share/OGRE/samples/Common/include/") # Otherwise, this one
-    else ()
-        message(SEND_ERROR "Failed to find module path.")
-    endif(EXISTS "/usr/local/lib/OGRE")
+    if(EXISTS "OGRE/cmake")
+        set(CMAKE_MODULE_PATH "OGRE/cmake/;${CMAKE_MODULE_PATH}")
+        set(OGRE_SAMPLES_INCLUDEPATH "OGRE/samples/Common/include/") # We could just *assume* that developers uses this basepath : /usr/local
+#    elseif(EXISTS "/usr/share/local/lib/OGRE/cmake")
+#        set(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
+#        set(OGRE_SAMPLES_INCLUDEPATH "/usr/local/share/OGRE/samples/Common/include/") # We could just *assume* that developers uses this basepath : /usr/local
+#    elseif(EXISTS "/usr/lib/OGRE/cmake")
+#        set(CMAKE_MODULE_PATH "/usr/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
+#        set(OGRE_SAMPLES_INCLUDEPATH "/usr/share/OGRE/samples/Common/include/") # Otherwise, this one
+#    else ()
+#        message(SEND_ERROR "Failed to find module path.")
+    endif(EXISTS "OGRE")
 endif(UNIX)
 
 if (CMAKE_BUILD_TYPE STREQUAL "")
@@ -68,10 +68,12 @@ SET(SRCS
         src/MapManager.cpp
         src/Collision.cpp
         src/Objects/Wall.cpp
-        src/Objects/Ground.cpp
         src/Objects/AGameObject.cpp
         src/Objects/ACharacter.cpp
         src/Objects/Player.cpp
+#        src/Objects/Bomb.cpp
+        src/Common/Manager/ConfigManager.cpp
+#        src/Controller/KeyController.cpp
         src/Common/Manager/NodeManager.cpp
         src/Common/Manager/CameraManager.cpp
         src/Common/Manager/GameManager.cpp
@@ -84,10 +86,12 @@ SET(SRCS
         includes/Controller/EventManager.hpp
         includes/Interfaces/AGameObject.hpp
         includes/Interfaces/ACharacter.hpp
-        includes/Objects/Ground.hpp
+#        includes/Controller/KeyController.hpp
+        includes/Common/Manager/ConfigManager.hpp
         includes/Objects/Player.hpp
         includes/MapManager.hpp
         includes/Objects/Wall.hpp
+#        includes/Objects/Bomb.hpp
         includes/Collision.hpp
         )
 
