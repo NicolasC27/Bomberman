@@ -3,6 +3,7 @@
 //
 
 #include <Ogre.h>
+#include <Objects/Bomb.hpp>
 #include "Interfaces/ACharacter.hpp"
 #include "Objects/Player.hpp"
 
@@ -10,11 +11,17 @@ int Player::_playerID = 1;
 
 Player::Player(AGameObject::Object object) : ACharacter(object, 35), _ID(_playerID++)
 {
+  _moveSpeed = 400;
   keyCodeType.clear();
   setKey();
 }
 
 Player::~Player()
+{
+
+}
+
+void 				Player::update()
 {
 
 }
@@ -29,7 +36,7 @@ void 				Player::setKey()
 	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_RIGHT, AT_RIGHT));
 	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_UP, AT_UP));
 	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_DOWN, AT_DOWN));
-	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_ESCAPE, AT_FIRE));
+	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_E, AT_FIRE));
 	} else if (_ID == 2)
 	  {
 	    keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_A, AT_LEFT));
@@ -49,8 +56,7 @@ void 				Player::move(Ogre::Vector3 const &vector,
 
     mAnimationState = dynamic_cast<Ogre::Entity*>(_obj)->getAnimationState("my_animation");
 
-    Ogre::Real mMoveSpeed  = 400;
-    Ogre::Vector3 translateVector = evt.timeSinceLastFrame * mMoveSpeed *vector;
+    Ogre::Vector3 translateVector = evt.timeSinceLastFrame * _moveSpeed * vector;
 
     Collision *test;
 
@@ -69,11 +75,10 @@ void 				Player::move(Ogre::Vector3 const &vector,
 
     _node->translate(translateVector);
     //Rotate the object to the moving direction
-      _collision->setOrigin(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z));
+      _collision->setOrigin(Ogre::Vector2(_node->getPosition().x - 50, _node->getPosition().z) - 50);
 
       if (translateVector != Ogre::Vector3::ZERO)
 	{
-
 	  Ogre::Vector3 src = _node->getOrientation() * Ogre::Vector3::UNIT_Z;
 	  Ogre::Vector3 mDirection = vector;
 	  mDirection.normalise();
@@ -107,6 +112,19 @@ void Player::action(ActionKeyCode action, const Ogre::FrameEvent &evt)
       else
 	if (action == Player::AT_RIGHT)
 	  move(Ogre::Vector3(1, 0, 0), evt);
+	else
+	  if (action == Player::AT_FIRE)
+	    {
+	      std::cout << "JE PASSE" << std::endl;
+	      Bomb *test;
+
+	      test = new Bomb(AGameObject::BOMB);
+	      test->setSceneManager(SceneManager);
+	      test->createEntity();
+	      test->setPosition(_node->getPosition().x, _node->getPosition().y, _node->getPosition().z);
+	      test->AttachObject();
+	      test->Explosion();
+	    }
 }
 
 const std::map<OIS::KeyCode, ACharacter::ActionKeyCode> &

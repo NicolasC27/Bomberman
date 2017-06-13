@@ -18,6 +18,8 @@ class Player : public ACharacter
 
   void			action(ActionKeyCode, const Ogre::FrameEvent &);
 
+  void 			update();
+
   const std::map<OIS::KeyCode, ActionKeyCode>	&getKeyCodeType() const;
 
  protected:
