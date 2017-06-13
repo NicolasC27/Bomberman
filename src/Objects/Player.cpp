@@ -7,7 +7,7 @@
 
 int Player::_playerID = 1;
 
-Player::Player(AGameObject::Object object) : ACharacter(object, 35), _ID(_playerID++), key(new KeyController())
+Player::Player(AGameObject::Object object) : ACharacter(object, 35), _ID(_playerID++)
 {
   keyCodeType.clear();
   setKey();
