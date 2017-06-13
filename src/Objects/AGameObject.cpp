@@ -4,6 +4,7 @@
 
 #include <OgreSceneManager.h>
 #include <OGRE/OgreEntity.h>
+#include <OgreNode.h>
 #include "Interfaces/AGameObject.hpp"
 
 int AGameObject::objectId = 1;
@@ -48,7 +49,7 @@ void 			AGameObject::setNode(Ogre::SceneNode *node)
 
 void 			AGameObject::AttachObject()
 {
-  _node->scale(getScale());
+  _node->setScale(getScale());
   _node->attachObject(_obj);
 }
 

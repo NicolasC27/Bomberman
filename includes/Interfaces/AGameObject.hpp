@@ -10,6 +10,8 @@
 #include <OgreVector2.h>
 #include <OgreMovableObject.h>
 #include <OgreEntity.h>
+#include <OgreNode.h>
+#include <OgreSceneNode.h>
 #include "Collision.hpp"
 
 class AGameObject {
@@ -62,7 +64,7 @@ class AGameObject {
 
   Ogre::MovableObject	*_obj;
   Ogre::SceneManager 	*SceneManager;
-  Ogre::SceneNode	*_node;
+  Ogre::SceneNode		*_node;
 
 
   Collision		*_collision;

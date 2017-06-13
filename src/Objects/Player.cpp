@@ -2,6 +2,7 @@
 // Created by nicolas on 07/06/17.
 //
 
+#include <Ogre.h>
 #include "Interfaces/ACharacter.hpp"
 #include "Objects/Player.hpp"
 
@@ -49,7 +50,7 @@ void 				Player::move(Ogre::Vector3 const &vector,
     mAnimationState = dynamic_cast<Ogre::Entity*>(_obj)->getAnimationState("my_animation");
 
     Ogre::Real mMoveSpeed  = 400;
-    Ogre::Vector3 translateVector = 	vector;
+    Ogre::Vector3 translateVector = evt.timeSinceLastFrame * mMoveSpeed *vector;
 
     Collision *test;
 

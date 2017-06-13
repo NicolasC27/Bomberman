@@ -8,22 +8,60 @@
 
 GameManager::GameManager()
 {
-//  ConfigManager configManager(_Root);
+  Ogre::String mResourcesCfg;
+  Ogre::String mPluginsCfg;
+#ifdef _DEBUG
+  mResourcesCfg = "resources_d.cfg";
+    mPluginsCfg = "plugins_d.cfg";
+#else
+  mResourcesCfg = "resources.cfg";
+  mPluginsCfg = "plugins.cfg";
+#endif
 
-//  _Root = configManager.getRoot();
-  _Root = new Ogre::Root;
+  // construct Ogre::Root
+  _Root = new Ogre::Root(mPluginsCfg);
 
-  // Configures the application
-  if (!_Root->restoreConfig())
-    _Root->showConfigDialog();
-  _Root->saveConfig();
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/materials", "FileSystem");
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/materials/scripts", "FileSystem");
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/materials/textures", "FileSystem");
-  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/models", "FileSystem");
+//-------------------------------------------------------------------------------------
+  // setup resources
+  // Load resource paths from config file
+  Ogre::ConfigFile cf;
+  cf.load(mResourcesCfg);
 
-  Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
-  createRenderWindow();
+  // Go through all sections & settings in the file
+  Ogre::ConfigFile::SectionIterator seci = cf.getSectionIterator();
+
+  Ogre::String secName, typeName, archName;
+  while (seci.hasMoreElements())
+    {
+      secName = seci.peekNextKey();
+      Ogre::ConfigFile::SettingsMultiMap *settings = seci.getNext();
+      Ogre::ConfigFile::SettingsMultiMap::iterator i;
+      for (i = settings->begin(); i != settings->end(); ++i)
+	{
+	  typeName = i->first;
+	  archName = i->second;
+	  Ogre::ResourceGroupManager::getSingleton().addResourceLocation(
+		  archName, typeName, secName);
+	}
+    }
+//-------------------------------------------------------------------------------------
+  // configure
+  // Show the configuration dialog and initialise the system
+  // You can skip this and use root.restoreConfig() to load configuration
+  // settings if you were sure there are valid ones saved in ogre.cfg
+  if(_Root->restoreConfig() || _Root->showConfigDialog())
+    {
+      // If returned true, user clicked OK so initialise
+      // Here we choose to let the system create a default rendering window by passing 'true'
+      _Window = _Root->initialise(true, NAME_GAME);
+    }
+//  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/materials", "FileSystem");
+//  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/materials/scripts", "FileSystem");
+//  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/materials/textures", "FileSystem");
+//  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/models", "FileSystem");
+//
+//  Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+//  createRenderWindow();
   initializeResources();
   setupScene();
   setupLight();

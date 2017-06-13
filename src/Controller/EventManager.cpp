@@ -130,12 +130,12 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 //
 
 
-  float rotX = mMouse->getMouseState().X.rel * evt.timeSinceLastFrame * -1;
-  float rotY = mMouse->getMouseState().Y.rel * evt.timeSinceLastFrame * -1;
-  mCamera->yaw(Ogre::Radian(rotX));
-  mCamera->pitch(Ogre::Radian(rotY));
-
-  mCamera->moveRelative(translate * evt.timeSinceLastFrame * mMovementspeed * 5);
+//  float rotX = mMouse->getMouseState().X.rel * evt.timeSinceLastFrame * -1;
+//  float rotY = mMouse->getMouseState().Y.rel * evt.timeSinceLastFrame * -1;
+//  mCamera->yaw(Ogre::Radian(rotX));
+//  mCamera->pitch(Ogre::Radian(rotY));
+//
+//  mCamera->moveRelative(translate * evt.timeSinceLastFrame * mMovementspeed * 5);
   return true;
 }
 
@@ -191,7 +191,7 @@ bool 			EventManager::povMoved(const OIS::JoyStickEvent &arg, int index)
 	    translate += Ogre::Vector3(-10, 0, 0);
 	  }
 
-  mCamera->moveRelative(translate * 0.5);
+//  mCamera->moveRelative(translate * 0.5);
 
   return true;
 }

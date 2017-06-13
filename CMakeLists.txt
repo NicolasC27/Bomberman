@@ -9,18 +9,18 @@ if(WIN32)
 endif(WIN32)
 
 if(UNIX)
-    if(EXISTS "OGRE/cmake")
-        set(CMAKE_MODULE_PATH "OGRE/cmake/;${CMAKE_MODULE_PATH}")
-        set(OGRE_SAMPLES_INCLUDEPATH "OGRE/samples/Common/include/") # We could just *assume* that developers uses this basepath : /usr/local
-#    elseif(EXISTS "/usr/share/local/lib/OGRE/cmake")
-#        set(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
-#        set(OGRE_SAMPLES_INCLUDEPATH "/usr/local/share/OGRE/samples/Common/include/") # We could just *assume* that developers uses this basepath : /usr/local
-#    elseif(EXISTS "/usr/lib/OGRE/cmake")
-#        set(CMAKE_MODULE_PATH "/usr/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
-#        set(OGRE_SAMPLES_INCLUDEPATH "/usr/share/OGRE/samples/Common/include/") # Otherwise, this one
-#    else ()
-#        message(SEND_ERROR "Failed to find module path.")
-    endif(EXISTS "OGRE")
+    if(EXISTS "/usr/local/lib/OGRE/cmake")
+        set(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
+        set(OGRE_SAMPLES_INCLUDEPATH "/usr/local/share/OGRE/samples/Common/include/") # We could just *assume* that developers uses this basepath : /usr/local
+    elseif(EXISTS "/usr/share/local/lib/OGRE/cmake")
+        set(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
+        set(OGRE_SAMPLES_INCLUDEPATH "/usr/local/share/OGRE/samples/Common/include/") # We could just *assume* that developers uses this basepath : /usr/local
+    elseif(EXISTS "/usr/lib/OGRE/cmake")
+        set(CMAKE_MODULE_PATH "/usr/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
+        set(OGRE_SAMPLES_INCLUDEPATH "/usr/share/OGRE/samples/Common/include/") # Otherwise, this one
+    else ()
+        message(SEND_ERROR "Failed to find module path.")
+    endif(EXISTS "/usr/local/lib/OGRE")
 endif(UNIX)
 
 if (CMAKE_BUILD_TYPE STREQUAL "")
@@ -101,14 +101,14 @@ set(CMAKE_CXX_FLAGS "-Iincludes -std=c++11")
 include_directories( ${OIS_INCLUDE_DIRS}
         ${OGRE_INCLUDE_DIRS}
         ${OGRE_SAMPLES_INCLUDEPATH}
-        ${OGRE_Overlay_INCLUDE_DIRS}
+#        ${OGRE_Overlay_INCLUDE_DIRS}
         )
 
 add_executable(bomberman WIN32 ${HDRS} ${SRCS})
 
 set_target_properties(bomberman PROPERTIES DEBUG_POSTFIX _d)
 
-target_link_libraries(bomberman ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
+target_link_libraries(bomberman ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/assets)
