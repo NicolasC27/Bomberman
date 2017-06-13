@@ -74,7 +74,7 @@ GameManager::~GameManager()
 
 void 			GameManager::run()
 {
-  MapManager *Map = new MapManager("media/map/map2", getSceneManager(), getNodes());
+  MapManager *Map = new MapManager("media/map/map1", getSceneManager(), getNodes());
   Map->generateObjects();
 
   Camera = new CameraManager(getSceneManager(), getWindow(), Map->getSize());
