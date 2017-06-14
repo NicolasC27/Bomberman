@@ -63,12 +63,20 @@ void 				Player::move(MapManager const &map,
 
     _node->translate(translateVector);
     //Rotate the object to the moving direction
-    object = map.getObjectFrom(_node->getPosition() + vector);
-    std::cout << "calcul de position entre " << _node->getPosition() << " et " << vector << " = " << _node->getPosition() + vector << std::endl;
-    std::cout << "object proche (position:" << object->getNode()->getPosition() << " ) " << object->getObj()->getBoundingBox() << std::endl;
-    std::cout << "object courant (position:" <<  _node->getPosition() << " ) " << _obj->getBoundingBox() << std::endl;
-    if (object != NULL &&_obj->getBoundingBox().intersects(object->getObj()->getBoundingBox()))
-       std::cout << "COLLISION" << std::endl;
+    object = map.getObjectFrom(_node->getPosition(), vector);
+    if (object != NULL)
+      {
+	std::cout << "calcul de position entre " << _node->getPosition() << " et " << vector
+	      << " = " << _node->getPosition() + vector << std::endl;
+    	std::cout << "object proche (position:" << object->getNode()->getPosition() << " ) "
+	      << object->getObj()->getBoundingBox() << std::endl;
+    	std::cout << "object courant (position:" << _node->getPosition() << " ) "
+	      << _obj->getBoundingBox() << std::endl;
+	if (_obj->getBoundingBox().intersects(object->getObj()->getBoundingBox()))
+	  {
+	    std::cout << "----COLLISION----" << std::endl;
+	  }
+      }
     if (translateVector != Ogre::Vector3::ZERO)
       {
 

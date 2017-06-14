@@ -6,6 +6,7 @@
 #include <OGRE/OgreEntity.h>
 #include <OgreNode.h>
 #include "Interfaces/AGameObject.hpp"
+#include <OgreAxisAlignedBox.h>
 
 int AGameObject::objectId = 1;
 
@@ -37,9 +38,17 @@ Ogre::MovableObject 	*AGameObject::getObj() const
 
 void 			AGameObject::setPosition(int x, int y, int z)
 {
+  Ogre::Vector3		max;
+  Ogre::Vector3		min;
+
   _node->setPosition(x, y, z);
   _node->showBoundingBox(true);
-  _collision->setOrigin(Ogre::Vector2(x , z));
+  /*max = _obj->getBoundingBox().getMaximum();
+  min = _obj->getBoundingBox().getMinimum();
+  max += _node->getPosition();
+  min += _node->getPosition();
+  _obj->getBoundingBox().setExtents(min, max);*/
+  //_collision->setOrigin(Ogre::Vector2(x , z));
 }
 
 

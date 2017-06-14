@@ -31,7 +31,7 @@ void 		MapManager::update(Ogre::Real dt)
 
   for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); iteratorObject++)
     {
-      (*iteratorObject).first->update(dt);
+      //(*iteratorObject).first->update(dt);
     }
 }
 
@@ -145,28 +145,27 @@ const std::vector<AGameObject *> &MapManager::getCharacter() const
   return _character;
 }
 
-AGameObject			*MapManager::getObjectFrom(Ogre::Vector2 const &pos) const
+AGameObject			*MapManager::getObjectFrom(Ogre::Vector3 const &pos, Ogre::Vector3 const &mov) const
 {
-  Objects::iterator	it = _objects.begin();
-  Ogre::Vector2		tmp(pos.x - std::fmod(pos.x, 100),
-			    pos.y - std::fmod(pos.y, 100));
-  
-  std::cout << "search " << pos << " equal " << tmp << " in map" << std::endl;
-  while (it != _objects.end())
-    {
-      if (it->second == tmp)
-	return (it->first);
-      it++;
-    }
-  return (NULL);
-}
+  Objects::const_iterator	it = _objects.begin();
+  float 			diffx = std::fmod(pos.x + mov.x, 100);
+  float 			diffy = std::fmod(pos.z + mov.z, 100);
+  Ogre::Vector2			tmp(pos.x + mov.x - diffx, pos.z + mov.z - diffy);
 
-AGameObject			*MapManager::getObjectFrom(Ogre::Vector3 const &pos) const
-{
-  Objects::iterator	it = _objects.begin();
-  Ogre::Vector2		tmp(pos.x - std::fmod(pos.x, 100),
-			    pos.y - std::fmod(pos.y, 100));
-  
+  if (mov.x == 1)
+    {
+      tmp.y += diffy > 50.0 ? 100 : 0;
+      tmp.x += 100;
+    }
+      /*if (mov.x == -1)
+    tmp.x -= diffx;*/
+  if (mov.z == 1)
+    {
+      tmp.x += diffx > 50.0 ? 100 : 0;
+      tmp.y += 100;
+    }
+/*  if (mov.y == -1)
+    tmp.y -= diffy;*/
   std::cout << "search " << pos << " equal " << tmp << " in map" << std::endl;
   while (it != _objects.end())
     {
@@ -179,7 +178,7 @@ AGameObject			*MapManager::getObjectFrom(Ogre::Vector3 const &pos) const
 
 bool		MapManager::getObject(Ogre::Vector2 vector)
 {
-  Objects::iterator it = _objects.begin();
+  Objects::const_iterator it = _objects.begin();
 
   while (it != _objects.end())
     {

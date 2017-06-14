@@ -31,12 +31,10 @@ class MapManager
   std::vector<AGameObject *>			_character;
 
 public:
-  AGameObject			   *getObjectFrom(Ogre::Vector2 const &) const;
-  AGameObject			   *getObjectFrom(Ogre::Vector3 const &) const;
+  //AGameObject			   *getObjectFrom(Ogre::Vector2 const &, Ogre::Vector3 const &) const;
+  AGameObject			   *getObjectFrom(Ogre::Vector3 const &, Ogre::Vector3 const &) const;
 
 private:
-
-  std::vector<AGameObject *>			_character;
   std::list<Ogre::Vector2> 			_spawns;
   std::string 					_filename;
 
