@@ -31,6 +31,8 @@ class ACharacter : public AGameObject
 
   void			createEntity();
 
+  void 			update();
+
   std::string 		getName() const;
   State 		getState() const;
   std::string		getMaterialName() const;

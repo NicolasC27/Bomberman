@@ -79,7 +79,7 @@ void 			GameManager::run()
 
   Camera = new CameraManager(getSceneManager(), getWindow(), Map->getSize());
 
-  Listener = new EventManager(Map, getWindow(), Camera->getCamera());
+  Listener = new EventManager(this, Map, getWindow(), Camera->getCamera());
   getRoot()->addFrameListener(Listener);
   getRoot()->startRendering();
 }
@@ -136,7 +136,20 @@ Ogre::RenderWindow*	GameManager::getWindow() const
   return _Window;
 }
 
-NodeManager*	GameManager::getNodes() const
+NodeManager*		GameManager::getNodes() const
 {
   return _nodes;
+}
+
+void 			GameManager::update(MapManager *map, Ogre::Real dt)
+{
+  _timer -= dt;
+
+  this->WallFalling(map, dt);
+  std::cout << _timer << std::endl;
+}
+
+void 			GameManager::WallFalling(MapManager *map, Ogre::Real dt)
+{
+
 }

@@ -11,6 +11,7 @@ class EventManager;
 #include <OgreException.h>
 #include <OIS/OIS.h>
 #include <Ogre.h>
+#include "Common/Manager/GameManager.hpp"
 #include "MapManager.hpp"
 
 class EventManager
@@ -24,13 +25,16 @@ class EventManager
   OIS::JoyStickListener 	*mJoystick;
   OIS::Mouse 			*mMouse;
   Ogre::Camera 			*mCamera;
+
   float 			mMovementspeed;
+
   MapManager			*_map;
+  GameManager 			*game;
 
  public:
 
 
-  EventManager(MapManager *, Ogre::RenderWindow *, Ogre::Camera *);
+  EventManager(GameManager *, MapManager *, Ogre::RenderWindow *, Ogre::Camera *);
 
   ~EventManager();
 

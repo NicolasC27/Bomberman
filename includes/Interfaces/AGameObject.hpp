@@ -17,12 +17,6 @@
 class AGameObject {
 
  public:
-  enum BoundingBoxType
-  {
-    SPHERE,
-    PARALL
-  };
-
   enum Object {
     NOTHING,
     WALL,
@@ -59,16 +53,15 @@ class AGameObject {
 
  protected:
 
+  Ogre::Real		_moveSpeed;
   static int		objectId;
   int			_id;
 
   Ogre::MovableObject	*_obj;
   Ogre::SceneManager 	*SceneManager;
-  Ogre::SceneNode		*_node;
-
+  Ogre::SceneNode	*_node;
 
   Collision		*_collision;
-
 
  public:
   virtual void		createEntity() = 0;
@@ -81,6 +74,8 @@ class AGameObject {
 
   virtual Ogre::SceneManager::PrefabType	getMeshPrefab() const = 0;
   virtual std::string				getMeshName() const = 0;
+
+  virtual void					update() = 0;
 };
 
 #endif //BOMBERMAN_AGAMEOBJECT_HPP

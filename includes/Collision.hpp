@@ -5,7 +5,7 @@
 // Login   <guilbo_m@epitech.net>
 //
 // Started on  Sun Jun 11 00:30:24 2017 Mathis Guilbon
-// Last update Tue Jun 13 18:40:02 2017 chalie_a
+// Last update Wed Jun 14 14:24:02 2017 chalie_a
 //
 
 #ifndef BOMBERMAN_COLLISION_HPP

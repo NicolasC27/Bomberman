@@ -2,6 +2,7 @@
 // Created by nicolas on 29/05/17.
 //
 
+#include <Ogre.h>
 #include "Objects/Wall.hpp"
 #include "Objects/Player.hpp"
 #include "Objects/Bomb.hpp"

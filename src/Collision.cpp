@@ -5,7 +5,7 @@
 // Login   <guilbo_m@epitech.net>
 //
 // Started on  Wed May 31 13:32:38 2017 Mathis Guilbon
-// Last update Tue Jun 13 18:43:42 2017 chalie_a
+// Last update Wed Jun 14 14:23:44 2017 chalie_a
 //
 
 #include "Collision.hpp"
@@ -69,7 +69,7 @@ bool			Collision::operator==(Collision const &with) const
       if (this->collideType[i] == this->_type + with.getType())
 	break;
     }
-  std::cout << *this << with;
+  std::cout << *this << with << std::endl;
   if (i < this->collideType.size())
     return ((this->*this->doesCollide[i])(with));
   // type inconnue ou non géré ?

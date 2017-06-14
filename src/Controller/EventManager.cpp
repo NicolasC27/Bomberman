@@ -3,7 +3,7 @@
 #include "Objects/Player.hpp"
 #include "Controller/EventManager.hpp"
 
-EventManager::EventManager(MapManager *map, Ogre::RenderWindow *Window, Ogre::Camera *camera) : _map(map)
+EventManager::EventManager(GameManager *gameManager, MapManager *map, Ogre::RenderWindow *Window, Ogre::Camera *camera) : _map(map), game(gameManager)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
 
@@ -106,7 +106,7 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
       player = dynamic_cast<Player *>(*characterit);
 
       for(std::map<OIS::KeyCode, Player::ActionKeyCode>::const_iterator keyit = player->getKeyCodeType().begin();
-	      keyit != player->getKeyCodeType().end(); keyit++)
+	      keyit != player->getKeyCodeType().end(); ++keyit)
 	{
 	  if (mKeyboard->isKeyDown(keyit->first))
 	      player->action(keyit->second, evt);
@@ -114,20 +114,6 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 	      return false;
 	}
     }
-//  if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
-//    return false;
-//  if (mKeyboard->isKeyDown(OIS::KC_W))
-//    translate += Ogre::Vector3(0, 0, -10);
-//
-//  if (mKeyboard->isKeyDown(OIS::KC_S))
-//    translate += Ogre::Vector3(0, 0, 10);
-//
-//  if (mKeyboard->isKeyDown(OIS::KC_A))
-//    translate += Ogre::Vector3(-10, 0, 0);
-//
-//  if (mKeyboard->isKeyDown(OIS::KC_D))
-//    translate += Ogre::Vector3(10, 0, 0);
-//
 
 
 //  float rotX = mMouse->getMouseState().X.rel * evt.timeSinceLastFrame * -1;
@@ -136,6 +122,8 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 //  mCamera->pitch(Ogre::Radian(rotY));
 //
 //  mCamera->moveRelative(translate * evt.timeSinceLastFrame * mMovementspeed * 5);
+
+  game->update(_map, evt.timeSinceLastFrame);
   return true;
 }
 

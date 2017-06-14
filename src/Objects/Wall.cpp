@@ -15,6 +15,11 @@ Wall::~Wall()
 
 }
 
+void 			Wall::update()
+{
+
+}
+
 Wall::State 		Wall::getState() const
 {
   return _state;
