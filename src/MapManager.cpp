@@ -24,9 +24,20 @@ MapManager::~MapManager()
 
 }
 
+
+void 		MapManager::update(Ogre::Real dt)
+{
+  Objects::iterator iteratorObject;
+
+  for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); iteratorObject++)
+    {
+      (*iteratorObject).first->update(dt);
+    }
+}
+
 void 		MapManager::addObjects(const Ogre::Vector2 &vector, AGameObject *object)
 {
-  _objects.insert(std::pair<Ogre::Vector2, AGameObject *>(vector, object));
+  _objects.insert(std::pair<AGameObject *, Ogre::Vector2>(object, vector));
   object->setSceneManager(_SceneManager);
   object->createEntity();
   object->setPosition(vector.x, object->getPositionY(), vector.y);
@@ -136,22 +147,45 @@ const std::vector<AGameObject *> &MapManager::getCharacter() const
 
 AGameObject			*MapManager::getObjectFrom(Ogre::Vector2 const &pos) const
 {
-  std::multimap<Ogre::Vector2, AGameObject *>::const_iterator it;
-
-  it = _objects.find(Ogre::Vector2(pos.x - std::fmod(pos.x, 100), pos.y - std::fmod(pos.y, 100)));
-  if (it != _objects.end())
-    return (it->second);
+  Objects::iterator	it = _objects.begin();
+  Ogre::Vector2		tmp(pos.x - std::fmod(pos.x, 100),
+			    pos.y - std::fmod(pos.y, 100));
+  
+  std::cout << "search " << pos << " equal " << tmp << " in map" << std::endl;
+  while (it != _objects.end())
+    {
+      if (it->second == tmp)
+	return (it->first);
+      it++;
+    }
   return (NULL);
 }
 
 AGameObject			*MapManager::getObjectFrom(Ogre::Vector3 const &pos) const
 {
-  std::multimap<Ogre::Vector2, AGameObject *>::const_iterator it;
-
-  std::cout << "search " << pos << " in map" << std::endl;
-  //it = _objects.find(Ogre::Vector2(pos.x - std::fmod(pos.x, 100), pos.y - std::fmod(pos.y, 100)));
-  it = _objects.find(Ogre::Vector2(100, 100));
-  if (it != _objects.end())
-    return (it->second);
+  Objects::iterator	it = _objects.begin();
+  Ogre::Vector2		tmp(pos.x - std::fmod(pos.x, 100),
+			    pos.y - std::fmod(pos.y, 100));
+  
+  std::cout << "search " << pos << " equal " << tmp << " in map" << std::endl;
+  while (it != _objects.end())
+    {
+      if (it->second == tmp)
+	return (it->first);
+      it++;
+    }
   return (NULL);
+}
+
+bool		MapManager::getObject(Ogre::Vector2 vector)
+{
+  Objects::iterator it = _objects.begin();
+
+  while (it != _objects.end())
+    {
+      if ((it->second.x == vector.x) && (it->second.y == vector.y))
+	return true;
+      it++;
+    }
+  return false;
 }

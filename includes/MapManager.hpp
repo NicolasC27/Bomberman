@@ -19,21 +19,24 @@ class MapManager;
 
 class MapManager
 {
- private:
+ public:
   static const int 				boxWidth = 100;
 
+ private:
   NodeManager 					*_nodes;
   Ogre::SceneManager 				*_SceneManager;
 
   typedef std::map<AGameObject *, Ogre::Vector2> 	Objects;
   Objects					_objects;
   std::vector<AGameObject *>			_character;
- public:
-  const std::vector<AGameObject *> &getCharacter() const;
+
+public:
   AGameObject			   *getObjectFrom(Ogre::Vector2 const &) const;
   AGameObject			   *getObjectFrom(Ogre::Vector3 const &) const;
- private:
 
+private:
+
+  std::vector<AGameObject *>			_character;
   std::list<Ogre::Vector2> 			_spawns;
   std::string 					_filename;
 
@@ -51,12 +54,18 @@ class MapManager
   void			generateSpawn();
   void			generatePlan();
 
-  void			setSize(int size);
-  int			getSize() const;
+  void					setSize(int size);
+
+  int					getSize() const;
+  const std::vector<AGameObject *> &	getCharacter() const;
 
   void 			addObjects(const Ogre::Vector2 &, AGameObject *);
   void 			addCharacter(const Ogre::Vector2 &vector);
   void 			addBomb(const Ogre::Vector2 &vector);
+
+  void 			update(Ogre::Real);
+
+  bool 			getObject(Ogre::Vector2 vector);
 };
 
 #endif //CPP_INDIE_STUDIO_MAP_HPP
