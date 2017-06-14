@@ -38,6 +38,7 @@ Ogre::MovableObject 	*AGameObject::getObj() const
 void 			AGameObject::setPosition(int x, int y, int z)
 {
   _node->setPosition(x, y, z);
+  _node->showBoundingBox(true);
   _collision->setOrigin(Ogre::Vector2(x , z));
 }
 
@@ -68,10 +69,7 @@ void 			AGameObject::setObj(Ogre::MovableObject *obj)
   _obj = obj;
 }
 
-
-
-
-
-
-
-
+Ogre::SceneNode *AGameObject::getNode() const
+{
+  return _node;
+}

@@ -109,7 +109,7 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 	      keyit != player->getKeyCodeType().end(); ++keyit)
 	{
 	  if (mKeyboard->isKeyDown(keyit->first))
-	      player->action(keyit->second, evt);
+	      player->action(*_map, keyit->second, evt);
 	  else if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
 	      return false;
 	}
@@ -123,7 +123,7 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 //
 //  mCamera->moveRelative(translate * evt.timeSinceLastFrame * mMovementspeed * 5);
 
-  game->update(_map, evt.timeSinceLastFrame);
+  //game->update(_map, evt.timeSinceLastFrame);
   return true;
 }
 

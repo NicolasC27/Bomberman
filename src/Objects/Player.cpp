@@ -14,7 +14,6 @@ Player::Player(AGameObject::Object object) : ACharacter(object, 35), _ID(_player
   _moveSpeed = 400;
   keyCodeType.clear();
   setKey();
-  
 }
 
 Player::~Player()
@@ -65,8 +64,10 @@ void 				Player::move(MapManager const &map,
     _node->translate(translateVector);
     //Rotate the object to the moving direction
     object = map.getObjectFrom(_node->getPosition() + vector);
-
-    if (_obj->getBoundingBox().intersects(object->_obj->getBoundingBox()))
+    std::cout << "calcul de position entre " << _node->getPosition() << " et " << vector << " = " << _node->getPosition() + vector << std::endl;
+    std::cout << "object proche (position:" << object->getNode()->getPosition() << " ) " << object->getObj()->getBoundingBox() << std::endl;
+    std::cout << "object courant (position:" <<  _node->getPosition() << " ) " << _obj->getBoundingBox() << std::endl;
+    if (object != NULL &&_obj->getBoundingBox().intersects(object->getObj()->getBoundingBox()))
        std::cout << "COLLISION" << std::endl;
     if (translateVector != Ogre::Vector3::ZERO)
       {
@@ -87,45 +88,21 @@ void 				Player::move(MapManager const &map,
       }
     mAnimationState->addTime(evt.timeSinceLastFrame * 1.5);
     std::cout << "x : " << _node->getPosition().x << "z: " << _node->getPosition().z << std::endl;
-=======
-      _collision->setOrigin(Ogre::Vector2(_node->getPosition().x - 50, _node->getPosition().z) - 50);
-
-      if (translateVector != Ogre::Vector3::ZERO)
-	{
-	  Ogre::Vector3 src = _node->getOrientation() * Ogre::Vector3::UNIT_Z;
-	  Ogre::Vector3 mDirection = vector;
-	  mDirection.normalise();
-
-	  if ((1.0f + src.dotProduct(mDirection)) < 0.0001f)
-	    {
-	      _node->yaw(Ogre::Degree(180));
-	    } else
-	    {
-	      Ogre::Quaternion quat = src.getRotationTo(mDirection);
-	      _node->rotate(quat);
-
-	    } // else
-	}
-      mAnimationState->addTime(evt.timeSinceLastFrame * 1.5);
-      std::cout << "x : " << _node->getPosition().x << "z: " << _node->getPosition().z
-		<< std::endl;
-    }
->>>>>>> master
 }
 
-void Player::action(ActionKeyCode action, const Ogre::FrameEvent &evt)
+void Player::action(MapManager const &map, ActionKeyCode action, const Ogre::FrameEvent &evt)
 {
   if (action == Player::AT_UP)
-    move(Ogre::Vector3(0, 0, -1), evt);
+    move(map ,Ogre::Vector3(0, 0, -1), evt);
   else
     if (action == Player::AT_DOWN)
-      move(Ogre::Vector3(0, 0, 1), evt);
+      move(map, Ogre::Vector3(0, 0, 1), evt);
     else
       if (action == Player::AT_LEFT)
-	move(Ogre::Vector3(-1, 0, 0), evt);
+	move(map, Ogre::Vector3(-1, 0, 0), evt);
       else
 	if (action == Player::AT_RIGHT)
-	  move(Ogre::Vector3(1, 0, 0), evt);
+	  move(map, Ogre::Vector3(1, 0, 0), evt);
 	else
 	  if (action == Player::AT_FIRE)
 	    {

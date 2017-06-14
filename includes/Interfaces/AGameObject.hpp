@@ -60,6 +60,10 @@ class AGameObject {
   Ogre::MovableObject	*_obj;
   Ogre::SceneManager 	*SceneManager;
   Ogre::SceneNode	*_node;
+ public:
+  Ogre::SceneNode *getNode() const;
+
+ protected:
 
   Collision		*_collision;
 

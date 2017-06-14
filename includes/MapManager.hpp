@@ -25,7 +25,8 @@ class MapManager
   NodeManager 					*_nodes;
   Ogre::SceneManager 				*_SceneManager;
 
-  std::multimap<Ogre::Vector2, AGameObject *> 	_objects;
+  typedef std::map<AGameObject *, Ogre::Vector2> 	Objects;
+  Objects					_objects;
   std::vector<AGameObject *>			_character;
  public:
   const std::vector<AGameObject *> &getCharacter() const;
