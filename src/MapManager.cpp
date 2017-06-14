@@ -145,28 +145,24 @@ const std::vector<AGameObject *> &MapManager::getCharacter() const
   return _character;
 }
 
-AGameObject			*MapManager::getObjectFrom(Ogre::Vector3 const &pos, Ogre::Vector3 const &mov) const
+AGameObject			*MapManager::getObjectFrom(Ogre::Vector2 const &pos) const
 {
   Objects::const_iterator	it = _objects.begin();
-  float 			diffx = std::fmod(pos.x + mov.x, 100);
-  float 			diffy = std::fmod(pos.z + mov.z, 100);
-  Ogre::Vector2			tmp(pos.x + mov.x - diffx, pos.z + mov.z - diffy);
 
-  if (mov.x == 1)
+  while (it != _objects.end())
     {
-      tmp.y += diffy > 50.0 ? 100 : 0;
-      tmp.x += 100;
+      if (it->second == pos)
+	return (it->first);
+      it++;
     }
-      /*if (mov.x == -1)
-    tmp.x -= diffx;*/
-  if (mov.z == 1)
-    {
-      tmp.x += diffx > 50.0 ? 100 : 0;
-      tmp.y += 100;
-    }
-/*  if (mov.y == -1)
-    tmp.y -= diffy;*/
-  std::cout << "search " << pos << " equal " << tmp << " in map" << std::endl;
+  return (NULL);
+}
+
+AGameObject			*MapManager::getObjectFrom(Ogre::Vector3 const &pos) const
+{
+  Objects::const_iterator	it = _objects.begin();
+  Ogre::Vector2			tmp(pos.x, pos.z);
+  
   while (it != _objects.end())
     {
       if (it->second == tmp)

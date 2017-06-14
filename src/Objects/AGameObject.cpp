@@ -43,12 +43,6 @@ void 			AGameObject::setPosition(int x, int y, int z)
 
   _node->setPosition(x, y, z);
   _node->showBoundingBox(true);
-  /*max = _obj->getBoundingBox().getMaximum();
-  min = _obj->getBoundingBox().getMinimum();
-  max += _node->getPosition();
-  min += _node->getPosition();
-  _obj->getBoundingBox().setExtents(min, max);*/
-  //_collision->setOrigin(Ogre::Vector2(x , z));
 }
 
 

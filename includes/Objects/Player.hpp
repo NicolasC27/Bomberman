@@ -8,10 +8,11 @@
 #include <MapManager.hpp>
 #include <Interfaces/AGameObject.hpp>
 #include <Interfaces/ACharacter.hpp>
+#include <vector>
 
 class Player : public ACharacter
 {
- public:
+public:
   Player(AGameObject::Object object);
   virtual ~Player();
 
@@ -24,10 +25,13 @@ class Player : public ACharacter
 
   const std::map<OIS::KeyCode, ActionKeyCode>	&getKeyCodeType() const;
 
- protected:
+protected:
   int			_ID;
   static int		_playerID;
 
-
+private:
+  bool			getFrontObstacle(MapManager const &, Ogre::Vector3 const &) const;
+  bool			Collide(AGameObject const *) const;
+  
 };
 #endif //BOMBERMAN_PLAYER_HPP

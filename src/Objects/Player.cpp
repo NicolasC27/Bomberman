@@ -49,34 +49,91 @@ void 				Player::setKey()
     }
 }
 
+bool			Player::Collide(AGameObject const *object) const
+{
+  Ogre::AxisAlignedBox	aab1(_obj->getBoundingBox().getMinimum() + _node->getPosition(),
+			     _obj->getBoundingBox().getMaximum() + _node->getPosition());
+  Ogre::AxisAlignedBox	aab2(object->getObj()->getBoundingBox().getMinimum() + object->getNode()->getPosition(),
+			     object->getObj()->getBoundingBox().getMaximum() + object->getNode()->getPosition());
+
+  std::cout << "object proche (position:" << object->getNode()->getPosition() << " ) "
+	    << aab2 << std::endl;
+  std::cout << "object courant (position:" << _node->getPosition() << " ) "
+	    << aab1 << std::endl;
+  return (aab1.intersects(aab2));
+}
+
+bool			Player::getFrontObstacle(MapManager const &map, const Ogre::Vector3 &mov) const
+{
+  Ogre::AxisAlignedBox	aab1(_obj->getBoundingBox().getMinimum() + _node->getPosition(),
+			     _obj->getBoundingBox().getMaximum() + _node->getPosition());
+  Ogre::AxisAlignedBox	aab2;
+  std::vector<Ogre::Vector2>	pos;
+  Ogre::Vector2			tmp;
+  AGameObject			*ptr;
+  float 			diffx;
+  float 			diffy;
+
+  // pos
+  //  pos.push_back(_node->getPosition() + mov);
+  tmp = Ogre::Vector2(_node->getPosition().x + mov.x, _node->getPosition().z + mov.z);
+  // min
+  //pos.push_back(pos[0] + _obj->getBoundingBox().getMaximum());
+  // max
+  //pos.push_back(pos[0] + _obj->getBoundingBox().getMaximum());
+  diffx = std::fmod(tmp.x, 100);
+  diffy = std::fmod(tmp.y, 100);
+  tmp = Ogre::Vector2(tmp.x - diffx, tmp.y - diffy);
+  //  pos.push_back(tmp);
+  pos.push_back(tmp - Ogre::Vector2(0, 100));
+  pos.push_back(tmp - Ogre::Vector2(100, 0));
+  pos.push_back(tmp - Ogre::Vector2(100, 100));
+  pos.push_back(tmp - Ogre::Vector2(-100, 0));
+  pos.push_back(tmp - Ogre::Vector2(0, -100));
+  pos.push_back(tmp - Ogre::Vector2(-100, -100));
+  pos.push_back(tmp - Ogre::Vector2(-100, 100));
+  pos.push_back(tmp - Ogre::Vector2(100, -100));
+  for (unsigned int i = 0; i < pos.size(); ++i)
+    {
+      // traduit les résultats en position fixe de la map
+      // sélectionne le bloc intéressant suivant l'oriantation du mouvement
+      /*if (mov.x == 1)
+	{
+	  tmp.y += diffy > 50.0 ? 100 : 0;
+	  tmp.x += 100;
+	}
+      else if (mov.z == 1)
+	{
+	  tmp.x += diffx > 50.0 ? 100 : 0;
+	  tmp.y += 100;
+	  }*/
+      std::cout << "search " << pos[i] << " equal " << tmp << " in map" << std::endl;
+      // vérifie si il y a collision
+      if ((ptr = map.getObjectFrom(pos[i])) != NULL)
+	{
+	  aab2 = Ogre::AxisAlignedBox(ptr->getObj()->getBoundingBox().getMinimum() + ptr->getNode()->getPosition(),
+	       ptr->getObj()->getBoundingBox().getMaximum() + ptr->getNode()->getPosition());
+	  if (aab1.intersects(aab2))//this->Collide(ptr))
+	    return (true);
+	}
+    }
+  return (false);
+}
+
 void 				Player::move(MapManager const &map,
 					     Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt)
 {
     static Ogre::AnimationState *mAnimationState;
-    AGameObject			*object;
-    mAnimationState = dynamic_cast<Ogre::Entity*>(_obj)->getAnimationState("my_animation");
-
     Ogre::Vector3 translateVector = evt.timeSinceLastFrame * _moveSpeed * vector;
 
+    mAnimationState = dynamic_cast<Ogre::Entity*>(_obj)->getAnimationState("my_animation");
     mAnimationState->setLoop(true);
     mAnimationState->setEnabled(true);
 
     _node->translate(translateVector);
     //Rotate the object to the moving direction
-    object = map.getObjectFrom(_node->getPosition(), vector);
-    if (object != NULL)
-      {
-	std::cout << "calcul de position entre " << _node->getPosition() << " et " << vector
-	      << " = " << _node->getPosition() + vector << std::endl;
-    	std::cout << "object proche (position:" << object->getNode()->getPosition() << " ) "
-	      << object->getObj()->getBoundingBox() << std::endl;
-    	std::cout << "object courant (position:" << _node->getPosition() << " ) "
-	      << _obj->getBoundingBox() << std::endl;
-	if (_obj->getBoundingBox().intersects(object->getObj()->getBoundingBox()))
-	  {
-	    std::cout << "----COLLISION----" << std::endl;
-	  }
-      }
+    if (this->getFrontObstacle(map, vector))
+      std::cout << "----COLLISION----" << std::endl;
     if (translateVector != Ogre::Vector3::ZERO)
       {
 
