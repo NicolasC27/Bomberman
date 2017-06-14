@@ -145,7 +145,16 @@ const std::vector<AGameObject *> &MapManager::getCharacter() const
   return _character;
 }
 
-bool		MapManager::getObject(const Ogre::Vector2 &vector)
+bool		MapManager::getObject(Ogre::Vector2 vector)
 {
+  Objects::iterator it = _objects.begin();
+
+  while (it != _objects.end())
+    {
+      if ((it->second.x == vector.x) && (it->second.y == vector.y))
+	return true;
+      it++;
+    }
+  return false;
 }
 

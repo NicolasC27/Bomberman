@@ -60,7 +60,7 @@ class MapManager
 
   void 			update(Ogre::Real);
 
-  bool getObject(const Ogre::Vector2 &vector);
+  bool 			getObject(Ogre::Vector2 vector);
 };
 
 #endif //CPP_INDIE_STUDIO_MAP_HPP
