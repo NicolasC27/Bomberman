@@ -24,9 +24,20 @@ MapManager::~MapManager()
 
 }
 
+
+void 		MapManager::update(Ogre::Real dt)
+{
+  Objects::iterator iteratorObject;
+
+  for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); iteratorObject++)
+    {
+      (*iteratorObject).first->update(dt);
+    }
+}
+
 void 		MapManager::addObjects(const Ogre::Vector2 &vector, AGameObject *object)
 {
-  _objects.insert(std::pair<Ogre::Vector2, AGameObject *>(vector, object));
+  _objects.insert(std::pair<AGameObject *, Ogre::Vector2>(object, vector));
   object->setSceneManager(_SceneManager);
   object->createEntity();
   object->setPosition(vector.x, object->getPositionY(), vector.y);
@@ -133,3 +144,8 @@ const std::vector<AGameObject *> &MapManager::getCharacter() const
 {
   return _character;
 }
+
+bool		MapManager::getObject(const Ogre::Vector2 &vector)
+{
+}
+
