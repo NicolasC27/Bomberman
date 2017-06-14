@@ -12,6 +12,7 @@ Player::Player(AGameObject::Object object) : ACharacter(object, 35), _ID(_player
 {
   keyCodeType.clear();
   setKey();
+  
 }
 
 Player::~Player()
@@ -52,20 +53,35 @@ void 				Player::move(Ogre::Vector3 const &vector,
     Ogre::Real mMoveSpeed  = 400;
     Ogre::Vector3 translateVector = evt.timeSinceLastFrame * mMoveSpeed *vector;
 
-    Collision *test;
+    static_cast<Ogre::Entity*>(_obj)->getMesh()->_setBounds(Ogre::AxisAlignedBox(-35, -35, 0, 35, 35, 70));
+    _node->setScale(Ogre::Vector3(0.7, 1, 0.33));
+    _node->showBoundingBox(true);
+    //Collision *test;
 
-    test = new Collision((Ogre::Vector2(100, 100)));
+ //   test = new Collision((Ogre::Vector2(100, 100)));
 
-    test->setOrigin(Ogre::Vector2(100, 100));
+  //  test->setOrigin(Ogre::Vector2(100, 100));
     mAnimationState->setLoop(true);
     mAnimationState->setEnabled(true);
 
     _node->translate(translateVector);
     //Rotate the object to the moving direction
+  Ogre::MovableObject * test1;
 
-    _collision->setOrigin(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z));
-    if (*_collision == *test)
-      std::cout << "COLLISION" << std::endl;
+   test1 =  SceneManager->createEntity("cube.mesh");
+  dynamic_cast <Ogre::Entity*>(test1)->setMaterialName("Objects/Cube/Wall");
+
+  //Ogre::SceneNode *test2 = new Ogre::SceneNode(SceneManager);
+
+  //test2->attachObject(test1);
+  //test2->setPosition(200, 0, 200);
+  //test2->setScale(1, 1 ,1);
+  std::cout << test1->getBoundingBox() << _obj->getBoundingBox() << std::endl;
+  //_collision->setOrigin(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z));
+    //if (*_collision == *test)
+    if (test1->getBoundingBox().intersects(_obj->getBoundingBox()))
+  if (false)
+    std::cout << "COLLISION" << std::endl;
     if (translateVector != Ogre::Vector3::ZERO)
       {
 
