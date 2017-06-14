@@ -43,45 +43,25 @@ void 				Player::setKey()
     }
 }
 
-void 				Player::move(Ogre::Vector3 const &vector,
-						 const Ogre::FrameEvent &evt)
+void 				Player::move(MapManager const &map,
+					     Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt)
 {
     static Ogre::AnimationState *mAnimationState;
-
+    AGameObject			*object;
     mAnimationState = dynamic_cast<Ogre::Entity*>(_obj)->getAnimationState("my_animation");
 
     Ogre::Real mMoveSpeed  = 400;
     Ogre::Vector3 translateVector = evt.timeSinceLastFrame * mMoveSpeed *vector;
 
-    static_cast<Ogre::Entity*>(_obj)->getMesh()->_setBounds(Ogre::AxisAlignedBox(-35, -35, 0, 35, 35, 70));
-    _node->setScale(Ogre::Vector3(0.7, 1, 0.33));
-    _node->showBoundingBox(true);
-    //Collision *test;
-
- //   test = new Collision((Ogre::Vector2(100, 100)));
-
-  //  test->setOrigin(Ogre::Vector2(100, 100));
     mAnimationState->setLoop(true);
     mAnimationState->setEnabled(true);
 
     _node->translate(translateVector);
     //Rotate the object to the moving direction
-  Ogre::MovableObject * test1;
+    object = map.getObjectFrom(_node->getPosition() + vector);
 
-   test1 =  SceneManager->createEntity("cube.mesh");
-  dynamic_cast <Ogre::Entity*>(test1)->setMaterialName("Objects/Cube/Wall");
-
-  //Ogre::SceneNode *test2 = new Ogre::SceneNode(SceneManager);
-
-  //test2->attachObject(test1);
-  //test2->setPosition(200, 0, 200);
-  //test2->setScale(1, 1 ,1);
-  std::cout << test1->getBoundingBox() << _obj->getBoundingBox() << std::endl;
-  //_collision->setOrigin(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z));
-    //if (*_collision == *test)
-    if (test1->getBoundingBox().intersects(_obj->getBoundingBox()))
-  if (false)
-    std::cout << "COLLISION" << std::endl;
+    if (_obj->getBoundingBox().intersects(object->_obj->getBoundingBox()))
+       std::cout << "COLLISION" << std::endl;
     if (translateVector != Ogre::Vector3::ZERO)
       {
 
@@ -100,7 +80,7 @@ void 				Player::move(Ogre::Vector3 const &vector,
 	  } // else
       }
     mAnimationState->addTime(evt.timeSinceLastFrame * 1.5);
-    //    std::cout << "x : " << _node->getPosition().x << "z: " << _node->getPosition().z << std::endl;
+    std::cout << "x : " << _node->getPosition().x << "z: " << _node->getPosition().z << std::endl;
 }
 
 void Player::action(ActionKeyCode action, const Ogre::FrameEvent &evt)

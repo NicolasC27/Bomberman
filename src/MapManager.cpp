@@ -132,3 +132,23 @@ const std::vector<AGameObject *> &MapManager::getCharacter() const
 {
   return _character;
 }
+
+AGameObject			*MapManager::getObjectFrom(Ogre::Vector2 const &pos) const
+{
+  std::multimap<Ogre::Vector2, AGameObject *>::const_iterator it;
+
+  it = _objects.find(pos);
+  if (it != _objects.end())
+    return (it->second);
+  return (NULL);
+}
+
+AGameObject			*MapManager::getObjectFrom(Ogre::Vector3 const &pos) const
+{
+  std::multimap<Ogre::Vector2, AGameObject *>::const_iterator it;
+
+  it = _objects.find(Ogre::Vector2(pos.x, pos.y));
+  if (it != _objects.end())
+    return (it->second);
+  return (NULL);
+}

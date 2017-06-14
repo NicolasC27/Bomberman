@@ -5,18 +5,20 @@
 #ifndef BOMBERMAN_PLAYER_HPP
 #define BOMBERMAN_PLAYER_HPP
 
-#include "Interfaces/ACharacter.hpp"
+#include <MapManager.hpp>
+#include <Interfaces/AGameObject.hpp>
+#include <Interfaces/ACharacter.hpp>
 
 class Player : public ACharacter
 {
  public:
-  Player(Object object);
+  Player(AGameObject::Object object);
   virtual ~Player();
 
-  void 			move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt);
+  void 			move(MapManager const &, Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt);
   void 			setKey();
 
-  void			action(ActionKeyCode, const Ogre::FrameEvent &);
+  void			action(MapManager const &, ActionKeyCode, const Ogre::FrameEvent &);
 
   const std::map<OIS::KeyCode, ActionKeyCode>	&getKeyCodeType() const;
 

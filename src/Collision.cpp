@@ -155,7 +155,12 @@ bool			Collision::PtoS(Collision const &with) const
       pO = this->getOrigin();
       pV = this->getV();
     }
+  // Cercle center inside of rectangle
+  /*if (Ogre::Vector2(pO.x, sO.x))
 
+  if ((pO.x <= sO.x && sO.x <= pO.x + pV.x) &&
+      (pO.y <= sO.y && sO.y <= pO.y + pV.y))
+    return (false);*/
   near.x = fabs(pO.x - sO.x) > fabs(pO.x + pV.x - sO.x) ? pO.x + pV.x : pO.x;
   near.y = fabs(pO.y - sO.y) > fabs(pO.y + pV.y - sO.y) ? pO.y + pV.y : pO.y;
   d = (sO.x - near.x) * (sO.x - near.x) + (sO.y - near.y) * (sO.y - near.y);

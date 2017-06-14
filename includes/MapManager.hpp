@@ -35,7 +35,8 @@ class MapManager
   std::vector<AGameObject *>			 _character;
  public:
   const std::vector<AGameObject *> &getCharacter() const;
-
+  AGameObject			   *getObjectFrom(Ogre::Vector2 const &) const;
+  AGameObject			   *getObjectFrom(Ogre::Vector3 const &) const;
  private:
 
   std::list<Ogre::Vector2> 			_spawns;

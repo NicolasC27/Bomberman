@@ -6,6 +6,7 @@
 #define BOMBERMAN_ACHARACTER_HPP
 
 #include <OIS/OIS.h>
+#include <MapManager.hpp>
 //#include "Controller/KeyController.hpp"
 #include "AGameObject.hpp"
 
@@ -25,8 +26,8 @@ class ACharacter : public AGameObject
 
   virtual ~ACharacter();
 
-  virtual void	move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt) = 0;
-  virtual void	action(ActionKeyCode, const Ogre::FrameEvent &evt) = 0;
+  virtual void	move(MapManager const &, Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt) = 0;
+  virtual void	action(MapManager const &, ActionKeyCode, const Ogre::FrameEvent &evt) = 0;
 
   void			createEntity();
 
