@@ -48,7 +48,6 @@ class AGameObject {
 
   Object 		getType() const;
   Ogre::MovableObject 	*getObj() const;
-  Collision		*getCollision() const;
 
   void 			setType(Object type);
   void 			setObj(Ogre::MovableObject *obj);
@@ -65,10 +64,6 @@ class AGameObject {
   Ogre::SceneNode	*_node;
  public:
   Ogre::SceneNode *getNode() const;
-
- protected:
-
-  Collision		*_collision;
 
  public:
   virtual void		createEntity() = 0;

@@ -10,12 +10,12 @@
 
 int AGameObject::objectId = 1;
 
-AGameObject::AGameObject(Object object) : _collision(new Collision(0)), _type(object)
+AGameObject::AGameObject(Object object) : _type(object)
 {
   _id = AGameObject::objectId++;
 }
 
-AGameObject::AGameObject(AGameObject::Object object, double r) : _collision(new Collision(r)),  _type(object)
+AGameObject::AGameObject(AGameObject::Object object, double r) : _type(object)
 {
   _id = AGameObject::objectId++;
 }
@@ -42,7 +42,7 @@ void 			AGameObject::setPosition(int x, int y, int z)
   Ogre::Vector3		min;
 
   _node->setPosition(x, y, z);
-  //_node->showBoundingBox(true);
+  _node->showBoundingBox(true);
 }
 
 
@@ -55,11 +55,6 @@ void 			AGameObject::AttachObject()
 {
   _node->setScale(getScale());
   _node->attachObject(_obj);
-}
-
-Collision		*AGameObject::getCollision() const
-{
-  return (this->_collision);
 }
 
 AGameObject::Object 	AGameObject::getType() const
