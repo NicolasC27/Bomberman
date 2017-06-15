@@ -21,9 +21,11 @@ std::ostream	&operator<<(std::ostream &os, Collision const &coll)
   return (os);
 }
 
-Collision::Collision(Ogre::Vector2 v)
-  : _type(Collision::PARALL), _v(v), _origin(0, 0)
+Collision::Collision(Ogre::AxisAlignedBox const &box, Ogre::Vector3 const &pos)
+  : _type(Collision::PARALL), _min(box.getMinimum()), _max(box.getMaximum()), _v(0, 0), _origin(0, 0)
 {
+  this->_v = Ogre::Vector2(_max.x - _min.x, _max.z - _min.z);
+  this->_origin = Ogre::Vector2(_min.x + pos.x, _min.z + pos.z);
   this->init();
 }
 
@@ -101,9 +103,9 @@ Ogre::Vector2		Collision::getOrigin() const
   return (this->_origin);
 }
 
-void			Collision::setOrigin(Ogre::Vector2 const &v)
+void			Collision::setOrigin(Ogre::Vector3 const &v)
 {
-  this->_origin = v;
+  this->_origin = Ogre::Vector2(v.x + _min.x, v.z + _min.z);
 }
 
 bool			Collision::StoS(Collision const &with) const

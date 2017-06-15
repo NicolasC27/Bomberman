@@ -13,6 +13,8 @@
 #include <OgreNode.h>
 #include <OgreSceneNode.h>
 #include "Collision.hpp"
+#include <Ogre.h>
+#include <OgreAxisAlignedBox.h>
 
 class AGameObject {
 
@@ -46,6 +48,7 @@ class AGameObject {
 
   Object 		getType() const;
   Ogre::MovableObject 	*getObj() const;
+  Collision		*getCollision() const;
 
   void 			setType(Object type);
   void 			setObj(Ogre::MovableObject *obj);

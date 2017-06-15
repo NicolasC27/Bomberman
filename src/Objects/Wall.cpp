@@ -39,6 +39,9 @@ void			Wall::createEntity()
 {
   _obj = SceneManager->createEntity(getName(), Ogre::SceneManager::PT_CUBE);
   dynamic_cast <Ogre::Entity*>(_obj)->setMaterialName(this->getMaterialName());
+  /*static_cast<Ogre::Entity*>(_obj)->getMesh()->_setBounds(Ogre::AxisAlignedBox(_obj->getBoundingBox().getMinimum() + _node->getPosition(),
+									       _obj->getBoundingBox().getMaximum() + _node->getPosition()));
+  *this->_collision = Collision(_obj->getBoundingBox(), _node->getPosition());*/
 }
 
 std::string		Wall::getMaterialName() const

@@ -14,6 +14,7 @@
 #include <OgreVector2.h>
 #include <vector>
 #include <iostream>
+#include <OgreAxisAlignedBox.h>
 
 class Collision
 {
@@ -26,7 +27,7 @@ class Collision
 
   Collision(Collision::BoundingBoxType type);
   Collision(double r);
-  Collision(Ogre::Vector2);
+  Collision(Ogre::AxisAlignedBox const &, Ogre::Vector3 const &);
   ~Collision();
 
   Collision		&operator=(Collision const &);
@@ -39,7 +40,7 @@ class Collision
   Ogre::Vector2		getV() const;
   double		getR() const;
 
-  void			setOrigin(Ogre::Vector2 const &);
+  void			setOrigin(Ogre::Vector3 const &);
 
 private:
   Collision(Collision const &);
@@ -49,6 +50,8 @@ private:
 
   Collision::BoundingBoxType	_type;
 
+  Ogre::Vector3		_min;
+  Ogre::Vector3		_max;
   Ogre::Vector2		_origin;
   Ogre::Vector2		_v;
   double    		_r;

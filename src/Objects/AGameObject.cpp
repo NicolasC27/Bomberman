@@ -42,7 +42,7 @@ void 			AGameObject::setPosition(int x, int y, int z)
   Ogre::Vector3		min;
 
   _node->setPosition(x, y, z);
-  _node->showBoundingBox(true);
+  //_node->showBoundingBox(true);
 }
 
 
@@ -55,6 +55,11 @@ void 			AGameObject::AttachObject()
 {
   _node->setScale(getScale());
   _node->attachObject(_obj);
+}
+
+Collision		*AGameObject::getCollision() const
+{
+  return (this->_collision);
 }
 
 AGameObject::Object 	AGameObject::getType() const
