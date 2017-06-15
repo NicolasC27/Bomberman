@@ -75,7 +75,7 @@ class AGameObject {
   virtual Ogre::SceneManager::PrefabType	getMeshPrefab() const = 0;
   virtual std::string				getMeshName() const = 0;
 
-  virtual void					update() = 0;
+  virtual void					update(Ogre::Real) = 0;
 };
 
 #endif //BOMBERMAN_AGAMEOBJECT_HPP
