@@ -3,7 +3,7 @@
 //
 
 #include <Ogre.h>
-#include <Objects/Bomb.hpp>
+#include "Objects/Bomb.hpp"
 #include "Interfaces/ACharacter.hpp"
 #include "Objects/Player.hpp"
 
@@ -21,7 +21,7 @@ Player::~Player()
 
 }
 
-void 				Player::update()
+void 				Player::update(Ogre::Real dt)
 {
 
 }
@@ -63,6 +63,8 @@ void 				Player::move(Ogre::Vector3 const &vector,
     test = new Collision((Ogre::Vector2(100, 100)));
 
     test->setOrigin(Ogre::Vector2(200, 200));
+  static_cast<Ogre::Entity*>(_obj)->getMesh()->_setBounds(Ogre::AxisAlignedBox(-125.152 * 0.3, -0.594098, -34.2034, 149.101 * 0.3, 185.54, 36.3049));
+  _node->showBoundingBox(true);
 
 
   if (*_collision == *test)
