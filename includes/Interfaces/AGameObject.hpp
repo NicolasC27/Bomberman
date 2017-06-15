@@ -5,6 +5,7 @@
 #ifndef BOMBERMAN_AGAMEOBJECT_HPP
 #define BOMBERMAN_AGAMEOBJECT_HPP
 
+class AGameObject;
 
 #include <OgreSceneManager.h>
 #include <OgreVector2.h>
@@ -12,6 +13,7 @@
 #include <OgreEntity.h>
 #include <OgreNode.h>
 #include <OgreSceneNode.h>
+#include <MapManager.hpp>
 #include "Collision.hpp"
 
 class AGameObject {
@@ -31,8 +33,8 @@ class AGameObject {
     UNBREAKABLE
   };
 
-  AGameObject(AGameObject::Object object);
-  AGameObject(AGameObject::Object object, double r);
+  AGameObject(MapManager *map, AGameObject::Object object);
+  AGameObject(MapManager *map, AGameObject::Object object, double r);
   virtual ~AGameObject();
 
  private:
@@ -52,6 +54,8 @@ class AGameObject {
   void 			setSceneManager(Ogre::SceneManager *SceneManager);
 
  protected:
+
+  MapManager		*_map;
 
   Ogre::Real		_moveSpeed;
   static int		objectId;

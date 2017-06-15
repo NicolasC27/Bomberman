@@ -15,7 +15,7 @@ class Wall : public AGameObject
   int			_positionY;
 
  public:
-  Wall(State type);
+  Wall(MapManager *map, State type);
   virtual ~Wall();
 
   void			setState(State state);

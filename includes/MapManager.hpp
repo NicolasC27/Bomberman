@@ -2,15 +2,16 @@
 // Created by nicolas on 29/05/17.
 //
 
-#ifndef CPP_INDIE_STUDIO_MAP_HPP
-#define CPP_INDIE_STUDIO_MAP_HPP
+#ifndef BOMBERMAN_MAP_HPP
+#define BOMBERMAN_MAP_HPP
 
 class MapManager;
+
 #include <OgreVector2.h>
 #include <OgreException.h>
 #include <map>
-#include "Common/Manager/NodeManager.hpp"
 #include "Interfaces/AGameObject.hpp"
+#include "Common/Manager/NodeManager.hpp"
 
 #define ERR_MAPSIZE	"Size map too big"
 #define ERR_NBLINEMAP	"The number of rows does not match the number of rows in the map."
@@ -24,12 +25,13 @@ class MapManager
  public:
   static const int 				boxWidth = 100;
 
- private:
+ public:
   NodeManager 					*_nodes;
   Ogre::SceneManager 				*_SceneManager;
 
   typedef std::map<AGameObject *, Ogre::Vector2>	Objects;
-  Objects	_objects;
+
+  Objects						_objects;
 
  private:
 
@@ -38,6 +40,7 @@ class MapManager
   std::string 					_filename;
 
   int 						_size;
+  int 						_isdestructible;
 
  public:
 
@@ -63,8 +66,11 @@ class MapManager
   void 			update(Ogre::Real);
 
   bool 			getObject(Ogre::Vector2 vector);
+  const 		Objects &getObjects() const;
 
-  void test();
+  int			getIsdestructible() const;
+
+  void 			setIsdestructible(int isdestructible);
 };
 
-#endif //CPP_INDIE_STUDIO_MAP_HPP
+#endif //BOMBERMAN_MAP_HPP

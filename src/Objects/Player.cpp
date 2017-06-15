@@ -9,7 +9,7 @@
 
 int Player::_playerID = 1;
 
-Player::Player(AGameObject::Object object) : ACharacter(object, 35), _ID(_playerID++)
+Player::Player(MapManager *map, AGameObject::Object object) : ACharacter(map, object, 35), _ID(_playerID++)
 {
   _moveSpeed = 400;
   keyCodeType.clear();
@@ -120,7 +120,7 @@ void Player::action(ActionKeyCode action, const Ogre::FrameEvent &evt)
 	      std::cout << "JE PASSE" << std::endl;
 	      Bomb *test;
 
-	      test = new Bomb(AGameObject::BOMB);
+	      test = new Bomb(_map, AGameObject::BOMB);
 	      test->setSceneManager(SceneManager);
 	      test->createEntity();
 	      test->setPosition(_node->getPosition().x, _node->getPosition().y, _node->getPosition().z);

@@ -21,7 +21,7 @@ class ACharacter : public AGameObject
     AT_FIRE,
   };
 
-  ACharacter(Object object, int r);
+  ACharacter(MapManager *map, Object object, int r);
 
   virtual ~ACharacter();
 

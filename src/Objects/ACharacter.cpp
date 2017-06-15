@@ -5,7 +5,7 @@
 #include <Ogre.h>
 #include "Interfaces/ACharacter.hpp"
 
-ACharacter::ACharacter(AGameObject::Object object, int r) : AGameObject(object, r)
+ACharacter::ACharacter(MapManager *map, AGameObject::Object object, int r) : AGameObject(map, object, r)
 {
 }
 
