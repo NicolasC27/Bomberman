@@ -9,12 +9,12 @@
 
 int AGameObject::objectId = 1;
 
-AGameObject::AGameObject(Object object) : _collision(new Collision(0)), _type(object)
+AGameObject::AGameObject(MapManager *map, Object object) : _collision(new Collision(0)), _type(object), _map(map)
 {
   _id = AGameObject::objectId++;
 }
 
-AGameObject::AGameObject(AGameObject::Object object, double r) : _collision(new Collision(r)),  _type(object)
+AGameObject::AGameObject(MapManager *map, AGameObject::Object object, double r) : _collision(new Collision(r)),  _type(object), _map(map)
 {
   _id = AGameObject::objectId++;
 }

@@ -3,9 +3,10 @@
 //
 
 #include <Objects/Wall.hpp>
+#include <map>
 #include <OgreEntity.h>
 
-Wall::Wall(Wall::State type) : AGameObject(BLOCK), _state(type), _positionY(0)
+Wall::Wall(MapManager *map, Wall::State type) : AGameObject(map, BLOCK), _state(type), _positionY(0)
 {
   _moveSpeed = 800;
 }
@@ -25,6 +26,13 @@ void 			Wall::update(Ogre::Real dt)
 			 _node->getPosition().y - translateVector.y,
 			 _node->getPosition().z);
       setPositionY(_node->getPosition().y);
+    }
+  else if (getPositionY() <= 0)
+    {
+      _node->setPosition(_node->getPosition().x,
+			 0,
+			 _node->getPosition().z);
+      setPositionY(0);
     }
 }
 
@@ -47,8 +55,6 @@ void			Wall::createEntity()
 {
   _obj = SceneManager->createEntity(getName(), Ogre::SceneManager::PT_CUBE);
   dynamic_cast <Ogre::Entity*>(_obj)->setMaterialName(this->getMaterialName());
-  _node->showBoundingBox(true);
-
 }
 
 std::string		Wall::getMaterialName() const

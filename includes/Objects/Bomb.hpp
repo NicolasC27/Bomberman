@@ -13,7 +13,7 @@ class Bomb : public AGameObject
   std::string		_name;
 
  public:
-  Bomb(Object object);
+  Bomb(MapManager *map, Object object);
 
   virtual ~Bomb();
 

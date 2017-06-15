@@ -10,7 +10,7 @@
 
 
 MapManager::MapManager(std::string const &filename, Ogre::SceneManager *SceneManager,
-	 NodeManager *node) : _filename(filename), _SceneManager(SceneManager), _nodes(node)
+	 NodeManager *node) : _filename(filename), _SceneManager(SceneManager), _nodes(node), _isdestructible(0)
 {
   std::ifstream infile(filename);
 
@@ -83,9 +83,11 @@ void 		MapManager::generateObjects()
       for(int z = 0, i = 0; line[i]; i++, z++)
 	{
 	  if ((line[i] - '0') == AGameObject::WALL)
-	    addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(Wall::UNBREAKABLE));
+	      addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(this, Wall::UNBREAKABLE));
 	  else if ((line[i] - '0')  == AGameObject::BLOCK)
-	      addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(Wall::BREAKABLE));
+	      addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(this, Wall::BREAKABLE));
+	  else
+	      _isdestructible += 1;
 	}
       count = x;
   }
@@ -116,7 +118,7 @@ void 		MapManager::addCharacter(const Ogre::Vector2 &vector)
 {
   AGameObject	*player;
 
-  player = new Player(AGameObject::CHARACTER);
+  player = new Player(this, AGameObject::CHARACTER);
   _character.push_back(player);
   player->setSceneManager(_SceneManager);
   player->createEntity();
@@ -126,7 +128,7 @@ void 		MapManager::addCharacter(const Ogre::Vector2 &vector)
 
 void 		MapManager::addBomb(const Ogre::Vector2 &vector)
 {
-  addObjects(Ogre::Vector2(vector.x, vector.y), new Bomb(AGameObject::BOMB));
+  addObjects(Ogre::Vector2(vector.x, vector.y), new Bomb(this, AGameObject::BOMB));
 }
 
 void 		MapManager::setSize(int size)
@@ -155,5 +157,20 @@ bool		MapManager::getObject(Ogre::Vector2 vector)
       it++;
     }
   return false;
+}
+
+int 		MapManager::getIsdestructible() const
+{
+  return 	_isdestructible;
+}
+
+void 		MapManager::setIsdestructible(int isdestructible)
+{
+  _isdestructible = isdestructible;
+}
+
+const 		MapManager::Objects &MapManager::getObjects() const
+{
+  return _objects;
 }
 

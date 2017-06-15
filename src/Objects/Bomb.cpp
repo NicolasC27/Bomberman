@@ -7,7 +7,7 @@
 #include <OgreParticleSystemManager.h>
 #include "Objects/Bomb.hpp"
 
-Bomb::Bomb(AGameObject::Object object) : AGameObject(object, 1)
+Bomb::Bomb(MapManager *map, AGameObject::Object object) : AGameObject(map, object, 1)
 {
 
 }
@@ -30,15 +30,15 @@ void 			Bomb::createEntity()
 
 void			Bomb::Explosion()
 {
-  Ogre::SceneNode	*test;
+//  Ogre::SceneNode	*test;
 // create a particle system named explosions using the explosionTemplate
-  Ogre::ParticleSystem* particleSystem = SceneManager->createParticleSystem("explosions", "explosionTemplate");
+//  Ogre::ParticleSystem* particleSystem = SceneManager->createParticleSystem("explosions", "explosionTemplate");
 
 // fast forward 1 second  to the point where the particle has been emitted
-  particleSystem->fastForward(1.0);
+//  particleSystem->fastForward(1.0);
 
 // attach the particle system to a scene node
-  test->attachObject(particleSystem);
+//  test->attachObject(particleSystem);
 }
 
 AGameObject::State 	Bomb::getState() const

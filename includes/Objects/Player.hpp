@@ -10,7 +10,7 @@
 class Player : public ACharacter
 {
  public:
-  Player(Object object);
+  Player(MapManager *map, Object object);
   virtual ~Player();
 
   void 			move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt);
