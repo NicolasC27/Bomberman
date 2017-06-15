@@ -5,9 +5,9 @@
 #include <Objects/Wall.hpp>
 #include <OgreEntity.h>
 
-Wall::Wall(Wall::State type) : AGameObject(BLOCK), _state(type)
+Wall::Wall(Wall::State type) : AGameObject(BLOCK), _state(type), _positionY(0)
 {
-
+  _moveSpeed = 800;
 }
 
 Wall::~Wall()
@@ -15,9 +15,17 @@ Wall::~Wall()
 
 }
 
-void 			Wall::update()
+void 			Wall::update(Ogre::Real dt)
 {
+  Ogre::Vector3		translateVector = _moveSpeed * dt * Ogre::Vector3(0, 1, 0);
 
+  if (getPositionY() > 0)
+    {
+      _node->setPosition(_node->getPosition().x,
+			 _node->getPosition().y - translateVector.y,
+			 _node->getPosition().z);
+      setPositionY(_node->getPosition().y);
+    }
 }
 
 Wall::State 		Wall::getState() const
@@ -39,6 +47,8 @@ void			Wall::createEntity()
 {
   _obj = SceneManager->createEntity(getName(), Ogre::SceneManager::PT_CUBE);
   dynamic_cast <Ogre::Entity*>(_obj)->setMaterialName(this->getMaterialName());
+  _node->showBoundingBox(true);
+
 }
 
 std::string		Wall::getMaterialName() const
@@ -63,20 +73,14 @@ std::string 		Wall::getMeshName() const
 Ogre::Vector3 		Wall::getScale() const
 {
   return (Ogre::Vector3(1.0, 1.0, 1.0));
-
-  if (getState() == Wall::State::UNBREAKABLE)
-    return (Ogre::Vector3(1.0, 1.0, 1.0));
-//    return Ogre::Vector3(0.9, 0.9, 0.9);
-  if (getState() == Wall::State::BREAKABLE)
-    return Ogre::Vector3(0.8, 0.8, 0.8);
 }
 
 double 		Wall::getPositionY() const
 {
-  return (0);
-  if (getState() == Wall::State::UNBREAKABLE)
-    return (0);
-//    return ((-(100 - (100 * 0.9)) + 10) / 2);
-  if (getState() == Wall::State::BREAKABLE)
-    return ((-(100 - (100 * 0.8) + 10)) / 2) + 6;
+  return _positionY;
+}
+
+void		Wall::setPositionY(int positionY)
+{
+  _positionY = positionY;
 }
