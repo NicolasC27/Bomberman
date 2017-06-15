@@ -1,3 +1,9 @@
+
+
+/*
+  Our explosion vertex program that just passes the alpha value of the vertex
+  on to the fragment program
+*/
 void main_vp(float4 position : POSITION,
 			float2 uv		  : TEXCOORD0,
 			float4 color	: COLOR0,
