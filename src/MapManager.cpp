@@ -83,9 +83,9 @@ void 		MapManager::generateObjects()
       for(int z = 0, i = 0; line[i]; i++, z++)
 	{
 	  if ((line[i] - '0') == AGameObject::WALL)
-	    addObjects(Ogre::Vector2(MapManager::boxWidth * z, MapManager::boxWidth * x), new Wall(Wall::UNBREAKABLE));
+	    addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(Wall::UNBREAKABLE));
 	  else if ((line[i] - '0')  == AGameObject::BLOCK)
-	      addObjects(Ogre::Vector2(MapManager::boxWidth * z, MapManager::boxWidth * x), new Wall(Wall::BREAKABLE));
+	      addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(Wall::BREAKABLE));
 	}
       count = x;
   }
@@ -94,23 +94,22 @@ void 		MapManager::generateObjects()
 			  ERR_NBLINEMAP, _filename);
   addCharacter(Ogre::Vector2(100, 100));
   addCharacter(Ogre::Vector2(900, 900));
-
   addBomb(Ogre::Vector2(900, 900));
   generatePlan();
 }
 
 void 		MapManager::generateSpawn()
 {
-  _spawns.push_front(Ogre::Vector2(MapManager::boxWidth, MapManager::boxWidth));
-  _spawns.push_front(Ogre::Vector2(MapManager::boxWidth,
-				   (_size * MapManager::boxWidth) -
-				   (MapManager::boxWidth * 2)));
+  _spawns.push_front(Ogre::Vector2(boxWidth, boxWidth));
+  _spawns.push_front(Ogre::Vector2(boxWidth,
+				   (_size * boxWidth) -
+				   (boxWidth * 2)));
   _spawns.push_front(Ogre::Vector2(
-	  (_size * MapManager::boxWidth) - (MapManager::boxWidth * 2),
-	  MapManager::boxWidth));
+	  (_size * boxWidth) - (boxWidth * 2),
+	  boxWidth));
   _spawns.push_front(Ogre::Vector2(
-	  (_size * MapManager::boxWidth) - (MapManager::boxWidth * 2),
-	  (_size * MapManager::boxWidth) - (MapManager::boxWidth * 2)));
+	  (_size * boxWidth) - (boxWidth * 2),
+	  (_size * boxWidth) - (boxWidth * 2)));
 }
 
 void 		MapManager::addCharacter(const Ogre::Vector2 &vector)

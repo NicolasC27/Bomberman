@@ -16,6 +16,8 @@ class MapManager;
 #define ERR_NBLINEMAP	"The number of rows does not match the number of rows in the map."
 #define NOT_FOUND	"File not found"
 #define FOLDER_MAP	"media/map/"
+#define CUBE_WIDTH	MapManager::boxWidth
+#define MAX_MAP		(map->getSize() * CUBE_WIDTH)
 
 class MapManager
 {
@@ -61,6 +63,8 @@ class MapManager
   void 			update(Ogre::Real);
 
   bool 			getObject(Ogre::Vector2 vector);
+
+  void test();
 };
 
 #endif //CPP_INDIE_STUDIO_MAP_HPP
