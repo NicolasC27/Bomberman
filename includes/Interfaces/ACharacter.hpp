@@ -30,7 +30,7 @@ class ACharacter : public AGameObject
 
   void			createEntity();
 
-  void 			update();
+  void 			update(Ogre::Real);
 
   std::string 		getName() const;
   State 		getState() const;
