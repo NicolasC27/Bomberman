@@ -17,7 +17,7 @@ class GameManager;
 class GameManager
 {
  private:
-  EventManager			*Listener;
+  EventManager		*Listener;
 
   Ogre::Root 		*_Root;
   Ogre::SceneManager 	*_SceneManager;
@@ -56,10 +56,15 @@ class GameManager
     int		x = 0;
     int 	z = 0;
     int		turn = 0;
+    int 	timer = 60;
+    int 	count = 0;
   };
 
   position		wallFalling;
 
+  bool checkAround();
+
+  bool checkAround(MapManager *map);
 };
 
 #endif //BOMBERMAN_GAMEMANAGER_HPP

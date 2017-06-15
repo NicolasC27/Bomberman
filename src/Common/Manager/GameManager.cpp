@@ -100,23 +100,17 @@ void 			GameManager::update(MapManager *map, Ogre::Real dt)
 
 void 			GameManager::nextFoundingPositionWallFalling(MapManager *map)
 {
-  if (wallFalling.x == 500 && wallFalling.z == 500)
-    return ;
   if (wallFalling.x == CUBE_WIDTH + wallFalling.turn && (wallFalling.z > CUBE_WIDTH + wallFalling.turn &&
 							 wallFalling.z <=
 							 (map->getSize() * MapManager::boxWidth) - 200))
     {
       wallFalling.z -= CUBE_WIDTH;
-      if (map->getObject(Ogre::Vector2(wallFalling.x, wallFalling.z)))
-	nextFoundingPositionWallFalling(map);
     } else
     if (wallFalling.z == CUBE_WIDTH + wallFalling.turn && (wallFalling.x >= CUBE_WIDTH
 							   && wallFalling.x <
 							      (map->getSize() * MapManager::boxWidth) - 200 - wallFalling.turn))
       {
 	wallFalling.x += CUBE_WIDTH;
-	if (map->getObject(Ogre::Vector2(wallFalling.x, wallFalling.z)))
-	  nextFoundingPositionWallFalling(map);
 
       } else
       if (wallFalling.x == (map->getSize() * MapManager::boxWidth) - 200 - wallFalling.turn &&
@@ -124,8 +118,6 @@ void 			GameManager::nextFoundingPositionWallFalling(MapManager *map)
 	   wallFalling.z < (map->getSize() * MapManager::boxWidth) - 200 - wallFalling.turn))
 	{
 	  wallFalling.z += CUBE_WIDTH;
-	  if (map->getObject(Ogre::Vector2(wallFalling.x, wallFalling.z)))
-	    nextFoundingPositionWallFalling(map);
 
 	} else
 	if (wallFalling.z == 900 - wallFalling.turn && (wallFalling.x > 200 &&
@@ -133,8 +125,6 @@ void 			GameManager::nextFoundingPositionWallFalling(MapManager *map)
 							(map->getSize() * MapManager::boxWidth) - 200 - wallFalling.turn))
 	  {
 	    wallFalling.x -= CUBE_WIDTH;
-	    if (map->getObject(Ogre::Vector2(wallFalling.x, wallFalling.z)))
-	      nextFoundingPositionWallFalling(map);
 	    if (wallFalling.x - wallFalling.turn == MapManager::boxWidth + 100)
 	      wallFalling.turn += 100;
 	  }
@@ -144,17 +134,23 @@ void 			GameManager::WallFalling(MapManager *map, Ogre::Real dt)
 {
   static int 		i = 0;
 
-  if (_timer <= 60 && i == 0 )
+  if (_timer <= 60 && i == 0 &&  map->getIsdestructible() > 1)
     {
-      if (map->getObject(Ogre::Vector2(500, 500)) == true && wallFalling.x == 500 && wallFalling.z == 500)
-	return ;
-      AGameObject *wall;
+      if (wallFalling.timer <= 0)
+	{
+	  AGameObject *wall;
       std::cout << "NEXT X : " << wallFalling.x << "NEXT Y :" << wallFalling.z << std::endl;
 
-      wall = new Wall(AGameObject::UNBREAKABLE);
+      wall = new Wall(map, AGameObject::UNBREAKABLE);
       dynamic_cast<Wall *>(wall)->setPositionY(800);
       map->addObjects(Ogre::Vector2(wallFalling.x, wallFalling.z), wall);
-      nextFoundingPositionWallFalling(map);
+	  map->setIsdestructible(map->getIsdestructible() - 1);
+	  std::cout << map->getIsdestructible() << std::endl;
+	  while (map->getIsdestructible() > 1 && map->getObject(Ogre::Vector2(wallFalling.x, wallFalling.z)))
+	    nextFoundingPositionWallFalling(map);
+	  wallFalling.timer = 60;
+	}
+      wallFalling.timer -= dt;
     }
 }
 
