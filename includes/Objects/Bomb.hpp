@@ -25,7 +25,7 @@ class Bomb : public AGameObject
   Ogre::Vector3 	getScale() const;
   double		getPositionY() const;
 
-  void 			update();
+  void 			update(Ogre::Real);
 
   void			Explosion();
 

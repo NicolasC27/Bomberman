@@ -17,7 +17,7 @@ Bomb::~Bomb()
 
 }
 
-void 			Bomb::update()
+void 			Bomb::update(Ogre::Real dt)
 {
 
 }
