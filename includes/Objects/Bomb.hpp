@@ -5,6 +5,7 @@
 #ifndef BOMBERMAN_BOMB_HPP
 #define BOMBERMAN_BOMB_HPP
 
+
 #include <OgreVector3.h>
 #include "Interfaces/AGameObject.hpp"
 
@@ -28,12 +29,12 @@ class Bomb : public AGameObject
 
   void 			update(Ogre::Real);
 
-  void			Explosion();
-
   Ogre::SceneManager::PrefabType	getMeshPrefab() const;
   std::string				getMeshName() const;
 
   std::string getNameExplosion() const;
+
+  void explode();
 };
 
 #endif //BOMBERMAN_BOMB_HPP
