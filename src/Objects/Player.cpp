@@ -49,18 +49,18 @@ void 				Player::setKey()
     }
 }
 
-bool			Player::Collide(Ogre::Vector3 const &m) const
+bool			Player::Collide(Ogre::Vector3 &m) const
 {
   Ogre::Vector2         mov(m.x, m.z);
   std::vector<Ogre::Vector2>	 pos = this->getFrontObstacle(mov);
+  Ogre::Sphere	sphere(_obj->getWorldBoundingBox().getCenter() + m, radius);
   AGameObject		*ptr;
 
-  Ogre::Sphere	aab1(_obj->getWorldBoundingBox().getCenter() + m, 35.0f);
   for (unsigned int i = 0; i < pos.size(); ++i)
     {
       if ((ptr = _map->getObjectFrom(pos[i]/*_map->getPosFrom(pos[i])*/)) != NULL)
 	{
-	  if (aab1.intersects(ptr->getObj()->getWorldBoundingBox(true)))
+	  if (sphere.intersects(ptr->getObj()->getWorldBoundingBox(true)))
 	    return (true);
 	}
     }
@@ -113,7 +113,7 @@ void			Player::move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt)
     Ogre::Vector3 src = _node->getOrientation() * Ogre::Vector3::UNIT_Z;
     Ogre::Vector3 mDirection = vector;
     mDirection.normalise();
-    translateVector *= (Collide(translateVector)) ? 0 : 1;
+    if (!this->Collide(translateVector))
       _node->translate(translateVector);
     if ((1.0f + src.dotProduct(mDirection)) < 0.0001f)
       _node->yaw(Ogre::Degree(180));
@@ -122,7 +122,6 @@ void			Player::move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt)
       Ogre::Quaternion quat = src.getRotationTo(mDirection);
       _node->rotate(quat);
     }
-    //  _node->translate(translateVector);
   }
   mAnimationState->addTime(evt.timeSinceLastFrame * 1.5f);
 }
@@ -143,7 +142,8 @@ void			Player::action(ActionKeyCode action, const Ogre::FrameEvent &evt)
 	else
 	  if (action == Player::AT_FIRE)
 	    {
-	      _map->addObjects(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z), new Bomb(_map, AGameObject::BOMB));
+	      _map->addObjects(_map->getMiddlePosFrom(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z)),
+			       new Bomb(_map, AGameObject::BOMB));
 	    }
 }
 

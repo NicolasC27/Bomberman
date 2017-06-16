@@ -193,10 +193,19 @@ Ogre::Vector2		&MapManager::getPosFrom(Ogre::Vector2 &tmp) const
 
   tmp.x -= diffx;
   tmp.y -= diffy;
-  if (diffx > boxWidth / 2.0)
+  if (diffx > halfboxWidth)
     tmp.x += boxWidth;
-  if (diffy > boxWidth / 2.0)
+  if (diffy > halfboxWidth)
     tmp.y += boxWidth;
+  return (tmp);
+}
+
+Ogre::Vector2 const	MapManager::getMiddlePosFrom(Ogre::Vector2 const &tmp) const
+{
+  Ogre::Vector2 v(tmp);
+  v = this->getPosFrom(v);
+  v.x -= halfboxWidth;
+  v.y -= halfboxWidth;
   return (tmp);
 }
 

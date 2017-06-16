@@ -24,6 +24,7 @@ class MapManager
 {
  public:
   static const int 				boxWidth = 100;
+  static const int 				halfboxWidth = 50;
 
  public:
   NodeManager 					*_nodes;
@@ -70,6 +71,8 @@ private:
   bool 			getObject(Ogre::Vector2 vector);
   const 		Objects &getObjects() const;
   Ogre::Vector2		&getPosFrom(Ogre::Vector2 &tmp) const;
+
+  Ogre::Vector2	const	getMiddlePosFrom(Ogre::Vector2 const &tmp) const;
 
   int			getIsdestructible() const;
 

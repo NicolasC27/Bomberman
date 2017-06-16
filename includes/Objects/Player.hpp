@@ -31,7 +31,7 @@ protected:
 
 private:
   std::vector<Ogre::Vector2> const	getFrontObstacle(Ogre::Vector2 const &) const;
-  bool			Collide(Ogre::Vector3 const &) const;
+  bool			Collide(Ogre::Vector3 &) const;
   Ogre::Vector2		&getPosFrom(Ogre::Vector2 &) const;
 };
 #endif //BOMBERMAN_PLAYER_HPP

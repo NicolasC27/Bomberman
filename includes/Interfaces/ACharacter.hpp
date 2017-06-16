@@ -22,6 +22,7 @@ class ACharacter : public AGameObject
     AT_FIRE,
   };
 
+  static const int 	radius = 35;
   ACharacter(MapManager *map, Object object, int r);
 
   virtual ~ACharacter();
