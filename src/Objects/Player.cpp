@@ -3,13 +3,13 @@
 //
 
 #include <Ogre.h>
-#include <Objects/Bomb.hpp>
+#include "Objects/Bomb.hpp"
 #include "Interfaces/ACharacter.hpp"
 #include "Objects/Player.hpp"
 
 int Player::_playerID = 1;
 
-Player::Player(AGameObject::Object object) : ACharacter(object, 35), _ID(_playerID++)
+Player::Player(MapManager *map, AGameObject::Object object) : ACharacter(map, object, 35), _ID(_playerID++)
 {
   _moveSpeed = 400;
   keyCodeType.clear();
@@ -21,7 +21,7 @@ Player::~Player()
 
 }
 
-void 				Player::update()
+void 				Player::update(Ogre::Real dt)
 {
 
 }
@@ -49,11 +49,6 @@ void 				Player::setKey()
     }
 }
 
-Ogre::Vector2		Player::getPosFrom(Ogre::Vector3 const &tmp) const
-{
-  return (Ogre::Vector2(tmp.x - std::fmod(tmp.x, 100), tmp.z - std::fmod(tmp.z, 100)));
-}
-
 Ogre::Vector2		&Player::getPosFrom(Ogre::Vector2 &tmp) const
 {
   float                 diffx = std::fmod(tmp.x, 100);
@@ -68,23 +63,25 @@ Ogre::Vector2		&Player::getPosFrom(Ogre::Vector2 &tmp) const
   return (tmp);
 }
 
-bool			Player::Collide(MapManager const &map, Ogre::Vector3 const &m) const
+bool			Player::Collide(Ogre::Vector3 const &m) const
 {
   Ogre::Vector2         mov(m.x, m.z);
   std::vector<Ogre::Vector2>	 pos = this->getFrontObstacle(mov);
-  Ogre::AxisAlignedBox	aab1(_obj->getWorldBoundingBox());
-  aab1.setMinimum(aab1.getMinimum() * 1.05f);
-  aab1.setMaximum(aab1.getMaximum() * 1.05f);
+  Ogre::AxisAlignedBox	aab1(_obj->getWorldBoundingBox(true));
+  aab1.setMinimum(aab1.getMinimum() * 1.04f);
+  aab1.setMaximum(aab1.getMaximum() * 1.04f);
   Ogre::AxisAlignedBox	aab2;
   AGameObject		*ptr;
 
+  std::cout << "Bounding box personnage : " << aab1 << std::endl;
   for (unsigned int i = 0; i < pos.size(); ++i)
     {
-      if ((ptr = map.getObjectFrom(this->getPosFrom(pos[i]))) != NULL)
+      std::cout << "check " << pos[i] << std::endl;
+      if ((ptr = _map->getObjectFrom(this->getPosFrom(pos[i]))) != NULL)
 	{
 	  ptr->getNode()->showBoundingBox(true);
-	  aab2 = ptr->getObj()->getWorldBoundingBox();
-	  std::cout << _node->getPosition() << " intesects " << aab2.getCenter() << " ?" << std::endl;
+	  aab2 = ptr->getObj()->getWorldBoundingBox(true);
+	  std::cout << aab2 << " intersects ?" << std::endl;
 	  if (aab1.intersects(aab2))
 	    return (true);
 	}
@@ -99,7 +96,7 @@ std::vector<Ogre::Vector2> const	Player::getFrontObstacle(Ogre::Vector2 const &m
 				    _node->getPosition().z);
 
   tmp = this->getPosFrom(tmp);
-  std::cout << "pos " << _node->getPosition() << " direction : " << mov << " which gives " << tmp << std::endl;
+  std::cout << std::endl << "pos : " << _node->getPosition() << " direction : " << mov << " correspond to node " << tmp << std::endl;
   if (mov.x > 0.0)
     {
       pos.push_back(tmp + Ogre::Vector2(100, -100));
@@ -127,8 +124,7 @@ std::vector<Ogre::Vector2> const	Player::getFrontObstacle(Ogre::Vector2 const &m
   return (pos);
 }
 
-void			Player::move(MapManager const &map,
-				     Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt)
+void			Player::move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt)
 {
   static Ogre::AnimationState *mAnimationState;
   Ogre::Vector3 translateVector = evt.timeSinceLastFrame * _moveSpeed * vector;
@@ -141,7 +137,7 @@ void			Player::move(MapManager const &map,
     Ogre::Vector3 src = _node->getOrientation() * Ogre::Vector3::UNIT_Z;
     Ogre::Vector3 mDirection = vector;
     mDirection.normalise();
-    translateVector *= this->Collide(map, translateVector) ? -10 : 1;
+    translateVector *= this->Collide(translateVector) ? -1 : 1;
     _node->translate(translateVector);
     if ((1.0f + src.dotProduct(mDirection)) < 0.0001f)
       _node->yaw(Ogre::Degree(180));
@@ -155,26 +151,26 @@ void			Player::move(MapManager const &map,
   mAnimationState->addTime(evt.timeSinceLastFrame * 1.5f);
 }
 
-void			Player::action(MapManager const &map, ActionKeyCode action, const Ogre::FrameEvent &evt)
+void			Player::action(ActionKeyCode action, const Ogre::FrameEvent &evt)
 {
   if (action == Player::AT_UP)
-    move(map ,Ogre::Vector3(0, 0, -1), evt);
+    move(Ogre::Vector3(0, 0, -1), evt);
   else
     if (action == Player::AT_DOWN)
-      move(map, Ogre::Vector3(0, 0, 1), evt);
+      move(Ogre::Vector3(0, 0, 1), evt);
     else
       if (action == Player::AT_LEFT)
-	move(map, Ogre::Vector3(-1, 0, 0), evt);
+	move(Ogre::Vector3(-1, 0, 0), evt);
       else
 	if (action == Player::AT_RIGHT)
-	  move(map, Ogre::Vector3(1, 0, 0), evt);
+	  move(Ogre::Vector3(1, 0, 0), evt);
 	else
 	  if (action == Player::AT_FIRE)
 	    {
 	      std::cout << "JE PASSE" << std::endl;
 	      Bomb *test;
 
-	      test = new Bomb(AGameObject::BOMB);
+	      test = new Bomb(_map, AGameObject::BOMB);
 	      test->setSceneManager(SceneManager);
 	      test->createEntity();
 	      test->setPosition(_node->getPosition().x, _node->getPosition().y, _node->getPosition().z);

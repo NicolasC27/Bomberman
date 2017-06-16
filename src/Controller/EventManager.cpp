@@ -2,7 +2,12 @@
 
 #include "Objects/Player.hpp"
 #include "Controller/EventManager.hpp"
-
+#include <CEGUI/CEGUI.h>
+#include <Overlay/OgreFontManager.h>
+#include <OgreOverlay.h>
+#include <OgreOverlayContainer.h>
+#include <Overlay/OgreOverlayManager.h>
+#include <Overlay/OgreTextAreaOverlayElement.h>
 EventManager::EventManager(GameManager *gameManager, MapManager *map, Ogre::RenderWindow *Window, Ogre::Camera *camera) : _map(map), game(gameManager)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
@@ -36,7 +41,6 @@ EventManager::EventManager(GameManager *gameManager, MapManager *map, Ogre::Rend
 //      mJoystick->setEventCallback(this);
 //    }
   windowResized(mWindow);
-  Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
 }
 
 EventManager::~EventManager()

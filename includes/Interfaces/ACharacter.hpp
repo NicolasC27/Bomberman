@@ -22,7 +22,7 @@ class ACharacter : public AGameObject
     AT_FIRE,
   };
 
-  ACharacter(Object object, int r);
+  ACharacter(MapManager *map, Object object, int r);
 
   virtual ~ACharacter();
 
@@ -31,7 +31,7 @@ class ACharacter : public AGameObject
 
   void			createEntity();
 
-  void 			update();
+  void 			update(Ogre::Real);
 
   std::string 		getName() const;
   State 		getState() const;

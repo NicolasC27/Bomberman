@@ -12,16 +12,16 @@
 
 class Player : public ACharacter
 {
-public:
-  Player(AGameObject::Object object);
+ public:
+  Player(MapManager *map, Object object);
   virtual ~Player();
 
-  void 			move(MapManager const &, Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt);
+  void 			move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt);
   void 			setKey();
 
-  void			action(MapManager const &, ActionKeyCode, const Ogre::FrameEvent &);
+  void			action(ActionKeyCode, const Ogre::FrameEvent &);
 
-  void 			update();
+  void 			update(Ogre::Real);
 
   const std::map<OIS::KeyCode, ActionKeyCode>	&getKeyCodeType() const;
 
@@ -31,8 +31,7 @@ protected:
 
 private:
   std::vector<Ogre::Vector2> const	getFrontObstacle(Ogre::Vector2 const &) const;
-  bool			Collide(MapManager const &, Ogre::Vector3 const &) const;
-  Ogre::Vector2		getPosFrom(Ogre::Vector3 const &) const;
+  bool			Collide(Ogre::Vector3 const &) const;
   Ogre::Vector2		&getPosFrom(Ogre::Vector2 &) const;
 };
 #endif //BOMBERMAN_PLAYER_HPP

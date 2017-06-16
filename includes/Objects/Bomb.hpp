@@ -13,7 +13,7 @@ class Bomb : public AGameObject
   std::string		_name;
 
  public:
-  Bomb(Object object);
+  Bomb(MapManager *map, Object object);
 
   virtual ~Bomb();
 
@@ -25,7 +25,7 @@ class Bomb : public AGameObject
   Ogre::Vector3 	getScale() const;
   double		getPositionY() const;
 
-  void 			update();
+  void 			update(Ogre::Real);
 
   void			Explosion();
 

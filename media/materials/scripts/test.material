@@ -1,0 +1,17 @@
+material HUD/TopRight
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			scene_blend alpha_blend
+			depth_check off
+			tex_address_mode clamp
+			texture_unit
+			{
+				texture TopRight.png
+			}
+		}
+	}
+}

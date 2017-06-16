@@ -12,9 +12,10 @@ class Wall : public AGameObject
 {
   State 		_state;
   std::string		_name;
+  int			_positionY;
 
  public:
-  Wall(State type);
+  Wall(MapManager *map, State type);
   virtual ~Wall();
 
   void			setState(State state);
@@ -25,7 +26,9 @@ class Wall : public AGameObject
   Ogre::Vector3 	getScale() const;
   double	 	getPositionY() const;
 
-  void			update();
+  void			setPositionY(int positionY);
+
+  void			update(Ogre::Real);
 
   Ogre::SceneManager::PrefabType	getMeshPrefab() const;
   std::string				getMeshName() const;

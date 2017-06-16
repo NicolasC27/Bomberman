@@ -20,7 +20,7 @@ if(UNIX)
         set(OGRE_SAMPLES_INCLUDEPATH "/usr/share/OGRE/samples/Common/include/") # Otherwise, this one
     else ()
         message(SEND_ERROR "Failed to find module path.")
-    endif(EXISTS "/usr/local/lib/OGRE")
+    endif()
 endif(UNIX)
 
 if (CMAKE_BUILD_TYPE STREQUAL "")
@@ -31,7 +31,53 @@ set(CMAKE_DEBUG_POSTFIX "_d")
 set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}")
 
 find_package(OGRE REQUIRED)
-find_package(OIS REQUIRED)
+
+IF (OIS_LIBRARIES AND OIS_INCLUDE_DIR)
+    SET(OIS_FIND_QUIETLY TRUE) # Already in cache, be silent
+ENDIF (OIS_LIBRARIES AND OIS_INCLUDE_DIR)
+
+IF (WIN32) #Windows
+    MESSAGE(STATUS "Looking for OIS")
+    SET(OIS_INCLUDE_DIR ../libs/ogre/Dependencies/include)
+    SET(OIS_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../libs/ogre/Samples/Common/bin/Release)
+    SET(OIS_LIBRARIES debug OIS_d optimized OIS)
+ELSE (WIN32) #Unix
+    FIND_PACKAGE(PkgConfig)
+    PKG_SEARCH_MODULE(OIS OIS /usr/pack/ois-1.0-sd/i686-debian-linux3.1/lib/pkgconfig/OIS.pc) # tardis specific hack
+    SET(OIS_INCLUDE_DIR ${OIS_INCLUDE_DIRS})
+    SET(OIS_LIB_DIR ${OIS_LIBDIR})
+    SET(OIS_LIBRARIES ${OIS_LIBRARIES} CACHE STRING "")
+ENDIF (WIN32)
+
+#Do some preparation
+SEPARATE_ARGUMENTS(OIS_INCLUDE_DIR)
+SEPARATE_ARGUMENTS(OIS_LIBRARIES)
+
+SET(OIS_INCLUDE_DIR ${OIS_INCLUDE_DIR} CACHE PATH "")
+SET(OIS_LIBRARIES ${OIS_LIBRARIES} CACHE STRING "")
+SET(OIS_LIB_DIR ${OIS_LIB_DIR} CACHE PATH "")
+
+IF (OIS_INCLUDE_DIR AND OIS_LIBRARIES)
+    SET(OIS_FOUND TRUE)
+ENDIF (OIS_INCLUDE_DIR AND OIS_LIBRARIES)
+
+IF (OIS_FOUND)
+    IF (NOT OIS_FIND_QUIETLY)
+        MESSAGE(STATUS "  libraries : ${OIS_LIBRARIES} from ${OIS_LIB_DIR}")
+        MESSAGE(STATUS "  includes  : ${OIS_INCLUDE_DIR}")
+    ENDIF (NOT OIS_FIND_QUIETLY)
+ELSE (OIS_FOUND)
+    IF (OIS_FIND_REQUIRED)
+        MESSAGE(FATAL_ERROR "Could not find OIS")
+    ENDIF (OIS_FIND_REQUIRED)
+ENDIF (OIS_FOUND)
+if(WIN32)
+    set(CMAKE_MODULE_PATH "$ENV{OGRE_HOME}/CMake/;${CMAKE_MODULE_PATH}")
+    set(OGRE_SAMPLES_INCLUDEPATH
+            $ENV{OGRE_HOME}/Samples/include
+            )
+endif(WIN32)
+
 
 if(NOT OIS_FOUND)
     message(SEND_ERROR "Failed to find OIS.")
@@ -62,6 +108,15 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 endif()
 
 include_directories(includes)
+include_directories(SYSTEM
+  /usr/local/include/cegui-0
+)
+
+link_directories(
+  /usr/local/lib/
+)
+
+set(CEGUI_LIBS CEGUIBase-0 CEGUICommonDialogs-0 CEGUIOgreRenderer-0)
 
 SET(SRCS
         src/main.cpp
@@ -98,17 +153,20 @@ SET(SRCS
 set(HDRS ${SRCS})
 set(CMAKE_CXX_FLAGS "-Iincludes -std=c++11")
 
+find_package(Freetype REQUIRED)
+include_directories(${FREETYPE_INCLUDE_DIRS})
+
 include_directories( ${OIS_INCLUDE_DIRS}
         ${OGRE_INCLUDE_DIRS}
         ${OGRE_SAMPLES_INCLUDEPATH}
-#        ${OGRE_Overlay_INCLUDE_DIRS}
+        ${OGRE_Overlay_INCLUDE_DIRS}
         )
 
 add_executable(bomberman WIN32 ${HDRS} ${SRCS})
 
 set_target_properties(bomberman PROPERTIES DEBUG_POSTFIX _d)
 
-target_link_libraries(bomberman ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
+target_link_libraries(bomberman OgreOverlay OgreMain ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${CEGUI_LIBS} ${FREETYPE_LIBRARIES})
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/assets)
