@@ -3,8 +3,6 @@
 //
 
 #include <Objects/Wall.hpp>
-#include <map>
-#include <OgreEntity.h>
 
 Wall::Wall(MapManager *map, Wall::State type) : AGameObject(map, BLOCK), _state(type), _positionY(0)
 {
