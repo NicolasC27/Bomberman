@@ -21,7 +21,9 @@ AGameObject::AGameObject(MapManager *map, AGameObject::Object object, double r) 
 
 AGameObject::~AGameObject()
 {
-
+  _node->detachObject(_obj);
+  SceneManager->destroyEntity(dynamic_cast<Ogre::Entity*>(_obj));
+  SceneManager->destroySceneNode(_node);
 }
 
 void 			AGameObject::setSceneManager(Ogre::SceneManager *SceneManager)
