@@ -3,7 +3,6 @@
 //
 
 #include <OgreSceneManager.h>
-
 #include "Objects/Wall.hpp"
 #include "Common/Manager/ConfigManager.hpp"
 #include "Common/Manager/GameManager.hpp"
@@ -72,7 +71,6 @@ void 			GameManager::run()
 
   Listener = new EventManager(this, Map, getWindow(), Camera->getCamera());
   getRoot()->addFrameListener(Listener);
-
   getRoot()->startRendering();
 }
 

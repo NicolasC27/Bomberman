@@ -11,6 +11,8 @@ class EventManager;
 #include <OgreException.h>
 #include <OIS/OIS.h>
 #include <Ogre.h>
+#include <CEGUI/RenderingWindow.h>
+#include <CEGUI/RendererModules/Ogre/Renderer.h>
 #include "Common/Manager/GameManager.hpp"
 #include "MapManager.hpp"
 
@@ -25,6 +27,7 @@ class EventManager
   OIS::JoyStickListener 	*mJoystick;
   OIS::Mouse 			*mMouse;
   Ogre::Camera 			*mCamera;
+  CEGUI::OgreRenderer		*mRenderer;
 
   float 			mMovementspeed;
 
@@ -51,6 +54,10 @@ class EventManager
   bool buttonReleased(const OIS::JoyStickEvent &e, int button);
   bool vector3Moved(const OIS::JoyStickEvent &arg, int index);
   bool povMoved(const OIS::JoyStickEvent &arg, int index);
+
+  void createSceneMenu();
+
+  bool quit(const CEGUI::EventArgs &e);
 };
 
 #endif //BOMBERMAN_EVENTMANAGER_HPP
