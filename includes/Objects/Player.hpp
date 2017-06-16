@@ -30,9 +30,9 @@ protected:
   static int		_playerID;
 
 private:
-  std::vector<Ogre::Vector2> const	getFrontObstacle(Ogre::Vector3 const &) const;
+  std::vector<Ogre::Vector2> const	getFrontObstacle(Ogre::Vector2 const &) const;
   bool			Collide(MapManager const &, Ogre::Vector3 const &) const;
   Ogre::Vector2		getPosFrom(Ogre::Vector3 const &) const;
-  Ogre::Vector2		&getPosFrom(Ogre::Vector2 &, Ogre::Vector3 const &) const;
+  Ogre::Vector2		&getPosFrom(Ogre::Vector2 &) const;
 };
 #endif //BOMBERMAN_PLAYER_HPP

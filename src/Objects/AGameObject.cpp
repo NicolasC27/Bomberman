@@ -42,7 +42,7 @@ void 			AGameObject::setPosition(int x, int y, int z)
   Ogre::Vector3		min;
 
   _node->setPosition(x, y, z);
-  _node->showBoundingBox(true);
+//  _node->showBoundingBox(true);
 }
 
 

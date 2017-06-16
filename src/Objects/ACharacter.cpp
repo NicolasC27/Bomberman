@@ -23,8 +23,9 @@ void 			ACharacter::createEntity()
 {
   _obj = SceneManager->createEntity(getName(), getMeshName());
   static_cast <Ogre::Entity*>(_obj)->setMaterialName(this->getMaterialName());
-  static_cast<Ogre::Entity*>(_obj)->getMesh()->_setBounds(Ogre::AxisAlignedBox(-125.152 * 0.3, -0.594098, -34.2034, 149.101 * 0.3, 185.54, 36.3049));
-  //static_cast<Ogre::Entity*>(_obj)->getMesh()->_setBounds(Ogre::AxisAlignedBox(-125.152 * 0.35, 0.0, -34.2034 * 0.35, 149.101 * 0.35, 100, 36.3049 * 0.35));
+  //static_cast<Ogre::Entity*>(_obj)->getMesh()->_setBounds(Ogre::AxisAlignedBox(-125.152 * 0.3, -0.594098, -34.2034, 149.101 * 0.3, 185.54, 36.3049));
+ static_cast<Ogre::Entity*>(_obj)->getMesh()->_setBounds(Ogre::AxisAlignedBox(-35, 0.0, -35, 35, 100, 35));
+  _node->showBoundingBox(true);
 }
 
 std::string 		ACharacter::getName() const

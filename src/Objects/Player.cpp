@@ -54,59 +54,51 @@ Ogre::Vector2		Player::getPosFrom(Ogre::Vector3 const &tmp) const
   return (Ogre::Vector2(tmp.x - std::fmod(tmp.x, 100), tmp.z - std::fmod(tmp.z, 100)));
 }
 
-Ogre::Vector2		&Player::getPosFrom(Ogre::Vector2 &tmp, Ogre::Vector3 const &mov) const
+Ogre::Vector2		&Player::getPosFrom(Ogre::Vector2 &tmp) const
 {
-  float 		diffx = std::fmod(tmp.x, 100);
-  float 		diffy = std::fmod(tmp.y, 100);
+  float                 diffx = std::fmod(tmp.x, 100);
+  float                 diffy = std::fmod(tmp.y, 100);
 
   tmp.x -= diffx;
   tmp.y -= diffy;
-  /*if (mov.x == 1)
-    {
-      tmp.y += diffy < 50.0 ? 100 : 0;
-      tmp.x += 100;
-    }
-  else if (mov.z == 1)
-    {
-      tmp.x += diffx < 50.0 ? 100 : 0;
-      tmp.y += 100;
-    }
-  */return (tmp);
+  if (diffx > 50.0f)
+    tmp.x +=  100;
+  if (diffy > 50.0f)
+    tmp.y += 100;
+  return (tmp);
 }
 
-bool			Player::Collide(MapManager const &map, Ogre::Vector3 const &mov) const
+bool			Player::Collide(MapManager const &map, Ogre::Vector3 const &m) const
 {
-  std::vector<Ogre::Vector2>	const pos = this->getFrontObstacle(mov);
-  Ogre::AxisAlignedBox	aab1 = _obj->getWorldBoundingBox();
+  Ogre::Vector2         mov(m.x, m.z);
+  std::vector<Ogre::Vector2>	 pos = this->getFrontObstacle(mov);
+  Ogre::AxisAlignedBox	aab1(_obj->getWorldBoundingBox());
   Ogre::AxisAlignedBox	aab2;
   AGameObject		*ptr;
 
   for (unsigned int i = 0; i < pos.size(); ++i)
     {
-      std::cout << "search " << pos[i] << std::endl;
-      // vérifie si il y a collision
-      if ((ptr = map.getObjectFrom(pos[i])) != NULL)
+      if ((ptr = map.getObjectFrom(this->getPosFrom(pos[i]))) != NULL)
 	{
+	  ptr->getNode()->showBoundingBox(true);
 	  aab2 = ptr->getObj()->getWorldBoundingBox();
-	  std::cout << aab2 << " intesects " << aab1 << " ?" << std::endl;
+	  std::cout << _node->getPosition() << " intesects " << aab2.getCenter() << " ?" << std::endl;
 	  if (aab1.intersects(aab2))
 	    return (true);
 	}
     }
-  std::cout << std::endl;
   return (false);
 }
 
-std::vector<Ogre::Vector2> const	Player::getFrontObstacle(Ogre::Vector3 const &mov) const
+std::vector<Ogre::Vector2> const	Player::getFrontObstacle(Ogre::Vector2 const &mov) const
 {
   std::vector<Ogre::Vector2>	pos;
-  Ogre::Vector2			tmp(_node->getPosition().x + mov.x,
-				    _node->getPosition().z + mov.z);
+  Ogre::Vector2			tmp(_node->getPosition().x,
+				    _node->getPosition().z);
 
-  tmp = this->getPosFrom(tmp, mov);
-  std::cout << _node->getPosition() << " direction : " << mov << "which gives " << tmp << std::endl;
-  pos.push_back(tmp);
-  /*if (mov.x > 0.0)
+  tmp = this->getPosFrom(tmp);
+  std::cout << "pos " << _node->getPosition() << " direction : " << mov << " which gives " << tmp << std::endl;
+  if (mov.x > 0.0)
     {
       pos.push_back(tmp + Ogre::Vector2(100, -100));
       pos.push_back(tmp + Ogre::Vector2(100, 0));
@@ -114,75 +106,51 @@ std::vector<Ogre::Vector2> const	Player::getFrontObstacle(Ogre::Vector3 const &m
     }
   else if (mov.x < 0.0)
     {
-      pos.push_back(tmp + Ogre::Vector2(-100, -100));
-      pos.push_back(tmp + Ogre::Vector2(-100, 0));
-      pos.push_back(tmp + Ogre::Vector2(-100, 100));
+	pos.push_back(tmp + Ogre::Vector2(-100, -100));
+	pos.push_back(tmp + Ogre::Vector2(-100, 0));
+	pos.push_back(tmp + Ogre::Vector2(-100, 100));
     }
   else if (mov.y > 0.0)
     {
-      pos.push_back(tmp + Ogre::Vector2(-100, 100));
-      pos.push_back(tmp + Ogre::Vector2(0, 100));
-      pos.push_back(tmp + Ogre::Vector2(100, 100));
+	  pos.push_back(tmp + Ogre::Vector2(-100, 100));
+	  pos.push_back(tmp + Ogre::Vector2(0, 100));
+	  pos.push_back(tmp + Ogre::Vector2(100, 100));
     }
-  else
+  else if (mov.y < 0.0)
     {
-      pos.push_back(tmp + Ogre::Vector2(-100, -100));
-      pos.push_back(tmp + Ogre::Vector2(0, -100));
-      pos.push_back(tmp + Ogre::Vector2(100, -100));
+	    pos.push_back(tmp + Ogre::Vector2(-100, -100));
+	    pos.push_back(tmp + Ogre::Vector2(0, -100));
+	    pos.push_back(tmp + Ogre::Vector2(100, -100));
     }
-  for (unsigned int i = 0; i < pos.size(); ++i)
-    pos[i] = this->getPosFrom(pos[i]);*/
-  //tmp = this->getPosFrom(tmp, mov);
-  pos.push_back(tmp - Ogre::Vector2(100, -100));
-  pos.push_back(tmp - Ogre::Vector2(100, 0));
-  pos.push_back(tmp - Ogre::Vector2(100, 100));
-  pos.push_back(tmp - Ogre::Vector2(-100, -100));
-  pos.push_back(tmp - Ogre::Vector2(-100, 0));
-  pos.push_back(tmp - Ogre::Vector2(-100, 100));
-  pos.push_back(tmp - Ogre::Vector2(0, 100));
-  pos.push_back(tmp - Ogre::Vector2(0, -100));
   return (pos);
 }
 
 void			Player::move(MapManager const &map,
 				     Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt)
 {
-    static Ogre::AnimationState *mAnimationState;
-    Ogre::Vector3 translateVector = evt.timeSinceLastFrame * _moveSpeed * vector;
+  static Ogre::AnimationState *mAnimationState;
+  Ogre::Vector3 translateVector = evt.timeSinceLastFrame * _moveSpeed * vector;
 
-    mAnimationState = dynamic_cast<Ogre::Entity*>(_obj)->getAnimationState("my_animation");
-    mAnimationState->setLoop(true);
-    mAnimationState->setEnabled(true);
-    //_node->translate(translateVector);
-    //Rotate the object to the moving direction
-      /*{
-	std::cout << "translate vector : " << translateVector;
-	translateVector.perpendicular();
-	std::cout << "perpandicular translate vector : " << translateVector << std::endl;
-	_node->translate(translateVector / -2);
-	std::cout << "----COLLISION----" << std::endl;
-      }
+  mAnimationState = dynamic_cast<Ogre::Entity*>(_obj)->getAnimationState("my_animation");
+  mAnimationState->setLoop(true);
+  mAnimationState->setEnabled(true);
+  if (translateVector != Ogre::Vector3::ZERO)
+  {
+    Ogre::Vector3 src = _node->getOrientation() * Ogre::Vector3::UNIT_Z;
+    Ogre::Vector3 mDirection = vector;
+    mDirection.normalise();
+    translateVector *= this->Collide(map, translateVector) ? -10 : 1;
+    _node->translate(translateVector);
+    if ((1.0f + src.dotProduct(mDirection)) < 0.0001f)
+      _node->yaw(Ogre::Degree(180));
     else
-      {*/
-	if (translateVector != Ogre::Vector3::ZERO)
-	  {
-	    Ogre::Vector3 src = _node->getOrientation() * Ogre::Vector3::UNIT_Z;
-	    Ogre::Vector3 mDirection = vector;
-	    mDirection.normalise();
-	    translateVector *= this->Collide(map, translateVector) ? -1 : 1;
-	      _node->translate(translateVector);
-	    if ((1.0f + src.dotProduct(mDirection)) < 0.0001f)
-	      _node->yaw(Ogre::Degree(180));
-	    else
-	      {
-		Ogre::Quaternion quat = src.getRotationTo(mDirection);
-		_node->rotate(quat);
-	      }
-	    //  _node->translate(translateVector);
-	  }
-      //}
-
-    mAnimationState->addTime(evt.timeSinceLastFrame * 1.5);
+    {
+      Ogre::Quaternion quat = src.getRotationTo(mDirection);
+      _node->rotate(quat);
+    }
+    //  _node->translate(translateVector);
+  }
+  mAnimationState->addTime(evt.timeSinceLastFrame * 1.5f);
 }
 
 void			Player::action(MapManager const &map, ActionKeyCode action, const Ogre::FrameEvent &evt)
