@@ -93,9 +93,10 @@ void 		MapManager::generateObjects()
     throw Ogre::Exception(Ogre::Exception::ERR_INVALID_STATE,
 			  ERR_NBLINEMAP, _filename);
   addCharacter(Ogre::Vector2(100, 100));
+  addCharacter(Ogre::Vector2(100, 900));
   addCharacter(Ogre::Vector2(900, 900));
-
-  addBomb(Ogre::Vector2(900, 900));
+  addCharacter(Ogre::Vector2(900, 100));
+  /*addBomb(Ogre::Vector2(900, 900));*/
   generatePlan();
 }
 

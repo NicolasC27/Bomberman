@@ -73,6 +73,8 @@ bool			Player::Collide(MapManager const &map, Ogre::Vector3 const &m) const
   Ogre::Vector2         mov(m.x, m.z);
   std::vector<Ogre::Vector2>	 pos = this->getFrontObstacle(mov);
   Ogre::AxisAlignedBox	aab1(_obj->getWorldBoundingBox());
+  aab1.setMinimum(aab1.getMinimum() * 1.05f);
+  aab1.setMaximum(aab1.getMaximum() * 1.05f);
   Ogre::AxisAlignedBox	aab2;
   AGameObject		*ptr;
 
