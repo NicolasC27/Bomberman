@@ -45,7 +45,7 @@ GameManager::GameManager()
 		  archName, typeName, secName);
 	}
     }
-  if(_Root->restoreConfig())
+  if(_Root->restoreConfig()  || _Root->showConfigDialog() )
     {
       _Window = _Root->initialise(true, NAME_GAME);
     }
