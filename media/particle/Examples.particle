@@ -102,7 +102,7 @@ particle_system Examples/Rain
         time_to_live    5
         direction       0 -1 0
         velocity    	50
-        width           1000
+        width           11000
         height          1000
         depth           0
     }

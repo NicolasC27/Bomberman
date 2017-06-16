@@ -32,9 +32,9 @@ void			Bomb::Explosion()
 {
     Ogre::SceneNode* particlenode= SceneManager->getRootSceneNode()->createChildSceneNode();
 
-    Ogre::ParticleSystem* ps1= SceneManager->createParticleSystem(getName(), "Examples/Smoke");
+    Ogre::ParticleSystem* ps1 = SceneManager->createParticleSystem(getName(), "Examples/Rain");
 
-    particlenode->setPosition(Ogre::Vector3(_node->getPosition().x, _node->getPosition().y, _node->getPosition().z));
+    particlenode->setPosition(Ogre::Vector3(_node->getPosition().x, 1000, _node->getPosition().z));
     particlenode->attachObject(ps1);
 
 }
