@@ -3,6 +3,7 @@
 //
 
 #include <OgreSceneManager.h>
+
 #include "Objects/Wall.hpp"
 #include "Common/Manager/ConfigManager.hpp"
 #include "Common/Manager/GameManager.hpp"
@@ -45,24 +46,10 @@ GameManager::GameManager()
 		  archName, typeName, secName);
 	}
     }
-//-------------------------------------------------------------------------------------
-  // configure
-  // Show the configuration dialog and initialise the system
-  // You can skip this and use root.restoreConfig() to load configuration
-  // settings if you were sure there are valid ones saved in ogre.cfg
-  if(_Root->restoreConfig() || _Root->showConfigDialog())
+  if(_Root->restoreConfig())
     {
-      // If returned true, user clicked OK so initialise
-      // Here we choose to let the system create a default rendering window by passing 'true'
       _Window = _Root->initialise(true, NAME_GAME);
     }
-//  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/materials", "FileSystem");
-//  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/materials/scripts", "FileSystem");
-//  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/materials/textures", "FileSystem");
-//  Ogre::ResourceGroupManager::getSingleton().addResourceLocation("media/models", "FileSystem");
-//
-//  Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
-//  createRenderWindow();
   initializeResources();
   setupScene();
   setupLight();
@@ -85,6 +72,7 @@ void 			GameManager::run()
 
   Listener = new EventManager(this, Map, getWindow(), Camera->getCamera());
   getRoot()->addFrameListener(Listener);
+
   getRoot()->startRendering();
 }
 
@@ -134,19 +122,17 @@ void 			GameManager::WallFalling(MapManager *map, Ogre::Real dt)
 {
   static int 		i = 0;
 
-  if (_timer <= 60 && i == 0 &&  map->getIsdestructible() > 1)
+  if (_timer <= 0 && i == 0 &&  map->getIsdestructible() > 1)
     {
       if (wallFalling.timer <= 0)
 	{
 	  AGameObject *wall;
-      std::cout << "NEXT X : " << wallFalling.x << "NEXT Y :" << wallFalling.z << std::endl;
-
-      wall = new Wall(map, AGameObject::UNBREAKABLE);
-      dynamic_cast<Wall *>(wall)->setPositionY(800);
-      map->addObjects(Ogre::Vector2(wallFalling.x, wallFalling.z), wall);
+	  wall = new Wall(map, AGameObject::UNBREAKABLE);
+	  dynamic_cast<Wall *>(wall)->setPositionY(800);
+	  map->addObjects(Ogre::Vector2(wallFalling.x, wallFalling.z), wall);
 	  map->setIsdestructible(map->getIsdestructible() - 1);
-	  std::cout << map->getIsdestructible() << std::endl;
-	  while (map->getIsdestructible() > 1 && map->getObject(Ogre::Vector2(wallFalling.x, wallFalling.z)))
+	  while (map->getIsdestructible() > 1 &&
+		 map->getObject(Ogre::Vector2(wallFalling.x, wallFalling.z)))
 	    nextFoundingPositionWallFalling(map);
 	  wallFalling.timer = 60;
 	}

@@ -20,7 +20,7 @@ if(UNIX)
         set(OGRE_SAMPLES_INCLUDEPATH "/usr/share/OGRE/samples/Common/include/") # Otherwise, this one
     else ()
         message(SEND_ERROR "Failed to find module path.")
-    endif(EXISTS "/usr/local/lib/OGRE")
+    endif()
 endif(UNIX)
 
 if (CMAKE_BUILD_TYPE STREQUAL "")
@@ -78,6 +78,7 @@ if(WIN32)
             )
 endif(WIN32)
 
+
 if(NOT OIS_FOUND)
     message(SEND_ERROR "Failed to find OIS.")
 endif()
@@ -107,6 +108,15 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 endif()
 
 include_directories(includes)
+include_directories(SYSTEM
+  /usr/local/include/cegui-0
+)
+
+link_directories(
+  /usr/local/lib/
+)
+
+set(CEGUI_LIBS CEGUIBase-0 CEGUICommonDialogs-0 CEGUIOgreRenderer-0)
 
 SET(SRCS
         src/main.cpp
@@ -143,17 +153,20 @@ SET(SRCS
 set(HDRS ${SRCS})
 set(CMAKE_CXX_FLAGS "-Iincludes -std=c++11")
 
+find_package(Freetype REQUIRED)
+include_directories(${FREETYPE_INCLUDE_DIRS})
+
 include_directories( ${OIS_INCLUDE_DIRS}
         ${OGRE_INCLUDE_DIRS}
         ${OGRE_SAMPLES_INCLUDEPATH}
-#        ${OGRE_Overlay_INCLUDE_DIRS}
+        ${OGRE_Overlay_INCLUDE_DIRS}
         )
 
 add_executable(bomberman WIN32 ${HDRS} ${SRCS})
 
 set_target_properties(bomberman PROPERTIES DEBUG_POSTFIX _d)
 
-target_link_libraries(bomberman ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
+target_link_libraries(bomberman OgreOverlay OgreMain ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${CEGUI_LIBS} ${FREETYPE_LIBRARIES})
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/assets)
