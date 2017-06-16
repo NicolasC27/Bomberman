@@ -4,6 +4,7 @@
 
 #include <Ogre.h>
 #include "Objects/Wall.hpp"
+#include "Objects/Explosion.hpp"
 #include "Objects/Player.hpp"
 #include "Objects/Bomb.hpp"
 #include "MapManager.hpp"
