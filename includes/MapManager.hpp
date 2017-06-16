@@ -71,6 +71,10 @@ class MapManager
   int			getIsdestructible() const;
 
   void 			setIsdestructible(int isdestructible);
+
+  void 			remove(AGameObject *object);
+
+  void 			removeObject(AGameObject *object);
 };
 
 #endif //BOMBERMAN_MAP_HPP
