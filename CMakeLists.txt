@@ -134,6 +134,7 @@ SET(SRCS
         src/Common/Manager/GameManager.cpp
         #        src/Common/Manager/ConfigManager.cpp
         src/Controller/EventManager.cpp
+        src/Objects/Explosion.cpp
         includes/Common/Manager/GameManager.hpp
         includes/Common/Manager/NodeManager.hpp
         includes/Common/Manager/CameraManager.hpp
@@ -148,6 +149,7 @@ SET(SRCS
         includes/Objects/Wall.hpp
         includes/Objects/Bomb.hpp
         includes/Collision.hpp
+        includes/Objects/Explosion.hpp
         )
 
 set(HDRS ${SRCS})
