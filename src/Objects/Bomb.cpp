@@ -30,15 +30,13 @@ void 			Bomb::createEntity()
 
 void			Bomb::Explosion()
 {
-//  Ogre::SceneNode	*test;
-// create a particle system named explosions using the explosionTemplate
-//  Ogre::ParticleSystem* particleSystem = SceneManager->createParticleSystem("explosions", "explosionTemplate");
+    Ogre::SceneNode* particlenode= SceneManager->getRootSceneNode()->createChildSceneNode();
 
-// fast forward 1 second  to the point where the particle has been emitted
-//  particleSystem->fastForward(1.0);
+    Ogre::ParticleSystem* ps1= SceneManager->createParticleSystem(getName(), "Examples/Smoke");
 
-// attach the particle system to a scene node
-//  test->attachObject(particleSystem);
+    particlenode->setPosition(Ogre::Vector3(_node->getPosition().x, _node->getPosition().y, _node->getPosition().z));
+    particlenode->attachObject(ps1);
+
 }
 
 AGameObject::State 	Bomb::getState() const
