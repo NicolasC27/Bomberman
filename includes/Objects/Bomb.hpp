@@ -11,6 +11,7 @@
 class Bomb : public AGameObject
 {
   std::string		_name;
+  float			explosionDelay;
 
  public:
   Bomb(MapManager *map, Object object);
@@ -32,6 +33,7 @@ class Bomb : public AGameObject
   Ogre::SceneManager::PrefabType	getMeshPrefab() const;
   std::string				getMeshName() const;
 
+  std::string getNameExplosion() const;
 };
 
 #endif //BOMBERMAN_BOMB_HPP

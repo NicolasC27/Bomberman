@@ -214,3 +214,9 @@ const 		MapManager::Objects &MapManager::getObjects() const
 {
   return _objects;
 }
+
+void 		MapManager::removeObject(AGameObject *object)
+{
+  _objects.erase(object);
+  delete object;
+}

@@ -166,7 +166,9 @@ add_executable(bomberman WIN32 ${HDRS} ${SRCS})
 
 set_target_properties(bomberman PROPERTIES DEBUG_POSTFIX _d)
 
-target_link_libraries(bomberman OgreOverlay OgreMain ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${CEGUI_LIBS} ${FREETYPE_LIBRARIES})
+#${CEGUI_LIBS} ${FREETYPE_LIBRARIES}
+
+target_link_libraries(bomberman OgreOverlay OgreMain ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/assets)

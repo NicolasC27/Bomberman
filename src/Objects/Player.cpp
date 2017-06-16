@@ -143,15 +143,7 @@ void			Player::action(ActionKeyCode action, const Ogre::FrameEvent &evt)
 	else
 	  if (action == Player::AT_FIRE)
 	    {
-	      std::cout << "JE PASSE" << std::endl;
-	      Bomb *test;
-
-	      test = new Bomb(_map, AGameObject::BOMB);
-	      test->setSceneManager(SceneManager);
-	      test->createEntity();
-	      test->setPosition(_node->getPosition().x, _node->getPosition().y, _node->getPosition().z);
-	      test->AttachObject();
-	      test->Explosion();
+	      _map->addObjects(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z), new Bomb(_map, AGameObject::BOMB));
 	    }
 }
 
