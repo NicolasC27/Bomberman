@@ -113,7 +113,7 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 	      keyit != player->getKeyCodeType().end(); ++keyit)
 	{
 	  if (mKeyboard->isKeyDown(keyit->first))
-	      player->action(*_map, keyit->second, evt);
+	      player->action(keyit->second, evt);
 	  else if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
 	      return false;
 	}

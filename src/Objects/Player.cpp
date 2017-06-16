@@ -49,40 +49,18 @@ void 				Player::setKey()
     }
 }
 
-Ogre::Vector2		&Player::getPosFrom(Ogre::Vector2 &tmp) const
-{
-  float                 diffx = std::fmod(tmp.x, 100);
-  float                 diffy = std::fmod(tmp.y, 100);
-
-  tmp.x -= diffx;
-  tmp.y -= diffy;
-  if (diffx > 50.0f)
-    tmp.x +=  100;
-  if (diffy > 50.0f)
-    tmp.y += 100;
-  return (tmp);
-}
-
 bool			Player::Collide(Ogre::Vector3 const &m) const
 {
   Ogre::Vector2         mov(m.x, m.z);
   std::vector<Ogre::Vector2>	 pos = this->getFrontObstacle(mov);
-  Ogre::AxisAlignedBox	aab1(_obj->getWorldBoundingBox(true));
-  aab1.setMinimum(aab1.getMinimum() * 1.04f);
-  aab1.setMaximum(aab1.getMaximum() * 1.04f);
-  Ogre::AxisAlignedBox	aab2;
   AGameObject		*ptr;
 
-  std::cout << "Bounding box personnage : " << aab1 << std::endl;
+  Ogre::Sphere	aab1(_obj->getWorldBoundingBox().getCenter(), 35.0f);
   for (unsigned int i = 0; i < pos.size(); ++i)
     {
-      std::cout << "check " << pos[i] << std::endl;
-      if ((ptr = _map->getObjectFrom(this->getPosFrom(pos[i]))) != NULL)
+      if ((ptr = _map->getObjectFrom(pos[i]/*_map->getPosFrom(pos[i])*/)) != NULL)
 	{
-	  ptr->getNode()->showBoundingBox(true);
-	  aab2 = ptr->getObj()->getWorldBoundingBox(true);
-	  std::cout << aab2 << " intersects ?" << std::endl;
-	  if (aab1.intersects(aab2))
+	  if (aab1.intersects(ptr->getObj()->getWorldBoundingBox(true)))
 	    return (true);
 	}
     }
@@ -92,11 +70,9 @@ bool			Player::Collide(Ogre::Vector3 const &m) const
 std::vector<Ogre::Vector2> const	Player::getFrontObstacle(Ogre::Vector2 const &mov) const
 {
   std::vector<Ogre::Vector2>	pos;
-  Ogre::Vector2			tmp(_node->getPosition().x,
-				    _node->getPosition().z);
+  Ogre::Vector2			tmp(_node->getPosition().x, _node->getPosition().z);
 
-  tmp = this->getPosFrom(tmp);
-  std::cout << std::endl << "pos : " << _node->getPosition() << " direction : " << mov << " correspond to node " << tmp << std::endl;
+  tmp = _map->getPosFrom(tmp);
   if (mov.x > 0.0)
     {
       pos.push_back(tmp + Ogre::Vector2(100, -100));
@@ -104,23 +80,23 @@ std::vector<Ogre::Vector2> const	Player::getFrontObstacle(Ogre::Vector2 const &m
       pos.push_back(tmp + Ogre::Vector2(100, 100));
     }
   else if (mov.x < 0.0)
-    {
+      {
 	pos.push_back(tmp + Ogre::Vector2(-100, -100));
 	pos.push_back(tmp + Ogre::Vector2(-100, 0));
 	pos.push_back(tmp + Ogre::Vector2(-100, 100));
-    }
-  else if (mov.y > 0.0)
-    {
+      }
+    else if (mov.y > 0.0)
+	{
 	  pos.push_back(tmp + Ogre::Vector2(-100, 100));
 	  pos.push_back(tmp + Ogre::Vector2(0, 100));
 	  pos.push_back(tmp + Ogre::Vector2(100, 100));
-    }
-  else if (mov.y < 0.0)
-    {
+	}
+      else if (mov.y < 0.0)
+	  {
 	    pos.push_back(tmp + Ogre::Vector2(-100, -100));
 	    pos.push_back(tmp + Ogre::Vector2(0, -100));
 	    pos.push_back(tmp + Ogre::Vector2(100, -100));
-    }
+	  }
   return (pos);
 }
 
@@ -137,8 +113,8 @@ void			Player::move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt)
     Ogre::Vector3 src = _node->getOrientation() * Ogre::Vector3::UNIT_Z;
     Ogre::Vector3 mDirection = vector;
     mDirection.normalise();
-    translateVector *= this->Collide(translateVector) ? -1 : 1;
-    _node->translate(translateVector);
+    translateVector *= (Collide(translateVector)) ? -2 : 1;
+      _node->translate(translateVector);
     if ((1.0f + src.dotProduct(mDirection)) < 0.0001f)
       _node->yaw(Ogre::Degree(180));
     else

@@ -186,6 +186,20 @@ bool		MapManager::getObject(Ogre::Vector2 vector)
   return false;
 }
 
+Ogre::Vector2		&MapManager::getPosFrom(Ogre::Vector2 &tmp) const
+{
+  float                 diffx = std::fmod(tmp.x, boxWidth);
+  float                 diffy = std::fmod(tmp.y, boxWidth);
+
+  tmp.x -= diffx;
+  tmp.y -= diffy;
+  if (diffx > boxWidth / 2.0)
+    tmp.x += boxWidth;
+  if (diffy > boxWidth / 2.0)
+    tmp.y += boxWidth;
+  return (tmp);
+}
+
 int 		MapManager::getIsdestructible() const
 {
   return 	_isdestructible;

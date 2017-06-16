@@ -69,6 +69,7 @@ private:
 
   bool 			getObject(Ogre::Vector2 vector);
   const 		Objects &getObjects() const;
+  Ogre::Vector2		&getPosFrom(Ogre::Vector2 &tmp) const;
 
   int			getIsdestructible() const;
 

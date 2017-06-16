@@ -26,8 +26,8 @@ class ACharacter : public AGameObject
 
   virtual ~ACharacter();
 
-  virtual void	move(MapManager const &, Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt) = 0;
-  virtual void	action(MapManager const &, ActionKeyCode, const Ogre::FrameEvent &evt) = 0;
+  virtual void	move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt) = 0;
+  virtual void	action(ActionKeyCode, const Ogre::FrameEvent &evt) = 0;
 
   void			createEntity();
 
@@ -43,7 +43,6 @@ class ACharacter : public AGameObject
   std::string				getMeshName() const;
 
   virtual const std::map<OIS::KeyCode, ActionKeyCode>	&getKeyCodeType() const = 0;
-
 
  protected:
   static int		objectId;
