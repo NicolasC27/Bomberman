@@ -3,6 +3,8 @@
 //
 
 #include <OgreSceneManager.h>
+#include <OgreParticleSystem.h>
+#include <OgreParticleSystemManager.h>
 #include <OGRE/OgreEntity.h>
 #include <OgreNode.h>
 #include "Interfaces/AGameObject.hpp"
@@ -21,9 +23,17 @@ AGameObject::AGameObject(MapManager *map, AGameObject::Object object, double r) 
 
 AGameObject::~AGameObject()
 {
-  _node->detachObject(_obj);
-  SceneManager->destroyEntity(dynamic_cast<Ogre::Entity*>(_obj));
-  SceneManager->destroySceneNode(_node);
+  if (_obj)
+    {
+      _node->detachObject(_obj);
+      SceneManager->destroyEntity(dynamic_cast<Ogre::Entity *>(_obj));
+      SceneManager->destroySceneNode(_node);
+    }
+  else
+    {
+      _node->detachObject(particleSystem);
+      SceneManager->destroySceneNode(_node);
+    }
 }
 
 void 			AGameObject::setSceneManager(Ogre::SceneManager *SceneManager)
@@ -52,7 +62,10 @@ void 			AGameObject::setNode(Ogre::SceneNode *node)
 void 			AGameObject::AttachObject()
 {
   _node->setScale(getScale());
-  _node->attachObject(_obj);
+  if (_obj != NULL)
+    _node->attachObject(_obj);
+  else
+    _node->attachObject(particleSystem);
 }
 
 AGameObject::Object 	AGameObject::getType() const

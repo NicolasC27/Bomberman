@@ -13,7 +13,7 @@ class AGameObject;
 #include <OgreEntity.h>
 #include <OgreNode.h>
 #include <OgreSceneNode.h>
-#include <MapManager.hpp>
+#include "MapManager.hpp"
 #include "Collision.hpp"
 
 class AGameObject {
@@ -62,6 +62,7 @@ class AGameObject {
   int			_id;
 
   Ogre::MovableObject	*_obj;
+  Ogre::ParticleSystem	*particleSystem;
   Ogre::SceneManager 	*SceneManager;
   Ogre::SceneNode	*_node;
 
