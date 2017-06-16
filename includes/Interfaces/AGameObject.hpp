@@ -15,6 +15,8 @@ class AGameObject;
 #include <OgreSceneNode.h>
 #include "MapManager.hpp"
 #include "Collision.hpp"
+#include <Ogre.h>
+#include <OgreAxisAlignedBox.h>
 
 class AGameObject {
 
@@ -65,8 +67,8 @@ class AGameObject {
   Ogre::ParticleSystem	*particleSystem;
   Ogre::SceneManager 	*SceneManager;
   Ogre::SceneNode	*_node;
-
-  Collision		*_collision;
+ public:
+  Ogre::SceneNode *getNode() const;
 
  public:
   virtual void		createEntity() = 0;

@@ -5,7 +5,10 @@
 #ifndef BOMBERMAN_PLAYER_HPP
 #define BOMBERMAN_PLAYER_HPP
 
-#include "Interfaces/ACharacter.hpp"
+#include <MapManager.hpp>
+#include <Interfaces/AGameObject.hpp>
+#include <Interfaces/ACharacter.hpp>
+#include <vector>
 
 class Player : public ACharacter
 {
@@ -22,10 +25,13 @@ class Player : public ACharacter
 
   const std::map<OIS::KeyCode, ActionKeyCode>	&getKeyCodeType() const;
 
- protected:
+protected:
   int			_ID;
   static int		_playerID;
 
-
+private:
+  std::vector<Ogre::Vector2> const	getFrontObstacle(Ogre::Vector2 const &) const;
+  bool			Collide(Ogre::Vector3 &) const;
+  Ogre::Vector2		&getPosFrom(Ogre::Vector2 &) const;
 };
 #endif //BOMBERMAN_PLAYER_HPP

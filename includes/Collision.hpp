@@ -5,7 +5,7 @@
 // Login   <guilbo_m@epitech.net>
 //
 // Started on  Sun Jun 11 00:30:24 2017 Mathis Guilbon
-// Last update Tue Jun 13 18:12:45 2017 chalie_a
+// Last update Wed Jun 14 14:24:02 2017 chalie_a
 //
 
 #ifndef BOMBERMAN_COLLISION_HPP
@@ -14,6 +14,7 @@
 #include <OgreVector2.h>
 #include <vector>
 #include <iostream>
+#include <OgreAxisAlignedBox.h>
 
 class Collision
 {
@@ -26,11 +27,12 @@ class Collision
 
   Collision(Collision::BoundingBoxType type);
   Collision(double r);
-  Collision(Ogre::Vector2);
+  Collision(Ogre::AxisAlignedBox const &, Ogre::Vector3 const &);
   ~Collision();
 
   Collision		&operator=(Collision const &);
   bool			operator==(Collision const &) const;
+  bool			operator!=(Collision const &) const;
 
   Collision::BoundingBoxType	getType() const;
 
@@ -38,7 +40,7 @@ class Collision
   Ogre::Vector2		getV() const;
   double		getR() const;
 
-  void			setOrigin(Ogre::Vector2 const &);
+  void			setOrigin(Ogre::Vector3 const &);
 
 private:
   Collision(Collision const &);
@@ -48,6 +50,8 @@ private:
 
   Collision::BoundingBoxType	_type;
 
+  Ogre::Vector3		_min;
+  Ogre::Vector3		_max;
   Ogre::Vector2		_origin;
   Ogre::Vector2		_v;
   double    		_r;

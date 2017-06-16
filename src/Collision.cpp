@@ -5,7 +5,7 @@
 // Login   <guilbo_m@epitech.net>
 //
 // Started on  Wed May 31 13:32:38 2017 Mathis Guilbon
-// Last update Tue Jun 13 18:15:44 2017 chalie_a
+// Last update Wed Jun 14 14:23:44 2017 chalie_a
 //
 
 #include "Collision.hpp"
@@ -21,9 +21,11 @@ std::ostream	&operator<<(std::ostream &os, Collision const &coll)
   return (os);
 }
 
-Collision::Collision(Ogre::Vector2 v)
-  : _type(Collision::PARALL), _v(v), _origin(0, 0)
+Collision::Collision(Ogre::AxisAlignedBox const &box, Ogre::Vector3 const &pos)
+  : _type(Collision::PARALL), _min(box.getMinimum()), _max(box.getMaximum()), _v(0, 0), _origin(0, 0)
 {
+  this->_v = Ogre::Vector2(_max.x - _min.x, _max.z - _min.z);
+  this->_origin = Ogre::Vector2(_min.x + pos.x, _min.z + pos.z);
   this->init();
 }
 
@@ -76,6 +78,11 @@ bool			Collision::operator==(Collision const &with) const
   return (false);
 }
 
+bool			Collision::operator!=(Collision const &with) const
+{
+  return (!(*this == with));
+}
+
 Collision::BoundingBoxType	Collision::getType() const
 {
   return (this->_type);
@@ -96,9 +103,9 @@ Ogre::Vector2		Collision::getOrigin() const
   return (this->_origin);
 }
 
-void			Collision::setOrigin(Ogre::Vector2 const &v)
+void			Collision::setOrigin(Ogre::Vector3 const &v)
 {
-  this->_origin = v;
+  this->_origin = Ogre::Vector2(v.x + _min.x, v.z + _min.z);
 }
 
 bool			Collision::StoS(Collision const &with) const
@@ -111,9 +118,9 @@ bool			Collision::StoS(Collision const &with) const
   d += (this->_origin.y - withO.y) * (this->_origin.y - withO.y);
 
   if (d > (this->_r + r) * (this->_r + r))
-    return false;
+    return (false);
   else
-    return true;
+    return (true);
 }
 
 bool			Collision::PtoP(Collision const &with) const
@@ -150,10 +157,17 @@ bool			Collision::PtoS(Collision const &with) const
       pO = this->getOrigin();
       pV = this->getV();
     }
+  // Cercle center inside of rectangle
+  /*if (Ogre::Vector2(pO.x, sO.x))
 
+  if ((pO.x <= sO.x && sO.x <= pO.x + pV.x) &&
+      (pO.y <= sO.y && sO.y <= pO.y + pV.y))
+    return (false);*/
   near.x = fabs(pO.x - sO.x) > fabs(pO.x + pV.x - sO.x) ? pO.x + pV.x : pO.x;
   near.y = fabs(pO.y - sO.y) > fabs(pO.y + pV.y - sO.y) ? pO.y + pV.y : pO.y;
   d = (sO.x - near.x) * (sO.x - near.x) + (sO.y - near.y) * (sO.y - near.y);
-
+  std::cout << "point le plus proche (" << near.x << "," << near.y << ") " <<
+    "distance-to-center: " << d <<
+    " r²: " << sR * sR << std::endl << std::endl;
   return ((d > sR * sR) ? false : true);
 }

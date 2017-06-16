@@ -24,18 +24,21 @@ class MapManager
 {
  public:
   static const int 				boxWidth = 100;
+  static const int 				halfboxWidth = 50;
 
  public:
   NodeManager 					*_nodes;
   Ogre::SceneManager 				*_SceneManager;
 
-  typedef std::map<AGameObject *, Ogre::Vector2>	Objects;
-
-  Objects						_objects;
-
- private:
-
+  typedef std::map<AGameObject *, Ogre::Vector2> 	Objects;
+  Objects					_objects;
   std::vector<AGameObject *>			_character;
+
+public:
+  AGameObject			   *getObjectFrom(Ogre::Vector2 const &) const;
+  AGameObject			   *getObjectFrom(Ogre::Vector3 const &) const;
+
+private:
   std::list<Ogre::Vector2> 			_spawns;
   std::string 					_filename;
 
@@ -67,6 +70,9 @@ class MapManager
 
   bool 			getObject(Ogre::Vector2 vector);
   const 		Objects &getObjects() const;
+  Ogre::Vector2		&getPosFrom(Ogre::Vector2 &tmp) const;
+
+  Ogre::Vector2	const	getMiddlePosFrom(Ogre::Vector2 const &tmp) const;
 
   int			getIsdestructible() const;
 

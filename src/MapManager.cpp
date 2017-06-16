@@ -32,7 +32,7 @@ void 		MapManager::update(Ogre::Real dt)
 
   for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); iteratorObject++)
     {
-      (*iteratorObject).first->update(dt);
+      //(*iteratorObject).first->update(dt);
     }
 }
 
@@ -95,8 +95,8 @@ void 		MapManager::generateObjects()
   if (count != (_size - 1))
     throw Ogre::Exception(Ogre::Exception::ERR_INVALID_STATE,
 			  ERR_NBLINEMAP, _filename);
+  addCharacter(Ogre::Vector2(100, 900));
   addCharacter(Ogre::Vector2(100, 100));
-  addCharacter(Ogre::Vector2(900, 900));
   addBomb(Ogre::Vector2(900, 900));
   generatePlan();
 }
@@ -147,9 +147,36 @@ const std::vector<AGameObject *> &MapManager::getCharacter() const
   return _character;
 }
 
+AGameObject			*MapManager::getObjectFrom(Ogre::Vector2 const &pos) const
+{
+  Objects::const_iterator	it = _objects.begin();
+
+  while (it != _objects.end())
+    {
+      if (it->second == pos)
+	return (it->first);
+      it++;
+    }
+  return (NULL);
+}
+
+AGameObject			*MapManager::getObjectFrom(Ogre::Vector3 const &pos) const
+{
+  Objects::const_iterator	it = _objects.begin();
+  Ogre::Vector2			tmp(pos.x, pos.z);
+  
+  while (it != _objects.end())
+    {
+      if (it->second == tmp)
+	return (it->first);
+      it++;
+    }
+  return (NULL);
+}
+
 bool		MapManager::getObject(Ogre::Vector2 vector)
 {
-  Objects::iterator it = _objects.begin();
+  Objects::const_iterator it = _objects.begin();
 
   while (it != _objects.end())
     {
@@ -158,6 +185,29 @@ bool		MapManager::getObject(Ogre::Vector2 vector)
       it++;
     }
   return false;
+}
+
+Ogre::Vector2		&MapManager::getPosFrom(Ogre::Vector2 &tmp) const
+{
+  float                 diffx = std::fmod(tmp.x, boxWidth);
+  float                 diffy = std::fmod(tmp.y, boxWidth);
+
+  tmp.x -= diffx;
+  tmp.y -= diffy;
+  if (diffx > halfboxWidth)
+    tmp.x += boxWidth;
+  if (diffy > halfboxWidth)
+    tmp.y += boxWidth;
+  return (tmp);
+}
+
+Ogre::Vector2 const	MapManager::getMiddlePosFrom(Ogre::Vector2 const &tmp) const
+{
+  Ogre::Vector2 v(tmp);
+  v = this->getPosFrom(v);
+  v.x -= halfboxWidth;
+  v.y -= halfboxWidth;
+  return (tmp);
 }
 
 int 		MapManager::getIsdestructible() const
@@ -180,4 +230,3 @@ void 		MapManager::removeObject(AGameObject *object)
   _objects.erase(object);
   delete object;
 }
-
