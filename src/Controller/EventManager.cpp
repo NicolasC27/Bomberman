@@ -2,7 +2,6 @@
 
 #include "Objects/Player.hpp"
 #include "Controller/EventManager.hpp"
-#include <CEGUI/CEGUI.h>
 #include <Overlay/OgreFontManager.h>
 #include <OgreOverlay.h>
 #include <OgreOverlayContainer.h>
