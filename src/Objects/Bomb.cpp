@@ -7,19 +7,26 @@
 #include <OgreParticleSystemManager.h>
 #include "Objects/Bomb.hpp"
 
-Bomb::Bomb(MapManager *map, AGameObject::Object object) : AGameObject(map, object, 1)
+Bomb::Bomb(MapManager *map, AGameObject::Object object) : AGameObject(map, object, 1), explosionDelay(3)
 {
 
 }
 
 Bomb::~Bomb()
 {
-
 }
 
 void 			Bomb::update(Ogre::Real dt)
 {
+  explosionDelay -= dt;
+  float scale = 1 - (0.5 * explosionDelay / 3);
+  _node->setScale(scale, scale, scale);
 
+  if (explosionDelay <= 0)
+    {
+      this->Explosion();
+      _map->removeObject(this);
+    }
 }
 
 void 			Bomb::createEntity()
@@ -30,13 +37,12 @@ void 			Bomb::createEntity()
 
 void			Bomb::Explosion()
 {
-    Ogre::SceneNode* particlenode= SceneManager->getRootSceneNode()->createChildSceneNode();
+    Ogre::SceneNode* particlenode = SceneManager->getRootSceneNode()->createChildSceneNode();
 
-    Ogre::ParticleSystem* ps1 = SceneManager->createParticleSystem(getName(), "Examples/Rain");
+    Ogre::ParticleSystem* ps1 = SceneManager->createParticleSystem(getNameExplosion(), "Examples/Smoke");
 
-    particlenode->setPosition(Ogre::Vector3(_node->getPosition().x, 1000, _node->getPosition().z));
+    particlenode->setPosition(Ogre::Vector3(_node->getPosition().x, _node->getPosition().y, _node->getPosition().z));
     particlenode->attachObject(ps1);
-
 }
 
 AGameObject::State 	Bomb::getState() const
@@ -47,6 +53,12 @@ AGameObject::State 	Bomb::getState() const
 std::string 		Bomb::getName() const
 {
   return  "Bomb_" + std::to_string(_id);
+}
+
+std::string 		Bomb::getNameExplosion() const
+{
+  objectId += 1;
+  return  "BombExplosion_" + std::to_string(objectId);
 }
 
 std::string 		Bomb::getMaterialName() const
