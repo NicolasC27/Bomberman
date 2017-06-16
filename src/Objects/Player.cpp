@@ -55,7 +55,7 @@ bool			Player::Collide(Ogre::Vector3 const &m) const
   std::vector<Ogre::Vector2>	 pos = this->getFrontObstacle(mov);
   AGameObject		*ptr;
 
-  Ogre::Sphere	aab1(_obj->getWorldBoundingBox().getCenter(), 35.0f);
+  Ogre::Sphere	aab1(_obj->getWorldBoundingBox().getCenter() + m, 35.0f);
   for (unsigned int i = 0; i < pos.size(); ++i)
     {
       if ((ptr = _map->getObjectFrom(pos[i]/*_map->getPosFrom(pos[i])*/)) != NULL)
@@ -113,7 +113,7 @@ void			Player::move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt)
     Ogre::Vector3 src = _node->getOrientation() * Ogre::Vector3::UNIT_Z;
     Ogre::Vector3 mDirection = vector;
     mDirection.normalise();
-    translateVector *= (Collide(translateVector)) ? -2 : 1;
+    translateVector *= (Collide(translateVector)) ? 0 : 1;
       _node->translate(translateVector);
     if ((1.0f + src.dotProduct(mDirection)) < 0.0001f)
       _node->yaw(Ogre::Degree(180));
