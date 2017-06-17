@@ -8,12 +8,12 @@
 
 Explosion::Explosion(MapManager *map, AGameObject::Object object, int isRoot, int Length,
 		     Ogre::Vector3 direction)
-	: AGameObject(map, object, 1), _IsRoot(isRoot), _Length(Length), _Direction(direction)
+	: AGameObject(map, object, 1), _IsRoot(isRoot), _Length(Length), _Direction(direction),
+	  _extend(false)
 {
   _obj = NULL;
   lifeTimeRemaning = LIFE_DURATION;
   delayExtend = EXTEND_DELAY;
-  std::cout << "explosion toward " << direction << " have " << _Length << " case to stop" << std::endl;
 }
 
 Explosion::~Explosion()
@@ -38,31 +38,50 @@ void 			Explosion::update(Ogre::Real dt)
 	{
 	  if (_IsRoot)
 	    {
+	      checkVictim(_node->getPosition(), Ogre::Vector3::ZERO);
 	      extendFire(Ogre::Vector3::UNIT_X);
 	      extendFire(-Ogre::Vector3::UNIT_X);
 	      extendFire(Ogre::Vector3::UNIT_Z);
 	      extendFire(-Ogre::Vector3::UNIT_Z);
+	      _extend = true;
 	    }
 	  else
-	    extendFire(_Direction);
+	    {
+	      extendFire(_Direction);
+	      _extend = true;
+	    }
 	}
     }
-
 }
 
-void 			Explosion::extendFire(Ogre::Vector3 direction)
+bool 			Explosion::checkVictim(Ogre::Vector3 const &pos, Ogre::Vector3 const &direction)
 {
-  Ogre::Vector3 pos = (_node->getPosition() + direction * MapManager::boxWidth);
-  MapManager::Character	charac = _map->getCharacterFrom(Ogre::Vector2(pos.x, pos.z));
   AGameObject		*obj = _map->getObjectFrom(pos);
+  MapManager::Character	victim = _map->getCharacterFrom(Ogre::Vector2(pos.x, pos.z));
+  bool 			ret = false;
 
-  for (unsigned int i = 0; i < charac.size() ; ++i)
-    charac[i]->destroy();
-  if (obj == NULL || obj->getType() == ITEM)
-    _map->addObjects(Ogre::Vector2(pos.x, pos.z),
-		     new Explosion(_map, AGameObject::EXPLOSION, false, _Length - 1, direction));
+  /*if (!_extend && obj != NULL && obj->getType() == AGameObject::EXPLOSION)
+    {
+      --_Length;
+      extendFire(direction + _Direction);
+      return (false);
+    }*/
+  if (!_extend && (obj == NULL || obj->getType() == AGameObject::ITEM))
+    ret = true;
+  for (unsigned int i = 0; i < victim.size() ; ++i)
+    victim[i]->destroy();
   if (obj != NULL)
     obj->destroy();
+  return (ret);
+}
+
+void 			Explosion::extendFire(Ogre::Vector3 const &direction)
+{
+  Ogre::Vector3 pos = (_node->getPosition() + direction * MapManager::boxWidth);
+
+  if (checkVictim(pos, direction))
+    _map->addObjects(Ogre::Vector2(pos.x, pos.z),
+		     new Explosion(_map, AGameObject::EXPLOSION, false, _Length - 1, direction));
 }
 
 void 			Explosion::createEntity()

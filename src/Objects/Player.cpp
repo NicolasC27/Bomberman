@@ -62,9 +62,9 @@ bool			Player::Collide(Ogre::Vector3 &m) const
 
   for (unsigned int i = 0; i < pos.size(); ++i)
     {
-      if ((ptr = _map->getObjectFrom(pos[i]/*_map->getPosFrom(pos[i])*/)) != NULL)
+      if ((ptr = _map->getObjectFrom(pos[i])) != NULL)
 	{
-	  if (sphere.intersects(ptr->getObj()->getWorldBoundingBox(true)))
+	  if (ptr->getType() != EXPLOSION && sphere.intersects(ptr->getObj()->getWorldBoundingBox(true)))
 	    return (true);
 	}
     }
