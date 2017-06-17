@@ -26,6 +26,7 @@ class AGameObject {
     WALL,
     BLOCK,
     BOMB,
+    EXPLOSION,
     ITEM,
     CHARACTER
   };
@@ -59,7 +60,6 @@ class AGameObject {
 
   MapManager		*_map;
 
-  Ogre::Real		_moveSpeed;
   static int		objectId;
   int			_id;
 

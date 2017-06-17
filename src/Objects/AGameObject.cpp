@@ -8,7 +8,6 @@
 #include <OGRE/OgreEntity.h>
 #include <OgreNode.h>
 #include "Interfaces/AGameObject.hpp"
-#include <OgreAxisAlignedBox.h>
 
 int AGameObject::objectId = 1;
 
