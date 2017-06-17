@@ -92,3 +92,11 @@ void		Wall::setPositionY(int positionY)
 {
   _positionY = positionY;
 }
+
+void 		Wall::destroy()
+{
+  if (_state == BREAKABLE)
+    _map->removeObject(this);
+  // and drop powerup
+  // animation ?
+}

@@ -14,7 +14,7 @@ Player::Player(MapManager *map, AGameObject::Object object) :
 {
   keyCodeType.clear();
   setKey();
-  setPowerbomb(1);
+  setPowerbomb(6);
   setMovespeed(300);
   setBombmax(5);
   setDelaybomb(0);
@@ -147,7 +147,8 @@ void			Player::action(ActionKeyCode action, const Ogre::FrameEvent &evt)
 	else
 	  if (action == Player::AT_FIRE)
 	    {
-	      this->fire();
+	      if (_map->getObjectFrom(_map->getPosFrom(_node->getPosition())) == NULL)
+	      	this->fire();
 	    }
 }
 
@@ -158,8 +159,8 @@ void			Player::fire()
       if (getBombmax() > 0)
 	{
 	  setBombmax(settings._bombmax - 1);
-	  _map->addObjects(_map->getMiddlePosFrom(Ogre::Vector2(_node->getPosition().x,
-								_node->getPosition().z)),
+	  _map->addObjects(_map->getPosFrom(Ogre::Vector2(_node->getPosition().x,
+				                          _node->getPosition().z)),
 			   new Bomb(this, _map, AGameObject::BOMB));
 	  setDelaybomb(1.5);
 	}
@@ -168,4 +169,13 @@ void			Player::fire()
 const std::map<OIS::KeyCode, ACharacter::ActionKeyCode>	&Player::getKeyCodeType() const
 {
   return (keyCodeType);
+}
+
+void 			Player::destroy()
+{
+  _map->removeCharacter(this);
+  // save score ?
+  // drop powerup ?
+  // animation ?
+  // end of game, else SEGV
 }

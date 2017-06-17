@@ -25,6 +25,7 @@ class Wall : public AGameObject
   void			setPositionY(int positionY);
 
   void			update(Ogre::Real);
+  virtual void 		destroy();
 
   Ogre::SceneManager::PrefabType	getMeshPrefab() const;
   std::string				getMeshName() const;

@@ -90,3 +90,8 @@ Ogre::SceneNode *AGameObject::getNode() const
 {
   return _node;
 }
+
+void 			AGameObject::destroy()
+{
+
+}

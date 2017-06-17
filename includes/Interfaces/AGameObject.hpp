@@ -70,6 +70,7 @@ class AGameObject {
  public:
   Ogre::SceneNode *getNode() const;
 
+  virtual void 		destroy();
  public:
   virtual void		createEntity() = 0;
 

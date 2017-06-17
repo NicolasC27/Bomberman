@@ -147,7 +147,7 @@ int 		MapManager::getSize() const
   return _size;
 }
 
-const std::vector<AGameObject *> &MapManager::getCharacter() const
+const MapManager::Character 		&MapManager::getCharacter() const
 {
   return _character;
 }
@@ -163,6 +163,20 @@ AGameObject			*MapManager::getObjectFrom(Ogre::Vector2 const &pos) const
       it++;
     }
   return (NULL);
+}
+
+MapManager::Character			MapManager::getCharacterFrom(Ogre::Vector2 const &pos) const
+{
+  MapManager::Character			in;
+  MapManager::Character::const_iterator	it = _character.begin();
+
+  while (it != _character.end())
+    {
+      if (getPosFrom((*it)->getNode()->getPosition()) == pos)
+	in.push_back(*it);
+      it++;
+    }
+  return (in);
 }
 
 AGameObject			*MapManager::getObjectFrom(Ogre::Vector3 const &pos) const
@@ -192,10 +206,11 @@ bool		MapManager::getObject(Ogre::Vector2 vector)
   return false;
 }
 
-Ogre::Vector2		&MapManager::getPosFrom(Ogre::Vector2 &tmp) const
+Ogre::Vector2		MapManager::getPosFrom(Ogre::Vector2 const &t) const
 {
-  float                 diffx = std::fmod(tmp.x, boxWidth);
-  float                 diffy = std::fmod(tmp.y, boxWidth);
+  Ogre::Vector2		tmp(t);
+  float                 diffx = std::fmod(t.x, boxWidth);
+  float                 diffy = std::fmod(t.y, boxWidth);
 
   tmp.x -= diffx;
   tmp.y -= diffy;
@@ -206,13 +221,24 @@ Ogre::Vector2		&MapManager::getPosFrom(Ogre::Vector2 &tmp) const
   return (tmp);
 }
 
-Ogre::Vector2 const	MapManager::getMiddlePosFrom(Ogre::Vector2 const &tmp) const
+Ogre::Vector2		MapManager::getPosFrom(Ogre::Vector3 const &t) const
 {
-  Ogre::Vector2 v(tmp);
-  v = this->getPosFrom(v);
-  v.x -= halfboxWidth;
-  v.y -= halfboxWidth;
+  Ogre::Vector2		tmp(t.x, t.z);
+  float                 diffx = std::fmod(t.x, boxWidth);
+  float                 diffy = std::fmod(t.z, boxWidth);
+
+  tmp.x -= diffx;
+  tmp.y -= diffy;
+  if (diffx > halfboxWidth)
+    tmp.x += boxWidth;
+  if (diffy > halfboxWidth)
+    tmp.y += boxWidth;
   return (tmp);
+}
+
+Ogre::Vector2 		MapManager::getMiddlePosFrom(Ogre::Vector2 const &tmp) const
+{
+  return (this->getPosFrom(tmp) - halfboxWidth);
 }
 
 int 		MapManager::getIsdestructible() const
@@ -233,5 +259,15 @@ const 		MapManager::Objects &MapManager::getObjects() const
 void 		MapManager::removeObject(AGameObject *object)
 {
   _objects.erase(object);
+  delete object;
+}
+
+void 		MapManager::removeCharacter(AGameObject *object)
+{
+  MapManager::Character::const_iterator it = _character.begin();
+
+  for (; it != _character.end() && *it != object; ++it);
+  if (it != _character.end())
+    _character.erase(it);
   delete object;
 }

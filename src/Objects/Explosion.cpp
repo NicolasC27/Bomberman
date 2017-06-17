@@ -6,14 +6,14 @@
 #include <OgreParticleSystemManager.h>
 #include "Objects/Explosion.hpp"
 
-Explosion::Explosion(MapManager *map, AGameObject::Object object, int isRoot, int Lenght,
-		     Ogre::Vector3 direction) : AGameObject(map, object, 1), _IsRoot(isRoot)
+Explosion::Explosion(MapManager *map, AGameObject::Object object, int isRoot, int Length,
+		     Ogre::Vector3 direction)
+	: AGameObject(map, object, 1), _IsRoot(isRoot), _Length(Length), _Direction(direction)
 {
   _obj = NULL;
-  _Length = Lenght;
-  _Direction = direction;
   lifeTimeRemaning = LIFE_DURATION;
   delayExtend = EXTEND_DELAY;
+  std::cout << "explosion toward " << direction << " have " << _Length << " case to stop" << std::endl;
 }
 
 Explosion::~Explosion()
@@ -23,7 +23,7 @@ Explosion::~Explosion()
 
 void 			Explosion::update(Ogre::Real dt)
 {
-  if(lifeTimeRemaning > 0)
+  if (lifeTimeRemaning > 0)
     lifeTimeRemaning-= dt;
   else
     {
@@ -32,9 +32,9 @@ void 			Explosion::update(Ogre::Real dt)
     }
 
   delayExtend -= dt;
-  if(delayExtend <= 0)
+  if (delayExtend <= 0)
     {
-      if(_Length > 0)
+      if (_Length > 0)
 	{
 	  if (_IsRoot)
 	    {
@@ -52,10 +52,17 @@ void 			Explosion::update(Ogre::Real dt)
 
 void 			Explosion::extendFire(Ogre::Vector3 direction)
 {
-  Ogre::Vector3 position = (_node->getPosition()+direction*MapManager::boxWidth);
+  Ogre::Vector3 pos = (_node->getPosition() + direction * MapManager::boxWidth);
+  MapManager::Character	charac = _map->getCharacterFrom(Ogre::Vector2(pos.x, pos.z));
+  AGameObject		*obj = _map->getObjectFrom(pos);
 
-  _map->addObjects(Ogre::Vector2(position.x, position.z),
-		   new Explosion(_map, AGameObject::EXPLOSION, false, _Length-1, _Direction));
+  for (unsigned int i = 0; i < charac.size() ; ++i)
+    charac[i]->destroy();
+  if (obj == NULL || obj->getType() == ITEM)
+    _map->addObjects(Ogre::Vector2(pos.x, pos.z),
+		     new Explosion(_map, AGameObject::EXPLOSION, false, _Length - 1, direction));
+  if (obj != NULL)
+    obj->destroy();
 }
 
 void 			Explosion::createEntity()
