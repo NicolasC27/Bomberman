@@ -126,6 +126,7 @@ SET(SRCS
         src/Objects/AGameObject.cpp
         src/Objects/ACharacter.cpp
         src/Objects/Player.cpp
+        src/Objects/PlayerSettings.cpp
         src/Objects/Bomb.cpp
         src/Common/Manager/ConfigManager.cpp
 #        src/Controller/KeyController.cpp
@@ -145,11 +146,12 @@ SET(SRCS
 #        includes/Controller/KeyController.hpp
         includes/Common/Manager/ConfigManager.hpp
         includes/Objects/Player.hpp
-        includes/MapManager.hpp
         includes/Objects/Wall.hpp
         includes/Objects/Bomb.hpp
-        includes/Collision.hpp
         includes/Objects/Explosion.hpp
+        includes/Objects/PlayerSettings.hpp
+        includes/MapManager.hpp
+        includes/Collision.hpp
         )
 
 set(HDRS ${SRCS})
