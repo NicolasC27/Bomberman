@@ -50,7 +50,7 @@ class GameManager
 
   void 			WallFalling(MapManager *map, Ogre::Real dt);
 
-  void 			nextFoundingPositionWallFalling(MapManager *);
+  void 			nextFoundingPositionWallFalling();
 
   struct position {
     int		x = 0;
@@ -61,6 +61,7 @@ class GameManager
   };
 
   position		wallFalling;
+  int			_boundary;
 
   bool checkAround();
 

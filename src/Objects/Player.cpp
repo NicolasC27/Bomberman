@@ -177,5 +177,5 @@ void 			Player::destroy()
   // save score ?
   // drop powerup ?
   // animation ?
-  // end of game, else SEGV
+  // end of game ?
 }

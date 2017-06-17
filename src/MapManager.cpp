@@ -199,11 +199,11 @@ bool		MapManager::getObject(Ogre::Vector2 vector)
 
   while (it != _objects.end())
     {
-      if ((it->second.x == vector.x) && (it->second.y == vector.y))
-	return true;
+      if (it->second == vector)
+	return (true);
       it++;
     }
-  return false;
+  return (false);
 }
 
 Ogre::Vector2		MapManager::getPosFrom(Ogre::Vector2 const &t) const
