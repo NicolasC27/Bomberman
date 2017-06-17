@@ -31,7 +31,7 @@ class Explosion : public AGameObject
   std::string				getMeshName() const;
   std::string 				getNameExplosion() const;
 
-  void 					extend(Ogre::Vector3 direction);
+  void 					extendFire(Ogre::Vector3 direction);
 
  private:
 
@@ -39,12 +39,11 @@ class Explosion : public AGameObject
 
   int 			_IsRoot;
   int 			_Length;
-  const float 	EXTEND_DELAY = 0.05;
-  const float 	LIFE_DURATION = 0.3;
-  float 		extendDelay;
-  float			lifeTimeRemaning;
+  Ogre::Real 		delayExtend;
+  Ogre::Real		lifeTimeRemaning;
+  const float 		EXTEND_DELAY = 0.05;
+  const float 		LIFE_DURATION = 0.3;
   Ogre::Vector3 	_Direction;
-  bool 			isAlreadyExtended;
 };
 
 #endif //BOMBERMAN_EXPLOSION_HPP

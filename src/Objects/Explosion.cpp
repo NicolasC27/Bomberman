@@ -7,12 +7,13 @@
 #include "Objects/Explosion.hpp"
 
 Explosion::Explosion(MapManager *map, AGameObject::Object object, int isRoot, int Lenght,
-		     Ogre::Vector3 direction) : AGameObject(map, object, 1), _IsRoot(isRoot),
-						_Length(Lenght), _Direction(direction),
-						lifeTimeRemaning(LIFE_DURATION), extendDelay(EXTEND_DELAY),
-						isAlreadyExtended(false)
+		     Ogre::Vector3 direction) : AGameObject(map, object, 1), _IsRoot(isRoot)
 {
   _obj = NULL;
+  _Length = Lenght;
+  _Direction = direction;
+  lifeTimeRemaning = LIFE_DURATION;
+  delayExtend = EXTEND_DELAY;
 }
 
 Explosion::~Explosion()
@@ -29,28 +30,32 @@ void 			Explosion::update(Ogre::Real dt)
       _map->removeObject(this);
       return ;
     }
-  extendDelay -= dt;
-  if(extendDelay<=0) {
-      if(_Length > 0) {
-	  if(_IsRoot) {
-	      extend(Ogre::Vector3::UNIT_X);
-	      extend(-Ogre::Vector3::UNIT_X);
-	      extend(Ogre::Vector3::UNIT_Z);
-	      extend(-Ogre::Vector3::UNIT_Z);
-	    } else {
-	      extend(_Direction);
+
+  delayExtend -= dt;
+  if(delayExtend <= 0)
+    {
+      if(_Length > 0)
+	{
+	  if (_IsRoot)
+	    {
+	      extendFire(Ogre::Vector3::UNIT_X);
+	      extendFire(-Ogre::Vector3::UNIT_X);
+	      extendFire(Ogre::Vector3::UNIT_Z);
+	      extendFire(-Ogre::Vector3::UNIT_Z);
 	    }
-	  isAlreadyExtended = true;
+	  else
+	    extendFire(_Direction);
 	}
     }
 
 }
 
-void 			Explosion::extend(Ogre::Vector3 direction)
+void 			Explosion::extendFire(Ogre::Vector3 direction)
 {
   Ogre::Vector3 position = (_node->getPosition()+direction*MapManager::boxWidth);
 
-  _map->addObjects(Ogre::Vector2(position.x, position.z), new Explosion(_map, AGameObject::BOMB, false, _Length-1, _Direction));
+  _map->addObjects(Ogre::Vector2(position.x, position.z),
+		   new Explosion(_map, AGameObject::EXPLOSION, false, _Length-1, _Direction));
 }
 
 void 			Explosion::createEntity()

@@ -32,7 +32,9 @@ class MapManager
 
   typedef std::map<AGameObject *, Ogre::Vector2> 	Objects;
   Objects					_objects;
-  std::vector<AGameObject *>			_character;
+
+  typedef std::vector<AGameObject *>			Character;
+  Character						_character;
 
 public:
   AGameObject			   *getObjectFrom(Ogre::Vector2 const &) const;

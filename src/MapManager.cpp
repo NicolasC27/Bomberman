@@ -3,11 +3,11 @@
 //
 
 #include <Ogre.h>
+#include "MapManager.hpp"
 #include "Objects/Wall.hpp"
 #include "Objects/Explosion.hpp"
 #include "Objects/Player.hpp"
 #include "Objects/Bomb.hpp"
-#include "MapManager.hpp"
 
 
 MapManager::MapManager(std::string const &filename, Ogre::SceneManager *SceneManager,
@@ -29,10 +29,15 @@ MapManager::~MapManager()
 void 		MapManager::update(Ogre::Real dt)
 {
   Objects::iterator iteratorObject;
+  Character::iterator iteratorCharacter;
 
   for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); iteratorObject++)
     {
       (*iteratorObject).first->update(dt);
+    }
+  for (iteratorCharacter = _character.begin(); iteratorCharacter != _character.end(); iteratorCharacter++)
+    {
+      (*iteratorCharacter)->update(dt);
     }
 }
 
@@ -129,7 +134,7 @@ void 		MapManager::addCharacter(const Ogre::Vector2 &vector)
 
 void 		MapManager::addBomb(const Ogre::Vector2 &vector)
 {
-  addObjects(Ogre::Vector2(vector.x, vector.y), new Bomb(this, AGameObject::BOMB));
+  (void)vector;
 }
 
 void 		MapManager::setSize(int size)

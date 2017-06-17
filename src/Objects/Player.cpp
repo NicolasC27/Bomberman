@@ -9,11 +9,15 @@
 
 int Player::_playerID = 1;
 
-Player::Player(MapManager *map, AGameObject::Object object) : ACharacter(map, object, 35), _ID(_playerID++)
+Player::Player(MapManager *map, AGameObject::Object object) :
+	ACharacter(map, object, 35), _ID(_playerID++),  settings(new PlayerSettings)
 {
-  _moveSpeed = 300;
   keyCodeType.clear();
   setKey();
+  setPowerbomb(1);
+  setMovespeed(300);
+  setBombmax(5);
+  setDelaybomb(0);
 }
 
 Player::~Player()
@@ -23,7 +27,7 @@ Player::~Player()
 
 void 				Player::update(Ogre::Real dt)
 {
-
+  settings->_delaybomb -= dt;
 }
 
 void 				Player::setKey()
@@ -102,8 +106,9 @@ std::vector<Ogre::Vector2> const	Player::getFrontObstacle(Ogre::Vector2 const &m
 
 void			Player::move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt)
 {
-  static Ogre::AnimationState *mAnimationState;
-  Ogre::Vector3 translateVector = evt.timeSinceLastFrame * _moveSpeed * vector;
+  static Ogre::AnimationState	*mAnimationState;
+
+  Ogre::Vector3 translateVector = evt.timeSinceLastFrame * getMovespeed() * vector;
 
   mAnimationState = dynamic_cast<Ogre::Entity*>(_obj)->getAnimationState("my_animation");
   mAnimationState->setLoop(true);
@@ -142,10 +147,24 @@ void			Player::action(ActionKeyCode action, const Ogre::FrameEvent &evt)
 	else
 	  if (action == Player::AT_FIRE)
 	    {
-	      _map->addObjects(_map->getMiddlePosFrom(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z)), new Bomb(_map, AGameObject::BOMB));
+	      this->fire();
 	    }
 }
 
+void			Player::fire()
+{
+  if (getDelaybomb() <= 0)
+    {
+      if (getBombmax() > 0)
+	{
+	  setBombmax(settings->_bombmax - 1);
+	  _map->addObjects(_map->getMiddlePosFrom(Ogre::Vector2(_node->getPosition().x,
+								_node->getPosition().z)),
+			   new Bomb(this, _map, AGameObject::BOMB));
+	  setDelaybomb(1.5);
+	}
+    }
+}
 const std::map<OIS::KeyCode, ACharacter::ActionKeyCode>	&Player::getKeyCodeType() const
 {
   return (keyCodeType);
