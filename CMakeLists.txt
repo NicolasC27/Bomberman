@@ -157,8 +157,8 @@ SET(SRCS
 set(HDRS ${SRCS})
 set(CMAKE_CXX_FLAGS "-Iincludes -std=c++11")
 
-find_package(Freetype REQUIRED)
-include_directories(${FREETYPE_INCLUDE_DIRS})
+#find_package(Freetype REQUIRED)
+#include_directories(${FREETYPE_INCLUDE_DIRS})
 
 include_directories( ${OIS_INCLUDE_DIRS}
         ${OGRE_INCLUDE_DIRS}
