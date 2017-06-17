@@ -32,7 +32,7 @@ void 		MapManager::update(Ogre::Real dt)
 
   for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); iteratorObject++)
     {
-      //(*iteratorObject).first->update(dt);
+      (*iteratorObject).first->update(dt);
     }
 }
 

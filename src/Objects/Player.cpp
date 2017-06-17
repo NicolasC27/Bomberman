@@ -11,7 +11,7 @@ int Player::_playerID = 1;
 
 Player::Player(MapManager *map, AGameObject::Object object) : ACharacter(map, object, 35), _ID(_playerID++)
 {
-  _moveSpeed = 400;
+  _moveSpeed = 300;
   keyCodeType.clear();
   setKey();
 }
@@ -142,8 +142,7 @@ void			Player::action(ActionKeyCode action, const Ogre::FrameEvent &evt)
 	else
 	  if (action == Player::AT_FIRE)
 	    {
-	      _map->addObjects(_map->getMiddlePosFrom(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z)),
-			       new Bomb(_map, AGameObject::BOMB));
+	      _map->addObjects(_map->getMiddlePosFrom(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z)), new Bomb(_map, AGameObject::BOMB));
 	    }
 }
 
