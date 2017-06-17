@@ -20,6 +20,23 @@ Item::~Item()
 
 void 			Item::update()
 {
+  Ogre::Vector2 itempos;
+  Ogre::Vector2 playerpos;
+  
+  int	used = 0;
+  itempos = _node->getPosition();
+  for (unsigned int i = 0; i < _map->_character(size); i++)
+    {
+      playerpos = _map->_character[i]->_node->getPosition();    
+      dist = sqrt(pow(itempos.x - playerpos.x, 2) +
+		  pow(itempos.x - playerpos.x, 2));
+      if (dist <= 100)
+	{
+	  used = 1;
+	  _map->_character[_upgrade]->use_item[i]();
+	  remoceObject();
+	}
+    }
 }
 
 void 			Item::createEntity()

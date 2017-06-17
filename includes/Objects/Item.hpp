@@ -18,6 +18,13 @@ std::vector<std::string> mesh_item = {"Sphere.mesh",
 				      "Sphere.mesh",
 				      "Sphere.mesh"};
 			     
+void    (*use_item)[7]() = {Player::powerup,
+			    Player::rangeup,
+			    Player::speedup,
+			    Player::throwing,
+			    Player::pushing,
+			    Player::godmode,
+			    Player::ghostmode};
 
 class Item : public AGameObject
 {
