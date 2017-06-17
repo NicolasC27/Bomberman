@@ -154,8 +154,8 @@ void			Player::action(ActionKeyCode action, const Ogre::FrameEvent &evt)
 
 void			Player::fire()
 {
-  if (getDelaybomb() <= 0)
-    {
+ // if (getDelaybomb() <= 0)
+   // {
       if (getBombmax() > 0)
 	{
 	  setBombmax(settings._bombmax - 1);
@@ -164,7 +164,7 @@ void			Player::fire()
 			   new Bomb(this, _map, AGameObject::BOMB));
 	  setDelaybomb(1.5);
 	}
-    }
+    //}
 }
 const std::map<OIS::KeyCode, ACharacter::ActionKeyCode>	&Player::getKeyCodeType() const
 {

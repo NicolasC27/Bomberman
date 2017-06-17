@@ -10,7 +10,7 @@
 Bomb::Bomb(Player *player, MapManager *map, AGameObject::Object object) :
 	AGameObject(map, object, 1),  explosionDelay(3), _player(player), _power(player->getPowerbomb())
 {
-std::cout << "create bomb with power  " << _power << std::endl;
+
 }
 
 Bomb::~Bomb()
@@ -26,7 +26,6 @@ void 			Bomb::update(Ogre::Real dt)
   if (explosionDelay <= 0)
     {
       this->explode();
-      _player->setBombmax(_player->getBombmax() + 1);
       _map->removeObject(this);
     }
 }
@@ -42,6 +41,7 @@ void			Bomb::explode()
   _map->addObjects(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z),
 		   new Explosion(_map, AGameObject::EXPLOSION, true,
 				 _power, Ogre::Vector3::ZERO));
+  _player->setBombmax(_player->getBombmax() + 1);
 }
 
 AGameObject::State 	Bomb::getState() const

@@ -43,13 +43,10 @@ void 			Explosion::update(Ogre::Real dt)
 	      extendFire(-Ogre::Vector3::UNIT_X);
 	      extendFire(Ogre::Vector3::UNIT_Z);
 	      extendFire(-Ogre::Vector3::UNIT_Z);
-	      _extend = true;
 	    }
 	  else
-	    {
-	      extendFire(_Direction);
-	      _extend = true;
-	    }
+	    extendFire(_Direction);
+	  _extend = true;
 	}
     }
 }
