@@ -5,10 +5,10 @@
 #include <OgreParticleSystem.h>
 #include <OgreParticleSystemManager.h>
 #include "Objects/Explosion.hpp"
-#include "Objects/Wall.hpp"
 #include "Objects/Bomb.hpp"
 
-Bomb::Bomb(MapManager *map, AGameObject::Object object) : AGameObject(map, object, 1), explosionDelay(3)
+Bomb::Bomb(Player *player, MapManager *map, AGameObject::Object object) :
+	AGameObject(map, object, 1),  explosionDelay(3), _player(player)
 {
 
 }
@@ -38,7 +38,9 @@ void 			Bomb::createEntity()
 
 void			Bomb::explode()
 {
-  _map->addObjects(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z), new Explosion(_map, AGameObject::BOMB, true, 1, Ogre::Vector3::ZERO));
+  _map->addObjects(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z),
+		   new Explosion(_map, AGameObject::EXPLOSION, true,
+				 _player->getPowerbomb(), Ogre::Vector3::ZERO));
 }
 
 AGameObject::State 	Bomb::getState() const

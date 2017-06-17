@@ -5,17 +5,20 @@
 #ifndef BOMBERMAN_BOMB_HPP
 #define BOMBERMAN_BOMB_HPP
 
+class Bomb;
 
 #include <OgreVector3.h>
 #include "Interfaces/AGameObject.hpp"
+#include "Objects/Player.hpp"
 
 class Bomb : public AGameObject
 {
+  Player		*_player;
   std::string		_name;
   float			explosionDelay;
 
  public:
-  Bomb(MapManager *map, Object object);
+  Bomb(Player *player, MapManager *map, Object object);
 
   virtual ~Bomb();
 
