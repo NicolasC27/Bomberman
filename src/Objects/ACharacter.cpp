@@ -25,7 +25,7 @@ void 			ACharacter::createEntity()
 {
   _obj = SceneManager->createEntity(getName(), getMeshName());
   dynamic_cast <Ogre::Entity*>(_obj)->setMaterialName(this->getMaterialName());
-  static_cast<Ogre::Entity*>(_obj)->getMesh()->_setBounds(Ogre::AxisAlignedBox(-15, 0.0, -15, 15, 100, 15));
+  static_cast<Ogre::Entity*>(_obj)->getMesh()->_setBounds(Ogre::AxisAlignedBox(-35, 0.0, -35, 35, 100, 35));
   _node->showBoundingBox(true);
 }
 
