@@ -4,67 +4,67 @@
 
 #include "Objects/Player.hpp"
 
-float 				Player::getNextFireDelay() const
+Ogre::Real			Player::getNextFireDelay() const
 {
-  return settings->_nextFireDelay;
+  return settings._nextFireDelay;
 }
 
-float 				Player::getIntervFire() const
+Ogre::Real			Player::getIntervFire() const
 {
-  return settings->_intervFire;
+  return settings._intervFire;
 }
 
 int 				Player::getBombmax() const
 {
-  return settings->_bombmax;
+  return settings._bombmax;
 }
 
 int 				Player::getDelaybomb() const
 {
-  return settings->_delaybomb;
+  return settings._delaybomb;
 }
 
 int 				Player::getPowerbomb() const
 {
-  return settings->_powerbomb;
+  return settings._powerbomb;
 }
 
-float 				Player::getMovespeed() const
+Ogre::Real			Player::getMovespeed() const
 {
-  return settings->_movespeed;
+  return settings._movespeed;
 }
 
-float 				Player::getProtectDelay() const
+Ogre::Real			Player::getProtectDelay() const
 {
-  return settings->_protectDelay;
+  return settings._protectDelay;
 }
 
 void 				Player::setNextFireDelay(Ogre::Real nextFireDelay)
 {
-  settings->_nextFireDelay = nextFireDelay;
+  settings._nextFireDelay = nextFireDelay;
 }
 
 void 				Player::setIntervFire(Ogre::Real intervFire)
 {
-  settings->_intervFire = intervFire;
+  settings._intervFire = intervFire;
 }
 
 void 				Player::setBombmax(int bombmax)
 {
-  settings->_bombmax = bombmax;
+  settings._bombmax = bombmax;
 }
 
 void 				Player::setDelaybomb(Ogre::Real delaybomb)
 {
-  settings->_delaybomb = delaybomb;
+  settings._delaybomb = delaybomb;
 }
 
 void 				Player::setPowerbomb(int powerbomb)
 {
-  settings->_powerbomb = powerbomb;
+  settings._powerbomb = powerbomb;
 }
 
 void 				Player::setMovespeed(Ogre::Real movespeed)
 {
-  settings->_movespeed = movespeed;
+  settings._movespeed = movespeed;
 }

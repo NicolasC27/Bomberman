@@ -10,7 +10,7 @@
 int Player::_playerID = 1;
 
 Player::Player(MapManager *map, AGameObject::Object object) :
-	ACharacter(map, object, 35), _ID(_playerID++),  settings(new PlayerSettings)
+	ACharacter(map, object, 25), _ID(_playerID++)
 {
   keyCodeType.clear();
   setKey();
@@ -27,7 +27,7 @@ Player::~Player()
 
 void 				Player::update(Ogre::Real dt)
 {
-  settings->_delaybomb -= dt;
+  settings._delaybomb -= dt;
 }
 
 void 				Player::setKey()
@@ -157,7 +157,7 @@ void			Player::fire()
     {
       if (getBombmax() > 0)
 	{
-	  setBombmax(settings->_bombmax - 1);
+	  setBombmax(settings._bombmax - 1);
 	  _map->addObjects(_map->getMiddlePosFrom(Ogre::Vector2(_node->getPosition().x,
 								_node->getPosition().z)),
 			   new Bomb(this, _map, AGameObject::BOMB));

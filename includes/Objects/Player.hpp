@@ -33,7 +33,7 @@ protected:
 
 private:
 
-  PlayerSettings	*settings;
+  PlayerSettings	settings;
 
   std::vector<Ogre::Vector2> const	getFrontObstacle(Ogre::Vector2 const &) const;
   Ogre::Vector2				&getPosFrom(Ogre::Vector2 &) const;
