@@ -50,6 +50,8 @@ private:
   int 			getPowerbomb() const;
   float 		getMovespeed() const;
   float 		getProtectDelay() const;
+  int                   getAbility() const;
+  int                   getMode() const;
 
   void 			setNextFireDelay(Ogre::Real nextFireDelay);
   void 			setIntervFire(Ogre::Real intervFire);
@@ -57,5 +59,7 @@ private:
   void 			setMovespeed(Ogre::Real movespeed);
   void 			setBombmax(int bombmax);
   void 			setPowerbomb(int powerbomb);
+  void                  setAbility(int ability);
+  void                  setMode(int mod);
 };
 #endif //BOMBERMAN_PLAYER_HPP

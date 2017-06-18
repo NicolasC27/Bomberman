@@ -39,6 +39,17 @@ Ogre::Real			Player::getProtectDelay() const
   return settings._protectDelay;
 }
 
+int	                        Player::getAbility() const
+{
+  return settings._ability;
+}
+
+int                             Player::getMode() const
+{
+  return settings._mode;
+}
+
+
 void 				Player::setNextFireDelay(Ogre::Real nextFireDelay)
 {
   settings._nextFireDelay = nextFireDelay;
@@ -67,4 +78,14 @@ void 				Player::setPowerbomb(int powerbomb)
 void 				Player::setMovespeed(Ogre::Real movespeed)
 {
   settings._movespeed = movespeed;
+}
+
+void				Player::setAbility(int	ability)
+{
+  settings._ability = ability;
+}
+
+void                            Player::setMode(int  mode)
+{
+  settings._mode = mode;
 }
