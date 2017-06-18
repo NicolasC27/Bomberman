@@ -146,36 +146,21 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
     }
   if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
     return false;
-  if (mKeyboard->isKeyDown(OIS::KC_I))
+  if (mKeyboard->isKeyDown(OIS::KC_G))
     translate += Ogre::Vector3(0, 0, -10);
-  if (mKeyboard->isKeyDown(OIS::KC_K))
+  if (mKeyboard->isKeyDown(OIS::KC_B))
     translate += Ogre::Vector3(0, 0, 10);
-  if (mKeyboard->isKeyDown(OIS::KC_A))
+  if (mKeyboard->isKeyDown(OIS::KC_V))
     translate += Ogre::Vector3(-10, 0, 0);
-  if (mKeyboard->isKeyDown(OIS::KC_L))
+  if (mKeyboard->isKeyDown(OIS::KC_N))
     translate += Ogre::Vector3(10, 0, 0);
-  float rotX = mMouse->getMouseState().X.rel * evt.timeSinceLastFrame * -1;
-  float rotY = mMouse->getMouseState().Y.rel * evt.timeSinceLastFrame * -1;
+
   for (std::vector<AGameObject *>::const_iterator characterit = Character.begin();
 	  characterit != Character.end(); ++characterit)
   {
 	  player = dynamic_cast<Player *>(*characterit);
 	  player->tick();
-	  std::cout << "toto" << std::endl;
   }
-  std::cout << std::endl;
-  mCamera->yaw(Ogre::Radian(rotX));
-  mCamera->pitch(Ogre::Radian(rotY));
-  mCamera->moveRelative(translate * evt.timeSinceLastFrame * 400);
-
-
-//  float rotX = mMouse->getMouseState().X.rel * evt.timeSinceLastFrame * -1;
-//  float rotY = mMouse->getMouseState().Y.rel * evt.timeSinceLastFrame * -1;
-//  mCamera->yaw(Ogre::Radian(rotX));
-//  mCamera->pitch(Ogre::Radian(rotY));
-//
-//  mCamera->moveRelative(translate * evt.timeSinceLastFrame * mMovementspeed * 5);
-
   game->update(evt.timeSinceLastFrame);
   return true;
 }
