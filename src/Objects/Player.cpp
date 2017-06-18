@@ -10,7 +10,7 @@
 int Player::_playerID = 1;
 
 Player::Player(MapManager *map, AGameObject::Object object) :
-	ACharacter(map, object, 25), _ID(_playerID++)
+	ACharacter(map, object, 35), _ID(_playerID++)
 {
   keyCodeType.clear();
   setKey();
@@ -40,14 +40,14 @@ void 				Player::setKey()
 	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_RIGHT, AT_RIGHT));
 	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_UP, AT_UP));
 	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_DOWN, AT_DOWN));
-	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_E, AT_FIRE));
+	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_SPACE, AT_FIRE));
 	} else if (_ID == 2)
 	  {
 	    keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_A, AT_LEFT));
 	    keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_D, AT_RIGHT));
 	    keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_W, AT_UP));
 	    keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_S, AT_DOWN));
-	    keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_T, AT_FIRE));
+	    keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_INSERT, AT_FIRE));
 
 	  }
     }
@@ -134,16 +134,16 @@ void			Player::move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt)
 void			Player::action(ActionKeyCode action, const Ogre::FrameEvent &evt)
 {
   if (action == Player::AT_UP)
-    move(Ogre::Vector3(0, 0, -1), evt);
+    move(Ogre::Vector3(0, 0, 1), evt);
   else
     if (action == Player::AT_DOWN)
-      move(Ogre::Vector3(0, 0, 1), evt);
+      move(Ogre::Vector3(0, 0, -1), evt);
     else
       if (action == Player::AT_LEFT)
-	move(Ogre::Vector3(-1, 0, 0), evt);
+	move(Ogre::Vector3(1, 0, 0), evt);
       else
 	if (action == Player::AT_RIGHT)
-	  move(Ogre::Vector3(1, 0, 0), evt);
+	  move(Ogre::Vector3(-1, 0, 0), evt);
 	else
 	  if (action == Player::AT_FIRE)
 	    {
