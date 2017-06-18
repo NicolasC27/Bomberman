@@ -88,11 +88,13 @@ void 		MapManager::generateObjects()
   {
       for(int z = 0, i = 0; line[i]; i++, z++)
 	{
-	  if ((line[i] - '0') == AGameObject::WALL)
-	      addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(this, Wall::UNBREAKABLE));
-	  else if ((line[i] - '0')  == AGameObject::BLOCK)
-	      addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(this, Wall::BREAKABLE));
-	  else
+	  if ((line[i] - '0') == 1)
+	      addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(this, Wall::UNBREAKABLE_WALL));
+	  else if ((line[i] - '0')  == 2)
+	      addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(this, Wall::UNBREAKABLE_BLOCK));
+	    else if ((line[i] - '0')  == 3)
+		addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(this, Wall::BREAKABLE));
+	      else
 	      _isdestructible += 1;
 	}
       count = x;
@@ -101,7 +103,7 @@ void 		MapManager::generateObjects()
     throw Ogre::Exception(Ogre::Exception::ERR_INVALID_STATE,
 			  ERR_NBLINEMAP, _filename);
   addCharacter(Ogre::Vector2(100, 900));
-  addCharacter(Ogre::Vector2(100, 100));
+//  addCharacter(Ogre::Vector2(100, 100));
   addBomb(Ogre::Vector2(900, 900));
   generatePlan();
 }
