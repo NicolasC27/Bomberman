@@ -26,7 +26,6 @@ void 			ACharacter::createEntity()
   _obj = SceneManager->createEntity(getName(), getMeshName());
   dynamic_cast <Ogre::Entity*>(_obj)->setMaterialName(this->getMaterialName());
   static_cast<Ogre::Entity*>(_obj)->getMesh()->_setBounds(Ogre::AxisAlignedBox(-35, 0.0, -35, 35, 100, 35));
-  _node->showBoundingBox(true);
 }
 
 std::string 		ACharacter::getName() const
@@ -36,7 +35,7 @@ std::string 		ACharacter::getName() const
 
 AGameObject::State 	ACharacter::getState() const
 {
-  return UNBREAKABLE;
+  return UNBREAKABLE_BLOCK;
 }
 
 std::string 		ACharacter::getMaterialName() const
