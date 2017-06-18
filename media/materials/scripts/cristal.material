@@ -35,3 +35,31 @@ material Mat
         }
     }
 }
+
+material Mat_red : Mat
+{
+	technique
+	{
+		pass
+		{
+            texture_unit {
+            	texture Mat_BaseColorRouge.png
+            	}
+
+		}
+	}
+}
+
+material Mat_gris : Mat
+{
+	technique
+	{
+		pass
+		{
+            texture_unit {
+            	texture Mat_Roughness.png
+            	}
+
+		}
+	}
+}
