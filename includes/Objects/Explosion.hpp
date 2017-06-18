@@ -39,6 +39,7 @@ class Explosion : public AGameObject
 
   int 			_IsRoot;
   int 			_Length;
+  bool 			_extend;
   Ogre::Real 		delayExtend;
   Ogre::Real		lifeTimeRemaning;
   const float 		EXTEND_DELAY = 0.05;

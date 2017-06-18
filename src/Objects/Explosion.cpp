@@ -14,6 +14,7 @@ Explosion::Explosion(MapManager *map, AGameObject::Object object, int isRoot, in
   _Direction = direction;
   lifeTimeRemaning = LIFE_DURATION;
   delayExtend = EXTEND_DELAY;
+  _extend = true;
 }
 
 Explosion::~Explosion()
@@ -23,18 +24,9 @@ Explosion::~Explosion()
 
 void 			Explosion::update(Ogre::Real dt)
 {
-  if(lifeTimeRemaning > 0)
-    lifeTimeRemaning-= dt;
-  else
+  if (_extend)
     {
-      _map->removeObject(this);
-      return ;
-    }
-
-  delayExtend -= dt;
-  if(delayExtend <= 0)
-    {
-      if(_Length > 0)
+      if (_Length > 0)
 	{
 	  if (_IsRoot)
 	    {
@@ -42,20 +34,28 @@ void 			Explosion::update(Ogre::Real dt)
 	      extendFire(-Ogre::Vector3::UNIT_X);
 	      extendFire(Ogre::Vector3::UNIT_Z);
 	      extendFire(-Ogre::Vector3::UNIT_Z);
-	    }
-	  else
+	    } else
 	    extendFire(_Direction);
 	}
+      _extend = false;
     }
+  if (lifeTimeRemaning > 0)
+    lifeTimeRemaning -= dt;
+  else
+    {
+      _map->removeObject(this);
+      return;
+    }
+
 
 }
 
 void 			Explosion::extendFire(Ogre::Vector3 direction)
 {
-  Ogre::Vector3 position = (_node->getPosition()+direction*MapManager::boxWidth);
+  Ogre::Vector3 position = (_node->getPosition() + direction *MapManager::boxWidth);
 
   _map->addObjects(Ogre::Vector2(position.x, position.z),
-		   new Explosion(_map, AGameObject::EXPLOSION, false, _Length-1, _Direction));
+		   new Explosion(_map, AGameObject::EXPLOSION, false, _Length - 1, direction));
 }
 
 void 			Explosion::createEntity()
@@ -86,18 +86,18 @@ std::string 		Explosion::getMaterialName() const
 
 std::string 		Explosion::getMeshName() const
 {
-  return "Sphere.mesh";
+  return "bomb.mesh";
 }
 
 Ogre::Vector3 		Explosion::getScale() const
 {
-  return Ogre::Vector3(0.8, 0.8, 0.80);
+  return Ogre::Vector3(0.8, 0.8, 0.8);
 }
 
 
 double 			Explosion::getPositionY() const
 {
-  return 0;
+  return -50;
 }
 
 Ogre::SceneManager::PrefabType	Explosion::getMeshPrefab() const
