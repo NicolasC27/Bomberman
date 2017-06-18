@@ -220,3 +220,15 @@ void 			Player::reset()
   setPoints(0);
   setDelaybomb(0);
 }
+
+std::string Player::getMaterialName() const
+{
+  if (_ID == 1)
+    {
+      return "mutant_M";
+    } else
+    {
+      return "mutant_M_red";
+    }
+}
+

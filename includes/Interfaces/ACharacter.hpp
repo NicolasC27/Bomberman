@@ -29,6 +29,7 @@ class ACharacter : public AGameObject
 
   virtual void	move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt) = 0;
   virtual void	action(ActionKeyCode, const Ogre::FrameEvent &evt) = 0;
+  virtual std::string		getMaterialName() const = 0;
 
   void			createEntity();
 
@@ -36,7 +37,6 @@ class ACharacter : public AGameObject
 
   std::string 		getName() const;
   State 		getState() const;
-  std::string		getMaterialName() const;
   Ogre::Vector3 	getScale() const;
   double		getPositionY() const;
 

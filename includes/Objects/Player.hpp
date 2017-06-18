@@ -72,6 +72,7 @@ private:
   int                   getAbility() const;
   int                   getMode() const;
   int			getPoint() const;
+  std::string		getMaterialName() const;
 
   void 			setNextFireDelay(Ogre::Real);
   void 			setIntervFire(Ogre::Real);

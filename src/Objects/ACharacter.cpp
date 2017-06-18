@@ -38,22 +38,6 @@ AGameObject::State 	ACharacter::getState() const
   return UNBREAKABLE_BLOCK;
 }
 
-std::string 		ACharacter::getMaterialName() const
-{
-  static int 		i = 1;
-
-  if (i == 1)
-    {
-      i += 1;
-      return ("mutant_M");
-    }
-  else
-    {
-      i = 0;
-      return ("mutant_M_red");
-    }
-}
-
 Ogre::Vector3	 	ACharacter::getScale() const
 {
 

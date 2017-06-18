@@ -179,6 +179,7 @@ void 			GameManager::setupLight()
 void 			GameManager::reset()
 {
   _map->reset();
+  _timer = 10;
   wallFalling.x = 0;
   wallFalling.z = 0;
   wallFalling.turn = 0;
