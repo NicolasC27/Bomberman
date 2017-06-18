@@ -11,11 +11,11 @@
 int Player::_playerID = 1;
 
 Player::Player(MapManager *map, AGameObject::Object object, int id)
-	: ACharacter(map, object, 35), _ID(id)
+	: ACharacter(map, object, 35),  _ID(id)
 {
+  ++_playerID;
   this->translateVector = Ogre::Vector3::ZERO;
   this->_vector = Ogre::Vector3::ZERO;
-  ++_playerID;
   keyCodeType.clear();
   setKey();
   setPowerbomb(1);
@@ -84,6 +84,7 @@ bool			Player::Collide(Ogre::Vector3 &m)
 		      (this->*_powerUp[dynamic_cast<Item *>(ptr)->getUpgrade()])();
 		      ptr->destroy();
 		    }
+		  this->translateVector = Ogre::Vector3::ZERO;
 		  return (true);
 		}
 	    }
