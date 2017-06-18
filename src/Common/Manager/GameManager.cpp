@@ -52,6 +52,7 @@ GameManager::GameManager() : _state(GAME)
   initializeResources();
   setupScene();
   setupLight();
+  this->_hudManager = new HudManager(this);
 }
 
 GameManager::~GameManager()
@@ -94,6 +95,7 @@ void 			GameManager::update(Ogre::Real dt)
     _map->update(dt);
     checkVictory();
   }
+      this->_hudManager->showHud(this->_map);
 }
 
 void 			GameManager::nextFoundingPositionWallFalling()
