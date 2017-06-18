@@ -31,14 +31,6 @@ EventManager::EventManager(GameManager *gameManager, MapManager *map, Ogre::Rend
 	  OIS::OISMouse, true));
 
 
-  //todo debug Joystick
-  //  if (mInputManager->getNumberOfDevices(OIS::OISJoyStick) > 0)
-//    {
-//      mJoystick = static_cast<OIS::JoyStick*>( mInputManager->createInputObject( OIS::OISJoyStick, true ) );
-//      mJoystick = static_cast<OIS::JoyStick*>( mInputManager->createInputObject( OIS::OISJoyStick, true ) );
-//      mJoystick = static_cast<OIS::JoyStick*>( mInputManager->createInputObject( OIS::OISJoyStick, true ) );
-//      mJoystick->setEventCallback(this);
-//    }
   windowResized(mWindow);
 }
 
@@ -91,6 +83,8 @@ bool 			EventManager::frameEnded(const Ogre::FrameEvent &evt)
 
 bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 {
+  std::map<OIS::KeyCode, Player::ActionKeyCode>::const_iterator keyit;
+  std::map<OIS::KeyCode, Player::ActionKeyCode>::const_iterator keyend;
   Ogre::Vector3 	translate(0, 0, 0);
   static OIS::KeyCode 	lastKey = OIS::KC_ESCAPE;
   Player		*player;
@@ -122,11 +116,14 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
   {
     lastKey = OIS::KC_ESCAPE;
     for (std::vector<AGameObject *>::const_iterator characterit = Character.begin();
-         characterit != Character.end(); ++characterit)
+         characterit != Character.end(); )
     {
-      player = dynamic_cast<Player *>(*characterit);
-      for (std::map<OIS::KeyCode, Player::ActionKeyCode>::const_iterator keyit = player->getKeyCodeType().begin();
-           player != NULL && keyit != player->getKeyCodeType().end(); ++keyit)
+      if ((player = dynamic_cast<Player *>(*characterit)) == NULL)
+	continue;
+      ++characterit;
+      keyit = player->getKeyCodeType().begin();
+      keyend = player->getKeyCodeType().end();
+	for ( ; player != NULL && keyit != keyend; ++keyit)
       {
         if ((mKeyboard->isKeyDown(keyit->first)))
           player->action(keyit->second, evt);
@@ -134,22 +131,7 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
     }
   }
   game->update(evt.timeSinceLastFrame);
- /* if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
-    return false;
-  if (mKeyboard->isKeyDown(OIS::KC_I))
-    translate += Ogre::Vector3(0, 0, -10);
-  if (mKeyboard->isKeyDown(OIS::KC_K))
-    translate += Ogre::Vector3(0, 0, 10);
-  if (mKeyboard->isKeyDown(OIS::KC_A))
-    translate += Ogre::Vector3(-10, 0, 0);
-  if (mKeyboard->isKeyDown(OIS::KC_L))
-    translate += Ogre::Vector3(10, 0, 0);
-  float rotX = mMouse->getMouseState().X.rel * evt.timeSinceLastFrame * -1;
-  float rotY = mMouse->getMouseState().Y.rel * evt.timeSinceLastFrame * -1;
-  mCamera->yaw(Ogre::Radian(rotX));
-  mCamera->pitch(Ogre::Radian(rotY));
-  mCamera->moveRelative(translate * evt.timeSinceLastFrame * 400);
-  */return true;
+  return true;
 }
 
 bool 			EventManager::axisMoved(const OIS::JoyStickEvent &e, int axis)
@@ -160,21 +142,16 @@ bool 			EventManager::axisMoved(const OIS::JoyStickEvent &e, int axis)
 
 bool 			EventManager::buttonPressed(const OIS::JoyStickEvent &e, int button)
 {
-  std::cout << "buttonPressed : " <<  button << std::endl;
   return true;
 }
 
 bool 			EventManager::buttonReleased(const OIS::JoyStickEvent &e, int button)
 {
-  std::cout << "buttonReleased : " <<  button << std::endl;
-
   return true;
 }
 
 bool 			EventManager::sliderMoved(const OIS::JoyStickEvent &e, int sliderID)
 {
-  std::cout << "sliderMoved : " <<  sliderID << std::endl;
-
   return true;
 }
 
@@ -203,8 +180,5 @@ bool 			EventManager::povMoved(const OIS::JoyStickEvent &arg, int index)
 	  {
 	    translate += Ogre::Vector3(-10, 0, 0);
 	  }
-
-//  mCamera->moveRelative(translate * 0.5);
-
   return true;
 }

@@ -132,15 +132,11 @@ void 		MapManager::generateSpawn()
 	  boxWidth));
 }
 
-void 		MapManager::addCharacter(const Ogre::Vector2 &vector, int id)
+void 		MapManager::addCharacter(const Ogre::Vector2 &vector)
 {
   AGameObject	*player;
 
-  std::cout << "create new Player, id " << id << std::endl;
-  if (id != -1)
-    player = new Player(this, AGameObject::CHARACTER, id);
-  else
-    player = new Player(this, AGameObject::CHARACTER);
+  player = new Player(this, AGameObject::CHARACTER);
   _character.push_back(player);
   player->setSceneManager(_SceneManager);
   player->createEntity();
@@ -304,10 +300,10 @@ void 		MapManager::reset()
   for (i = 0; i < _character.size(); ++i)
     {
       dynamic_cast<Player *>(_character[i])->reset();
-      _character[i]->setPosition(_spawns[i].x, 0, _spawns[i].y);
+      _character[i]->setPosition(_spawns[i].x, _character[i]->getPositionY(), _spawns[i].y);
     }
   if (i < 2)
     for (; i < 2; ++i)
-      addCharacter(_spawns[i], i);
+      addCharacter(_spawns[i]);
   generateObjects(true);
 }

@@ -7,11 +7,12 @@
 #include "Interfaces/ACharacter.hpp"
 #include "Objects/Player.hpp"
 
-int Player::_playerID = 1;
+int Player::_playerID = 0;
 
 Player::Player(MapManager *map, AGameObject::Object object)
 	: ACharacter(map, object, 35), _ID(++_playerID % 2 + 1)
 {
+std::cout << "_ID player " << _ID << std::endl;
   keyCodeType.clear();
   setKey();
   setPowerbomb(1);
