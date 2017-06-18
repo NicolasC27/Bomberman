@@ -207,7 +207,6 @@ void 			Player::destroy()
 
 void 			Player::reset()
 {
-  std::cout << "reset Player" << std::endl;
   setPowerbomb(1);
   setMovespeed(300);
   setBombmax(1);

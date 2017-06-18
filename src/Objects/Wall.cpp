@@ -26,8 +26,13 @@ void 			Wall::update(Ogre::Real dt)
 	  Ogre::Vector2	pos(_map->getPosFrom(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z)));
 	  AGameObject		*obj = _map->getObjectFrom(pos);
 	  MapManager::Character	victim = _map->getCharacterFrom(pos);
-	  for (unsigned int i = 0; i < victim.size() ; ++i)
-	    victim[i]->destroy();
+	  AGameObject		*tmp;
+	  for (MapManager::Character::const_iterator it = victim.begin(); it != victim.end(); )
+	    {
+	      tmp = *it;
+	      ++it;
+	      tmp->destroy();
+	    }
 	  if (obj != NULL)
 	    obj->destroy();
 	}

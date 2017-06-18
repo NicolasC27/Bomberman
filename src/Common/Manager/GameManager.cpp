@@ -186,7 +186,6 @@ void 			GameManager::setupLight()
 
 void 			GameManager::reset()
 {
-  std::cout << "reset game" << std::endl;
   _map->reset();
   wallFalling.x = 0;
   wallFalling.z = 0;

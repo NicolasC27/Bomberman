@@ -294,7 +294,6 @@ void 		MapManager::reset()
   MapManager::Objects::const_iterator iteratorObject;
   AGameObject	*tmp;
 
-  std::cout << "reset Map" << std::endl;
   for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); )
     {
       tmp = iteratorObject->first;
