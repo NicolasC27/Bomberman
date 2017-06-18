@@ -57,37 +57,37 @@ class AGameObject {
   void 			setSceneManager(Ogre::SceneManager *SceneManager);
 
  protected:
+  MapManager			*_map;
 
-  MapManager		*_map;
+  static int			objectId;
+  int				_id;
 
-  static int		objectId;
-  int			_id;
-
-  Ogre::MovableObject	*_obj;
-  Ogre::ParticleSystem	*particleSystem;
+  Ogre::MovableObject		*_obj;
+  Ogre::ParticleSystem		*particleSystem;
  public:
-  Ogre::ParticleSystem *getParticleSystem() const;
+  Ogre::ParticleSystem 		*getParticleSystem() const;
 
  protected:
-  Ogre::SceneManager 	*SceneManager;
-  Ogre::SceneNode	*_node;
+  Ogre::SceneManager		*SceneManager;
+  Ogre::SceneNode		*_node;
  public:
-  Ogre::SceneNode *getNode() const;
+  Ogre::SceneNode		*getNode() const;
 
-  virtual void 		destroy();
+  virtual void 			destroy();
  public:
-  virtual void		createEntity() = 0;
+  virtual void			createEntity() = 0;
 
-  virtual std::string 	getName() const = 0;
-  virtual State 	getState() const = 0;
-  virtual std::string	getMaterialName() const = 0;
-  virtual Ogre::Vector3 getScale() const = 0;
-  virtual double	getPositionY() const = 0;
+  virtual std::string 		getName() const = 0;
+  virtual State 		getState() const = 0;
+  virtual std::string		getMaterialName() const = 0;
+  virtual Ogre::Vector3 	getScale() const = 0;
+  virtual double		getPositionY() const = 0;
 
   virtual Ogre::SceneManager::PrefabType	getMeshPrefab() const = 0;
   virtual std::string				getMeshName() const = 0;
 
   virtual void					update(Ogre::Real) = 0;
+
 };
 
 #endif //BOMBERMAN_AGAMEOBJECT_HPP
