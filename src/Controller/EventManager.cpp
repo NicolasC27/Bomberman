@@ -33,14 +33,6 @@ EventManager::EventManager(GameManager *gameManager, MapManager *map, Ogre::Rend
 	  OIS::OISMouse, true));
 
 
-  //todo debug Joystick
-  //  if (mInputManager->getNumberOfDevices(OIS::OISJoyStick) > 0)
-//    {
-//      mJoystick = static_cast<OIS::JoyStick*>( mInputManager->createInputObject( OIS::OISJoyStick, true ) );
-//      mJoystick = static_cast<OIS::JoyStick*>( mInputManager->createInputObject( OIS::OISJoyStick, true ) );
-//      mJoystick = static_cast<OIS::JoyStick*>( mInputManager->createInputObject( OIS::OISJoyStick, true ) );
-//      mJoystick->setEventCallback(this);
-//    }
   windowResized(mWindow);
 }
 
@@ -93,9 +85,11 @@ bool 			EventManager::frameEnded(const Ogre::FrameEvent &evt)
 
 bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 {
-  Ogre::Vector3 	translate(0, 0, 0);
-  static OIS::KeyCode 	lastKey = OIS::KC_ESCAPE;
-  Player		*player;
+  std::map<OIS::KeyCode, Player::ActionKeyCode>::const_iterator keyit;
+  std::map<OIS::KeyCode, Player::ActionKeyCode>::const_iterator keyend;
+  Ogre::Vector3 translate(0, 0, 0);
+  static OIS::KeyCode lastKey = OIS::KC_ESCAPE;
+  Player *player;
   std::vector<AGameObject *> Character = _map->getCharacter();
 
   mKeyboard->capture();
@@ -121,39 +115,41 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 	  }
   if (game->getState() == GameManager::GAME)
     {
+      lastKey = OIS::KC_ESCAPE;
       for (std::vector<AGameObject *>::const_iterator characterit = Character.begin();
-	   characterit != Character.end(); ++characterit)
+	   characterit != Character.end();)
 	{
-	  player = dynamic_cast<Player *>(*characterit);
-	  for (std::map<OIS::KeyCode, Player::ActionKeyCode>::const_iterator keyit = player->getKeyCodeType().begin();
-	       keyit != player->getKeyCodeType().end(); ++keyit)
+	  if ((player = dynamic_cast<Player *>(*characterit)) == NULL)
+	    continue;
+	  ++characterit;
+	  keyit = player->getKeyCodeType().begin();
+	  keyend = player->getKeyCodeType().end();
+	  for (; player != NULL && keyit != keyend; ++keyit)
 	    {
 	      if ((mKeyboard->isKeyDown(keyit->first)))
 		player->action(keyit->second, evt);
 	    }
 	}
-    }
-  if (mKeyboard->isKeyDown(OIS::KC_G))
-    translate += Ogre::Vector3(0, 0, -10);
-  if (mKeyboard->isKeyDown(OIS::KC_B))
-    translate += Ogre::Vector3(0, 0, 10);
-  if (mKeyboard->isKeyDown(OIS::KC_V))
-    translate += Ogre::Vector3(-10, 0, 0);
-  if (mKeyboard->isKeyDown(OIS::KC_N))
-    translate += Ogre::Vector3(10, 0, 0);
-
-  for (std::vector<AGameObject *>::const_iterator characterit = Character.begin();
-	  characterit != Character.end(); ++characterit)
-  {
+      if (mKeyboard->isKeyDown(OIS::KC_G))
+	translate += Ogre::Vector3(0, 0, -10);
+      if (mKeyboard->isKeyDown(OIS::KC_B))
+	translate += Ogre::Vector3(0, 0, 10);
+      if (mKeyboard->isKeyDown(OIS::KC_V))
+	translate += Ogre::Vector3(-10, 0, 0);
+      if (mKeyboard->isKeyDown(OIS::KC_N))
+	translate += Ogre::Vector3(10, 0, 0);
+      for (std::vector<AGameObject *>::const_iterator characterit = Character.begin(); characterit != Character.end(); ++characterit)
+	{
 	  player = dynamic_cast<Player *>(*characterit);
 	  player->tick();
-  }
+	}
 
-  mCamera->moveRelative(translate * evt.timeSinceLastFrame * 400);
+      mCamera->moveRelative(translate * evt.timeSinceLastFrame * 400);
+
+    }
 
   game->update(evt.timeSinceLastFrame);
   return true;
-
 }
 
 bool 			EventManager::axisMoved(const OIS::JoyStickEvent &e, int axis)
@@ -165,21 +161,16 @@ bool 			EventManager::axisMoved(const OIS::JoyStickEvent &e, int axis)
 
 bool 			EventManager::buttonPressed(const OIS::JoyStickEvent &e, int button)
 {
-  std::cout << "buttonPressed : " <<  button << std::endl;
   return true;
 }
 
 bool 			EventManager::buttonReleased(const OIS::JoyStickEvent &e, int button)
 {
-  std::cout << "buttonReleased : " <<  button << std::endl;
-
   return true;
 }
 
 bool 			EventManager::sliderMoved(const OIS::JoyStickEvent &e, int sliderID)
 {
-  std::cout << "sliderMoved : " <<  sliderID << std::endl;
-
   return true;
 }
 
@@ -190,7 +181,7 @@ bool 			EventManager::vector3Moved(const OIS::JoyStickEvent &arg, int index)
 
 bool 			EventManager::povMoved(const OIS::JoyStickEvent &arg, int index)
 {
-  Ogre::Vector3 translate(0,0,0);
+  Ogre::Vector3 translate(0, 0, 0);
 
   if (arg.state.mPOV[index].direction == arg.state.mPOV->North)
     {

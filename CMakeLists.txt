@@ -127,6 +127,7 @@ set(CEGUI_LIBS CEGUIBase-0 CEGUICommonDialogs-0 CEGUIOgreRenderer-0)
 SET(SRCS
         src/main.cpp
         src/MapManager.cpp
+        src/HudManager.cpp
 #        src/Collision.cpp
         src/Objects/Wall.cpp
         src/Objects/AGameObject.cpp
@@ -166,8 +167,10 @@ SET(SRCS
 set(HDRS ${SRCS})
 set(CMAKE_CXX_FLAGS "-Iincludes -std=c++11")
 
-#find_package(Freetype REQUIRED)
-#include_directories(${FREETYPE_INCLUDE_DIRS})
+if(UNIX)
+    find_package(Freetype REQUIRED)
+    include_directories(${FREETYPE_INCLUDE_DIRS})
+endif(UNIX)
 
 include_directories( ${OIS_INCLUDE_DIRS}
         ${OGRE_INCLUDE_DIRS}
@@ -179,9 +182,12 @@ add_executable(bomberman WIN32 ${HDRS} ${SRCS})
 
 set_target_properties(bomberman PROPERTIES DEBUG_POSTFIX _d)
 
-#${CEGUI_LIBS} ${FREETYPE_LIBRARIES}
-
-target_link_libraries(bomberman IrrKlang OgreOverlay OgreMain ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
+if(UNIX)
+    target_link_libraries(bomberman libIrrKlang.so OgreOverlay OgreMain ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${FREETYPE_LIBRAIRIES})
+endif(UNIX)
+if(WIN32)
+    target_link_libraries(bomberman irrKlang freetype OgreOverlay OgreMain ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
+endif(WIN32)
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/assets)

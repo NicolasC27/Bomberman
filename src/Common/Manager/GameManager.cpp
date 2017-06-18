@@ -52,6 +52,7 @@ GameManager::GameManager() : _state(GAME)
   initializeResources();
   setupScene();
   setupLight();
+  this->_hudManager = new HudManager(this);
 }
 
 GameManager::~GameManager()
@@ -88,12 +89,13 @@ void 			GameManager::update(Ogre::Real dt)
   if (_state == RESTART)
     reset();
   else if (_state == GAME)
-  {
-    _timer -= dt;
-    this->WallFalling(dt);
-    _map->update(dt);
-    checkVictory();
-  }
+      {
+	_timer -= dt;
+	this->WallFalling(dt);
+	_map->update(dt);
+	checkVictory();
+	this->_hudManager->showHud(this->_map);
+      }
 }
 
 void 			GameManager::nextFoundingPositionWallFalling()
@@ -172,15 +174,6 @@ void 			GameManager::setupLight()
   _Light->setSpecularColour(Ogre::ColourValue::White);
 
   _Light->setAttenuation(2000,1,0.000,0);
-
-//  _Light = _SceneManager->createLight("Light Red");
-//  _Light->setType(Ogre::Light::LT_POINT);
-//  _Light->setPosition(Ogre::Vector3(250, 550, 1000));
-//  _Light->setDiffuseColour(Ogre::ColourValue::Red);
-//  _Light->setSpecularColour(Ogre::ColourValue::Red);
-//
-//  _Light->setAttenuation(1000,1,0,0);
-
 }
 
 void 			GameManager::reset()

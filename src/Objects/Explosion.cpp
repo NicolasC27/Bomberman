@@ -13,7 +13,7 @@ Explosion::Explosion(MapManager *map, AGameObject::Object object, int isRoot, in
 {
   _obj = NULL;
   lifeTimeRemaning = 1.0f;
-  delayExtend = 0.05f;
+  delayExtend = 0.1f;
 }
 
 Explosion::~Explosion()
@@ -30,8 +30,6 @@ void 			Explosion::update(Ogre::Real dt)
       _map->removeObject(this);
     }
 
-  if (_extend == false)
-    {
       delayExtend -= dt;
       if (delayExtend <= 0)
 	{
@@ -49,7 +47,6 @@ void 			Explosion::update(Ogre::Real dt)
 	      _extend = true;
 	    }
 	}
-    }
 }
 
 bool 			Explosion::checkVictim(Ogre::Vector3 const &pos, Ogre::Vector3 const &direction)

@@ -29,6 +29,11 @@ int 				Player::getPowerbomb() const
   return settings._powerbomb;
 }
 
+int				Player::getPoint() const
+{
+  return settings._points;
+}
+
 Ogre::Real			Player::getMovespeed() const
 {
   return settings._movespeed;
@@ -85,6 +90,11 @@ void				Player::setAbility(int	ability)
   settings._ability = ability;
 }
 
+void				Player::setPoints(int	points)
+{
+  settings._points = points;
+}
+
 void                            Player::setMode(int  mode)
 {
   settings._mode = mode;
@@ -132,4 +142,9 @@ void    Player::godmode()
 void    Player::ghostmode()
 {
   setMode(2);
+}
+
+int 	Player::getID() const
+{
+  return _ID;
 }

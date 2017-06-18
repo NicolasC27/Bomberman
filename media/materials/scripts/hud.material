@@ -1,0 +1,31 @@
+material hudPlayerOne
+{
+   technique
+   {
+      pass
+      {
+         scene_blend alpha_blend
+         
+         texture_unit
+         {
+            texture hudPlayerOne.png
+         }
+      }
+   }
+}
+
+material hudPlayerTwo
+{
+   technique
+   {
+      pass
+      {
+         scene_blend alpha_blend
+         
+         texture_unit
+         {
+            texture hudPlayerTwo.png
+         }
+      }
+   }
+}
