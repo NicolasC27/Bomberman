@@ -33,12 +33,12 @@ void 			Item::update(Ogre::Real dt)
 	  removeObject();
 	}
     }*/
+  _node->yaw(Ogre::Degree(5));
 }
 
 void 			Item::createEntity()
 {
-  std::cout << "create entity Item" << std::endl;
-  _obj = SceneManager->createEntity(getName(),  Ogre::SceneManager::PT_SPHERE);//getMeshPrefab());
+  _obj = SceneManager->createEntity(getName(),  getMeshName());//getMeshPrefab());
   dynamic_cast <Ogre::Entity*>(_obj)->setMaterialName(this->getMaterialName());
 }
 
@@ -54,17 +54,22 @@ std::string 		Item::getName() const
 
 std::string 		Item::getMaterialName() const
 {
-  return "Objects/Bomb";//"Objects/Item";
+  if (this->upgrade == 0)
+    return "Mat";
+  else if (this->upgrade == 1)
+      return "Mat_gris";
+    else if (this->upgrade == 2)
+	return "Mat_red";
 }
 
 std::string Item::getMeshName() const
 {
-  return ("sphere.mesh");//mesh_item[this->upgrade];
+  return ("cristal.mesh");//mesh_item[this->upgrade];
 }
 
 Ogre::Vector3 		Item::getScale() const
 {
-  return Ogre::Vector3(0.8, 0.8, 0.80);
+  return Ogre::Vector3(1, 1, 1);
 }
 
 double 			Item::getPositionY() const
@@ -79,12 +84,10 @@ Ogre::SceneManager::PrefabType	Item::getMeshPrefab() const
 
 void 			Item::destroy()
 {
-  std::cout << "item destroyed" << std::endl;
   _map->removeObject(this);
 }
 
 int Item::getUpgrade() const
 {
-  std::cout << "upgrade " << upgrade << " asked, pos " << _node->getPosition() << std::endl;
   return upgrade;
 }

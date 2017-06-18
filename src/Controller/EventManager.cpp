@@ -124,7 +124,6 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
          characterit != Character.end(); ++characterit)
     {
       player = dynamic_cast<Player *>(*characterit);
-
       for (std::map<OIS::KeyCode, Player::ActionKeyCode>::const_iterator keyit = player->getKeyCodeType().begin();
            keyit != player->getKeyCodeType().end(); ++keyit)
       {
@@ -136,13 +135,13 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
   game->update(evt.timeSinceLastFrame);
  /* if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
     return false;
-  if (mKeyboard->isKeyDown(OIS::KC_W))
+  if (mKeyboard->isKeyDown(OIS::KC_I))
     translate += Ogre::Vector3(0, 0, -10);
-  if (mKeyboard->isKeyDown(OIS::KC_S))
+  if (mKeyboard->isKeyDown(OIS::KC_K))
     translate += Ogre::Vector3(0, 0, 10);
   if (mKeyboard->isKeyDown(OIS::KC_A))
     translate += Ogre::Vector3(-10, 0, 0);
-  if (mKeyboard->isKeyDown(OIS::KC_D))
+  if (mKeyboard->isKeyDown(OIS::KC_L))
     translate += Ogre::Vector3(10, 0, 0);
   float rotX = mMouse->getMouseState().X.rel * evt.timeSinceLastFrame * -1;
   float rotY = mMouse->getMouseState().Y.rel * evt.timeSinceLastFrame * -1;
