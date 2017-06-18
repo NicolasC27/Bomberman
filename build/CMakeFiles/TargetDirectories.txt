@@ -1,0 +1,4 @@
+C:/Users/Tsigorf/projects/cpp_indie_studio/build/CMakeFiles/bomberman.dir
+C:/Users/Tsigorf/projects/cpp_indie_studio/build/CMakeFiles/INSTALL.dir
+C:/Users/Tsigorf/projects/cpp_indie_studio/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Tsigorf/projects/cpp_indie_studio/build/CMakeFiles/ZERO_CHECK.dir

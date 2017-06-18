@@ -1,0 +1,19 @@
+material Material
+{
+    receive_shadows on
+
+    technique
+    {
+        pass Material
+        {
+
+            texture_unit
+            {
+                texture Block.jpg
+                tex_address_mode wrap
+                scale 1.0 1.0
+                colour_op modulate
+            }
+        }
+    }
+}

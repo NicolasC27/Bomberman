@@ -1,0 +1,74 @@
+material Objects/Cube/Wall
+{
+    receive_shadows on
+
+        technique
+        {
+                pass
+                {
+
+
+                             texture_unit
+                                        {
+                                            texture wall.jpg
+
+                                        }
+                }
+        }
+}
+
+material Objects/Cube/Block
+{
+    receive_shadows on
+
+        technique
+        {
+                pass
+                {
+
+                             texture_unit
+                                        {
+                                            texture Block.jpg
+
+                                        }
+                }
+        }
+}
+
+material Objects/Cube/UNBREAKABLE_BLOCK
+{
+    receive_shadows on
+
+        technique
+        {
+
+
+                pass
+                {
+
+                             texture_unit
+                                        {
+                                            texture test.jpg
+
+                                        }
+                }
+        }
+}
+
+material Objects/Ground/BumpyMetal
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.25 0.25 0.25
+			cull_hardware none
+			cull_software none
+
+			texture_unit
+			{
+				texture ground.jpg
+			}
+		}
+	}
+}
