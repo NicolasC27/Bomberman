@@ -2,41 +2,36 @@
 // Created by nicolas on 12/06/17.
 //
 
-
-
-#include <Interfaces/AGameObject.hpp>
-#include <OgreParticleSystem.h>
-#include <OgreParticleSystemManager.h>
 #include "Objects/Item.hpp"
 
-Item::Item(AGameObject::Object object) : AGameObject(object, 1)
+Item::Item(MapManager *map, AGameObject::Object object) : AGameObject(map, object, 1)
 {
-  this->upgrade = rand() % NB_UPGRADE;
+  this->upgrade = rand() % 3;//NB_UPGRADE;
 }
 
 Item::~Item()
 {
 }
 
-void 			Item::update()
+void 			Item::update(Ogre::Real dt)
 {
-  Ogre::Vector2 itempos;
-  Ogre::Vector2 playerpos;
+  /*MapManager::Character	charac = _map->getCharacter();
+  Ogre::Vector3 	itempos(_node->getPosition());
+  Ogre::Vector3 	playerpos;
   
   int	used = 0;
-  itempos = _node->getPosition();
-  for (unsigned int i = 0; i < _map->_character(size); i++)
+  for (unsigned int i = 0; i < charac.size(); i++)
     {
-      playerpos = _map->_character[i]->_node->getPosition();    
-      dist = sqrt(pow(itempos.x - playerpos.x, 2) +
-		  pow(itempos.x - playerpos.x, 2));
-      if (dist <= 100)
+      playerpos = charac[i]->getNode()->getPosition();
+      dist = (itempos.x - playerpos.x) * (itempos.x - playerpos.x) +
+	     (itempos.z - playerpos.z) * (itempos.z - playerpos.z);
+      if (dist <= 10000)
 	{
 	  used = 1;
 	  _map->_character[_upgrade]->use_item[i]();
-	  remoceObject();
+	  removeObject();
 	}
-    }
+    }*/
 }
 
 void 			Item::createEntity()
@@ -62,14 +57,13 @@ std::string 		Item::getMaterialName() const
 
 std::string Item::getMeshName() const
 {
-  return mesh_item[this->upgrade];
+  return "Sphere.mesh";//mesh_item[this->upgrade];
 }
 
 Ogre::Vector3 		Item::getScale() const
 {
   return Ogre::Vector3(0.8, 0.8, 0.80);
 }
-
 
 double 			Item::getPositionY() const
 {
@@ -81,3 +75,12 @@ Ogre::SceneManager::PrefabType	Item::getMeshPrefab() const
   return Ogre::SceneManager::PT_SPHERE;
 }
 
+void 			Item::destroy()
+{
+  _map->removeObject(this);
+}
+
+int Item::getUpgrade() const
+{
+  return upgrade;
+}

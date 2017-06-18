@@ -5,6 +5,8 @@
 #ifndef BOMBERMAN_PLAYERINFO_HPP
 #define BOMBERMAN_PLAYERINFO_HPP
 
+#include "Item.hpp"
+
 struct PlayerSettings
 {
   Ogre::Real	_nextFireDelay;

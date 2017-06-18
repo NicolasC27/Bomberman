@@ -16,9 +16,16 @@ Player::Player(MapManager *map, AGameObject::Object object) :
   setKey();
   setPowerbomb(1);
   setMovespeed(300);
-  setBombmax(5);
+  setBombmax(1);
   setDelaybomb(0);
-}
+  _powerUp.push_back(&Player::powerUp);
+  _powerUp.push_back(&Player::maxBombUp);
+  _powerUp.push_back(&Player::speedUp);
+  /*_powerUp.push_back(&Player::throwing);
+  _powerUp.push_back(&Player::pushing);
+  _powerUp.push_back(&Player::godmode);
+  _powerUp.push_back(&Player::ghostmode);
+*/}
 
 Player::~Player()
 {
@@ -53,7 +60,7 @@ void 				Player::setKey()
     }
 }
 
-bool			Player::Collide(Ogre::Vector3 &m) const
+bool			Player::Collide(Ogre::Vector3 &m)
 {
   Ogre::Vector2         mov(m.x, m.z);
   std::vector<Ogre::Vector2>	 pos = this->getFrontObstacle(mov);
@@ -64,7 +71,9 @@ bool			Player::Collide(Ogre::Vector3 &m) const
     {
       if ((ptr = _map->getObjectFrom(pos[i]/*_map->getPosFrom(pos[i])*/)) != NULL)
 	{
-	  if (sphere.intersects(ptr->getObj()->getWorldBoundingBox(true)))
+	  if (i == 1 && ptr->getType() == AGameObject::ITEM)
+	    (this->*_powerUp[dynamic_cast<Item *>(ptr)->getUpgrade()])();
+	  else if (sphere.intersects(ptr->getObj()->getWorldBoundingBox(true)))
 	    return (true);
 	}
     }

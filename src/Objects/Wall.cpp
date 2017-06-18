@@ -3,6 +3,7 @@
 //
 
 #include <Objects/Wall.hpp>
+#include <Objects/Item.hpp>
 
 Wall::Wall(MapManager *map, Wall::State type) : AGameObject(map, BLOCK), _state(type), _positionY(0)
 {
@@ -11,7 +12,9 @@ Wall::Wall(MapManager *map, Wall::State type) : AGameObject(map, BLOCK), _state(
 
 Wall::~Wall()
 {
-
+  _map->addObjects(Ogre::Vector2(_node->getPosition().x,
+				 _node->getPosition().z),
+  		   new Item(_map, AGameObject::ITEM));
 }
 
 void 			Wall::update(Ogre::Real dt)
@@ -91,4 +94,9 @@ double 		Wall::getPositionY() const
 void		Wall::setPositionY(int positionY)
 {
   _positionY = positionY;
+}
+
+void 		Wall::destroy()
+{
+  _map->removeObject(this);
 }
