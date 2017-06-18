@@ -6,11 +6,13 @@
 #define BOMBERMAN_GAMEMANAGER_HPP
 
 class GameManager;
+class HudManager;
 
 #include <Ogre.h>
 #include "Controller/EventManager.hpp"
 #include "Common/Manager/CameraManager.hpp"
 #include "MapManager.hpp"
+#include "HudManager.hh"
 
 #define NAME_GAME	"Bomberman"
 
@@ -29,17 +31,20 @@ class GameManager
 
   Ogre::Root 		*_Root;
   Ogre::SceneManager 	*_SceneManager;
-  Ogre::RenderWindow 	*_Window;
   Ogre::Light 		*_Light;
   CameraManager		*Camera;
   NodeManager 		*_nodes;
   MapManager		*_map;
+  HudManager		*_hudManager;
 
   float 		_timer = 120;
 
   State 		_state;
 
  public:
+  
+  Ogre::RenderWindow 	*_Window;
+  
   GameManager();
   virtual ~GameManager();
 

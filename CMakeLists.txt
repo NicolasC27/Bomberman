@@ -121,6 +121,7 @@ set(CEGUI_LIBS CEGUIBase-0 CEGUICommonDialogs-0 CEGUIOgreRenderer-0)
 SET(SRCS
         src/main.cpp
         src/MapManager.cpp
+        src/HudManager.cpp
 #        src/Collision.cpp
         src/Objects/Wall.cpp
         src/Objects/AGameObject.cpp

@@ -17,6 +17,7 @@ Player::Player(MapManager *map, AGameObject::Object object) :
   setPowerbomb(1);
   setMovespeed(300);
   setBombmax(1);
+  setPoints(0);
   setDelaybomb(0);
   _powerUp.push_back(&Player::powerUp);
   _powerUp.push_back(&Player::maxBombUp);
@@ -208,5 +209,6 @@ void 			Player::reset()
   setPowerbomb(1);
   setMovespeed(300);
   setBombmax(1);
+  setPoints(0);
   setDelaybomb(0);
 }

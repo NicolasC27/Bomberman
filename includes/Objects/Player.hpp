@@ -55,12 +55,14 @@ private:
   float 		getProtectDelay() const;
   int                   getAbility() const;
   int                   getMode() const;
+  int			getPoint() const;
 
   void 			setNextFireDelay(Ogre::Real);
   void 			setIntervFire(Ogre::Real);
   void 			setDelaybomb(Ogre::Real);
   void 			setMovespeed(Ogre::Real);
   void 			setBombmax(int);
+  void 			setPoints(int);
   void 			setPowerbomb(int);
   void                  setAbility(int);
   void                  setMode(int);

@@ -5,7 +5,7 @@
 // Login   <valentin.gerard@epitech.eu>
 // 
 // Started on  Sat Jun 17 23:19:24 2017 Valentin Gérard
-// Last update Sun Jun 18 12:24:44 2017 Valentin Gérard
+// Last update Sun Jun 18 14:59:42 2017 Valentin Gérard
 //
 
 #ifndef HUDMANAGER_HH_
@@ -18,6 +18,7 @@
 # include <OIS/OIS.h>
 # include <Ogre.h>
 # include <OgreException.h>
+# include <OgreOverlay.h>
 # include <OgreOverlaySystem.h>
 # include <OgreOverlayContainer.h>
 # include <Overlay/OgreFontManager.h>
