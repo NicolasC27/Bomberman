@@ -9,7 +9,7 @@
 
 int Player::_playerID = 1;
 
-Player::Player(MapManager *map, AGameObject::Object object) :
+Player::Player(std::shared_ptr<MapManager> &map, AGameObject::Object object) :
 	ACharacter(map, object, 25), _ID(_playerID++)
 {
   keyCodeType.clear();

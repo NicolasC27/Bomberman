@@ -7,7 +7,7 @@
 #include <OgreOverlayContainer.h>
 #include <Overlay/OgreOverlayManager.h>
 #include <Overlay/OgreTextAreaOverlayElement.h>
-EventManager::EventManager(GameManager *gameManager, MapManager *map, Ogre::RenderWindow *Window, Ogre::Camera *camera) : _map(map), game(gameManager)
+EventManager::EventManager(GameManager *gameManager, std::shared_ptr<MapManager> &map, Ogre::RenderWindow *Window, Ogre::Camera *camera) : _map(map), game(gameManager)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
 

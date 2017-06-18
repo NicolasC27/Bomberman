@@ -7,7 +7,7 @@
 #include "Objects/Explosion.hpp"
 #include "Objects/Bomb.hpp"
 
-Bomb::Bomb(Player *player, MapManager *map, AGameObject::Object object) :
+Bomb::Bomb(Player *player, std::shared_ptr<MapManager> &map, AGameObject::Object object) :
 	AGameObject(map, object, 1),  explosionDelay(3), _player(player), _power(player->getPowerbomb())
 {
 

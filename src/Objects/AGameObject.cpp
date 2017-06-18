@@ -11,28 +11,30 @@
 
 int AGameObject::objectId = 1;
 
-AGameObject::AGameObject(MapManager *map, Object object) : _type(object), _map(map)
+AGameObject::AGameObject(std::shared_ptr<MapManager> &map, Object object) : _type(object), _map(map)
 {
   _id = AGameObject::objectId++;
+  std::cout << "la map est utilisé " << _map.use_count() << " fois" << std::endl;
 }
 
-AGameObject::AGameObject(MapManager *map, AGameObject::Object object, double r) : _type(object), _map(map)
+AGameObject::AGameObject(std::shared_ptr<MapManager> &map, AGameObject::Object object, double r) : _type(object), _map(map)
 {
   _id = AGameObject::objectId++;
+  std::cout << "la map est utilisé " << _map.use_count() << " fois" << std::endl;
 }
 
 AGameObject::~AGameObject()
 {
   if (_obj)
     {
-      _node->detachObject(_obj);
-      SceneManager->destroyEntity(dynamic_cast<Ogre::Entity *>(_obj));
-      SceneManager->destroySceneNode(_node);
+      _node->detachAllObjects();// detachObject(_obj);
+      //SceneManager->destroyEntity(dynamic_cast<Ogre::Entity *>(_obj));
+      //SceneManager->destroySceneNode(_node);
     }
   else
     {
-      _node->detachObject(particleSystem);
-      SceneManager->destroySceneNode(_node);
+      _node->detachAllObjects();// detachObject(particleSystem);
+      //SceneManager->destroySceneNode(_node);
     }
 }
 

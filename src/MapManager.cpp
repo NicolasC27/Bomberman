@@ -93,9 +93,9 @@ void 		MapManager::generateObjects(bool res)
       for(int z = 0, i = 0; line[i]; i++, z++)
 	{
 	  if ((line[i] - '0') == AGameObject::WALL)
-	      addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(this, Wall::UNBREAKABLE));
+	      addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(std::shared_ptr<MapManager>(this), Wall::UNBREAKABLE));
 	  else if ((line[i] - '0')  == AGameObject::BLOCK)
-	      addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(this, Wall::BREAKABLE));
+	      addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(std::shared_ptr<MapManager>(this), Wall::BREAKABLE));
 	  else
 	      _isdestructible += 1;
 	}
@@ -131,7 +131,7 @@ void 		MapManager::addCharacter(const Ogre::Vector2 &vector)
 {
   AGameObject	*player;
 
-  player = new Player(this, AGameObject::CHARACTER);
+  player = new Player(std::shared_ptr<MapManager>(this), AGameObject::CHARACTER);
   _character.push_back(player);
   player->setSceneManager(_SceneManager);
   player->createEntity();

@@ -35,8 +35,8 @@ class AGameObject {
     UNBREAKABLE
   };
 
-  AGameObject(MapManager *map, AGameObject::Object object);
-  AGameObject(MapManager *map, AGameObject::Object object, double r);
+  AGameObject(std::shared_ptr<MapManager> &map, AGameObject::Object object);
+  AGameObject(std::shared_ptr<MapManager> &map, AGameObject::Object object, double r);
   virtual ~AGameObject();
 
  private:
@@ -57,7 +57,7 @@ class AGameObject {
 
  protected:
 
-  MapManager		*_map;
+  std::shared_ptr<MapManager>		_map;
 
   static int		objectId;
   int			_id;

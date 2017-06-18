@@ -28,13 +28,12 @@ class EventManager
 
   float 			mMovementspeed;
 
-  MapManager			*_map;
+  std::shared_ptr<MapManager>	_map;
   GameManager 			*game;
 
  public:
 
-
-  EventManager(GameManager *, MapManager *, Ogre::RenderWindow *, Ogre::Camera *);
+  EventManager(GameManager *, std::shared_ptr<MapManager> &, Ogre::RenderWindow *, Ogre::Camera *);
 
   ~EventManager();
 

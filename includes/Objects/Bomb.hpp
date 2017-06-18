@@ -19,7 +19,7 @@ class Bomb : public AGameObject
   int 			_power;
 
  public:
-  Bomb(Player *player, MapManager *map, Object object);
+  Bomb(Player *player, std::shared_ptr<MapManager> &map, Object object);
 
   virtual ~Bomb();
 

@@ -20,7 +20,7 @@ GameManager::GameManager()
 #endif
 
   // construct Ogre::Root
-  _Root = new Ogre::Root(mPluginsCfg);
+  _Root = std::unique_ptr<Ogre::Root>(new Ogre::Root(mPluginsCfg));
 
 //-------------------------------------------------------------------------------------
   // setup resources
@@ -45,9 +45,9 @@ GameManager::GameManager()
 		  archName, typeName, secName);
 	}
     }
-  if(_Root->restoreConfig()  || _Root->showConfigDialog() )
+  if((*_Root).restoreConfig()  || (*_Root).showConfigDialog())
     {
-      _Window = _Root->initialise(true, NAME_GAME);
+      _Window = (*_Root).initialise(true, NAME_GAME);
     }
   initializeResources();
   setupScene();
@@ -56,13 +56,13 @@ GameManager::GameManager()
 
 GameManager::~GameManager()
 {
-  delete _map;
-  delete _Root;
+  //delete _map;
+  //delete _Root;
 }
 
 void 			GameManager::run()
 {
-  _map = new MapManager("media/map/map1", getSceneManager(), getNodes());
+  _map = std::make_shared<MapManager>("media/map/map1", getSceneManager(), getNodes());
   _map->generateObjects(false);
   _boundary = (_map->getSize() - 2) * MapManager::boxWidth;
   wallFalling.x = MapManager::boxWidth;
@@ -72,15 +72,15 @@ void 			GameManager::run()
   Camera = new CameraManager(getSceneManager(), getWindow(), _map->getSize());
 
   Listener = new EventManager(this, _map, getWindow(), Camera->getCamera());
-  getRoot()->addFrameListener(Listener);
-  getRoot()->startRendering();
+  (*_Root).addFrameListener(Listener);
+  (*_Root).startRendering();
 }
 
 void 			GameManager::update(Ogre::Real dt)
 {
   _timer -= dt;
 
-  this->WallFalling(dt);
+  //this->WallFalling(dt);
 
   _map->update(dt);
 }
@@ -133,7 +133,7 @@ void 			GameManager::WallFalling(Ogre::Real dt)
 
 void 			GameManager::createRenderWindow()
 {
-  _Window = _Root->initialise(true, NAME_GAME);
+  _Window = (*_Root).initialise(true, NAME_GAME);
 }
 
 void 			GameManager::initializeResources()
@@ -144,7 +144,7 @@ void 			GameManager::initializeResources()
 
 void 			GameManager::setupScene()
 {
-  _SceneManager = _Root->createSceneManager(Ogre::ST_GENERIC, "Bomberman Game");
+  _SceneManager = (*_Root).createSceneManager(Ogre::ST_GENERIC, "Bomberman Game");
   _SceneManager->setAmbientLight(Ogre::ColourValue(0.4f, 0.4f, 0.4f));
 }
 
@@ -171,11 +171,6 @@ void 			GameManager::setupLight()
 
   _Light->setAttenuation(1000,1,0.007,0);
 
-}
-
-Ogre::Root*		GameManager::getRoot() const
-{
-  return _Root;
 }
 
 Ogre::RenderWindow*	GameManager::getWindow() const

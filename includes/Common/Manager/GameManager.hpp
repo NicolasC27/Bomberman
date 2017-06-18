@@ -11,7 +11,7 @@ class GameManager;
 #include "Controller/EventManager.hpp"
 #include "Common/Manager/CameraManager.hpp"
 #include "MapManager.hpp"
-
+#include <memory>
 #define NAME_GAME	"Bomberman"
 
 class GameManager
@@ -19,13 +19,13 @@ class GameManager
  private:
   EventManager		*Listener;
 
-  Ogre::Root 		*_Root;
+  std::unique_ptr<Ogre::Root>	_Root;
   Ogre::SceneManager 	*_SceneManager;
   Ogre::RenderWindow 	*_Window;
   Ogre::Light 		*_Light;
   CameraManager		*Camera;
   NodeManager 		*_nodes;
-  MapManager		*_map;
+  std::shared_ptr<MapManager>_map;
   float 		_timer = 10;
 
  public:
@@ -44,7 +44,7 @@ class GameManager
   void 			update(Ogre::Real dt);
   void 			reset();
 
-  Ogre::Root 		*getRoot() const;
+  //Ogre::Root 		*getRoot() const;
   Ogre::SceneManager 	*getSceneManager() const;
   Ogre::RenderWindow 	*getWindow() const;
   NodeManager 		*getNodes() const;

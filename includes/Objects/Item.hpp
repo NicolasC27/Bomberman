@@ -36,7 +36,7 @@ class Item : public AGameObject
   int			upgrade;
 
  public:
-  Item(MapManager *, Object object);
+  Item(std::shared_ptr<MapManager> &, Object object);
 
   virtual ~Item();
 

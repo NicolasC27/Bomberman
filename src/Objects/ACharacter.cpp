@@ -6,7 +6,7 @@
 #include "Interfaces/ACharacter.hpp"
 #include <Ogre.h>
 
-ACharacter::ACharacter(MapManager *map, AGameObject::Object object, int r) : AGameObject(map, object, r)
+ACharacter::ACharacter(std::shared_ptr<MapManager> &map, AGameObject::Object object, int r) : AGameObject(map, object, r)
 {
 
 }

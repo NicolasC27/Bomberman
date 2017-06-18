@@ -15,7 +15,7 @@
 class Player : public ACharacter
 {
  public:
-  Player(MapManager *map, Object object);
+  Player(std::shared_ptr<MapManager> &map, Object object);
   virtual ~Player();
 
   void 			move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt);

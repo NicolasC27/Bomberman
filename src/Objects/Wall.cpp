@@ -5,7 +5,7 @@
 #include <Objects/Wall.hpp>
 #include <Objects/Item.hpp>
 
-Wall::Wall(MapManager *map, Wall::State type) : AGameObject(map, BLOCK), _state(type), _positionY(0)
+Wall::Wall(std::shared_ptr<MapManager> &map, Wall::State type) : AGameObject(map, BLOCK), _state(type), _positionY(0)
 {
   _moveSpeed = 800;
 }
