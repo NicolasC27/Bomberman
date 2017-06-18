@@ -24,7 +24,15 @@ MapManager::MapManager(std::string const &filename, Ogre::SceneManager *SceneMan
 MapManager::~MapManager()
 {
   _spawns.clear();
-
+  engine->removeSoundSource(general);
+  engine->removeSoundSource(explosion);
+  engine->removeSoundSource(pause);
+  engine->removeSoundSource(winner);
+  engine->removeSoundSource(confirm);
+  engine->removeSoundSource(player_out);
+  engine->removeSoundSource(getitem);
+  engine->removeSoundSource(fall);
+  engine->removeSoundSource(wallOnGround);
 }
 
 void		MapManager::setSound()
@@ -33,8 +41,15 @@ void		MapManager::setSound()
 
   general = engine->addSoundSourceFromFile("media/sound/Bomberman.wav");
   explosion = engine->addSoundSourceFromFile("media/sound/explosion.wav");
+  pause = engine->addSoundSourceFromFile("media/sound/pause.wav");
+  winner = engine->addSoundSourceFromFile("media/sound/Winner.wav");
+  confirm = engine->addSoundSourceFromFile("media/sound/confirm.wav");
+  player_out = engine->addSoundSourceFromFile("media/sound/PLAYER_OUT.wav");
+  getitem = engine->addSoundSourceFromFile("media/sound/ITEM_GET.wav");
+  fall = engine->addSoundSourceFromFile("media/sound/BC_END.wav");
+  wallOnGround = engine->addSoundSourceFromFile("media/sound/BOS_JUMP.wav");
   engine->setSoundVolume(0.07f);
-  engine->play2D(general);
+  engine->play2D("media/sound/Bomberman.wav");
 }
 
 

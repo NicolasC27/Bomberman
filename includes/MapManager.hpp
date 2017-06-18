@@ -96,6 +96,13 @@ private:
  protected:
   irrklang::ISoundSource			*general;
   irrklang::ISoundSource			*explosion;
+  irrklang::ISoundSource			*pause;
+  irrklang::ISoundSource			*winner;
+  irrklang::ISoundSource			*confirm;
+  irrklang::ISoundSource			*player_out;
+  irrklang::ISoundSource			*getitem;
+  irrklang::ISoundSource			*fall;
+  irrklang::ISoundSource			*wallOnGround;
 
  public:
   irrklang::ISoundSource 			*getExplosion() const;
