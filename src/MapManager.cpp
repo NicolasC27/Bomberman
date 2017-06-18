@@ -277,17 +277,21 @@ void 		MapManager::removeCharacter(AGameObject *object)
 
 void 		MapManager::reset()
 {
+  unsigned int i;
   MapManager::Objects::const_iterator iteratorObject;
 
   for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); )
     {
-      _objects.erase(iteratorObject);
       delete iteratorObject->first;
+      iteratorObject = _objects.erase(iteratorObject);
     }
-  for (unsigned int i = 0; i < _character.size(); ++i)
+  for (i = 0; i < _character.size(); ++i)
     {
       dynamic_cast<Player *>(_character[i])->reset();
       _character[i]->setPosition(_spawns[i].x, 0, _spawns[i].y);
     }
+  if (i < 2)
+    for (; i < 2; ++i)
+      addCharacter(_spawns[i]);
   generateObjects(true);
 }

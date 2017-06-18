@@ -191,4 +191,8 @@ NodeManager*		GameManager::getNodes() const
 void 			GameManager::reset()
 {
   _map->reset();
+  wallFalling.x = 0;
+  wallFalling.z = 0;
+  wallFalling.turn = 0;
+  wallFalling.timer = 60;
 }
