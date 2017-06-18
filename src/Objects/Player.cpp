@@ -52,7 +52,7 @@ void 				Player::setKey()
 	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_RIGHT, AT_RIGHT));
 	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_UP, AT_UP));
 	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_DOWN, AT_DOWN));
-	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_R, AT_FIRE));
+	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_SPACE, AT_FIRE));
 	} else if (_ID == 2)
 	  {
 	    keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_A, AT_LEFT));
