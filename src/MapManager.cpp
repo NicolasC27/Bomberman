@@ -136,6 +136,7 @@ void 		MapManager::addCharacter(const Ogre::Vector2 &vector, int id)
 {
   AGameObject	*player;
 
+  std::cout << "create new Player, id " << id << std::endl;
   if (id != -1)
     player = new Player(this, AGameObject::CHARACTER, id);
   else

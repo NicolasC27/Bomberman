@@ -120,12 +120,13 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
   }
   if (game->getState() == GameManager::GAME)
   {
+    lastKey = OIS::KC_ESCAPE;
     for (std::vector<AGameObject *>::const_iterator characterit = Character.begin();
          characterit != Character.end(); ++characterit)
     {
       player = dynamic_cast<Player *>(*characterit);
       for (std::map<OIS::KeyCode, Player::ActionKeyCode>::const_iterator keyit = player->getKeyCodeType().begin();
-           keyit != player->getKeyCodeType().end(); ++keyit)
+           player != NULL && keyit != player->getKeyCodeType().end(); ++keyit)
       {
         if ((mKeyboard->isKeyDown(keyit->first)))
           player->action(keyit->second, evt);

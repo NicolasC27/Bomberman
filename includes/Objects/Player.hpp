@@ -24,7 +24,7 @@ class Player : public ACharacter
     GODMOD,
     GHOSTMODE
   };
-  Player(MapManager *map, Object object, int id = _playerID);
+  Player(MapManager *map, Object object);
   virtual ~Player();
 
   void 			move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt);

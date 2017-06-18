@@ -86,6 +86,7 @@ void			GameManager::checkVictory()
 
 void 			GameManager::update(Ogre::Real dt)
 {
+  std::cout << "GameManager State " << (_state == RESTART ? "restart" : _state == GAME ? "game" : "pause") << std::endl;
   if (_state == RESTART)
     reset();
   else if (_state == GAME)
