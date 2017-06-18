@@ -4,6 +4,7 @@
 
 #include <Common/Manager/CameraManager.hpp>
 #include <MapManager.hpp>
+#include <iostream>
 
 CameraManager::CameraManager()
 {

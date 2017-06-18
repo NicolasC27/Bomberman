@@ -4,6 +4,7 @@
 
 #include <Objects/Wall.hpp>
 #include <Objects/Item.hpp>
+#include <iostream>
 
 Wall::Wall(MapManager *map, Wall::State type) : AGameObject(map, BLOCK), _state(type), _positionY(0)
 {

@@ -7,6 +7,8 @@
 #include <OgreOverlayContainer.h>
 #include <Overlay/OgreOverlayManager.h>
 #include <Overlay/OgreTextAreaOverlayElement.h>
+#include <iostream>
+
 EventManager::EventManager(GameManager *gameManager, MapManager *map, Ogre::RenderWindow *Window, Ogre::Camera *camera) : _map(map), game(gameManager)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
@@ -144,14 +146,36 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
     }
   if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
     return false;
-  if (mKeyboard->isKeyDown(OIS::KC_G))
+  if (mKeyboard->isKeyDown(OIS::KC_I))
     translate += Ogre::Vector3(0, 0, -10);
-  if (mKeyboard->isKeyDown(OIS::KC_B))
+  if (mKeyboard->isKeyDown(OIS::KC_K))
     translate += Ogre::Vector3(0, 0, 10);
-  if (mKeyboard->isKeyDown(OIS::KC_V))
+  if (mKeyboard->isKeyDown(OIS::KC_A))
     translate += Ogre::Vector3(-10, 0, 0);
-  if (mKeyboard->isKeyDown(OIS::KC_N))
+  if (mKeyboard->isKeyDown(OIS::KC_L))
     translate += Ogre::Vector3(10, 0, 0);
+  float rotX = mMouse->getMouseState().X.rel * evt.timeSinceLastFrame * -1;
+  float rotY = mMouse->getMouseState().Y.rel * evt.timeSinceLastFrame * -1;
+  for (std::vector<AGameObject *>::const_iterator characterit = Character.begin();
+	  characterit != Character.end(); ++characterit)
+  {
+	  player = dynamic_cast<Player *>(*characterit);
+	  player->tick();
+	  std::cout << "toto" << std::endl;
+  }
+  std::cout << std::endl;
+  mCamera->yaw(Ogre::Radian(rotX));
+  mCamera->pitch(Ogre::Radian(rotY));
+  mCamera->moveRelative(translate * evt.timeSinceLastFrame * 400);
+
+
+//  float rotX = mMouse->getMouseState().X.rel * evt.timeSinceLastFrame * -1;
+//  float rotY = mMouse->getMouseState().Y.rel * evt.timeSinceLastFrame * -1;
+//  mCamera->yaw(Ogre::Radian(rotX));
+//  mCamera->pitch(Ogre::Radian(rotY));
+//
+//  mCamera->moveRelative(translate * evt.timeSinceLastFrame * mMovementspeed * 5);
+
   game->update(evt.timeSinceLastFrame);
   return true;
 }
@@ -160,6 +184,7 @@ bool 			EventManager::axisMoved(const OIS::JoyStickEvent &e, int axis)
 {
   if( e.state.mAxes[axis].abs > 2500 || e.state.mAxes[axis].abs < -2500 )
     std::cout << std::endl << e.device->vendor() << ". Axis # " << axis << " Value: " << e.state.mAxes[axis].abs;
+  return true;
 }
 
 bool 			EventManager::buttonPressed(const OIS::JoyStickEvent &e, int button)

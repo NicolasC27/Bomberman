@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B2594073-C15E-345C-AD28-4A508FEA8CAA}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>bomberman</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\Tsigorf\projects\cpp_indie_studio\build\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">bomberman.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">bomberman_d</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\Tsigorf\projects\cpp_indie_studio\build\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">bomberman.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">bomberman</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\Tsigorf\projects\cpp_indie_studio\build\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">bomberman.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">bomberman</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\Tsigorf\projects\cpp_indie_studio\build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">bomberman.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">bomberman</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>includes;C:\OgreSDK\build\sdk\include;C:\Program Files\boost_1_64_0;C:\Users\Tsigorf\projects\cpp_indie_studio\includes;\usr\local\include\cegui-0;C:\OgreSDK\build\sdk\include\OGRE;C:\OgreSDK\build\sdk\include\OGRE\Bites;C:\OgreSDK\build\Dependencies\include\SDL2;C:\OgreSDK\build\sdk\include\OGRE\HLMS;C:\OgreSDK\build\sdk\include\OGRE\MeshLodGenerator;C:\OgreSDK\build\sdk\include\OGRE\Overlay;C:\OgreSDK\build\sdk\include\OGRE\Paging;C:\OgreSDK\build\sdk\include\OGRE\Property;C:\OgreSDK\build\sdk\include\OGRE\RTShaderSystem;C:\OgreSDK\build\sdk\include\OGRE\Terrain;C:\OgreSDK\build\sdk\include\OGRE\Volume;\Samples\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <CppLanguageStandard>c++11</CppLanguageStandard>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>BOOST_ALL_NO_LIB;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\OgreSDK\build\sdk\include;C:\Program Files\boost_1_64_0;C:\Users\Tsigorf\projects\cpp_indie_studio\includes;\usr\local\include\cegui-0;C:\OgreSDK\build\sdk\include\OGRE;C:\OgreSDK\build\sdk\include\OGRE\Bites;C:\OgreSDK\build\Dependencies\include\SDL2;C:\OgreSDK\build\sdk\include\OGRE\HLMS;C:\OgreSDK\build\sdk\include\OGRE\MeshLodGenerator;C:\OgreSDK\build\sdk\include\OGRE\Overlay;C:\OgreSDK\build\sdk\include\OGRE\Paging;C:\OgreSDK\build\sdk\include\OGRE\Property;C:\OgreSDK\build\sdk\include\OGRE\RTShaderSystem;C:\OgreSDK\build\sdk\include\OGRE\Terrain;C:\OgreSDK\build\sdk\include\OGRE\Volume;\Samples\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\OgreSDK\build\sdk\include;C:\Program Files\boost_1_64_0;C:\Users\Tsigorf\projects\cpp_indie_studio\includes;\usr\local\include\cegui-0;C:\OgreSDK\build\sdk\include\OGRE;C:\OgreSDK\build\sdk\include\OGRE\Bites;C:\OgreSDK\build\Dependencies\include\SDL2;C:\OgreSDK\build\sdk\include\OGRE\HLMS;C:\OgreSDK\build\sdk\include\OGRE\MeshLodGenerator;C:\OgreSDK\build\sdk\include\OGRE\Overlay;C:\OgreSDK\build\sdk\include\OGRE\Paging;C:\OgreSDK\build\sdk\include\OGRE\Property;C:\OgreSDK\build\sdk\include\OGRE\RTShaderSystem;C:\OgreSDK\build\sdk\include\OGRE\Terrain;C:\OgreSDK\build\sdk\include\OGRE\Volume;\Samples\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PreBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+if not exist .\bin mkdir .\bin
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+copy "$(TargetPath)" .\bin
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>OgreOverlay.lib;OgreMain.lib;OgreBites.lib;winmm.lib;imm32.lib;version.lib;msimg32.lib;C:\OgreSDK\build\Dependencies\lib\SDL2main.lib;C:\OgreSDK\build\Dependencies\lib\SDL2.lib;OgreHLMS.lib;OgreMeshLodGenerator.lib;OgreOverlay.lib;OgrePaging.lib;OgreProperty.lib;OgreRTShaderSystem.lib;OgreTerrain.lib;OgreVolume.lib;OgreMain.lib;OIS_d.lib;OgreOverlay.lib;OgreBites.lib;winmm.lib;imm32.lib;version.lib;msimg32.lib;C:\OgreSDK\build\Dependencies\lib\SDL2main.lib;C:\OgreSDK\build\Dependencies\lib\SDL2.lib;OgreHLMS.lib;OgreMeshLodGenerator.lib;OgrePaging.lib;OgreProperty.lib;OgreRTShaderSystem.lib;OgreTerrain.lib;OgreVolume.lib;OIS_d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/OgreSDK/build/lib/Release;C:/OgreSDK/build/lib/Release/$(Configuration);C:/OgreSDK/build/lib/Debug;C:/OgreSDK/build/lib/Debug/$(Configuration);/usr/local/lib;/usr/local/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/Tsigorf/projects/cpp_indie_studio/build/Debug/bomberman_d.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/Tsigorf/projects/cpp_indie_studio/build/Debug/bomberman_d.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>includes;C:\OgreSDK\build\sdk\include;C:\Program Files\boost_1_64_0;C:\Users\Tsigorf\projects\cpp_indie_studio\includes;\usr\local\include\cegui-0;C:\OgreSDK\build\sdk\include\OGRE;C:\OgreSDK\build\sdk\include\OGRE\Bites;C:\OgreSDK\build\Dependencies\include\SDL2;C:\OgreSDK\build\sdk\include\OGRE\HLMS;C:\OgreSDK\build\sdk\include\OGRE\MeshLodGenerator;C:\OgreSDK\build\sdk\include\OGRE\Overlay;C:\OgreSDK\build\sdk\include\OGRE\Paging;C:\OgreSDK\build\sdk\include\OGRE\Property;C:\OgreSDK\build\sdk\include\OGRE\RTShaderSystem;C:\OgreSDK\build\sdk\include\OGRE\Terrain;C:\OgreSDK\build\sdk\include\OGRE\Volume;\Samples\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <CppLanguageStandard>c++11</CppLanguageStandard>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>NDEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\OgreSDK\build\sdk\include;C:\Program Files\boost_1_64_0;C:\Users\Tsigorf\projects\cpp_indie_studio\includes;\usr\local\include\cegui-0;C:\OgreSDK\build\sdk\include\OGRE;C:\OgreSDK\build\sdk\include\OGRE\Bites;C:\OgreSDK\build\Dependencies\include\SDL2;C:\OgreSDK\build\sdk\include\OGRE\HLMS;C:\OgreSDK\build\sdk\include\OGRE\MeshLodGenerator;C:\OgreSDK\build\sdk\include\OGRE\Overlay;C:\OgreSDK\build\sdk\include\OGRE\Paging;C:\OgreSDK\build\sdk\include\OGRE\Property;C:\OgreSDK\build\sdk\include\OGRE\RTShaderSystem;C:\OgreSDK\build\sdk\include\OGRE\Terrain;C:\OgreSDK\build\sdk\include\OGRE\Volume;\Samples\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\OgreSDK\build\sdk\include;C:\Program Files\boost_1_64_0;C:\Users\Tsigorf\projects\cpp_indie_studio\includes;\usr\local\include\cegui-0;C:\OgreSDK\build\sdk\include\OGRE;C:\OgreSDK\build\sdk\include\OGRE\Bites;C:\OgreSDK\build\Dependencies\include\SDL2;C:\OgreSDK\build\sdk\include\OGRE\HLMS;C:\OgreSDK\build\sdk\include\OGRE\MeshLodGenerator;C:\OgreSDK\build\sdk\include\OGRE\Overlay;C:\OgreSDK\build\sdk\include\OGRE\Paging;C:\OgreSDK\build\sdk\include\OGRE\Property;C:\OgreSDK\build\sdk\include\OGRE\RTShaderSystem;C:\OgreSDK\build\sdk\include\OGRE\Terrain;C:\OgreSDK\build\sdk\include\OGRE\Volume;\Samples\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PreBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+if not exist .\bin mkdir .\bin
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+copy "$(TargetPath)" .\bin
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>OgreOverlay.lib;OgreMain.lib;OgreBites.lib;winmm.lib;imm32.lib;version.lib;msimg32.lib;C:\OgreSDK\build\Dependencies\lib\SDL2main.lib;C:\OgreSDK\build\Dependencies\lib\SDL2.lib;OgreHLMS.lib;OgreMeshLodGenerator.lib;OgreOverlay.lib;OgrePaging.lib;OgreProperty.lib;OgreRTShaderSystem.lib;OgreTerrain.lib;OgreVolume.lib;OgreMain.lib;OIS.lib;OgreOverlay.lib;OgreBites.lib;winmm.lib;imm32.lib;version.lib;msimg32.lib;C:\OgreSDK\build\Dependencies\lib\SDL2main.lib;C:\OgreSDK\build\Dependencies\lib\SDL2.lib;OgreHLMS.lib;OgreMeshLodGenerator.lib;OgrePaging.lib;OgreProperty.lib;OgreRTShaderSystem.lib;OgreTerrain.lib;OgreVolume.lib;OIS.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/OgreSDK/build/lib/Release;C:/OgreSDK/build/lib/Release/$(Configuration);C:/OgreSDK/build/lib/Debug;C:/OgreSDK/build/lib/Debug/$(Configuration);/usr/local/lib;/usr/local/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/Tsigorf/projects/cpp_indie_studio/build/Release/bomberman.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/Tsigorf/projects/cpp_indie_studio/build/Release/bomberman.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>includes;C:\OgreSDK\build\sdk\include;C:\Program Files\boost_1_64_0;C:\Users\Tsigorf\projects\cpp_indie_studio\includes;\usr\local\include\cegui-0;C:\OgreSDK\build\sdk\include\OGRE;C:\OgreSDK\build\sdk\include\OGRE\Bites;C:\OgreSDK\build\Dependencies\include\SDL2;C:\OgreSDK\build\sdk\include\OGRE\HLMS;C:\OgreSDK\build\sdk\include\OGRE\MeshLodGenerator;C:\OgreSDK\build\sdk\include\OGRE\Overlay;C:\OgreSDK\build\sdk\include\OGRE\Paging;C:\OgreSDK\build\sdk\include\OGRE\Property;C:\OgreSDK\build\sdk\include\OGRE\RTShaderSystem;C:\OgreSDK\build\sdk\include\OGRE\Terrain;C:\OgreSDK\build\sdk\include\OGRE\Volume;\Samples\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <CppLanguageStandard>c++11</CppLanguageStandard>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>NDEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\OgreSDK\build\sdk\include;C:\Program Files\boost_1_64_0;C:\Users\Tsigorf\projects\cpp_indie_studio\includes;\usr\local\include\cegui-0;C:\OgreSDK\build\sdk\include\OGRE;C:\OgreSDK\build\sdk\include\OGRE\Bites;C:\OgreSDK\build\Dependencies\include\SDL2;C:\OgreSDK\build\sdk\include\OGRE\HLMS;C:\OgreSDK\build\sdk\include\OGRE\MeshLodGenerator;C:\OgreSDK\build\sdk\include\OGRE\Overlay;C:\OgreSDK\build\sdk\include\OGRE\Paging;C:\OgreSDK\build\sdk\include\OGRE\Property;C:\OgreSDK\build\sdk\include\OGRE\RTShaderSystem;C:\OgreSDK\build\sdk\include\OGRE\Terrain;C:\OgreSDK\build\sdk\include\OGRE\Volume;\Samples\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\OgreSDK\build\sdk\include;C:\Program Files\boost_1_64_0;C:\Users\Tsigorf\projects\cpp_indie_studio\includes;\usr\local\include\cegui-0;C:\OgreSDK\build\sdk\include\OGRE;C:\OgreSDK\build\sdk\include\OGRE\Bites;C:\OgreSDK\build\Dependencies\include\SDL2;C:\OgreSDK\build\sdk\include\OGRE\HLMS;C:\OgreSDK\build\sdk\include\OGRE\MeshLodGenerator;C:\OgreSDK\build\sdk\include\OGRE\Overlay;C:\OgreSDK\build\sdk\include\OGRE\Paging;C:\OgreSDK\build\sdk\include\OGRE\Property;C:\OgreSDK\build\sdk\include\OGRE\RTShaderSystem;C:\OgreSDK\build\sdk\include\OGRE\Terrain;C:\OgreSDK\build\sdk\include\OGRE\Volume;\Samples\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PreBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+if not exist .\bin mkdir .\bin
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+copy "$(TargetPath)" .\bin
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>OgreOverlay.lib;OgreMain.lib;OgreBites.lib;winmm.lib;imm32.lib;version.lib;msimg32.lib;C:\OgreSDK\build\Dependencies\lib\SDL2main.lib;C:\OgreSDK\build\Dependencies\lib\SDL2.lib;OgreHLMS.lib;OgreMeshLodGenerator.lib;OgreOverlay.lib;OgrePaging.lib;OgreProperty.lib;OgreRTShaderSystem.lib;OgreTerrain.lib;OgreVolume.lib;OgreMain.lib;OIS.lib;OgreOverlay.lib;OgreBites.lib;winmm.lib;imm32.lib;version.lib;msimg32.lib;C:\OgreSDK\build\Dependencies\lib\SDL2main.lib;C:\OgreSDK\build\Dependencies\lib\SDL2.lib;OgreHLMS.lib;OgreMeshLodGenerator.lib;OgrePaging.lib;OgreProperty.lib;OgreRTShaderSystem.lib;OgreTerrain.lib;OgreVolume.lib;OIS.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/OgreSDK/build/lib/Release;C:/OgreSDK/build/lib/Release/$(Configuration);C:/OgreSDK/build/lib/Debug;C:/OgreSDK/build/lib/Debug/$(Configuration);/usr/local/lib;/usr/local/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/Tsigorf/projects/cpp_indie_studio/build/MinSizeRel/bomberman.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/Tsigorf/projects/cpp_indie_studio/build/MinSizeRel/bomberman.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>includes;C:\OgreSDK\build\sdk\include;C:\Program Files\boost_1_64_0;C:\Users\Tsigorf\projects\cpp_indie_studio\includes;\usr\local\include\cegui-0;C:\OgreSDK\build\sdk\include\OGRE;C:\OgreSDK\build\sdk\include\OGRE\Bites;C:\OgreSDK\build\Dependencies\include\SDL2;C:\OgreSDK\build\sdk\include\OGRE\HLMS;C:\OgreSDK\build\sdk\include\OGRE\MeshLodGenerator;C:\OgreSDK\build\sdk\include\OGRE\Overlay;C:\OgreSDK\build\sdk\include\OGRE\Paging;C:\OgreSDK\build\sdk\include\OGRE\Property;C:\OgreSDK\build\sdk\include\OGRE\RTShaderSystem;C:\OgreSDK\build\sdk\include\OGRE\Terrain;C:\OgreSDK\build\sdk\include\OGRE\Volume;\Samples\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <CppLanguageStandard>c++11</CppLanguageStandard>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>NDEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BOOST_ALL_NO_LIB;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\OgreSDK\build\sdk\include;C:\Program Files\boost_1_64_0;C:\Users\Tsigorf\projects\cpp_indie_studio\includes;\usr\local\include\cegui-0;C:\OgreSDK\build\sdk\include\OGRE;C:\OgreSDK\build\sdk\include\OGRE\Bites;C:\OgreSDK\build\Dependencies\include\SDL2;C:\OgreSDK\build\sdk\include\OGRE\HLMS;C:\OgreSDK\build\sdk\include\OGRE\MeshLodGenerator;C:\OgreSDK\build\sdk\include\OGRE\Overlay;C:\OgreSDK\build\sdk\include\OGRE\Paging;C:\OgreSDK\build\sdk\include\OGRE\Property;C:\OgreSDK\build\sdk\include\OGRE\RTShaderSystem;C:\OgreSDK\build\sdk\include\OGRE\Terrain;C:\OgreSDK\build\sdk\include\OGRE\Volume;\Samples\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\OgreSDK\build\sdk\include;C:\Program Files\boost_1_64_0;C:\Users\Tsigorf\projects\cpp_indie_studio\includes;\usr\local\include\cegui-0;C:\OgreSDK\build\sdk\include\OGRE;C:\OgreSDK\build\sdk\include\OGRE\Bites;C:\OgreSDK\build\Dependencies\include\SDL2;C:\OgreSDK\build\sdk\include\OGRE\HLMS;C:\OgreSDK\build\sdk\include\OGRE\MeshLodGenerator;C:\OgreSDK\build\sdk\include\OGRE\Overlay;C:\OgreSDK\build\sdk\include\OGRE\Paging;C:\OgreSDK\build\sdk\include\OGRE\Property;C:\OgreSDK\build\sdk\include\OGRE\RTShaderSystem;C:\OgreSDK\build\sdk\include\OGRE\Terrain;C:\OgreSDK\build\sdk\include\OGRE\Volume;\Samples\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PreBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+if not exist .\bin mkdir .\bin
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+copy "$(TargetPath)" .\bin
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>OgreOverlay.lib;OgreMain.lib;OgreBites.lib;winmm.lib;imm32.lib;version.lib;msimg32.lib;C:\OgreSDK\build\Dependencies\lib\SDL2main.lib;C:\OgreSDK\build\Dependencies\lib\SDL2.lib;OgreHLMS.lib;OgreMeshLodGenerator.lib;OgreOverlay.lib;OgrePaging.lib;OgreProperty.lib;OgreRTShaderSystem.lib;OgreTerrain.lib;OgreVolume.lib;OgreMain.lib;OIS.lib;OgreOverlay.lib;OgreBites.lib;winmm.lib;imm32.lib;version.lib;msimg32.lib;C:\OgreSDK\build\Dependencies\lib\SDL2main.lib;C:\OgreSDK\build\Dependencies\lib\SDL2.lib;OgreHLMS.lib;OgreMeshLodGenerator.lib;OgrePaging.lib;OgreProperty.lib;OgreRTShaderSystem.lib;OgreTerrain.lib;OgreVolume.lib;OIS.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:/OgreSDK/build/lib/Release;C:/OgreSDK/build/lib/Release/$(Configuration);C:/OgreSDK/build/lib/Debug;C:/OgreSDK/build/lib/Debug/$(Configuration);/usr/local/lib;/usr/local/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/Tsigorf/projects/cpp_indie_studio/build/RelWithDebInfo/bomberman.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/Tsigorf/projects/cpp_indie_studio/build/RelWithDebInfo/bomberman.pdb</ProgramDataBaseFile>
+      <SubSystem>Windows</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Tsigorf\projects\cpp_indie_studio\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/Tsigorf/projects/cpp_indie_studio/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Tsigorf/projects/cpp_indie_studio -BC:/Users/Tsigorf/projects/cpp_indie_studio/build --check-stamp-file C:/Users/Tsigorf/projects/cpp_indie_studio/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/Tsigorf/projects/cpp_indie_studio/CMakeLists.txt;C:\Users\Tsigorf\projects\cpp_indie_studio\CMakeLists.txt;C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\3.9.0-rc3\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\3.9.0-rc3\CMakeCCompiler.cmake;C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\3.9.0-rc3\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\3.9.0-rc3\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\OgreSDK\build\sdk\CMake\OGREConfigVersion.cmake;C:\OgreSDK\build\sdk\CMake\OGREConfig.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindBoost.cmake;C:\Users\Tsigorf\projects\cpp_indie_studio\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/Tsigorf/projects/cpp_indie_studio/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Tsigorf/projects/cpp_indie_studio -BC:/Users/Tsigorf/projects/cpp_indie_studio/build --check-stamp-file C:/Users/Tsigorf/projects/cpp_indie_studio/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/Tsigorf/projects/cpp_indie_studio/CMakeLists.txt;C:\Users\Tsigorf\projects\cpp_indie_studio\CMakeLists.txt;C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\3.9.0-rc3\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\3.9.0-rc3\CMakeCCompiler.cmake;C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\3.9.0-rc3\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\3.9.0-rc3\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\OgreSDK\build\sdk\CMake\OGREConfigVersion.cmake;C:\OgreSDK\build\sdk\CMake\OGREConfig.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindBoost.cmake;C:\Users\Tsigorf\projects\cpp_indie_studio\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/Tsigorf/projects/cpp_indie_studio/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Tsigorf/projects/cpp_indie_studio -BC:/Users/Tsigorf/projects/cpp_indie_studio/build --check-stamp-file C:/Users/Tsigorf/projects/cpp_indie_studio/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/Tsigorf/projects/cpp_indie_studio/CMakeLists.txt;C:\Users\Tsigorf\projects\cpp_indie_studio\CMakeLists.txt;C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\3.9.0-rc3\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\3.9.0-rc3\CMakeCCompiler.cmake;C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\3.9.0-rc3\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\3.9.0-rc3\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\OgreSDK\build\sdk\CMake\OGREConfigVersion.cmake;C:\OgreSDK\build\sdk\CMake\OGREConfig.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindBoost.cmake;C:\Users\Tsigorf\projects\cpp_indie_studio\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/Tsigorf/projects/cpp_indie_studio/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/Tsigorf/projects/cpp_indie_studio -BC:/Users/Tsigorf/projects/cpp_indie_studio/build --check-stamp-file C:/Users/Tsigorf/projects/cpp_indie_studio/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/Tsigorf/projects/cpp_indie_studio/CMakeLists.txt;C:\Users\Tsigorf\projects\cpp_indie_studio\CMakeLists.txt;C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\3.9.0-rc3\CMakeSystem.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\3.9.0-rc3\CMakeCCompiler.cmake;C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\3.9.0-rc3\CMakeCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\3.9.0-rc3\CMakeRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeCommonLanguageInclude.cmake;C:\OgreSDK\build\sdk\CMake\OGREConfigVersion.cmake;C:\OgreSDK\build\sdk\CMake\OGREConfig.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.9\Modules\FindBoost.cmake;C:\Users\Tsigorf\projects\cpp_indie_studio\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\Tsigorf\projects\cpp_indie_studio\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Tsigorf\projects\cpp_indie_studio\src\main.cpp"  />
+    <ClCompile Include="C:\Users\Tsigorf\projects\cpp_indie_studio\src\MapManager.cpp"  />
+    <ClCompile Include="C:\Users\Tsigorf\projects\cpp_indie_studio\src\Objects\Wall.cpp"  />
+    <ClCompile Include="C:\Users\Tsigorf\projects\cpp_indie_studio\src\Objects\AGameObject.cpp"  />
+    <ClCompile Include="C:\Users\Tsigorf\projects\cpp_indie_studio\src\Objects\ACharacter.cpp"  />
+    <ClCompile Include="C:\Users\Tsigorf\projects\cpp_indie_studio\src\Objects\Player.cpp"  />
+    <ClCompile Include="C:\Users\Tsigorf\projects\cpp_indie_studio\src\Objects\PlayerSettings.cpp"  />
+    <ClCompile Include="C:\Users\Tsigorf\projects\cpp_indie_studio\src\Objects\Bomb.cpp"  />
+    <ClCompile Include="C:\Users\Tsigorf\projects\cpp_indie_studio\src\Objects\Item.cpp"  />
+    <ClCompile Include="C:\Users\Tsigorf\projects\cpp_indie_studio\src\Common\Manager\ConfigManager.cpp"  />
+    <ClCompile Include="C:\Users\Tsigorf\projects\cpp_indie_studio\src\Common\Manager\NodeManager.cpp"  />
+    <ClCompile Include="C:\Users\Tsigorf\projects\cpp_indie_studio\src\Common\Manager\CameraManager.cpp"  />
+    <ClCompile Include="C:\Users\Tsigorf\projects\cpp_indie_studio\src\Common\Manager\GameManager.cpp"  />
+    <ClCompile Include="C:\Users\Tsigorf\projects\cpp_indie_studio\src\Controller\EventManager.cpp"  />
+    <ClCompile Include="C:\Users\Tsigorf\projects\cpp_indie_studio\src\Objects\Explosion.cpp"  />
+    <ClInclude Include="C:\Users\Tsigorf\projects\cpp_indie_studio\includes\Common\Manager\GameManager.hpp" />
+    <ClInclude Include="C:\Users\Tsigorf\projects\cpp_indie_studio\includes\Common\Manager\NodeManager.hpp" />
+    <ClInclude Include="C:\Users\Tsigorf\projects\cpp_indie_studio\includes\Common\Manager\CameraManager.hpp" />
+    <ClInclude Include="C:\Users\Tsigorf\projects\cpp_indie_studio\includes\Controller\EventManager.hpp" />
+    <ClInclude Include="C:\Users\Tsigorf\projects\cpp_indie_studio\includes\Interfaces\AGameObject.hpp" />
+    <ClInclude Include="C:\Users\Tsigorf\projects\cpp_indie_studio\includes\Interfaces\ACharacter.hpp" />
+    <ClInclude Include="C:\Users\Tsigorf\projects\cpp_indie_studio\includes\Common\Manager\ConfigManager.hpp" />
+    <ClInclude Include="C:\Users\Tsigorf\projects\cpp_indie_studio\includes\Objects\Player.hpp" />
+    <ClInclude Include="C:\Users\Tsigorf\projects\cpp_indie_studio\includes\Objects\Wall.hpp" />
+    <ClInclude Include="C:\Users\Tsigorf\projects\cpp_indie_studio\includes\Objects\Bomb.hpp" />
+    <ClInclude Include="C:\Users\Tsigorf\projects\cpp_indie_studio\includes\Objects\Explosion.hpp" />
+    <ClInclude Include="C:\Users\Tsigorf\projects\cpp_indie_studio\includes\Objects\PlayerSettings.hpp" />
+    <ClInclude Include="C:\Users\Tsigorf\projects\cpp_indie_studio\includes\Objects\Item.hpp" />
+    <ClInclude Include="C:\Users\Tsigorf\projects\cpp_indie_studio\includes\MapManager.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\Tsigorf\projects\cpp_indie_studio\build\ZERO_CHECK.vcxproj">
+      <Project>{724713C7-3CD9-3FDB-8E56-06D9A277E0AE}</Project>
+      <Name>ZERO_CHECK</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

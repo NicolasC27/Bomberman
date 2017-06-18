@@ -3,6 +3,7 @@
 //
 
 #include "Objects/Item.hpp"
+#include <iostream>
 
 Item::Item(MapManager *map, AGameObject::Object object) : AGameObject(map, object, 1)
 {
