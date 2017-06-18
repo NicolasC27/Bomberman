@@ -15,9 +15,9 @@ Player::Player(MapManager *map, AGameObject::Object object, int id)
   ++_playerID;
   keyCodeType.clear();
   setKey();
-  setPowerbomb(1);
+  setPowerbomb(3);
   setMovespeed(300);
-  setBombmax(1);
+  setBombmax(5);
   //setDelaybomb(0);
   _powerUp.push_back(&Player::powerUp);
   _powerUp.push_back(&Player::maxBombUp);
