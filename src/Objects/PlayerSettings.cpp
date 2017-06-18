@@ -110,8 +110,8 @@ void    Player::speedUp()
 {
   int temp;
 
-  if ((temp = getMovespeed()) < 700)
-    setMovespeed(temp + 50);
+  if ((temp = getMovespeed()) < PlayerSettings::BASIC_SPEED * 2)
+    setMovespeed(temp + PlayerSettings::BASIC_SPEED / 4);
 }
 
 void    Player::throwing()

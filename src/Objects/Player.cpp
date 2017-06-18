@@ -9,9 +9,11 @@
 
 int Player::_playerID = 1;
 
-Player::Player(MapManager *map, AGameObject::Object object) :
-	ACharacter(map, object, 35), _ID(_playerID++)
+Player::Player(MapManager *map, AGameObject::Object object, int id)
+	: ACharacter(map, object, 35), _ID(id)
 {
+  if (_playerID == id)
+    ++_playerID;
   keyCodeType.clear();
   setKey();
   setPowerbomb(1);
@@ -205,6 +207,7 @@ void 			Player::destroy()
 
 void 			Player::reset()
 {
+  std::cout << "reset Player" << std::endl;
   setPowerbomb(1);
   setMovespeed(300);
   setBombmax(1);

@@ -86,15 +86,15 @@ void			GameManager::checkVictory()
 
 void 			GameManager::update(Ogre::Real dt)
 {
-  if (_state != PAUSE)
-    {
-      _timer -= dt;
-
-      this->WallFalling(dt);
-
-      _map->update(dt);
-      checkVictory();
-    }
+  if (_state == RESTART)
+    reset();
+  else if (_state == GAME)
+  {
+    _timer -= dt;
+    this->WallFalling(dt);
+    _map->update(dt);
+    checkVictory();
+  }
 }
 
 void 			GameManager::nextFoundingPositionWallFalling()
@@ -186,11 +186,13 @@ void 			GameManager::setupLight()
 
 void 			GameManager::reset()
 {
+  std::cout << "reset game" << std::endl;
   _map->reset();
   wallFalling.x = 0;
   wallFalling.z = 0;
   wallFalling.turn = 0;
   wallFalling.timer = 60;
+  setState(GAME);
 }
 
 Ogre::RenderWindow	*GameManager::getWindow() const

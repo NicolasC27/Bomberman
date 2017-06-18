@@ -6,6 +6,7 @@
 
 Item::Item(MapManager *map, AGameObject::Object object) : AGameObject(map, object, 1)
 {
+  std::cout << "create item " << std::endl;
   this->upgrade = rand() % 3;//NB_UPGRADE;
 }
 
@@ -36,6 +37,7 @@ void 			Item::update(Ogre::Real dt)
 
 void 			Item::createEntity()
 {
+  std::cout << "create entity Item" << std::endl;
   _obj = SceneManager->createEntity(getName(),  Ogre::SceneManager::PT_SPHERE);//getMeshPrefab());
   dynamic_cast <Ogre::Entity*>(_obj)->setMaterialName(this->getMaterialName());
 }

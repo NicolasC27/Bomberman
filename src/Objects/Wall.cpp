@@ -12,10 +12,7 @@ Wall::Wall(MapManager *map, Wall::State type) : AGameObject(map, BLOCK), _state(
 
 Wall::~Wall()
 {
-  if (rand() % 3 == 2)
-    _map->addObjects(Ogre::Vector2(_node->getPosition().x,
-                                   _node->getPosition().z),
-  		     new Item(_map, AGameObject::ITEM));
+
 }
 
 void 			Wall::update(Ogre::Real dt)
@@ -110,6 +107,10 @@ void		Wall::setPositionY(int positionY)
 
 void 		Wall::destroy()
 {
+  if (rand() % 3 == 2)
+    _map->addObjects(Ogre::Vector2(_node->getPosition().x,
+				   _node->getPosition().z),
+		     new Item(_map, AGameObject::ITEM));
   if (_state == BREAKABLE)
     _map->removeObject(this);
   // animation ?
