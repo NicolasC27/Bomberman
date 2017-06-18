@@ -107,11 +107,13 @@ void		Wall::setPositionY(int positionY)
 
 void 		Wall::destroy()
 {
-  if (rand() % 3 == 2)
-    _map->addObjects(Ogre::Vector2(_node->getPosition().x,
-				   _node->getPosition().z),
-		     new Item(_map, AGameObject::ITEM));
   if (_state == BREAKABLE)
+  {
+    if (rand() % 3 == 2)
+      _map->addObjects(Ogre::Vector2(_node->getPosition().x,
+	                             _node->getPosition().z),
+		       new Item(_map, AGameObject::ITEM));
     _map->removeObject(this);
+    }
   // animation ?
 }
