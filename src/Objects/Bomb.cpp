@@ -8,9 +8,8 @@
 #include "Objects/Bomb.hpp"
 
 Bomb::Bomb(Player *player, MapManager *map, AGameObject::Object object) :
-	AGameObject(map, object, 1),  explosionDelay(3), _player(player), _power(player->getPowerbomb())
+	AGameObject(map, object, 1),  explosionDelay(3), _player(player), _power(player->getPowerbomb()), delayDelete(2), _delete(false)
 {
-
 }
 
 Bomb::~Bomb()
@@ -23,9 +22,11 @@ void 			Bomb::update(Ogre::Real dt)
   float 		scale;
 
   explosionDelay -= dt;
-  scale  =  40 - (20 * explosionDelay / 3);
+  scale = 40 - (20 * explosionDelay / 3);
   _node->setScale(scale, scale, scale);
 
+  if (explosionDelay <= 0.5)
+    _map->getEngine()->play2D(_map->getExplosion());
   if (explosionDelay <= 0)
     {
       this->explode();

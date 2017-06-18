@@ -8,6 +8,7 @@
 class Bomb;
 
 #include <OgreVector3.h>
+#include <irrKlang.h>
 #include "Interfaces/AGameObject.hpp"
 #include "Objects/Player.hpp"
 
