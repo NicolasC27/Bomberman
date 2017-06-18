@@ -10,9 +10,11 @@
 
 int Player::_playerID = 1;
 
-Player::Player(MapManager *map, AGameObject::Object object) :
-	ACharacter(map, object, 35), _ID(_playerID++)
+Player::Player(MapManager *map, AGameObject::Object object, int id)
+	: ACharacter(map, object, 35), _ID(id)
 {
+  if (_playerID == id)
+    ++_playerID;
   this->translateVector = Ogre::Vector3::ZERO;
   this->_vector = Ogre::Vector3::ZERO;
   keyCodeType.clear();

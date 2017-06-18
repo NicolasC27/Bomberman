@@ -4,6 +4,7 @@
 
 #include <OgreParticleSystem.h>
 #include <OgreParticleSystemManager.h>
+#include <Interfaces/ACharacter.hpp>
 #include "Objects/Explosion.hpp"
 
 Explosion::Explosion(MapManager *map, AGameObject::Object object, int isRoot, int Length,
@@ -55,6 +56,7 @@ bool 			Explosion::checkVictim(Ogre::Vector3 const &pos, Ogre::Vector3 const &di
   AGameObject		*obj = _map->getObjectFrom(pos);
   MapManager::Character	victim = _map->getCharacterFrom(Ogre::Vector2(pos.x, pos.z));
   bool 			ret = false;
+  AGameObject		*tmp;
   /*if (!_extend && obj != NULL && obj->getType() == AGameObject::EXPLOSION)
     {
       --_Length;
@@ -63,8 +65,12 @@ bool 			Explosion::checkVictim(Ogre::Vector3 const &pos, Ogre::Vector3 const &di
     }*/
   if (!_extend && (obj == NULL || obj->getType() == AGameObject::ITEM))
     ret = true;
-  for (unsigned int i = 0; i < victim.size() ; ++i)
-    victim[i]->destroy();
+  for (MapManager::Character::const_iterator it = victim.begin(); it != victim.end(); )
+    {
+      tmp = *it;
+      ++it;
+      tmp->destroy();
+    }
   if (!_extend && obj != NULL)
     obj->destroy();
   return (ret);

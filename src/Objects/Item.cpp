@@ -16,29 +16,12 @@ Item::~Item()
 
 void 			Item::update(Ogre::Real dt)
 {
-  /*MapManager::Character	charac = _map->getCharacter();
-  Ogre::Vector3 	itempos(_node->getPosition());
-  Ogre::Vector3 	playerpos;
-  
-  int	used = 0;
-  for (unsigned int i = 0; i < charac.size(); i++)
-    {
-      playerpos = charac[i]->getNode()->getPosition();
-      dist = (itempos.x - playerpos.x) * (itempos.x - playerpos.x) +
-	     (itempos.z - playerpos.z) * (itempos.z - playerpos.z);
-      if (dist <= 10000)
-	{
-	  used = 1;
-	  _map->_character[_upgrade]->use_item[i]();
-	  removeObject();
-	}
-    }*/
   _node->yaw(Ogre::Degree(5));
 }
 
 void 			Item::createEntity()
 {
-  _obj = SceneManager->createEntity(getName(),  getMeshName());//getMeshPrefab());
+  _obj = SceneManager->createEntity(getName(),  getMeshName());
   dynamic_cast <Ogre::Entity*>(_obj)->setMaterialName(this->getMaterialName());
 }
 
@@ -54,11 +37,11 @@ std::string 		Item::getName() const
 
 std::string 		Item::getMaterialName() const
 {
-  if (this->upgrade == 0)
+  if (this->upgrade == Player::SPEEDUP)
     return "Mat";
-  else if (this->upgrade == 1)
+  else if (this->upgrade == Player::MAXBOMBUP)
       return "Mat_gris";
-    else if (this->upgrade == 2)
+    else if (this->upgrade == Player::POWERUP)
 	return "Mat_red";
 }
 

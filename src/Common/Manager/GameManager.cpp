@@ -20,7 +20,7 @@ GameManager::GameManager() : _state(GAME)
 #endif
 
   // construct Ogre::Root
-  _Root = new Ogre::Root(mPluginsCfg);
+  _Root = std::unique_ptr<Ogre::Root>(new Ogre::Root(mPluginsCfg));
 
 //-------------------------------------------------------------------------------------
   // setup resources
@@ -45,9 +45,9 @@ GameManager::GameManager() : _state(GAME)
 		  archName, typeName, secName);
 	}
     }
-  if(_Root->restoreConfig()  || _Root->showConfigDialog() )
+  if((*_Root).restoreConfig()  || (*_Root).showConfigDialog())
     {
-      _Window = _Root->initialise(true, NAME_GAME);
+      _Window = (*_Root).initialise(true, NAME_GAME);
     }
   initializeResources();
   setupScene();
@@ -56,8 +56,8 @@ GameManager::GameManager() : _state(GAME)
 
 GameManager::~GameManager()
 {
-  delete _map;
-  delete _Root;
+  //delete _map;
+  //delete _Root;
 }
 
 void 			GameManager::run()
@@ -71,29 +71,29 @@ void 			GameManager::run()
 
   Camera = new CameraManager(getSceneManager(), getWindow(), _map->getSize());
   Listener = new EventManager(this, _map, getWindow(), Camera->getCamera());
-  getRoot()->addFrameListener(Listener);
-  getRoot()->startRendering();
+  (*_Root).addFrameListener(Listener);
+  (*_Root).startRendering();
 }
 
 void			GameManager::checkVictory()
 {
-  if (_map->getCharacter().size() <= 1)
+  if (_map->getCharacter().size() == 1)
     {
-
+	reset();
     }
 }
 
 void 			GameManager::update(Ogre::Real dt)
 {
-  if (_state != PAUSE)
-    {
-      _timer -= dt;
-
-      this->WallFalling(dt);
-
-      _map->update(dt);
-      checkVictory();
-    }
+  if (_state == RESTART)
+    reset();
+  else if (_state == GAME)
+  {
+    _timer -= dt;
+    this->WallFalling(dt);
+    _map->update(dt);
+    checkVictory();
+  }
 }
 
 void 			GameManager::nextFoundingPositionWallFalling()
@@ -142,7 +142,7 @@ void 			GameManager::WallFalling(Ogre::Real dt)
 
 void 			GameManager::createRenderWindow()
 {
-  _Window = _Root->initialise(true, NAME_GAME);
+  _Window = (*_Root).initialise(true, NAME_GAME);
 }
 
 void 			GameManager::initializeResources()
@@ -153,7 +153,7 @@ void 			GameManager::initializeResources()
 
 void 			GameManager::setupScene()
 {
-  _SceneManager = _Root->createSceneManager(Ogre::ST_GENERIC, "Bomberman Game");
+  _SceneManager = (*_Root).createSceneManager(Ogre::ST_GENERIC, "Bomberman Game");
   _SceneManager->setAmbientLight(Ogre::ColourValue(0.4f, 0.4f, 0.4f));
 }
 
@@ -183,22 +183,6 @@ void 			GameManager::setupLight()
 
 }
 
-
-Ogre::Root*		GameManager::getRoot() const
-{
-  return _Root;
-}
-
-Ogre::RenderWindow*	GameManager::getWindow() const
-{
-  return _Window;
-}
-
-NodeManager*		GameManager::getNodes() const
-{
-  return _nodes;
-}
-
 void 			GameManager::reset()
 {
   _map->reset();
@@ -206,6 +190,17 @@ void 			GameManager::reset()
   wallFalling.z = 0;
   wallFalling.turn = 0;
   wallFalling.timer = 60;
+  setState(GAME);
+}
+
+Ogre::RenderWindow	*GameManager::getWindow() const
+{
+  return _Window;
+}
+
+NodeManager*		GameManager::getNodes() const
+{
+  return _nodes;
 }
 
 GameManager::State 	GameManager::getState() const

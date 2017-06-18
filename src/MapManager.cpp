@@ -23,6 +23,7 @@ MapManager::MapManager(std::string const &filename, Ogre::SceneManager *SceneMan
 
 MapManager::~MapManager()
 {
+  _spawns.clear();
 
 }
 
@@ -49,9 +50,10 @@ void 		MapManager::update(Ogre::Real dt)
       ++iteratorObject;
       tmp->update(dt);
     }
-  for (iteratorCharacter = _character.begin(); iteratorCharacter != _character.end(); iteratorCharacter++)
+  for (iteratorCharacter = _character.begin(); iteratorCharacter != _character.end(); )
     {
       tmp = *iteratorCharacter;
+      ++iteratorCharacter;
       tmp->update(dt);
     }
 }
@@ -132,19 +134,23 @@ void 		MapManager::generateSpawn()
   _spawns.push_back(Ogre::Vector2(boxWidth, boxWidth));
   _spawns.push_back(Ogre::Vector2(
 	  (_size * boxWidth) - (boxWidth * 2),
-	  (_size * boxWidth) - (boxWidth * 2)));_spawns.push_back(Ogre::Vector2(boxWidth,
-				   (_size * boxWidth) -
-				   (boxWidth * 2)));
+	  (_size * boxWidth) - (boxWidth * 2)));
+  _spawns.push_back(Ogre::Vector2(boxWidth,
+	             		 (_size * boxWidth) -
+				 (boxWidth * 2)));
   _spawns.push_back(Ogre::Vector2(
 	  (_size * boxWidth) - (boxWidth * 2),
 	  boxWidth));
 }
 
-void 		MapManager::addCharacter(const Ogre::Vector2 &vector)
+void 		MapManager::addCharacter(const Ogre::Vector2 &vector, int id)
 {
   AGameObject	*player;
 
-  player = new Player(this, AGameObject::CHARACTER);
+  if (id != -1)
+    player = new Player(this, AGameObject::CHARACTER, id);
+  else
+    player = new Player(this, AGameObject::CHARACTER);
   _character.push_back(player);
   player->setSceneManager(_SceneManager);
   player->createEntity();
@@ -288,6 +294,8 @@ void 		MapManager::removeCharacter(AGameObject *object)
   for (; it != _character.end() && *it != object; ++it);
   if (it != _character.end())
     _character.erase(it);
+  //object->getObj()->detachFromParent();
+  object->getNode()->detachAllObjects();
   delete object;
 }
 
@@ -295,11 +303,13 @@ void 		MapManager::reset()
 {
   unsigned int i;
   MapManager::Objects::const_iterator iteratorObject;
+  AGameObject	*tmp;
 
   for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); )
     {
-      delete iteratorObject->first;
-      iteratorObject = _objects.erase(iteratorObject);
+      tmp = iteratorObject->first;
+      ++iteratorObject;
+      removeObject(tmp);
     }
   for (i = 0; i < _character.size(); ++i)
     {
@@ -308,7 +318,7 @@ void 		MapManager::reset()
     }
   if (i < 2)
     for (; i < 2; ++i)
-      addCharacter(_spawns[i]);
+      addCharacter(_spawns[i], i);
   generateObjects(true);
 }
 

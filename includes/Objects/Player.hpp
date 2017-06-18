@@ -15,7 +15,16 @@
 class Player : public ACharacter
 {
  public:
-  Player(MapManager *map, Object object);
+  enum {
+    POWERUP,
+    MAXBOMBUP,
+    SPEEDUP,
+    THROWING,
+    PUSHING,
+    GODMOD,
+    GHOSTMODE
+  };
+  Player(MapManager *map, Object object, int id = _playerID);
   virtual ~Player();
 
   void 			move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt);

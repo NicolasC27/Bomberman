@@ -33,7 +33,6 @@ class EventManager
 
  public:
 
-
   EventManager(GameManager *, MapManager *, Ogre::RenderWindow *, Ogre::Camera *);
 
   ~EventManager();
