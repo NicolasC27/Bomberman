@@ -61,21 +61,21 @@ std::string 		Wall::getName() const
 
 void			Wall::createEntity()
 {
-  _obj = SceneManager->createEntity(getName(), Ogre::SceneManager::PT_CUBE);
+    _obj = SceneManager->createEntity(getName(), getMeshName());
+
   dynamic_cast <Ogre::Entity*>(_obj)->setMaterialName(this->getMaterialName());
 
-  static_cast<Ogre::Entity*>(_obj)->getMesh()->_setBounds(Ogre::AxisAlignedBox(-42, -42, -42, 42, 42, 42));
-
-//  _node->showBoundingBox(true);
+  static_cast<Ogre::Entity*>(_obj)->getMesh()->_setBounds(Ogre::AxisAlignedBox(-48, -48, -48, 48, 48, 48));
 }
 
 std::string		Wall::getMaterialName() const
 {
-  if (getState() == Wall::State::UNBREAKABLE)
+  if (getState() == Wall::State::UNBREAKABLE_WALL)
     return std::string("Objects/Cube/Wall");
-  if (getState() == Wall::State::BREAKABLE)
-    return std::string("Objects/Cube/Block");
-
+  else if (getState() == Wall::State::BREAKABLE)
+    return std::string("Material");
+  else if (getState() == Wall::State::UNBREAKABLE_BLOCK)
+	return std::string("Objects/Cube/UNBREAKABLE_BLOCK");
 }
 
 Ogre::SceneManager::PrefabType		Wall::getMeshPrefab() const
@@ -85,12 +85,17 @@ Ogre::SceneManager::PrefabType		Wall::getMeshPrefab() const
 
 std::string 		Wall::getMeshName() const
 {
-  return ("cube.mesh");
+  if (getState() == Wall::State::UNBREAKABLE_WALL)
+    return ("cube1.mesh");
+  else
+    return ("cube2.mesh");
 }
 
 Ogre::Vector3 		Wall::getScale() const
 {
-  return (Ogre::Vector3(1.0, 1.0, 1.0));
+    return (Ogre::Vector3(1.0, 1.0, 1.0));
+
+
 }
 
 double 		Wall::getPositionY() const

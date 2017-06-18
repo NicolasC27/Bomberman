@@ -31,7 +31,7 @@ class MapManager
   Ogre::SceneManager 				*_SceneManager;
 
   typedef std::map<AGameObject *, Ogre::Vector2> 	Objects;
-  Objects					_objects;
+  Objects						_objects;
 
   typedef std::vector<AGameObject *>			Character;
   Character						_character;
@@ -82,7 +82,6 @@ private:
   void 			setIsdestructible(int isdestructible);
 
   void 			remove(AGameObject *object);
-
   void 			removeObject(AGameObject *object);
   void 			removeCharacter(AGameObject *object);
 

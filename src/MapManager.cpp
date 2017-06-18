@@ -92,11 +92,13 @@ void 		MapManager::generateObjects(bool res)
   {
       for(int z = 0, i = 0; line[i]; i++, z++)
 	{
-	  if ((line[i] - '0') == AGameObject::WALL)
-	      addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(this, Wall::UNBREAKABLE));
-	  else if ((line[i] - '0')  == AGameObject::BLOCK)
-	      addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(this, Wall::BREAKABLE));
-	  else
+	  if ((line[i] - '0') == 1)
+	      addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(this, Wall::UNBREAKABLE_WALL));
+	  else if ((line[i] - '0')  == 2)
+	      addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(this, Wall::UNBREAKABLE_BLOCK));
+	    else if ((line[i] - '0')  == 3)
+		addObjects(Ogre::Vector2(boxWidth * z, boxWidth * x), new Wall(this, Wall::BREAKABLE));
+	      else
 	      _isdestructible += 1;
 	}
       count = x;
@@ -241,11 +243,6 @@ Ogre::Vector2		MapManager::getPosFrom(Ogre::Vector3 const &t) const
   if (diffy > halfboxWidth)
     tmp.y += boxWidth;
   return (tmp);
-}
-
-Ogre::Vector2 		MapManager::getMiddlePosFrom(Ogre::Vector2 const &tmp) const
-{
-  return (this->getPosFrom(tmp) - halfboxWidth);
 }
 
 int 		MapManager::getIsdestructible() const

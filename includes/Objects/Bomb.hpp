@@ -36,8 +36,6 @@ class Bomb : public AGameObject
   Ogre::SceneManager::PrefabType	getMeshPrefab() const;
   std::string				getMeshName() const;
 
-  std::string getNameExplosion() const;
-
   void 			explode();
   virtual void		destroy();
 };

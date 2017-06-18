@@ -35,7 +35,7 @@ std::string 		ACharacter::getName() const
 
 AGameObject::State 	ACharacter::getState() const
 {
-  return UNBREAKABLE;
+  return UNBREAKABLE_BLOCK;
 }
 
 std::string 		ACharacter::getMaterialName() const

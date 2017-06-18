@@ -43,8 +43,7 @@ void 			Explosion::update(Ogre::Real dt)
 	      extendFire(-Ogre::Vector3::UNIT_X);
 	      extendFire(Ogre::Vector3::UNIT_Z);
 	      extendFire(-Ogre::Vector3::UNIT_Z);
-	    }
-	  else
+	    } else
 	    extendFire(_Direction);
 	  _extend = true;
 	}
@@ -56,7 +55,6 @@ bool 			Explosion::checkVictim(Ogre::Vector3 const &pos, Ogre::Vector3 const &di
   AGameObject		*obj = _map->getObjectFrom(pos);
   MapManager::Character	victim = _map->getCharacterFrom(Ogre::Vector2(pos.x, pos.z));
   bool 			ret = false;
-
   /*if (!_extend && obj != NULL && obj->getType() == AGameObject::EXPLOSION)
     {
       --_Length;
@@ -109,18 +107,18 @@ std::string 		Explosion::getMaterialName() const
 
 std::string 		Explosion::getMeshName() const
 {
-  return "Sphere.mesh";
+  return "bomb.mesh";
 }
 
 Ogre::Vector3 		Explosion::getScale() const
 {
-  return Ogre::Vector3(0.8, 0.8, 0.80);
+  return Ogre::Vector3(0.8, 0.8, 0.8);
 }
 
 
 double 			Explosion::getPositionY() const
 {
-  return 0;
+  return -50;
 }
 
 Ogre::SceneManager::PrefabType	Explosion::getMeshPrefab() const

@@ -15,12 +15,15 @@ Bomb::Bomb(Player *player, MapManager *map, AGameObject::Object object) :
 
 Bomb::~Bomb()
 {
+
 }
 
 void 			Bomb::update(Ogre::Real dt)
 {
+  float 		scale;
+
   explosionDelay -= dt;
-  float scale = 1 - (0.5 * explosionDelay / 3);
+  scale  =  40 - (20 * explosionDelay / 3);
   _node->setScale(scale, scale, scale);
 
   if (explosionDelay <= 0)
@@ -32,8 +35,10 @@ void 			Bomb::update(Ogre::Real dt)
 
 void 			Bomb::createEntity()
 {
-  _obj = SceneManager->createEntity(getName(), getMeshPrefab());
+  _obj = SceneManager->createEntity(getName(), getMeshName());
   dynamic_cast <Ogre::Entity*>(_obj)->setMaterialName(this->getMaterialName());
+  _node->yaw(Ogre::Degree(90));
+  _node->pitch(Ogre::Degree(90));
 }
 
 void			Bomb::explode()
@@ -54,31 +59,24 @@ std::string 		Bomb::getName() const
   return  "Bomb_" + std::to_string(_id);
 }
 
-std::string 		Bomb::getNameExplosion() const
-{
-  objectId += 1;
-  return  "BombExplosion_" + std::to_string(objectId);
-}
-
 std::string 		Bomb::getMaterialName() const
 {
-  return "Objects/Bomb";
+  return "BombTexture";
 }
 
 std::string Bomb::getMeshName() const
 {
-  return "Sphere.mesh";
+  return "bomb.mesh";
 }
 
 Ogre::Vector3 		Bomb::getScale() const
 {
-  return Ogre::Vector3(0.8, 0.8, 0.80);
+  return Ogre::Vector3(40, 40, 40);
 }
-
 
 double 			Bomb::getPositionY() const
 {
-  return 0;
+  return (-50);
 }
 
 Ogre::SceneManager::PrefabType	Bomb::getMeshPrefab() const

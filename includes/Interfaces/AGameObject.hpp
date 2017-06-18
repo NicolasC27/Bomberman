@@ -32,7 +32,8 @@ class AGameObject {
 
   enum State {
     BREAKABLE,
-    UNBREAKABLE
+    UNBREAKABLE_WALL,
+    UNBREAKABLE_BLOCK
   };
 
   AGameObject(MapManager *map, AGameObject::Object object);
