@@ -14,7 +14,7 @@ Player::Player(MapManager *map, AGameObject::Object object) :
 {
   keyCodeType.clear();
   setKey();
-  setPowerbomb(6);
+  setPowerbomb(1);
   setMovespeed(300);
   setBombmax(1);
   setDelaybomb(0);
@@ -72,16 +72,22 @@ bool			Player::Collide(Ogre::Vector3 &m)
     {
       if ((ptr = _map->getObjectFrom(pos[i])) != NULL)
 	{
-	  if (i == 1 && ptr->getType() == AGameObject::ITEM)
-	    (this->*_powerUp[dynamic_cast<Item *>(ptr)->getUpgrade()])();
-	  else if (ptr->getObj() != NULL || ptr->getParticleSystem() != NULL)
+	  if (ptr->getObj() != NULL/* || ptr->getParticleSystem() != NULL*/)
 	    {
 	      if (ptr->getObj() != NULL)
 		aab2 = ptr->getObj()->getWorldBoundingBox(true);
-	      else
-		aab2 = ptr->getParticleSystem()->getWorldBoundingBox(true);
+	     /* else
+		aab2 = ptr->getParticleSystem()->getWorldBoundingBox(true);*/
               if (sphere.intersects(ptr->getObj()->getWorldBoundingBox(true)))
-		return (true);
+		{
+		  if (ptr->getType() == AGameObject::ITEM)
+		    {
+		      (this->*_powerUp[dynamic_cast<Item *>(ptr)->getUpgrade()])();
+		      ptr->destroy();
+		    }
+
+		  return (true);
+		}
 	    }
 	}
     }

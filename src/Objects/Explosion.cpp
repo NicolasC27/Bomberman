@@ -67,7 +67,7 @@ bool 			Explosion::checkVictim(Ogre::Vector3 const &pos, Ogre::Vector3 const &di
     ret = true;
   for (unsigned int i = 0; i < victim.size() ; ++i)
     victim[i]->destroy();
-  if (obj != NULL)
+  if (!_extend && obj != NULL)
     obj->destroy();
   return (ret);
 }
