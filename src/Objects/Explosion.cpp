@@ -55,12 +55,7 @@ bool 			Explosion::checkVictim(Ogre::Vector3 const &pos, Ogre::Vector3 const &di
   MapManager::Character	victim = _map->getCharacterFrom(Ogre::Vector2(pos.x, pos.z));
   bool 			ret = false;
   AGameObject		*tmp;
-  /*if (!_extend && obj != NULL && obj->getType() == AGameObject::EXPLOSION)
-    {
-      --_Length;
-      extendFire(direction + _Direction);
-      return (false);
-    }*/
+
   if (!_extend && (obj == NULL || obj->getType() == AGameObject::ITEM))
     ret = true;
   for (MapManager::Character::const_iterator it = victim.begin(); it != victim.end(); )

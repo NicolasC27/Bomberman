@@ -7,7 +7,6 @@
 
 #include <OIS/OIS.h>
 #include <MapManager.hpp>
-//#include "Controller/KeyController.hpp"
 #include "AGameObject.hpp"
 
 class ACharacter : public AGameObject

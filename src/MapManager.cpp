@@ -55,19 +55,19 @@ void		MapManager::setSound()
 
 void 		MapManager::update(Ogre::Real dt)
 {
-  Objects::iterator iteratorObject;
-  Character::iterator iteratorCharacter;
-  AGameObject 		*tmp;
+  Objects::const_iterator iteratorObject;
+  Character::const_iterator iteratorCharacter;
+  AGameObject		  *tmp;
 
   for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); )
     {
-      tmp = (iteratorObject->first);
+      tmp = iteratorObject->first;
       ++iteratorObject;
       tmp->update(dt);
     }
   for (iteratorCharacter = _character.begin(); iteratorCharacter != _character.end(); )
     {
-      tmp = (*iteratorCharacter);
+      tmp = *iteratorCharacter;
       ++iteratorCharacter;
       tmp->update(dt);
     }
@@ -138,7 +138,6 @@ void 		MapManager::generateObjects(bool res)
   {
     addCharacter(Ogre::Vector2(100, 900));
     addCharacter(Ogre::Vector2(100, 100));
-    //addBomb(Ogre::Vector2(900, 900));
     generatePlan();
     generateSpawn();
   }

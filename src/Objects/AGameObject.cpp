@@ -25,14 +25,11 @@ AGameObject::~AGameObject()
 {
   if (_obj)
     {
-      _node->detachAllObjects();// detachObject(_obj);
-      //SceneManager->destroyEntity(dynamic_cast<Ogre::Entity *>(_obj));
-      //SceneManager->destroySceneNode(_node);
+      _node->detachAllObjects();
     }
   else
     {
-      _node->detachAllObjects();// detachObject(particleSystem);
-      //SceneManager->destroySceneNode(_node);
+      _node->detachAllObjects();
     }
 }
 

@@ -14,22 +14,6 @@
 
 #define	NB_UPGRADE	7
 
-/*std::vector<std::string> mesh_item = {"Sphere.mesh",
-				      "Sphere.mesh",
-				      "Sphere.mesh",
-				      "Sphere.mesh",
-				      "Sphere.mesh",
-				      "Sphere.mesh",
-				      "Sphere.mesh"};
-*/
-/*void    (*)[7](void) = {&Player::powerup,
-			&Player::rangeup,
-				  &Player::speedup,
-				  &Player::throwing,
-				  &Player::pushing,
-				  &Player::godmode,
-				  &Player::ghostmode};
-*/
 class Item : public AGameObject
 {
   std::string		_name;

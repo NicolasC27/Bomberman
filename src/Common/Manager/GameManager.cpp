@@ -19,16 +19,11 @@ GameManager::GameManager() : _state(GAME)
   mPluginsCfg = "plugins.cfg";
 #endif
 
-  // construct Ogre::Root
   _Root = std::unique_ptr<Ogre::Root>(new Ogre::Root(mPluginsCfg));
 
-//-------------------------------------------------------------------------------------
-  // setup resources
-  // Load resource paths from config file
   Ogre::ConfigFile cf;
   cf.load(mResourcesCfg);
 
-  // Go through all sections & settings in the file
   Ogre::ConfigFile::SectionIterator seci = cf.getSectionIterator();
 
   Ogre::String secName, typeName, archName;
@@ -57,20 +52,19 @@ GameManager::GameManager() : _state(GAME)
 
 GameManager::~GameManager()
 {
-  //delete _map;
-  //delete _Root;
 }
 
 void 			GameManager::run()
 {
   _map = new MapManager("media/map/map1", getSceneManager(), getNodes());
-
   _map->generateObjects(false);
   _boundary = (_map->getSize() - 2) * MapManager::boxWidth;
   wallFalling.x = MapManager::boxWidth;
   wallFalling.z = _boundary;
 
+
   Camera = new CameraManager(getSceneManager(), getWindow(), _map->getSize());
+
   Listener = new EventManager(this, _map, getWindow(), Camera->getCamera());
   (*_Root).addFrameListener(Listener);
   (*_Root).startRendering();
@@ -88,9 +82,13 @@ void 			GameManager::update(Ogre::Real dt)
 {
   if (_state == RESTART)
     reset();
-  else if (_state == GAME)
+  else
+    if (_state == GAME)
       {
-	_timer -= dt;
+	if (_timer <= 0)
+	  _timer = 0;
+	else
+	  _timer -= dt;
 	this->WallFalling(dt);
 	_map->update(dt);
 	checkVictory();
@@ -132,9 +130,7 @@ void 			GameManager::WallFalling(Ogre::Real dt)
 	  wall = new Wall(_map, AGameObject::UNBREAKABLE_WALL);
 	  dynamic_cast<Wall *>(wall)->setPositionY(800);
 	  _map->addObjects(Ogre::Vector2(wallFalling.x, wallFalling.z), wall);
-	  //map->setIsdestructible(map->getIsdestructible() - 1);
-	  while (/*map->getIsdestructible() > 1 &&*/
-		 _map->getObject(Ogre::Vector2(wallFalling.x, wallFalling.z)))
+	  while (_map->getObject(Ogre::Vector2(wallFalling.x, wallFalling.z)))
 	    nextFoundingPositionWallFalling();
 	  wallFalling.timer = 60;
 	}
@@ -179,7 +175,7 @@ void 			GameManager::setupLight()
 void 			GameManager::reset()
 {
   _map->reset();
-  _timer = 10;
+  _timer = 120;
   wallFalling.x = 0;
   wallFalling.z = 0;
   wallFalling.turn = 0;
