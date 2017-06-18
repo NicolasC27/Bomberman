@@ -167,7 +167,7 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 //
 //  mCamera->moveRelative(translate * evt.timeSinceLastFrame * mMovementspeed * 5);
 
-  game->update(_map, evt.timeSinceLastFrame);
+  game->update(evt.timeSinceLastFrame);
   return true;
 }
 

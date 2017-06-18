@@ -76,24 +76,24 @@ void 			GameManager::run()
   getRoot()->startRendering();
 }
 
-void			GameManager::checkVictory(MapManager *map)
+void			GameManager::checkVictory()
 {
-  if (map->getCharacter().size() <= 1)
+  if (_map->getCharacter().size() <= 1)
     {
 
     }
 }
 
-void 			GameManager::update(MapManager *map, Ogre::Real dt)
+void 			GameManager::update(Ogre::Real dt)
 {
   if (_state != PAUSE)
     {
       _timer -= dt;
 
-      this->WallFalling(map, dt);
+      this->WallFalling(dt);
 
-      map->update(dt);
-      checkVictory(map);
+      _map->update(dt);
+      checkVictory();
     }
 }
 
@@ -130,7 +130,7 @@ void 			GameManager::WallFalling(Ogre::Real dt)
       if (wallFalling.timer <= 0)
 	{
 	  AGameObject *wall;
-	  wall = new Wall(map, AGameObject::UNBREAKABLE_WALL);
+	  wall = new Wall(_map, AGameObject::UNBREAKABLE_WALL);
 	  dynamic_cast<Wall *>(wall)->setPositionY(800);
 	  _map->addObjects(Ogre::Vector2(wallFalling.x, wallFalling.z), wall);
 	  //map->setIsdestructible(map->getIsdestructible() - 1);
@@ -186,6 +186,16 @@ void 			GameManager::setupLight()
 
 }
 
+void 			GameManager::reset()
+{
+  _map->reset();
+  wallFalling.x = 0;
+  wallFalling.z = 0;
+  wallFalling.turn = 0;
+  wallFalling.timer = 60;
+}
+
+
 Ogre::Root*		GameManager::getRoot() const
 {
   return _Root;
@@ -199,4 +209,14 @@ Ogre::RenderWindow*	GameManager::getWindow() const
 NodeManager*		GameManager::getNodes() const
 {
   return _nodes;
+}
+
+GameManager::State 	GameManager::getState() const
+{
+  return _state;
+}
+
+void 			GameManager::setState(GameManager::State state)
+{
+  _state = state;
 }
