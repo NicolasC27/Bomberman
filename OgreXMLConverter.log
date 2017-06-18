@@ -1,0 +1,22 @@
+23:36:22: Creating resource group General
+23:36:22: Creating resource group Internal
+23:36:22: Creating resource group Autodetect
+23:36:22: Registering ResourceManager for type Mesh
+23:36:22: Registering ResourceManager for type Material
+23:36:22: Registering ResourceManager for type Skeleton
+23:36:22: XMLSkeletonSerializer: reading XML data from media/models/MutantMesh.skeleton.xml...
+23:36:22: XMLSkeletonSerializer: Reading Bones name...
+23:36:22: XMLSkeletonSerializer: Reading Hierarchy data...
+23:36:22: XMLSkeletonSerializer: Reading Bones data...
+23:36:22: XMLSkeletonSerializer: Reading Animations data...
+23:36:22: XMLSkeletonSerializer: Finished. Running SkeletonSerializer...
+23:36:22: Exporting bones..
+23:36:22: Bones exported.
+23:36:22: Exporting animations, count=2
+23:36:22: Exporting animation: idle
+23:36:22: Animation exported.
+23:36:22: Exporting animation: running
+23:36:22: Animation exported.
+23:36:22: Unregistering ResourceManager for type Skeleton
+23:36:22: Unregistering ResourceManager for type Material
+23:36:22: Unregistering ResourceManager for type Mesh
