@@ -184,16 +184,6 @@ void 			GameManager::setupLight()
 
 }
 
-Ogre::RenderWindow*	GameManager::getWindow() const
-{
-  return _Window;
-}
-
-NodeManager*		GameManager::getNodes() const
-{
-  return _nodes;
-}
-
 void 			GameManager::reset()
 {
   _map->reset();
@@ -201,6 +191,16 @@ void 			GameManager::reset()
   wallFalling.z = 0;
   wallFalling.turn = 0;
   wallFalling.timer = 60;
+}
+
+Ogre::RenderWindow	*GameManager::getWindow() const
+{
+  return _Window;
+}
+
+NodeManager*		GameManager::getNodes() const
+{
+  return _nodes;
 }
 
 GameManager::State 	GameManager::getState() const

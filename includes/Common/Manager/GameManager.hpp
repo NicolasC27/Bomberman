@@ -37,9 +37,6 @@ class GameManager
 
   float 		_timer = 120;
 
-
- private:
-
   State 		_state;
 
  public:
@@ -62,10 +59,13 @@ class GameManager
   Ogre::SceneManager 	*getSceneManager() const;
   Ogre::RenderWindow 	*getWindow() const;
   NodeManager 		*getNodes() const;
+  State 		getState() const;
 
   void 			WallFalling(Ogre::Real dt);
 
   void 			nextFoundingPositionWallFalling();
+
+  void 			setState(State state);
 
   struct position {
     int		x = 0;
@@ -79,9 +79,6 @@ class GameManager
   int			_boundary;
 
   void 			checkVictory();
-
-  State 		getState() const;
-  void 			setState(State state);
 };
 
 #endif //BOMBERMAN_GAMEMANAGER_HPP
