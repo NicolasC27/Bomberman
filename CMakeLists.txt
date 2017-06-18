@@ -6,6 +6,9 @@ if(WIN32)
     set(OGRE_SAMPLES_INCLUDEPATH
             $ENV{OGRE_HOME}/Samples/include
             )
+    set(Boost_INCLUDE_DIR "C:\Program Files\boost_1_64_0")
+    include_directories("C:\OgreSDK\build\sdk\include")
+    link_directories("C:\OgreSDK\build\lib\Release" "C:\OgreSDK\build\lib\Debug")
 endif(WIN32)
 
 if(UNIX)

@@ -7,6 +7,8 @@
 #include <OgreOverlayContainer.h>
 #include <Overlay/OgreOverlayManager.h>
 #include <Overlay/OgreTextAreaOverlayElement.h>
+#include <iostream>
+
 EventManager::EventManager(GameManager *gameManager, MapManager *map, Ogre::RenderWindow *Window, Ogre::Camera *camera) : _map(map), game(gameManager)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
@@ -175,6 +177,7 @@ bool 			EventManager::axisMoved(const OIS::JoyStickEvent &e, int axis)
 {
   if( e.state.mAxes[axis].abs > 2500 || e.state.mAxes[axis].abs < -2500 )
     std::cout << std::endl << e.device->vendor() << ". Axis # " << axis << " Value: " << e.state.mAxes[axis].abs;
+  return true;
 }
 
 bool 			EventManager::buttonPressed(const OIS::JoyStickEvent &e, int button)
