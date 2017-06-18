@@ -16,6 +16,14 @@ class GameManager;
 
 class GameManager
 {
+ public:
+  enum State
+  {
+    PAUSE,
+    RESTART,
+    GAME
+  };
+
  private:
   EventManager		*Listener;
 
@@ -26,7 +34,12 @@ class GameManager
   CameraManager		*Camera;
   NodeManager 		*_nodes;
 
-  float 		_timer = 10;
+  float 		_timer = 120;
+
+
+ private:
+
+  State 		_state;
 
  public:
   GameManager();
@@ -62,9 +75,10 @@ class GameManager
 
   position		wallFalling;
 
-  bool checkAround();
+  void 			checkVictory(MapManager *map);
 
-  bool checkAround(MapManager *map);
+  State 		getState() const;
+  void 			setState(State state);
 };
 
 #endif //BOMBERMAN_GAMEMANAGER_HPP

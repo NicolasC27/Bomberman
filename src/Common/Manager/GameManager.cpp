@@ -7,7 +7,7 @@
 #include "Common/Manager/ConfigManager.hpp"
 #include "Common/Manager/GameManager.hpp"
 
-GameManager::GameManager()
+GameManager::GameManager() : _state(GAME)
 {
   Ogre::String mResourcesCfg;
   Ogre::String mPluginsCfg;
@@ -74,14 +74,25 @@ void 			GameManager::run()
   getRoot()->startRendering();
 }
 
+void			GameManager::checkVictory(MapManager *map)
+{
+  if (map->getCharacter().size() <= 1)
+    {
+
+    }
+}
+
 void 			GameManager::update(MapManager *map, Ogre::Real dt)
 {
-  _timer -= dt;
+  if (_state != PAUSE)
+    {
+      _timer -= dt;
 
-  this->WallFalling(map, dt);
+      this->WallFalling(map, dt);
 
-  map->update(dt);
-//  std::cout << _timer << std::endl;
+      map->update(dt);
+      checkVictory(map);
+    }
 }
 
 void 			GameManager::nextFoundingPositionWallFalling(MapManager *map)
@@ -106,7 +117,7 @@ void 			GameManager::nextFoundingPositionWallFalling(MapManager *map)
 	  wallFalling.z += CUBE_WIDTH;
 
 	} else
-	if (wallFalling.z == 900 - wallFalling.turn && (wallFalling.x > 200 &&
+	if (wallFalling.z == (map->getSize() * MapManager::boxWidth - 200) - wallFalling.turn && (wallFalling.x > 200 &&
 							wallFalling.x <=
 							(map->getSize() * MapManager::boxWidth) - 200 - wallFalling.turn))
 	  {
@@ -120,16 +131,16 @@ void 			GameManager::WallFalling(MapManager *map, Ogre::Real dt)
 {
   static int 		i = 0;
 
-  if (_timer <= 0 && i == 0 &&  map->getIsdestructible() > 1)
+  if (_timer <= 0 && i == 0 &&  map->getIsdestructible() > 0)
     {
       if (wallFalling.timer <= 0)
 	{
 	  AGameObject *wall;
-	  wall = new Wall(map, AGameObject::UNBREAKABLE);
+	  wall = new Wall(map, AGameObject::UNBREAKABLE_WALL);
 	  dynamic_cast<Wall *>(wall)->setPositionY(800);
 	  map->addObjects(Ogre::Vector2(wallFalling.x, wallFalling.z), wall);
 	  map->setIsdestructible(map->getIsdestructible() - 1);
-	  while (map->getIsdestructible() > 1 &&
+	  while (map->getIsdestructible() > 0 &&
 		 map->getObject(Ogre::Vector2(wallFalling.x, wallFalling.z)))
 	    nextFoundingPositionWallFalling(map);
 	  wallFalling.timer = 60;
@@ -164,19 +175,20 @@ void 			GameManager::setupLight()
 {
   Ogre::Light *_Light = _SceneManager->createLight("Light1");
   _Light->setType(Ogre::Light::LT_POINT);
-  _Light->setPosition(Ogre::Vector3(1100, 500, 1100));
+
+  _Light->setPosition(Ogre::Vector3(550, 1192, -200));
   _Light->setDiffuseColour(Ogre::ColourValue::White);
   _Light->setSpecularColour(Ogre::ColourValue::White);
 
-  _Light->setAttenuation(2000,1,0,0);
+  _Light->setAttenuation(2000,1,0.000,0);
 
-  _Light = _SceneManager->createLight("Light Red");
-  _Light->setType(Ogre::Light::LT_POINT);
-  _Light->setPosition(Ogre::Vector3(250, 500, 1000));
-  _Light->setDiffuseColour(Ogre::ColourValue::Red);
-  _Light->setSpecularColour(Ogre::ColourValue::Red);
-
-  _Light->setAttenuation(1000,1,0.007,0);
+//  _Light = _SceneManager->createLight("Light Red");
+//  _Light->setType(Ogre::Light::LT_POINT);
+//  _Light->setPosition(Ogre::Vector3(250, 550, 1000));
+//  _Light->setDiffuseColour(Ogre::ColourValue::Red);
+//  _Light->setSpecularColour(Ogre::ColourValue::Red);
+//
+//  _Light->setAttenuation(1000,1,0,0);
 
 }
 
@@ -193,4 +205,14 @@ Ogre::RenderWindow*	GameManager::getWindow() const
 NodeManager*		GameManager::getNodes() const
 {
   return _nodes;
+}
+
+GameManager::State 	GameManager::getState() const
+{
+  return _state;
+}
+
+void 			GameManager::setState(GameManager::State state)
+{
+  _state = state;
 }
