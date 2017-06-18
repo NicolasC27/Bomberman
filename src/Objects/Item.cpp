@@ -6,7 +6,7 @@
 
 Item::Item(MapManager *map, AGameObject::Object object) : AGameObject(map, object, 1)
 {
-  this->upgrade = rand() % 3;//NB_UPGRADE;
+  this->upgrade = rand() % 3;
 }
 
 Item::~Item()
@@ -63,7 +63,7 @@ std::string 		Item::getMaterialName() const
 
 std::string Item::getMeshName() const
 {
-  return ("cristal.mesh");//mesh_item[this->upgrade];
+  return ("cristal.mesh");
 }
 
 Ogre::Vector3 		Item::getScale() const
@@ -83,12 +83,10 @@ Ogre::SceneManager::PrefabType	Item::getMeshPrefab() const
 
 void 			Item::destroy()
 {
-  std::cout << "item destroyed" << std::endl;
   _map->removeObject(this);
 }
 
 int Item::getUpgrade() const
 {
-  std::cout << "upgrade " << upgrade << " asked, pos " << _node->getPosition() << std::endl;
   return upgrade;
 }
