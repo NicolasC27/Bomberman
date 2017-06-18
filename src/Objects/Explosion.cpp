@@ -1,7 +1,6 @@
 //
 // Created by nicolas on 12/06/17.
 //
-
 #include <OgreParticleSystem.h>
 #include <OgreParticleSystemManager.h>
 #include <Interfaces/ACharacter.hpp>
@@ -10,11 +9,11 @@
 Explosion::Explosion(MapManager *map, AGameObject::Object object, int isRoot, int Length,
 		     Ogre::Vector3 direction)
 	: AGameObject(map, object, 1), _IsRoot(isRoot), _Length(Length), _Direction(direction),
-	  _extend(false)
+	  _extend(false), _deleteDelay(1), _delete(false)
 {
   _obj = NULL;
-  lifeTimeRemaning = LIFE_DURATION;
-  delayExtend = EXTEND_DELAY;
+  lifeTimeRemaning = 1.0f;
+  delayExtend = 0.05f;
 }
 
 Explosion::~Explosion()
@@ -25,28 +24,30 @@ Explosion::~Explosion()
 void 			Explosion::update(Ogre::Real dt)
 {
   if (lifeTimeRemaning > 0)
-    lifeTimeRemaning-= dt;
+    lifeTimeRemaning -= dt;
   else
     {
       _map->removeObject(this);
-      return ;
     }
 
-  delayExtend -= dt;
-  if (delayExtend <= 0)
+  if (_extend == false)
     {
-      if (_Length > 0)
+      delayExtend -= dt;
+      if (delayExtend <= 0)
 	{
-	  if (_IsRoot)
+	  if (_Length > 0)
 	    {
-	      checkVictim(_node->getPosition(), Ogre::Vector3::ZERO);
-	      extendFire(Ogre::Vector3::UNIT_X);
-	      extendFire(-Ogre::Vector3::UNIT_X);
-	      extendFire(Ogre::Vector3::UNIT_Z);
-	      extendFire(-Ogre::Vector3::UNIT_Z);
-	    } else
-	    extendFire(_Direction);
-	  _extend = true;
+	      if (_IsRoot)
+		{
+		  checkVictim(_node->getPosition(), Ogre::Vector3::ZERO);
+		  extendFire(Ogre::Vector3::UNIT_X);
+		  extendFire(-Ogre::Vector3::UNIT_X);
+		  extendFire(Ogre::Vector3::UNIT_Z);
+		  extendFire(-Ogre::Vector3::UNIT_Z);
+		} else
+		extendFire(_Direction);
+	      _extend = true;
+	    }
 	}
     }
 }

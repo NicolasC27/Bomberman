@@ -38,14 +38,16 @@ class Explosion : public AGameObject
 
   std::string		_name;
 
-  int 			_IsRoot;
-  int 			_Length;
-  bool 			_extend;
   Ogre::Real 		delayExtend;
   Ogre::Real		lifeTimeRemaning;
-  const float 		EXTEND_DELAY = 0.05;
-  const float 		LIFE_DURATION = 0.3;
   Ogre::Vector3 	_Direction;
+  Ogre::Real		_deleteDelay;
+
+  bool 			_extend;
+  bool 			_delete;
+  int 			_IsRoot;
+  int 			_Length;
+
 };
 
 #endif //BOMBERMAN_EXPLOSION_HPP
