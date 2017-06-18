@@ -40,19 +40,19 @@ void		MapManager::setSound()
 
 void 		MapManager::update(Ogre::Real dt)
 {
-  Objects::const_iterator iteratorObject;
-  Character::const_iterator iteratorCharacter;
-  AGameObject		  *tmp;
+  Objects::iterator iteratorObject;
+  Character::iterator iteratorCharacter;
+  AGameObject 		*tmp;
 
   for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); )
     {
-      tmp = iteratorObject->first;
+      tmp = (iteratorObject->first);
       ++iteratorObject;
       tmp->update(dt);
     }
   for (iteratorCharacter = _character.begin(); iteratorCharacter != _character.end(); )
     {
-      tmp = *iteratorCharacter;
+      tmp = (*iteratorCharacter);
       ++iteratorCharacter;
       tmp->update(dt);
     }
@@ -284,7 +284,8 @@ void 		MapManager::removeObject(AGameObject *object)
   else
     object->getParticleSystem()->clear();
   _objects.erase(object);
-  delete object;
+  if (object->getType() != AGameObject::BOMB)
+    delete object;
 }
 
 void 		MapManager::removeCharacter(AGameObject *object)
@@ -294,7 +295,6 @@ void 		MapManager::removeCharacter(AGameObject *object)
   for (; it != _character.end() && *it != object; ++it);
   if (it != _character.end())
     _character.erase(it);
-  //object->getObj()->detachFromParent();
   object->getNode()->detachAllObjects();
   delete object;
 }
