@@ -52,7 +52,7 @@ void 				Player::setKey()
 	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_RIGHT, AT_RIGHT));
 	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_UP, AT_UP));
 	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_DOWN, AT_DOWN));
-	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_SPACE, AT_FIRE));
+	  keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_R, AT_FIRE));
 	} else if (_ID == 2)
 	  {
 	    keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_A, AT_LEFT));
@@ -135,47 +135,49 @@ std::vector<Ogre::Vector2> const	Player::getFrontObstacle(Ogre::Vector2 const &m
 
 void            			Player::tick()
 {
-	if (this->_vector == Ogre::Vector3::ZERO || this->translateVector == Ogre::Vector3::ZERO)
-	{
-		return;
-	}
-	static Ogre::AnimationState	*mAnimationState;
+  if (this->_vector == Ogre::Vector3::ZERO || this->translateVector == Ogre::Vector3::ZERO)
+    {
+      return;
+    }
+  static Ogre::AnimationState *mAnimationState;
 
-	mAnimationState = dynamic_cast<Ogre::Entity*>(_obj)->getAnimationState("my_animation");
-	mAnimationState->setLoop(true);
-	mAnimationState->setEnabled(true);
-	if (this->translateVector != Ogre::Vector3::ZERO)
+  mAnimationState = dynamic_cast<Ogre::Entity *>(_obj)->getAnimationState("my_animation");
+  mAnimationState->setLoop(true);
+  mAnimationState->setEnabled(true);
+  if (this->translateVector != Ogre::Vector3::ZERO)
+    {
+      Ogre::Vector3 src = _node->getOrientation() * Ogre::Vector3::UNIT_Z;
+      Ogre::Vector3 mDirection = _vector;
+      mDirection.normalise();
+      if (!this->Collide(this->translateVector))
+	_node->translate(this->translateVector);
+      if ((1.0f + src.dotProduct(mDirection)) < 0.0001f)
+	_node->yaw(Ogre::Degree(180));
+      else
 	{
-		Ogre::Vector3 src = _node->getOrientation() * Ogre::Vector3::UNIT_Z;
-		Ogre::Vector3 mDirection = _vector;
-		mDirection.normalise();
-		if (!this->Collide(this->translateVector))
-			_node->translate(this->translateVector);
-		if ((1.0f + src.dotProduct(mDirection)) < 0.0001f)
-			_node->yaw(Ogre::Degree(180));
-		else
-		{
-			Ogre::Quaternion quat = src.getRotationTo(mDirection);
-			_node->rotate(quat);
-		}
-		int x = ((int)_node->getPosition()[0]) % 100;
-		int y = ((int)_node->getPosition()[2]) % 100;
-		if ((x < 8 && x > -8 && this->translateVector[0]) || (y < 8 && y > -8 && this->translateVector[2]))
-		{
-			this->translateVector = Ogre::Vector3::ZERO;
-		}
+	  Ogre::Quaternion quat = src.getRotationTo(mDirection);
+	  _node->rotate(quat);
 	}
-	mAnimationState->addTime(_evt.timeSinceLastFrame * 1.5f);
+      int x = ((int) _node->getPosition()[0]) % 100;
+      int y = ((int) _node->getPosition()[2]) % 100;
+      if ((x < 8 && x > -8 && this->translateVector[0]) ||
+	  (y < 8 && y > -8 && this->translateVector[2]))
+	{
+	  this->translateVector = Ogre::Vector3::ZERO;
+	}
+    }
+  mAnimationState->addTime(_evt.timeSinceLastFrame * 1.5f);
 }
 
 void			Player::move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt)
 {
-	if (this->translateVector == Ogre::Vector3::ZERO || (vector[0] && this->translateVector[0]) || (vector[2] && this->translateVector[2]))
-	{
-		this->_vector = vector;
-		this->_evt = evt;
-		this->translateVector = evt.timeSinceLastFrame * getMovespeed() * vector;
-	}
+  if (this->translateVector == Ogre::Vector3::ZERO || (vector[0] && this->translateVector[0]) ||
+      (vector[2] && this->translateVector[2]))
+    {
+      this->_vector = vector;
+      this->_evt = evt;
+      this->translateVector = evt.timeSinceLastFrame * getMovespeed() * vector;
+    }
 
 }
 

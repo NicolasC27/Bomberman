@@ -103,40 +103,37 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 
   if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
     return false;
-  if (mKeyboard->isKeyDown(OIS::KC_G))
-  else if (lastKey != OIS::KC_R && mKeyboard->isKeyDown(OIS::KC_R))
-  {
-    game->setState(GameManager::RESTART);
-    lastKey = OIS::KC_R;
-  }
-  else if (lastKey != OIS::KC_P && mKeyboard->isKeyDown(OIS::KC_P))
-  {
-    game->setState(GameManager::PAUSE);
-    lastKey = OIS::KC_P;
-  }
-  else if (mKeyboard->isKeyDown(OIS::KC_O))
-  {
-    game->setState(GameManager::GAME);
-    lastKey = OIS::KC_O;
-  }
-  if (game->getState() == GameManager::GAME)
-  {
-    for (std::vector<AGameObject *>::const_iterator characterit = Character.begin();
-         characterit != Character.end(); ++characterit)
-    {
-      player = dynamic_cast<Player *>(*characterit);
-      for (std::map<OIS::KeyCode, Player::ActionKeyCode>::const_iterator keyit = player->getKeyCodeType().begin();
-           keyit != player->getKeyCodeType().end(); ++keyit)
+  else
+    if (lastKey != OIS::KC_R && mKeyboard->isKeyDown(OIS::KC_R))
       {
-        if ((mKeyboard->isKeyDown(keyit->first)))
-          player->action(keyit->second, evt);
-      }
+	game->setState(GameManager::RESTART);
+	lastKey = OIS::KC_R;
+      } else
+      if (lastKey != OIS::KC_P && mKeyboard->isKeyDown(OIS::KC_P))
+	{
+	  game->setState(GameManager::PAUSE);
+	  lastKey = OIS::KC_P;
+	} else
+	if (mKeyboard->isKeyDown(OIS::KC_O))
+	  {
+	    game->setState(GameManager::GAME);
+	    lastKey = OIS::KC_O;
+	  }
+  if (game->getState() == GameManager::GAME)
+    {
+      for (std::vector<AGameObject *>::const_iterator characterit = Character.begin();
+	   characterit != Character.end(); ++characterit)
+	{
+	  player = dynamic_cast<Player *>(*characterit);
+	  for (std::map<OIS::KeyCode, Player::ActionKeyCode>::const_iterator keyit = player->getKeyCodeType().begin();
+	       keyit != player->getKeyCodeType().end(); ++keyit)
+	    {
+	      if ((mKeyboard->isKeyDown(keyit->first)))
+		player->action(keyit->second, evt);
+	    }
+	}
     }
-  }
-  game->update(evt.timeSinceLastFrame);
- /* if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
-    return false;
-  if (mKeyboard->isKeyDown(OIS::KC_I))
+  if (mKeyboard->isKeyDown(OIS::KC_G))
     translate += Ogre::Vector3(0, 0, -10);
   if (mKeyboard->isKeyDown(OIS::KC_B))
     translate += Ogre::Vector3(0, 0, 10);
@@ -151,8 +148,12 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 	  player = dynamic_cast<Player *>(*characterit);
 	  player->tick();
   }
+
+  mCamera->moveRelative(translate * evt.timeSinceLastFrame * 400);
+
   game->update(evt.timeSinceLastFrame);
   return true;
+
 }
 
 bool 			EventManager::axisMoved(const OIS::JoyStickEvent &e, int axis)
@@ -207,8 +208,6 @@ bool 			EventManager::povMoved(const OIS::JoyStickEvent &arg, int index)
 	  {
 	    translate += Ogre::Vector3(-10, 0, 0);
 	  }
-
-//  mCamera->moveRelative(translate * 0.5);
 
   return true;
 }
