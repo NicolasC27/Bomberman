@@ -63,14 +63,13 @@ GameManager::~GameManager()
 void 			GameManager::run()
 {
   _map = new MapManager("media/map/map1", getSceneManager(), getNodes());
+
   _map->generateObjects(false);
   _boundary = (_map->getSize() - 2) * MapManager::boxWidth;
   wallFalling.x = MapManager::boxWidth;
   wallFalling.z = _boundary;
 
-
   Camera = new CameraManager(getSceneManager(), getWindow(), _map->getSize());
-
   Listener = new EventManager(this, _map, getWindow(), Camera->getCamera());
   getRoot()->addFrameListener(Listener);
   getRoot()->startRendering();

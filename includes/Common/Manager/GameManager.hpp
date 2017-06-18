@@ -8,6 +8,7 @@
 class GameManager;
 
 #include <Ogre.h>
+#include <irrKlang.h>
 #include "Controller/EventManager.hpp"
 #include "Common/Manager/CameraManager.hpp"
 #include "MapManager.hpp"
@@ -26,7 +27,6 @@ class GameManager
 
  private:
   EventManager		*Listener;
-
   Ogre::Root 		*_Root;
   Ogre::SceneManager 	*_SceneManager;
   Ogre::RenderWindow 	*_Window;

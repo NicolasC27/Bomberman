@@ -108,6 +108,7 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 endif()
 
 include_directories(includes)
+include_directories(includes/irrKlang)
 include_directories(SYSTEM
   /usr/local/include/cegui-0
 )
@@ -115,6 +116,8 @@ include_directories(SYSTEM
 link_directories(
   /usr/local/lib/
 )
+
+link_directories(${CMAKE_BINARY_DIR})
 
 set(CEGUI_LIBS CEGUIBase-0 CEGUICommonDialogs-0 CEGUIOgreRenderer-0)
 
@@ -128,8 +131,8 @@ SET(SRCS
         src/Objects/Player.cpp
         src/Objects/PlayerSettings.cpp
         src/Objects/Bomb.cpp
-	src/Objects/Item.cpp
-	src/Common/Manager/ConfigManager.cpp
+	    src/Objects/Item.cpp
+	    src/Common/Manager/ConfigManager.cpp
 #        src/Controller/KeyController.cpp
         src/Common/Manager/NodeManager.cpp
         src/Common/Manager/CameraManager.cpp
@@ -154,6 +157,7 @@ SET(SRCS
     	includes/Objects/Item.hpp
 	    includes/MapManager.hpp
 #        includes/Collision.hpp
+        includes/irrKlang/irrKlang.h
         )
 
 set(HDRS ${SRCS})
@@ -174,7 +178,7 @@ set_target_properties(bomberman PROPERTIES DEBUG_POSTFIX _d)
 
 #${CEGUI_LIBS} ${FREETYPE_LIBRARIES}
 
-target_link_libraries(bomberman OgreOverlay OgreMain ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
+target_link_libraries(bomberman OgreOverlay OgreMain  libIrrKlang.so ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/assets)
