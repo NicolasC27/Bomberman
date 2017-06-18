@@ -54,7 +54,7 @@ void 				Player::setKey()
 	    keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_D, AT_RIGHT));
 	    keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_W, AT_UP));
 	    keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_S, AT_DOWN));
-	    keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_INSERT, AT_FIRE));
+	    keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_E, AT_FIRE));
 
 	  }
     }
