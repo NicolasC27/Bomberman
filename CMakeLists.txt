@@ -8,7 +8,7 @@ if(WIN32)
             )
     set(Boost_INCLUDE_DIR "C:\Program Files\boost_1_64_0")
     include_directories("C:\OgreSDK\build\sdk\include")
-    link_directories("C:\OgreSDK\build\lib\Release" "C:\OgreSDK\build\lib\Debug")
+    link_directories("C:\OgreSDK\build\lib\Release" "C:\OgreSDK\build\lib\Debug" "build")
 endif(WIN32)
 
 if(UNIX)
@@ -167,8 +167,10 @@ SET(SRCS
 set(HDRS ${SRCS})
 set(CMAKE_CXX_FLAGS "-Iincludes -std=c++11")
 
-find_package(Freetype REQUIRED)
-include_directories(${FREETYPE_INCLUDE_DIRS})
+if(UNIX)
+    find_package(Freetype REQUIRED)
+    include_directories(${FREETYPE_INCLUDE_DIRS})
+endif(UNIX)
 
 include_directories( ${OIS_INCLUDE_DIRS}
         ${OGRE_INCLUDE_DIRS}
@@ -180,8 +182,12 @@ add_executable(bomberman WIN32 ${HDRS} ${SRCS})
 
 set_target_properties(bomberman PROPERTIES DEBUG_POSTFIX _d)
 
-
-target_link_libraries(bomberman OgreOverlay OgreMain  libIrrKlang.so ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${FREETYPE_LIBRARIES})
+if(UNIX)
+    target_link_libraries(bomberman libIrrKlang.so OgreOverlay OgreMain ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${FREETYPE_LIBRAIRIES})
+endif(UNIX)
+if(WIN32)
+    target_link_libraries(bomberman irrKlang freetype OgreOverlay OgreMain ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
+endif(WIN32)
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/assets)
