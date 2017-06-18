@@ -183,7 +183,7 @@ add_executable(bomberman WIN32 ${HDRS} ${SRCS})
 set_target_properties(bomberman PROPERTIES DEBUG_POSTFIX _d)
 
 if(UNIX)
-    target_link_libraries(bomberman libIrrKlang.so OgreOverlay OgreMain ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${FREETYPE_LIBRAIRIES})
+    target_link_libraries(bomberman libIrrKlang.so OgreOverlay OgreMain ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${FREETYPE_LIBRARIES})
 endif(UNIX)
 if(WIN32)
     target_link_libraries(bomberman irrKlang freetype OgreOverlay OgreMain ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
