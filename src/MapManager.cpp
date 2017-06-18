@@ -147,10 +147,10 @@ void 		MapManager::addCharacter(const Ogre::Vector2 &vector, int id)
 {
   AGameObject	*player;
 
-  if (id != -1)
-    player = new Player(this, AGameObject::CHARACTER, id);
-  else
+  if (id == 0)
     player = new Player(this, AGameObject::CHARACTER);
+  else
+    player = new Player(this, AGameObject::CHARACTER, id);
   _character.push_back(player);
   player->setSceneManager(_SceneManager);
   player->createEntity();
@@ -304,6 +304,7 @@ void 		MapManager::reset()
   unsigned int i;
   MapManager::Objects::const_iterator iteratorObject;
   AGameObject	*tmp;
+  int 		id = -1;
 
   for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); )
     {
@@ -314,11 +315,12 @@ void 		MapManager::reset()
   for (i = 0; i < _character.size(); ++i)
     {
       dynamic_cast<Player *>(_character[i])->reset();
-      _character[i]->setPosition(_spawns[i].x, 0, _spawns[i].y);
+      _character[i]->setPosition(_spawns[i].x, _character[i]->getPositionY(), _spawns[i].y);
+      id = dynamic_cast<Player *>(_character[i])->getID();
     }
   if (i < 2)
     for (; i < 2; ++i)
-      addCharacter(_spawns[i], i);
+      addCharacter(_spawns[i], (i == 0 || id == 2) ? 1 : 2);
   generateObjects(true);
 }
 

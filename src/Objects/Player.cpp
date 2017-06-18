@@ -13,24 +13,23 @@ int Player::_playerID = 1;
 Player::Player(MapManager *map, AGameObject::Object object, int id)
 	: ACharacter(map, object, 35), _ID(id)
 {
-  if (_playerID == id)
-    ++_playerID;
   this->translateVector = Ogre::Vector3::ZERO;
   this->_vector = Ogre::Vector3::ZERO;
+  ++_playerID;
   keyCodeType.clear();
   setKey();
   setPowerbomb(1);
   setMovespeed(300);
   setBombmax(1);
-  setDelaybomb(0);
+  //setDelaybomb(0);
   _powerUp.push_back(&Player::powerUp);
   _powerUp.push_back(&Player::maxBombUp);
   _powerUp.push_back(&Player::speedUp);
   /*_powerUp.push_back(&Player::throwing);
   _powerUp.push_back(&Player::pushing);
   _powerUp.push_back(&Player::godmode);
-  _powerUp.push_back(&Player::ghostmode);
-*/}
+  _powerUp.push_back(&Player::ghostmode);*/
+}
 
 Player::~Player()
 {
@@ -71,18 +70,13 @@ bool			Player::Collide(Ogre::Vector3 &m)
   std::vector<Ogre::Vector2>	 pos = this->getFrontObstacle(mov);
   Ogre::Sphere	sphere(_obj->getWorldBoundingBox().getCenter() + m, radius);
   AGameObject		*ptr;
-  Ogre::AxisAlignedBox  aab2;
 
   for (unsigned int i = 0; i < pos.size(); ++i)
     {
       if ((ptr = _map->getObjectFrom(pos[i])) != NULL)
 	{
-	  if (ptr->getObj() != NULL/* || ptr->getParticleSystem() != NULL*/)
+	  if (ptr->getObj() != NULL)
 	    {
-	      if (ptr->getObj() != NULL)
-		aab2 = ptr->getObj()->getWorldBoundingBox(true);
-	     /* else
-		aab2 = ptr->getParticleSystem()->getWorldBoundingBox(true);*/
               if (sphere.intersects(ptr->getObj()->getWorldBoundingBox(true)))
 		{
 		  if (ptr->getType() == AGameObject::ITEM)
@@ -90,8 +84,6 @@ bool			Player::Collide(Ogre::Vector3 &m)
 		      (this->*_powerUp[dynamic_cast<Item *>(ptr)->getUpgrade()])();
 		      ptr->destroy();
 		    }
-		  this->translateVector = Ogre::Vector3::ZERO;
-
 		  return (true);
 		}
 	    }
@@ -212,7 +204,7 @@ void			Player::fire()
 	  _map->addObjects(_map->getPosFrom(Ogre::Vector2(_node->getPosition().x,
 				                          _node->getPosition().z)),
 			   new Bomb(this, _map, AGameObject::BOMB));
-	  setDelaybomb(1.5);
+	  //setDelaybomb(1.5);
 	}
     //}
 }

@@ -172,15 +172,6 @@ void 			GameManager::setupLight()
   _Light->setSpecularColour(Ogre::ColourValue::White);
 
   _Light->setAttenuation(2000,1,0.000,0);
-
-//  _Light = _SceneManager->createLight("Light Red");
-//  _Light->setType(Ogre::Light::LT_POINT);
-//  _Light->setPosition(Ogre::Vector3(250, 550, 1000));
-//  _Light->setDiffuseColour(Ogre::ColourValue::Red);
-//  _Light->setSpecularColour(Ogre::ColourValue::Red);
-//
-//  _Light->setAttenuation(1000,1,0,0);
-
 }
 
 void 			GameManager::reset()
