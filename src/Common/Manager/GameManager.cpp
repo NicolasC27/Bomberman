@@ -78,9 +78,9 @@ void 			GameManager::run()
 
 void			GameManager::checkVictory()
 {
-  if (_map->getCharacter().size() <= 1)
+  if (_map->getCharacter().size() == 1)
     {
-
+	reset();
     }
 }
 

@@ -44,11 +44,10 @@ EventManager::EventManager(GameManager *gameManager, MapManager *map, Ogre::Rend
 
 EventManager::~EventManager()
 {
-
   mInputManager->destroyInputObject(mKeyboard);
   mInputManager->destroyInputObject(mMouse);
-
   OIS::InputManager::destroyInputSystem(mInputManager);
+
   Ogre::WindowEventUtilities::removeWindowEventListener(mWindow, this);
   windowClosed(mWindow);
 }
@@ -140,7 +139,7 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 		    }
 		}
     }
-  if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
+ /* if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
     return false;
   if (mKeyboard->isKeyDown(OIS::KC_W))
     translate += Ogre::Vector3(0, 0, -10);
@@ -155,7 +154,7 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
   mCamera->yaw(Ogre::Radian(rotX));
   mCamera->pitch(Ogre::Radian(rotY));
   mCamera->moveRelative(translate * evt.timeSinceLastFrame * 400);
-
+*/
   game->update(evt.timeSinceLastFrame);
   return true;
 }

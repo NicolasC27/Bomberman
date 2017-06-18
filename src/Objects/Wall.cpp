@@ -12,10 +12,10 @@ Wall::Wall(MapManager *map, Wall::State type) : AGameObject(map, BLOCK), _state(
 
 Wall::~Wall()
 {
-  std::cout << "spawn item in " << _node->getPosition()<< std::endl;
-  _map->addObjects(Ogre::Vector2(_node->getPosition().x,
-				 _node->getPosition().z),
-  		   new Item(_map, AGameObject::ITEM));
+  if (rand() % 3 == 2)
+    _map->addObjects(Ogre::Vector2(_node->getPosition().x,
+                                   _node->getPosition().z),
+  		     new Item(_map, AGameObject::ITEM));
 }
 
 void 			Wall::update(Ogre::Real dt)

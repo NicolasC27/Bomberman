@@ -28,7 +28,7 @@ class EventManager
 
   float 			mMovementspeed;
 
-  std::shared_ptr<MapManager>	_map;
+  MapManager			*_map;
   GameManager 			*game;
 
  public:
