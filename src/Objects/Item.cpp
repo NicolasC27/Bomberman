@@ -53,7 +53,12 @@ std::string 		Item::getName() const
 
 std::string 		Item::getMaterialName() const
 {
-  return "Mat";//"Objects/Item";
+  if (this->upgrade == 0)
+    return "Mat";
+  else if (this->upgrade == 1)
+      return "Mat_gris";
+    else if (this->upgrade == 2)
+	return "Mat_red";
 }
 
 std::string Item::getMeshName() const
