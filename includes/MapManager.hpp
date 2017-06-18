@@ -10,6 +10,7 @@ class MapManager;
 #include <OgreVector2.h>
 #include <OgreException.h>
 #include <map>
+#include <irrKlang/ik_ISoundEngine.h>
 #include "Interfaces/AGameObject.hpp"
 #include "Common/Manager/NodeManager.hpp"
 
@@ -27,6 +28,10 @@ class MapManager
   static const int 				halfboxWidth = 50;
 
  public:
+  irrklang::ISoundEngine			* engine;
+
+  irrklang::ISoundEngine 			*getEngine() const;
+
   NodeManager 					*_nodes;
   Ogre::SceneManager 				*_SceneManager;
 
@@ -64,6 +69,7 @@ private:
   void			generatePlan();
 
   void			setSize(int size);
+  void 			setSound();
 
   int			getSize() const;
   const Character &	getCharacter() const;
@@ -86,6 +92,14 @@ private:
   void 			removeCharacter(AGameObject *object);
 
   void 			reset();
+
+ protected:
+  irrklang::ISoundSource			*general;
+  irrklang::ISoundSource			*explosion;
+
+ public:
+  irrklang::ISoundSource 			*getExplosion() const;
+
 };
 
 #endif //BOMBERMAN_MAP_HPP

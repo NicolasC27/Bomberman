@@ -18,11 +18,22 @@ MapManager::MapManager(std::string const &filename, Ogre::SceneManager *SceneMan
   if (!(infile.good()))
     throw Ogre::Exception(Ogre::Exception::ERR_FILE_NOT_FOUND,
 			  NOT_FOUND, FOLDER_MAP);
+  this->setSound();
 }
 
 MapManager::~MapManager()
 {
 
+}
+
+void		MapManager::setSound()
+{
+  engine = irrklang::createIrrKlangDevice();
+
+  general = engine->addSoundSourceFromFile("media/sound/Bomberman.wav");
+  explosion = engine->addSoundSourceFromFile("media/sound/explosion.wav");
+  engine->setSoundVolume(0.07f);
+  engine->play2D(general);
 }
 
 
@@ -299,4 +310,14 @@ void 		MapManager::reset()
     for (; i < 2; ++i)
       addCharacter(_spawns[i]);
   generateObjects(true);
+}
+
+irrklang::ISoundEngine 		*MapManager::getEngine() const
+{
+  return engine;
+}
+
+irrklang::ISoundSource 		*MapManager::getExplosion() const
+{
+  return explosion;
 }
