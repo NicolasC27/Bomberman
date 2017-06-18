@@ -108,7 +108,7 @@ void				HudManager::setupHudPlayerOne()
   hudTextTimer->setMetricsMode(Ogre::GMM_PIXELS);
   hudTextTimer->setPosition(600, 50);
   hudTextTimer->setDimensions(100, 100);
-  hudTextTimer->setCaption("Time remaining : " + std::to_string((int)this->_gameManager->_timer));
+  hudTextTimer->setCaption("Time remaining : " + std::to_string((int)this->_gameManager->_timer) + " s");
   hudTextTimer->setCharHeight(64);
   hudTextTimer->setFontName("Vera");
   hudTextTimer->setColourBottom(Ogre::ColourValue(0.3, 0.5, 0.3));
@@ -221,7 +221,7 @@ void					HudManager::showHud(MapManager *mapManager)
   percentWidth = ((this->_gameManager->_Window->getWidth() * 100) / this->_sizeWidth);
   hudTextTimer->setPosition(600 * (percentWidth / 100), 50 * (percentHeight / 100));
   hudTextTimer->setCharHeight(64 * (percentHeight / 100));
-  hudTextTimer->setCaption("Time remaining : " + std::to_string((int)this->_gameManager->_timer));
+  hudTextTimer->setCaption("Time remaining : " + std::to_string((int)this->_gameManager->_timer) + " s");
 
 
   if (mapManager->_character.size() < 2)

@@ -49,7 +49,7 @@ std::string 		ACharacter::getMaterialName() const
     }
   else
     {
-      i += 1;
+      i = 0;
       return ("mutant_M_red");
     }
 }
