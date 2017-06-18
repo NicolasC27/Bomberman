@@ -33,7 +33,7 @@ class EventManager
 
  public:
 
-  EventManager(GameManager *, std::shared_ptr<MapManager> &, Ogre::RenderWindow *, Ogre::Camera *);
+  EventManager(GameManager *, MapManager *, Ogre::RenderWindow *, Ogre::Camera *);
 
   ~EventManager();
 

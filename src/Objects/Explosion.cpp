@@ -7,7 +7,7 @@
 #include <Interfaces/ACharacter.hpp>
 #include "Objects/Explosion.hpp"
 
-Explosion::Explosion(std::shared_ptr<MapManager> &map, AGameObject::Object object, int isRoot, int Length,
+Explosion::Explosion(MapManager *map, AGameObject::Object object, int isRoot, int Length,
 		     Ogre::Vector3 direction)
 	: AGameObject(map, object, 1), _IsRoot(isRoot), _Length(Length), _Direction(direction),
 	  _extend(false)
@@ -44,8 +44,7 @@ void 			Explosion::update(Ogre::Real dt)
 	      extendFire(-Ogre::Vector3::UNIT_X);
 	      extendFire(Ogre::Vector3::UNIT_Z);
 	      extendFire(-Ogre::Vector3::UNIT_Z);
-	    }
-	  else
+	    } else
 	    extendFire(_Direction);
 	  _extend = true;
 	}
@@ -114,18 +113,18 @@ std::string 		Explosion::getMaterialName() const
 
 std::string 		Explosion::getMeshName() const
 {
-  return "Sphere.mesh";
+  return "bomb.mesh";
 }
 
 Ogre::Vector3 		Explosion::getScale() const
 {
-  return Ogre::Vector3(0.8, 0.8, 0.80);
+  return Ogre::Vector3(0.8, 0.8, 0.8);
 }
 
 
 double 			Explosion::getPositionY() const
 {
-  return 0;
+  return -50;
 }
 
 Ogre::SceneManager::PrefabType	Explosion::getMeshPrefab() const

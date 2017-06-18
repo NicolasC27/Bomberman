@@ -4,7 +4,7 @@
 
 #include "Objects/Item.hpp"
 
-Item::Item(std::shared_ptr<MapManager> &map, AGameObject::Object object) : AGameObject(map, object, 1)
+Item::Item(MapManager *map, AGameObject::Object object) : AGameObject(map, object, 1)
 {
   this->upgrade = rand() % 3;//NB_UPGRADE;
 }

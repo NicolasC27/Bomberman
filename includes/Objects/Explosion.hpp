@@ -13,7 +13,7 @@ class AGameObject;
 class Explosion : public AGameObject
 {
  public:
-  Explosion(std::shared_ptr<MapManager> &map, AGameObject::Object object, int isRoot, int Lenght, Ogre::Vector3 direction);
+  Explosion(MapManager *map, AGameObject::Object object, int isRoot, int Lenght, Ogre::Vector3 direction);
 
   virtual ~Explosion();
 

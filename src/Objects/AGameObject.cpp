@@ -11,16 +11,14 @@
 
 int AGameObject::objectId = 1;
 
-AGameObject::AGameObject(std::shared_ptr<MapManager> &map, Object object) : _type(object), _map(map)
+AGameObject::AGameObject(MapManager *map, Object object) : _type(object), _map(map)
 {
   _id = AGameObject::objectId++;
-  std::cout << "la map est utilisé " << _map.use_count() << " fois" << std::endl;
 }
 
-AGameObject::AGameObject(std::shared_ptr<MapManager> &map, AGameObject::Object object, double r) : _type(object), _map(map)
+AGameObject::AGameObject(MapManager *map, AGameObject::Object object, double r) : _type(object), _map(map)
 {
   _id = AGameObject::objectId++;
-  std::cout << "la map est utilisé " << _map.use_count() << " fois" << std::endl;
 }
 
 AGameObject::~AGameObject()

@@ -7,7 +7,7 @@
 #include "Common/Manager/ConfigManager.hpp"
 #include "Common/Manager/GameManager.hpp"
 
-GameManager::GameManager()
+GameManager::GameManager() : _state(GAME)
 {
   Ogre::String mResourcesCfg;
   Ogre::String mPluginsCfg;
@@ -62,7 +62,7 @@ GameManager::~GameManager()
 
 void 			GameManager::run()
 {
-  _map = std::make_shared<MapManager>("media/map/map1", getSceneManager(), getNodes());
+  _map = new MapManager("media/map/map1", getSceneManager(), getNodes());
   _map->generateObjects(false);
   _boundary = (_map->getSize() - 2) * MapManager::boxWidth;
   wallFalling.x = MapManager::boxWidth;
@@ -76,13 +76,25 @@ void 			GameManager::run()
   (*_Root).startRendering();
 }
 
+void			GameManager::checkVictory()
+{
+  if (_map->getCharacter().size() <= 1)
+    {
+
+    }
+}
+
 void 			GameManager::update(Ogre::Real dt)
 {
-  _timer -= dt;
+  if (_state != PAUSE)
+    {
+      _timer -= dt;
 
-  //this->WallFalling(dt);
+      this->WallFalling(dt);
 
-  _map->update(dt);
+      _map->update(dt);
+      checkVictory();
+    }
 }
 
 void 			GameManager::nextFoundingPositionWallFalling()
@@ -111,14 +123,12 @@ void 			GameManager::nextFoundingPositionWallFalling()
 
 void 			GameManager::WallFalling(Ogre::Real dt)
 {
- // static int 		i = 0;
-
-  if (_timer <= 0 /*&& i == 0 &&  map->getIsdestructible() > 1*/)
+  if (_timer <= 0)
     {
       if (wallFalling.timer <= 0)
 	{
 	  AGameObject *wall;
-	  wall = new Wall(_map, AGameObject::UNBREAKABLE);
+	  wall = new Wall(_map, AGameObject::UNBREAKABLE_WALL);
 	  dynamic_cast<Wall *>(wall)->setPositionY(800);
 	  _map->addObjects(Ogre::Vector2(wallFalling.x, wallFalling.z), wall);
 	  //map->setIsdestructible(map->getIsdestructible() - 1);
@@ -157,19 +167,20 @@ void 			GameManager::setupLight()
 {
   Ogre::Light *_Light = _SceneManager->createLight("Light1");
   _Light->setType(Ogre::Light::LT_POINT);
-  _Light->setPosition(Ogre::Vector3(1100, 500, 1100));
+
+  _Light->setPosition(Ogre::Vector3(550, 1192, -200));
   _Light->setDiffuseColour(Ogre::ColourValue::White);
   _Light->setSpecularColour(Ogre::ColourValue::White);
 
-  _Light->setAttenuation(2000,1,0,0);
+  _Light->setAttenuation(2000,1,0.000,0);
 
-  _Light = _SceneManager->createLight("Light Red");
-  _Light->setType(Ogre::Light::LT_POINT);
-  _Light->setPosition(Ogre::Vector3(250, 500, 1000));
-  _Light->setDiffuseColour(Ogre::ColourValue::Red);
-  _Light->setSpecularColour(Ogre::ColourValue::Red);
-
-  _Light->setAttenuation(1000,1,0.007,0);
+//  _Light = _SceneManager->createLight("Light Red");
+//  _Light->setType(Ogre::Light::LT_POINT);
+//  _Light->setPosition(Ogre::Vector3(250, 550, 1000));
+//  _Light->setDiffuseColour(Ogre::ColourValue::Red);
+//  _Light->setSpecularColour(Ogre::ColourValue::Red);
+//
+//  _Light->setAttenuation(1000,1,0,0);
 
 }
 
@@ -190,4 +201,14 @@ void 			GameManager::reset()
   wallFalling.z = 0;
   wallFalling.turn = 0;
   wallFalling.timer = 60;
+}
+
+GameManager::State 	GameManager::getState() const
+{
+  return _state;
+}
+
+void 			GameManager::setState(GameManager::State state)
+{
+  _state = state;
 }

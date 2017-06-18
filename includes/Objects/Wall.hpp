@@ -11,7 +11,7 @@
 class Wall : public AGameObject
 {
  public:
-  Wall(std::shared_ptr<MapManager> &map, State type);
+  Wall(MapManager *map, State type);
   virtual ~Wall();
 
   void			setState(State state);

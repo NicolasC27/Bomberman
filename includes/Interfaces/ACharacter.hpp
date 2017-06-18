@@ -23,7 +23,7 @@ class ACharacter : public AGameObject
   };
 
   static const int 	radius = 35;
-  ACharacter(std::shared_ptr<MapManager> &map, Object object, int r);
+  ACharacter(MapManager *map, Object object, int r);
 
   virtual ~ACharacter();
 

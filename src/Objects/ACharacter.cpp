@@ -6,7 +6,7 @@
 #include "Interfaces/ACharacter.hpp"
 #include <Ogre.h>
 
-ACharacter::ACharacter(std::shared_ptr<MapManager> &map, AGameObject::Object object, int r) : AGameObject(map, object, r)
+ACharacter::ACharacter(MapManager *map, AGameObject::Object object, int r) : AGameObject(map, object, r)
 {
 
 }
@@ -35,7 +35,7 @@ std::string 		ACharacter::getName() const
 
 AGameObject::State 	ACharacter::getState() const
 {
-  return UNBREAKABLE;
+  return UNBREAKABLE_BLOCK;
 }
 
 std::string 		ACharacter::getMaterialName() const

@@ -19,7 +19,7 @@ class Bomb : public AGameObject
   int 			_power;
 
  public:
-  Bomb(Player *player, std::shared_ptr<MapManager> &map, Object object);
+  Bomb(Player *player, MapManager *map, Object object);
 
   virtual ~Bomb();
 
@@ -35,8 +35,6 @@ class Bomb : public AGameObject
 
   Ogre::SceneManager::PrefabType	getMeshPrefab() const;
   std::string				getMeshName() const;
-
-  std::string getNameExplosion() const;
 
   void 			explode();
   virtual void		destroy();

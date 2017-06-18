@@ -32,11 +32,12 @@ class AGameObject {
 
   enum State {
     BREAKABLE,
-    UNBREAKABLE
+    UNBREAKABLE_WALL,
+    UNBREAKABLE_BLOCK
   };
 
-  AGameObject(std::shared_ptr<MapManager> &map, AGameObject::Object object);
-  AGameObject(std::shared_ptr<MapManager> &map, AGameObject::Object object, double r);
+  AGameObject(MapManager *map, AGameObject::Object object);
+  AGameObject(MapManager *map, AGameObject::Object object, double r);
   virtual ~AGameObject();
 
  private:
@@ -57,7 +58,7 @@ class AGameObject {
 
  protected:
 
-  std::shared_ptr<MapManager>		_map;
+  MapManager		*_map;
 
   static int		objectId;
   int			_id;
