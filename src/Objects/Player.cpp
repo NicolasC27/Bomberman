@@ -2,6 +2,7 @@
 // Created by nicolas on 07/06/17.
 //
 
+#include <iostream>
 #include <Ogre.h>
 #include "Objects/Bomb.hpp"
 #include "Interfaces/ACharacter.hpp"
@@ -12,6 +13,8 @@ int Player::_playerID = 1;
 Player::Player(MapManager *map, AGameObject::Object object) :
 	ACharacter(map, object, 35), _ID(_playerID++)
 {
+  this->translateVector = Ogre::Vector3::ZERO;
+  this->_vector = Ogre::Vector3::ZERO;
   keyCodeType.clear();
   setKey();
   setPowerbomb(1);
@@ -85,6 +88,7 @@ bool			Player::Collide(Ogre::Vector3 &m)
 		      (this->*_powerUp[dynamic_cast<Item *>(ptr)->getUpgrade()])();
 		      ptr->destroy();
 		    }
+		  this->translateVector = Ogre::Vector3::ZERO;
 
 		  return (true);
 		}
@@ -127,31 +131,54 @@ std::vector<Ogre::Vector2> const	Player::getFrontObstacle(Ogre::Vector2 const &m
   return (pos);
 }
 
+void            Player::tick()
+{
+	std::cout << this->translateVector << std::endl;
+	if (this->_vector == Ogre::Vector3::ZERO || this->translateVector == Ogre::Vector3::ZERO)
+	{
+		return;
+	}
+	static Ogre::AnimationState	*mAnimationState;
+
+	mAnimationState = dynamic_cast<Ogre::Entity*>(_obj)->getAnimationState("my_animation");
+	mAnimationState->setLoop(true);
+	mAnimationState->setEnabled(true);
+	if (this->translateVector != Ogre::Vector3::ZERO)
+	{
+		Ogre::Vector3 src = _node->getOrientation() * Ogre::Vector3::UNIT_Z;
+		Ogre::Vector3 mDirection = _vector;
+		mDirection.normalise();
+		if (!this->Collide(this->translateVector))
+			_node->translate(this->translateVector);
+		if ((1.0f + src.dotProduct(mDirection)) < 0.0001f)
+			_node->yaw(Ogre::Degree(180));
+		else
+		{
+			Ogre::Quaternion quat = src.getRotationTo(mDirection);
+			_node->rotate(quat);
+		}
+		int x = ((int)_node->getPosition()[0]) % 100;
+		int y = ((int)_node->getPosition()[2]) % 100;
+		if ((x < 8 && x > -8 && this->translateVector[0]) || (y < 8 && y > -8 && this->translateVector[2]))
+		{
+			this->translateVector = Ogre::Vector3::ZERO;
+		}
+		std::cout << _node->getPosition()[0] << std::endl;
+		std::cout << _node->getPosition()[2] << std::endl;
+	}
+	mAnimationState->addTime(_evt.timeSinceLastFrame * 1.5f);
+}
+
 void			Player::move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt)
 {
-  static Ogre::AnimationState	*mAnimationState;
+	std::cout << vector << std::endl;
+	if (this->translateVector == Ogre::Vector3::ZERO || (vector[0] && this->translateVector[0]) || (vector[2] && this->translateVector[2]))
+	{
+		this->_vector = vector;
+		this->_evt = evt;
+		this->translateVector = evt.timeSinceLastFrame * getMovespeed() * vector;
+	}
 
-  Ogre::Vector3 translateVector = evt.timeSinceLastFrame * getMovespeed() * vector;
-
-  mAnimationState = dynamic_cast<Ogre::Entity*>(_obj)->getAnimationState("my_animation");
-  mAnimationState->setLoop(true);
-  mAnimationState->setEnabled(true);
-  if (translateVector != Ogre::Vector3::ZERO)
-  {
-    Ogre::Vector3 src = _node->getOrientation() * Ogre::Vector3::UNIT_Z;
-    Ogre::Vector3 mDirection = vector;
-    mDirection.normalise();
-    if (!this->Collide(translateVector))
-      _node->translate(translateVector);
-    if ((1.0f + src.dotProduct(mDirection)) < 0.0001f)
-      _node->yaw(Ogre::Degree(180));
-    else
-    {
-      Ogre::Quaternion quat = src.getRotationTo(mDirection);
-      _node->rotate(quat);
-    }
-  }
-  mAnimationState->addTime(evt.timeSinceLastFrame * 1.5f);
 }
 
 void			Player::action(ActionKeyCode action, const Ogre::FrameEvent &evt)

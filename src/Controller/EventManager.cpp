@@ -156,6 +156,14 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
     translate += Ogre::Vector3(10, 0, 0);
   float rotX = mMouse->getMouseState().X.rel * evt.timeSinceLastFrame * -1;
   float rotY = mMouse->getMouseState().Y.rel * evt.timeSinceLastFrame * -1;
+  for (std::vector<AGameObject *>::const_iterator characterit = Character.begin();
+	  characterit != Character.end(); ++characterit)
+  {
+	  player = dynamic_cast<Player *>(*characterit);
+	  player->tick();
+	  std::cout << "toto" << std::endl;
+  }
+  std::cout << std::endl;
   mCamera->yaw(Ogre::Radian(rotX));
   mCamera->pitch(Ogre::Radian(rotY));
   mCamera->moveRelative(translate * evt.timeSinceLastFrame * 400);
