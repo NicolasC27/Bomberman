@@ -131,9 +131,8 @@ std::vector<Ogre::Vector2> const	Player::getFrontObstacle(Ogre::Vector2 const &m
   return (pos);
 }
 
-void            Player::tick()
+void            			Player::tick()
 {
-	std::cout << this->translateVector << std::endl;
 	if (this->_vector == Ogre::Vector3::ZERO || this->translateVector == Ogre::Vector3::ZERO)
 	{
 		return;
@@ -163,15 +162,12 @@ void            Player::tick()
 		{
 			this->translateVector = Ogre::Vector3::ZERO;
 		}
-		std::cout << _node->getPosition()[0] << std::endl;
-		std::cout << _node->getPosition()[2] << std::endl;
 	}
 	mAnimationState->addTime(_evt.timeSinceLastFrame * 1.5f);
 }
 
 void			Player::move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt)
 {
-	std::cout << vector << std::endl;
 	if (this->translateVector == Ogre::Vector3::ZERO || (vector[0] && this->translateVector[0]) || (vector[2] && this->translateVector[2]))
 	{
 		this->_vector = vector;

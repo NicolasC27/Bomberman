@@ -25,16 +25,19 @@ class Player : public ACharacter
 
   void 			update(Ogre::Real);
   virtual void 		destroy();
-  void		reset();
+  void			reset();
+  void      		tick();
 
   const std::map<OIS::KeyCode, ActionKeyCode>	&getKeyCodeType() const;
 
 protected:
+  Ogre::Vector3 translateVector;
   int			_ID;
   static int		_playerID;
 
 private:
-
+  Ogre::Vector3 _vector;
+  Ogre::FrameEvent _evt;
   PlayerSettings	settings;
   std::vector<void (Player::*)(void)>	_powerUp;
 
