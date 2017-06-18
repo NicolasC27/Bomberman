@@ -55,7 +55,7 @@ namespace irrklang
 		 'enableSoundEffects' have been set to true, if the sound could not be played.*/
 		virtual ISound* play2D(const char* soundFileName, 
 							   bool playLooped = false,
-							   bool startPaused = false, 
+							   bool startPaused = false,
 							   bool track = false,
 							   E_STREAM_MODE streamMode = ESM_AUTO_DETECT,
 							   bool enableSoundEffects = false) = 0;
@@ -81,7 +81,7 @@ namespace irrklang
 		 you HAVE to call ISound::drop() after you don't need the ISound interface anymore. Otherwise this 
 		 will cause memory waste. This method also may return 0 altough 'track', 'startPaused' or 
 		 'enableSoundEffects' have been set to true, if the sound could not be played.*/
-		virtual ISound* play2D(ISoundSource* source, 
+		virtual ISound* rplay2D(ISoundSource* source,
 							   bool playLooped = false,
 							   bool startPaused = false, 
 							   bool track = false,
