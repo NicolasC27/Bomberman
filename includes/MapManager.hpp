@@ -45,7 +45,7 @@ public:
   Character				getCharacterFrom(Ogre::Vector2 const &) const;
 
 private:
-  std::list<Ogre::Vector2> 			_spawns;
+  std::vector<Ogre::Vector2> 			_spawns;
   std::string 					_filename;
 
   int 						_size;
@@ -59,7 +59,7 @@ private:
 
   virtual ~MapManager();
 
-  void			generateObjects();
+  void			generateObjects(bool);
   void			generateSpawn();
   void			generatePlan();
 
@@ -85,6 +85,8 @@ private:
 
   void 			removeObject(AGameObject *object);
   void 			removeCharacter(AGameObject *object);
+
+  void 			reset();
 };
 
 #endif //BOMBERMAN_MAP_HPP

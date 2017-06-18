@@ -179,3 +179,11 @@ void 			Player::destroy()
   // animation ?
   // end of game ?
 }
+
+void 			Player::reset()
+{
+  setPowerbomb(1);
+  setMovespeed(300);
+  setBombmax(1);
+  setDelaybomb(0);
+}

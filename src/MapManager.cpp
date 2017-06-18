@@ -72,7 +72,7 @@ void		MapManager::generatePlan()
   node->attachObject(plan);
 }
 
-void 		MapManager::generateObjects()
+void 		MapManager::generateObjects(bool res)
 {
   std::ifstream infile(_filename);
   std::string 	line;
@@ -100,24 +100,27 @@ void 		MapManager::generateObjects()
   if (count != (_size - 1))
     throw Ogre::Exception(Ogre::Exception::ERR_INVALID_STATE,
 			  ERR_NBLINEMAP, _filename);
-  addCharacter(Ogre::Vector2(100, 900));
-  addCharacter(Ogre::Vector2(100, 100));
-  addBomb(Ogre::Vector2(900, 900));
-  generatePlan();
+  if (!res)
+  {
+    addCharacter(Ogre::Vector2(100, 900));
+    addCharacter(Ogre::Vector2(100, 100));
+    //addBomb(Ogre::Vector2(900, 900));
+    generatePlan();
+    generateSpawn();
+  }
 }
 
 void 		MapManager::generateSpawn()
 {
-  _spawns.push_front(Ogre::Vector2(boxWidth, boxWidth));
-  _spawns.push_front(Ogre::Vector2(boxWidth,
+  _spawns.push_back(Ogre::Vector2(boxWidth, boxWidth));
+  _spawns.push_back(Ogre::Vector2(
+	  (_size * boxWidth) - (boxWidth * 2),
+	  (_size * boxWidth) - (boxWidth * 2)));_spawns.push_back(Ogre::Vector2(boxWidth,
 				   (_size * boxWidth) -
 				   (boxWidth * 2)));
-  _spawns.push_front(Ogre::Vector2(
+  _spawns.push_back(Ogre::Vector2(
 	  (_size * boxWidth) - (boxWidth * 2),
 	  boxWidth));
-  _spawns.push_front(Ogre::Vector2(
-	  (_size * boxWidth) - (boxWidth * 2),
-	  (_size * boxWidth) - (boxWidth * 2)));
 }
 
 void 		MapManager::addCharacter(const Ogre::Vector2 &vector)
@@ -270,4 +273,21 @@ void 		MapManager::removeCharacter(AGameObject *object)
   if (it != _character.end())
     _character.erase(it);
   delete object;
+}
+
+void 		MapManager::reset()
+{
+  MapManager::Objects::const_iterator iteratorObject;
+
+  for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); )
+    {
+      _objects.erase(iteratorObject);
+      delete iteratorObject->first;
+    }
+  for (unsigned int i = 0; i < _character.size(); ++i)
+    {
+      dynamic_cast<Player *>(_character[i])->reset();
+      _character[i]->setPosition(_spawns[i].x, 0, _spawns[i].y);
+    }
+  generateObjects(true);
 }

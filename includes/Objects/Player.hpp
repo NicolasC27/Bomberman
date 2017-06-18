@@ -25,6 +25,7 @@ class Player : public ACharacter
 
   void 			update(Ogre::Real);
   virtual void 		destroy();
+  void		reset();
 
   const std::map<OIS::KeyCode, ActionKeyCode>	&getKeyCodeType() const;
 

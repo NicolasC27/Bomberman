@@ -25,7 +25,7 @@ class GameManager
   Ogre::Light 		*_Light;
   CameraManager		*Camera;
   NodeManager 		*_nodes;
-
+  MapManager		*_map;
   float 		_timer = 10;
 
  public:
@@ -41,14 +41,15 @@ class GameManager
 
   void 			run();
 
-  void 			update(MapManager *map, Ogre::Real dt);
+  void 			update(Ogre::Real dt);
+  void 			reset();
 
   Ogre::Root 		*getRoot() const;
   Ogre::SceneManager 	*getSceneManager() const;
   Ogre::RenderWindow 	*getWindow() const;
   NodeManager 		*getNodes() const;
 
-  void 			WallFalling(MapManager *map, Ogre::Real dt);
+  void 			WallFalling(Ogre::Real dt);
 
   void 			nextFoundingPositionWallFalling();
 
@@ -63,9 +64,9 @@ class GameManager
   position		wallFalling;
   int			_boundary;
 
-  bool checkAround();
+  //bool checkAround();
 
-  bool checkAround(MapManager *map);
+//  bool checkAround();
 };
 
 #endif //BOMBERMAN_GAMEMANAGER_HPP

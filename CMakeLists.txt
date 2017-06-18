@@ -121,7 +121,7 @@ set(CEGUI_LIBS CEGUIBase-0 CEGUICommonDialogs-0 CEGUIOgreRenderer-0)
 SET(SRCS
         src/main.cpp
         src/MapManager.cpp
-        src/Collision.cpp
+#        src/Collision.cpp
         src/Objects/Wall.cpp
         src/Objects/AGameObject.cpp
         src/Objects/ACharacter.cpp
@@ -151,7 +151,7 @@ SET(SRCS
         includes/Objects/Explosion.hpp
         includes/Objects/PlayerSettings.hpp
         includes/MapManager.hpp
-        includes/Collision.hpp
+ #       includes/Collision.hpp
         )
 
 set(HDRS ${SRCS})
