@@ -8,7 +8,7 @@ if(WIN32)
             )
     set(Boost_INCLUDE_DIR "C:\Program Files\boost_1_64_0")
     include_directories("C:\OgreSDK\build\sdk\include")
-    link_directories("C:\OgreSDK\build\lib\Release" "C:\OgreSDK\build\lib\Debug")
+    link_directories("C:\OgreSDK\build\lib\Release" "C:\OgreSDK\build\lib\Debug" "build")
 endif(WIN32)
 
 if(UNIX)
@@ -181,7 +181,7 @@ set_target_properties(bomberman PROPERTIES DEBUG_POSTFIX _d)
 
 #${CEGUI_LIBS} ${FREETYPE_LIBRARIES}
 
-target_link_libraries(bomberman OgreOverlay OgreMain  libIrrKlang.so ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
+target_link_libraries(bomberman IrrKlang OgreOverlay OgreMain ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/assets)
