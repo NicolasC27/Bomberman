@@ -24,19 +24,28 @@ class MapManager
 {
  public:
   static const int 				boxWidth = 100;
+  static const int 				halfboxWidth = 50;
 
  public:
   NodeManager 					*_nodes;
   Ogre::SceneManager 				*_SceneManager;
 
-  typedef std::map<AGameObject *, Ogre::Vector2>	Objects;
-
+  typedef std::map<AGameObject *, Ogre::Vector2> 	Objects;
   Objects						_objects;
 
- private:
+  typedef std::vector<AGameObject *>			Character;
+  Character						_character;
 
-  std::vector<AGameObject *>			_character;
-  std::list<Ogre::Vector2> 			_spawns;
+public:
+  AGameObject			   	*getObjectFrom(Ogre::Vector2 const &) const;
+  AGameObject				*getObjectFrom(Ogre::Vector3 const &) const;
+  Ogre::Vector2				getPosFrom(Ogre::Vector2 const &) const;
+  Ogre::Vector2				getPosFrom(Ogre::Vector3 const &) const;
+  Ogre::Vector2				getMiddlePosFrom(Ogre::Vector2 const &) const;
+  Character				getCharacterFrom(Ogre::Vector2 const &) const;
+
+private:
+  std::vector<Ogre::Vector2> 			_spawns;
   std::string 					_filename;
 
   int 						_size;
@@ -50,14 +59,14 @@ class MapManager
 
   virtual ~MapManager();
 
-  void			generateObjects();
+  void			generateObjects(bool);
   void			generateSpawn();
   void			generatePlan();
 
-  void					setSize(int size);
+  void			setSize(int size);
 
-  int					getSize() const;
-  const std::vector<AGameObject *> &	getCharacter() const;
+  int			getSize() const;
+  const Character &	getCharacter() const;
 
   void 			addObjects(const Ogre::Vector2 &, AGameObject *);
   void 			addCharacter(const Ogre::Vector2 &vector);
@@ -73,8 +82,10 @@ class MapManager
   void 			setIsdestructible(int isdestructible);
 
   void 			remove(AGameObject *object);
-
   void 			removeObject(AGameObject *object);
+  void 			removeCharacter(AGameObject *object);
+
+  void 			reset();
 };
 
 #endif //BOMBERMAN_MAP_HPP

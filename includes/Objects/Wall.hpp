@@ -10,10 +10,6 @@
 
 class Wall : public AGameObject
 {
-  State 		_state;
-  std::string		_name;
-  int			_positionY;
-
  public:
   Wall(MapManager *map, State type);
   virtual ~Wall();
@@ -29,12 +25,19 @@ class Wall : public AGameObject
   void			setPositionY(int positionY);
 
   void			update(Ogre::Real);
+  virtual void		destroy();
 
   Ogre::SceneManager::PrefabType	getMeshPrefab() const;
   std::string				getMeshName() const;
 
  protected:
   void			createEntity();
+
+ private:
+  Ogre::Real		_moveSpeed;
+  int			_positionY;
+  State 		_state;
+  std::string		_name;
 };
 
 #endif //BOMBERMAN_GROUND_H

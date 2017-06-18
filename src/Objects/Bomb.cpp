@@ -2,47 +2,51 @@
 // Created by nicolas on 12/06/17.
 //
 
-#include <Interfaces/AGameObject.hpp>
 #include <OgreParticleSystem.h>
 #include <OgreParticleSystemManager.h>
+#include "Objects/Explosion.hpp"
 #include "Objects/Bomb.hpp"
 
-Bomb::Bomb(MapManager *map, AGameObject::Object object) : AGameObject(map, object, 1), explosionDelay(3)
+Bomb::Bomb(Player *player, MapManager *map, AGameObject::Object object) :
+	AGameObject(map, object, 1),  explosionDelay(3), _player(player), _power(player->getPowerbomb())
 {
 
 }
 
 Bomb::~Bomb()
 {
+
 }
 
 void 			Bomb::update(Ogre::Real dt)
 {
+  float 		scale;
+
   explosionDelay -= dt;
-  float scale = 1 - (0.5 * explosionDelay / 3);
+  scale  =  40 - (20 * explosionDelay / 3);
   _node->setScale(scale, scale, scale);
 
   if (explosionDelay <= 0)
     {
-      this->Explosion();
+      this->explode();
       _map->removeObject(this);
     }
 }
 
 void 			Bomb::createEntity()
 {
-  _obj = SceneManager->createEntity(getName(), getMeshPrefab());
+  _obj = SceneManager->createEntity(getName(), getMeshName());
   dynamic_cast <Ogre::Entity*>(_obj)->setMaterialName(this->getMaterialName());
+  _node->yaw(Ogre::Degree(90));
+  _node->pitch(Ogre::Degree(90));
 }
 
-void			Bomb::Explosion()
+void			Bomb::explode()
 {
-    Ogre::SceneNode* particlenode = SceneManager->getRootSceneNode()->createChildSceneNode();
-
-    Ogre::ParticleSystem* ps1 = SceneManager->createParticleSystem(getNameExplosion(), "Examples/Smoke");
-
-    particlenode->setPosition(Ogre::Vector3(_node->getPosition().x, _node->getPosition().y, _node->getPosition().z));
-    particlenode->attachObject(ps1);
+  _map->addObjects(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z),
+		   new Explosion(_map, AGameObject::EXPLOSION, true,
+				 _power, Ogre::Vector3::ZERO));
+  _player->setBombmax(_player->getBombmax() + 1);
 }
 
 AGameObject::State 	Bomb::getState() const
@@ -55,31 +59,24 @@ std::string 		Bomb::getName() const
   return  "Bomb_" + std::to_string(_id);
 }
 
-std::string 		Bomb::getNameExplosion() const
-{
-  objectId += 1;
-  return  "BombExplosion_" + std::to_string(objectId);
-}
-
 std::string 		Bomb::getMaterialName() const
 {
-  return "Objects/Bomb";
+  return "BombTexture";
 }
 
 std::string Bomb::getMeshName() const
 {
-  return "Sphere.mesh";
+  return "bomb.mesh";
 }
 
 Ogre::Vector3 		Bomb::getScale() const
 {
-  return Ogre::Vector3(0.8, 0.8, 0.80);
+  return Ogre::Vector3(40, 40, 40);
 }
-
 
 double 			Bomb::getPositionY() const
 {
-  return 0;
+  return (-50);
 }
 
 Ogre::SceneManager::PrefabType	Bomb::getMeshPrefab() const
@@ -87,3 +84,8 @@ Ogre::SceneManager::PrefabType	Bomb::getMeshPrefab() const
   return Ogre::SceneManager::PT_SPHERE;
 }
 
+void 			Bomb::destroy()
+{
+  explode();
+  _map->removeObject(this);
+}

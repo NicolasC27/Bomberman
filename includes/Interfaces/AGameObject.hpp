@@ -13,8 +13,9 @@ class AGameObject;
 #include <OgreEntity.h>
 #include <OgreNode.h>
 #include <OgreSceneNode.h>
-#include <MapManager.hpp>
-#include "Collision.hpp"
+#include "MapManager.hpp"
+#include <Ogre.h>
+#include <OgreAxisAlignedBox.h>
 
 class AGameObject {
 
@@ -24,13 +25,15 @@ class AGameObject {
     WALL,
     BLOCK,
     BOMB,
+    EXPLOSION,
     ITEM,
     CHARACTER
   };
 
   enum State {
     BREAKABLE,
-    UNBREAKABLE
+    UNBREAKABLE_WALL,
+    UNBREAKABLE_BLOCK
   };
 
   AGameObject(MapManager *map, AGameObject::Object object);
@@ -57,16 +60,21 @@ class AGameObject {
 
   MapManager		*_map;
 
-  Ogre::Real		_moveSpeed;
   static int		objectId;
   int			_id;
 
   Ogre::MovableObject	*_obj;
+  Ogre::ParticleSystem	*particleSystem;
+ public:
+  Ogre::ParticleSystem *getParticleSystem() const;
+
+ protected:
   Ogre::SceneManager 	*SceneManager;
   Ogre::SceneNode	*_node;
+ public:
+  Ogre::SceneNode *getNode() const;
 
-  Collision		*_collision;
-
+  virtual void 		destroy();
  public:
   virtual void		createEntity() = 0;
 

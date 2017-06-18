@@ -121,19 +121,22 @@ set(CEGUI_LIBS CEGUIBase-0 CEGUICommonDialogs-0 CEGUIOgreRenderer-0)
 SET(SRCS
         src/main.cpp
         src/MapManager.cpp
-        src/Collision.cpp
+#        src/Collision.cpp
         src/Objects/Wall.cpp
         src/Objects/AGameObject.cpp
         src/Objects/ACharacter.cpp
         src/Objects/Player.cpp
+        src/Objects/PlayerSettings.cpp
         src/Objects/Bomb.cpp
-        src/Common/Manager/ConfigManager.cpp
+	src/Objects/Item.cpp
+	src/Common/Manager/ConfigManager.cpp
 #        src/Controller/KeyController.cpp
         src/Common/Manager/NodeManager.cpp
         src/Common/Manager/CameraManager.cpp
         src/Common/Manager/GameManager.cpp
         #        src/Common/Manager/ConfigManager.cpp
         src/Controller/EventManager.cpp
+        src/Objects/Explosion.cpp
         includes/Common/Manager/GameManager.hpp
         includes/Common/Manager/NodeManager.hpp
         includes/Common/Manager/CameraManager.hpp
@@ -144,17 +147,20 @@ SET(SRCS
 #        includes/Controller/KeyController.hpp
         includes/Common/Manager/ConfigManager.hpp
         includes/Objects/Player.hpp
-        includes/MapManager.hpp
         includes/Objects/Wall.hpp
         includes/Objects/Bomb.hpp
-        includes/Collision.hpp
+        includes/Objects/Explosion.hpp
+        includes/Objects/PlayerSettings.hpp
+    	includes/Objects/Item.hpp
+	    includes/MapManager.hpp
+#        includes/Collision.hpp
         )
 
 set(HDRS ${SRCS})
 set(CMAKE_CXX_FLAGS "-Iincludes -std=c++11")
 
-find_package(Freetype REQUIRED)
-include_directories(${FREETYPE_INCLUDE_DIRS})
+#find_package(Freetype REQUIRED)
+#include_directories(${FREETYPE_INCLUDE_DIRS})
 
 include_directories( ${OIS_INCLUDE_DIRS}
         ${OGRE_INCLUDE_DIRS}

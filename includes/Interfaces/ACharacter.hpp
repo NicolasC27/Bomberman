@@ -6,6 +6,7 @@
 #define BOMBERMAN_ACHARACTER_HPP
 
 #include <OIS/OIS.h>
+#include <MapManager.hpp>
 //#include "Controller/KeyController.hpp"
 #include "AGameObject.hpp"
 
@@ -21,6 +22,7 @@ class ACharacter : public AGameObject
     AT_FIRE,
   };
 
+  static const int 	radius = 35;
   ACharacter(MapManager *map, Object object, int r);
 
   virtual ~ACharacter();
@@ -42,7 +44,6 @@ class ACharacter : public AGameObject
   std::string				getMeshName() const;
 
   virtual const std::map<OIS::KeyCode, ActionKeyCode>	&getKeyCodeType() const = 0;
-
 
  protected:
   static int		objectId;
