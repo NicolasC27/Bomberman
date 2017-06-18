@@ -109,7 +109,6 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
       for (std::vector<AGameObject *>::const_iterator characterit = Character.begin();
 	   characterit != Character.end(); ++characterit)
 	{
-
 	  player = dynamic_cast<Player *>(*characterit);
 
 	  for (std::map<OIS::KeyCode, Player::ActionKeyCode>::const_iterator keyit = player->getKeyCodeType().begin();

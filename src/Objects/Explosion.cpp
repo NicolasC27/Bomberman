@@ -14,7 +14,6 @@ Explosion::Explosion(MapManager *map, AGameObject::Object object, int isRoot, in
   _obj = NULL;
   lifeTimeRemaning = LIFE_DURATION;
   delayExtend = EXTEND_DELAY;
-  _extend = true;
 }
 
 Explosion::~Explosion()
@@ -48,7 +47,6 @@ void 			Explosion::update(Ogre::Real dt)
 	    extendFire(_Direction);
 	  _extend = true;
 	}
-      _extend = false;
     }
 }
 
@@ -57,7 +55,6 @@ bool 			Explosion::checkVictim(Ogre::Vector3 const &pos, Ogre::Vector3 const &di
   AGameObject		*obj = _map->getObjectFrom(pos);
   MapManager::Character	victim = _map->getCharacterFrom(Ogre::Vector2(pos.x, pos.z));
   bool 			ret = false;
-
   /*if (!_extend && obj != NULL && obj->getType() == AGameObject::EXPLOSION)
     {
       --_Length;
@@ -68,7 +65,7 @@ bool 			Explosion::checkVictim(Ogre::Vector3 const &pos, Ogre::Vector3 const &di
     ret = true;
   for (unsigned int i = 0; i < victim.size() ; ++i)
     victim[i]->destroy();
-  if (obj != NULL)
+  if (!_extend && obj != NULL)
     obj->destroy();
   return (ret);
 }
