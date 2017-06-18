@@ -95,3 +95,8 @@ void 			AGameObject::destroy()
 {
 
 }
+
+Ogre::ParticleSystem *AGameObject::getParticleSystem() const
+{
+  return particleSystem;
+}

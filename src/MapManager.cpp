@@ -28,16 +28,20 @@ MapManager::~MapManager()
 
 void 		MapManager::update(Ogre::Real dt)
 {
-  Objects::iterator iteratorObject;
-  Character::iterator iteratorCharacter;
+  Objects::const_iterator iteratorObject;
+  Character::const_iterator iteratorCharacter;
+  AGameObject		  *tmp;
 
-  for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); iteratorObject++)
+  for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); )
     {
-      (*iteratorObject).first->update(dt);
+      tmp = iteratorObject->first;
+      ++iteratorObject;
+      tmp->update(dt);
     }
   for (iteratorCharacter = _character.begin(); iteratorCharacter != _character.end(); iteratorCharacter++)
     {
-      (*iteratorCharacter)->update(dt);
+      tmp = *iteratorCharacter;
+      tmp->update(dt);
     }
 }
 
@@ -261,6 +265,10 @@ const 		MapManager::Objects &MapManager::getObjects() const
 
 void 		MapManager::removeObject(AGameObject *object)
 {
+  if (object->getObj() != NULL)
+    object->getObj()->detachFromParent();
+  else
+    object->getParticleSystem()->clear();
   _objects.erase(object);
   delete object;
 }

@@ -66,6 +66,7 @@ bool			Player::Collide(Ogre::Vector3 &m)
   std::vector<Ogre::Vector2>	 pos = this->getFrontObstacle(mov);
   Ogre::Sphere	sphere(_obj->getWorldBoundingBox().getCenter() + m, radius);
   AGameObject		*ptr;
+  Ogre::AxisAlignedBox  aab2;
 
   for (unsigned int i = 0; i < pos.size(); ++i)
     {
@@ -73,8 +74,15 @@ bool			Player::Collide(Ogre::Vector3 &m)
 	{
 	  if (i == 1 && ptr->getType() == AGameObject::ITEM)
 	    (this->*_powerUp[dynamic_cast<Item *>(ptr)->getUpgrade()])();
-	  else if (ptr->getObj() != NULL && sphere.intersects(ptr->getObj()->getWorldBoundingBox(true)))
-	    return (true);
+	  else if (ptr->getObj() != NULL || ptr->getParticleSystem() != NULL)
+	    {
+	      if (ptr->getObj() != NULL)
+		aab2 = ptr->getObj()->getWorldBoundingBox(true);
+	      else
+		aab2 = ptr->getParticleSystem()->getWorldBoundingBox(true);
+              if (sphere.intersects(ptr->getObj()->getWorldBoundingBox(true)))
+		return (true);
+	    }
 	}
     }
   return (false);

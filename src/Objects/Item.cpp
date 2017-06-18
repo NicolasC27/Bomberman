@@ -36,7 +36,7 @@ void 			Item::update(Ogre::Real dt)
 
 void 			Item::createEntity()
 {
-  _obj = SceneManager->createEntity(getName(), getMeshPrefab());
+  _obj = SceneManager->createEntity(getName(),  Ogre::SceneManager::PT_SPHERE);//getMeshPrefab());
   dynamic_cast <Ogre::Entity*>(_obj)->setMaterialName(this->getMaterialName());
 }
 
@@ -52,12 +52,12 @@ std::string 		Item::getName() const
 
 std::string 		Item::getMaterialName() const
 {
-  return "Objects/Item";
+  return "Objects/Bomb";//"Objects/Item";
 }
 
 std::string Item::getMeshName() const
 {
-  return "Sphere.mesh";//mesh_item[this->upgrade];
+  return ("sphere.mesh");//mesh_item[this->upgrade];
 }
 
 Ogre::Vector3 		Item::getScale() const

@@ -64,6 +64,10 @@ class AGameObject {
 
   Ogre::MovableObject	*_obj;
   Ogre::ParticleSystem	*particleSystem;
+ public:
+  Ogre::ParticleSystem *getParticleSystem() const;
+
+ protected:
   Ogre::SceneManager 	*SceneManager;
   Ogre::SceneNode	*_node;
  public:
