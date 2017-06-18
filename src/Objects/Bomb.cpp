@@ -8,7 +8,7 @@
 #include "Objects/Bomb.hpp"
 
 Bomb::Bomb(Player *player, MapManager *map, AGameObject::Object object) :
-	AGameObject(map, object, 1),  explosionDelay(3), _player(player), _power(player->getPowerbomb()), delayDelete(2), _delete(false)
+	AGameObject(map, object, 1),  explosionDelay(3), _player(player), _power(player->getPowerbomb())
 {
 }
 
