@@ -46,3 +46,18 @@ material mutant_M
         }
     }
 }
+
+material mutant_M_red : mutant_M
+{
+	technique
+	{
+		pass
+		{
+	            texture_unit {
+        	    	texture Mat_BaseColor.png
+            		}
+
+		}
+	}
+}
+

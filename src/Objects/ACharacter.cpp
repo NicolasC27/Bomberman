@@ -40,7 +40,18 @@ AGameObject::State 	ACharacter::getState() const
 
 std::string 		ACharacter::getMaterialName() const
 {
-  return ("mutant_M");
+  static int 		i = 1;
+
+  if (i == 1)
+    {
+      i += 1;
+      return ("mutant_M");
+    }
+  else
+    {
+      i = 0;
+      return ("mutant_M_red");
+    }
 }
 
 Ogre::Vector3	 	ACharacter::getScale() const

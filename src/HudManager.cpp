@@ -5,7 +5,7 @@
 // Login   <valentin.gerard@epitech.eu>
 // 
 // Started on  Sat Jun 17 23:18:26 2017 Valentin Gérard
-// Last update Sun Jun 18 18:29:30 2017 Valentin Gérard
+// Last update Sun Jun 18 23:31:54 2017 Valentin Gérard
 //
 
 #include <iomanip>
@@ -18,18 +18,24 @@ HudManager::HudManager(GameManager *gameManager) : _gameManager(gameManager)
   if (this->_mOverlaySystem.get() == NULL)
     throw Ogre::Exception(0, "HudManager", "HudManager");
   this->_gameManager->getSceneManager()->addRenderQueueListener(this->_mOverlaySystem.get());
+
   this->_mOverlayManager = Ogre::OverlayManager::getSingletonPtr();
   if (this->_mOverlayManager == NULL)
     throw Ogre::Exception(0, "HudManager", "HudManager");
+
   this->_mOverlay = this->_mOverlayManager->create("HudOverlay");
   if (this->_mOverlay == NULL)
     throw Ogre::Exception(0, "HudManager", "HudManager");
+
   this->_mFontManager = Ogre::FontManager::getSingletonPtr();
   if (this->_mFontManager == NULL)
     throw Ogre::Exception(0, "HudManager", "HudManager");
+
   this->createFont("Vera", 64);
+
   this->setHeightSize(1080);
   this->setWidthSize(1920);
+
   this->setupHudPlayerOne();
   this->setupHudPlayerTwo();
 }
@@ -54,6 +60,7 @@ void			HudManager::createFont(const std::string &fontName, int size)
   font = this->_mFontManager->create(fontName, "General");
   if (font.get() == NULL)
     return ;
+
   font->setParameter("type", "truetype");
   font->setParameter("source", "fonts/" + fontName + ".ttf");
   font->setParameter("size", std::to_string(size));
@@ -63,10 +70,12 @@ void			HudManager::createFont(const std::string &fontName, int size)
 
 void				HudManager::setupHudPlayerOne()
 {
+  Ogre::OverlayContainer       	*hudPanelTimer;
   Ogre::OverlayContainer       	*hudPanelPlayerOne;
   Ogre::TextAreaOverlayElement 	*hudTextBomb;
   Ogre::TextAreaOverlayElement 	*hudTextSpeed;
   Ogre::TextAreaOverlayElement 	*hudTextScore;
+  Ogre::TextAreaOverlayElement 	*hudTextTimer;
   double		       	percentHeight;
   double		       	percentWidth;
 
@@ -74,18 +83,38 @@ void				HudManager::setupHudPlayerOne()
   hudTextBomb = static_cast<Ogre::TextAreaOverlayElement*>(this->_mOverlayManager->createOverlayElement("TextArea", "hudTextBomb1"));
   hudTextSpeed = static_cast<Ogre::TextAreaOverlayElement*>(this->_mOverlayManager->createOverlayElement("TextArea", "hudTextSpeed1"));
   hudTextScore = static_cast<Ogre::TextAreaOverlayElement*>(this->_mOverlayManager->createOverlayElement("TextArea", "hudTextScore1"));
-  std::cout << this->_sizeHeight << "dqdqzd" << this->_sizeWidth << std::endl;
+  hudPanelTimer = static_cast<Ogre::OverlayContainer*>(this->_mOverlayManager->createOverlayElement("Panel", "HudPanelTimer"));
+  hudTextTimer = static_cast<Ogre::TextAreaOverlayElement*>(this->_mOverlayManager->createOverlayElement("TextArea", "hudTextTimer"));
+  
   percentHeight = ((this->_gameManager->_Window->getHeight() * 100) / this->_sizeHeight);
   percentWidth = ((this->_gameManager->_Window->getWidth() * 100) / this->_sizeWidth);
 
   if (hudPanelPlayerOne == NULL || hudTextBomb == NULL ||
-      hudTextSpeed == NULL || hudTextScore == NULL)
+      hudTextSpeed == NULL || hudTextScore == NULL
+      || hudPanelTimer == NULL || hudTextTimer == NULL)
     return ;
+  
   hudPanelPlayerOne->setMaterialName("hudPlayerOne");
   hudPanelPlayerOne->setDimensions(281 * (percentWidth / 100), 627 * (percentHeight / 100));
   hudPanelPlayerOne->setPosition(0, 0);
   hudPanelPlayerOne->setMetricsMode(Ogre::GMM_PIXELS);
   this->_mOverlay->add2D(hudPanelPlayerOne);
+  
+  hudPanelTimer->setDimensions(281 * (percentWidth / 100), 627 * (percentHeight / 100));
+  hudPanelTimer->setPosition(0, 0);
+  hudPanelTimer->setMetricsMode(Ogre::GMM_PIXELS);
+  this->_mOverlay->add2D(hudPanelTimer);
+  
+  hudTextTimer->setMetricsMode(Ogre::GMM_PIXELS);
+  hudTextTimer->setPosition(600, 50);
+  hudTextTimer->setDimensions(100, 100);
+  hudTextTimer->setCaption("Time remaining : " + std::to_string((int)this->_gameManager->_timer) + " s");
+  hudTextTimer->setCharHeight(64);
+  hudTextTimer->setFontName("Vera");
+  hudTextTimer->setColourBottom(Ogre::ColourValue(0.3, 0.5, 0.3));
+  hudTextTimer->setColourTop(Ogre::ColourValue(0.5, 0.7, 0.5));
+  hudPanelTimer->addChild(hudTextTimer);
+  
   hudTextBomb->setMetricsMode(Ogre::GMM_PIXELS);
   hudTextBomb->setPosition(170, 325);
   hudTextBomb->setDimensions(100, 100);
@@ -95,6 +124,7 @@ void				HudManager::setupHudPlayerOne()
   hudTextBomb->setColourBottom(Ogre::ColourValue(0.3, 0.5, 0.3));
   hudTextBomb->setColourTop(Ogre::ColourValue(0.5, 0.7, 0.5));
   hudPanelPlayerOne->addChild(hudTextBomb);
+  
   hudTextSpeed->setMetricsMode(Ogre::GMM_PIXELS);
   hudTextSpeed->setPosition(170, 425);
   hudTextSpeed->setDimensions(100, 100);
@@ -104,6 +134,7 @@ void				HudManager::setupHudPlayerOne()
   hudTextSpeed->setColourBottom(Ogre::ColourValue(0.3, 0.5, 0.3));
   hudTextSpeed->setColourTop(Ogre::ColourValue(0.5, 0.7, 0.5));
   hudPanelPlayerOne->addChild(hudTextSpeed);
+  
   hudTextScore->setMetricsMode(Ogre::GMM_PIXELS);
   hudTextScore->setPosition(170, 525);
   hudTextScore->setDimensions(100, 100);
@@ -128,16 +159,20 @@ void				HudManager::setupHudPlayerTwo()
   hudTextBomb = static_cast<Ogre::TextAreaOverlayElement*>(this->_mOverlayManager->createOverlayElement("TextArea", "hudTextBomb2"));
   hudTextSpeed = static_cast<Ogre::TextAreaOverlayElement*>(this->_mOverlayManager->createOverlayElement("TextArea", "hudTextSpeed2"));
   hudTextScore = static_cast<Ogre::TextAreaOverlayElement*>(this->_mOverlayManager->createOverlayElement("TextArea", "hudTextScore2"));
+  
   percentHeight = ((this->_gameManager->_Window->getHeight() * 100) / this->_sizeHeight);
   percentWidth = ((this->_gameManager->_Window->getWidth() * 100) / this->_sizeWidth);
+  
   if (hudPanelPlayerTwo == NULL || hudTextBomb == NULL ||
       hudTextSpeed == NULL || hudTextScore == NULL)
     return ;
+
   hudPanelPlayerTwo->setMaterialName("hudPlayerTwo");
   hudPanelPlayerTwo->setDimensions(281 * (percentWidth / 100), 627 * (percentHeight / 100));
   hudPanelPlayerTwo->setPosition(0, 0);
   hudPanelPlayerTwo->setMetricsMode(Ogre::GMM_PIXELS);
   this->_mOverlay->add2D(hudPanelPlayerTwo);
+
   hudTextBomb->setMetricsMode(Ogre::GMM_PIXELS);
   hudTextBomb->setPosition(30, 325);
   hudTextBomb->setDimensions(100, 100);
@@ -147,6 +182,7 @@ void				HudManager::setupHudPlayerTwo()
   hudTextBomb->setColourBottom(Ogre::ColourValue(0.3, 0.5, 0.3));
   hudTextBomb->setColourTop(Ogre::ColourValue(0.5, 0.7, 0.5));
   hudPanelPlayerTwo->addChild(hudTextBomb);
+
   hudTextSpeed->setMetricsMode(Ogre::GMM_PIXELS);
   hudTextSpeed->setPosition(30, 425);
   hudTextSpeed->setDimensions(100, 100);
@@ -156,6 +192,7 @@ void				HudManager::setupHudPlayerTwo()
   hudTextSpeed->setColourBottom(Ogre::ColourValue(0.3, 0.5, 0.3));
   hudTextSpeed->setColourTop(Ogre::ColourValue(0.5, 0.7, 0.5));
   hudPanelPlayerTwo->addChild(hudTextSpeed);
+
   hudTextScore->setMetricsMode(Ogre::GMM_PIXELS);
   hudTextScore->setPosition(30, 525);
   hudTextScore->setDimensions(100, 100);
@@ -165,7 +202,6 @@ void				HudManager::setupHudPlayerTwo()
   hudTextScore->setColourBottom(Ogre::ColourValue(0.3, 0.5, 0.3));
   hudTextScore->setColourTop(Ogre::ColourValue(0.5, 0.7, 0.5));
   hudPanelPlayerTwo->addChild(hudTextScore);
-  this->_mOverlay->add2D(hudPanelPlayerTwo);
 }
 
 void					HudManager::showHud(MapManager *mapManager)
@@ -175,8 +211,21 @@ void					HudManager::showHud(MapManager *mapManager)
   Ogre::TextAreaOverlayElement		*hudTextBomb;
   Ogre::TextAreaOverlayElement		*hudTextSpeed;
   Ogre::TextAreaOverlayElement		*hudTextScore;
+  Ogre::TextAreaOverlayElement		*hudTextTimer;
   double				percentHeight;
   double				percentWidth;
+  Player				*player;
+
+  hudTextTimer = static_cast<Ogre::TextAreaOverlayElement*>(this->_mOverlayManager->getOverlayElement("hudTextTimer"));
+  percentHeight = ((this->_gameManager->_Window->getHeight() * 100) / this->_sizeHeight);
+  percentWidth = ((this->_gameManager->_Window->getWidth() * 100) / this->_sizeWidth);
+  hudTextTimer->setPosition(600 * (percentWidth / 100), 50 * (percentHeight / 100));
+  hudTextTimer->setCharHeight(64 * (percentHeight / 100));
+  hudTextTimer->setCaption("Time remaining : " + std::to_string((int)this->_gameManager->_timer) + " s");
+
+
+  if (mapManager->_character.size() < 2)
+    return ;
 
   hudPanelPlayerOne = static_cast<Ogre::OverlayContainer*>(this->_mOverlayManager->getOverlayElement("HudPanelPlayerOne"));
   percentHeight = ((this->_gameManager->_Window->getHeight() * 100) / this->_sizeHeight);
@@ -190,9 +239,7 @@ void					HudManager::showHud(MapManager *mapManager)
   hudPanelPlayerTwo->setPosition(this->_gameManager->_Window->getWidth() - (281 * (percentWidth / 100)), 0);
   hudPanelPlayerTwo->setDimensions(281.0 * (percentWidth / 100), 627.0 * (percentHeight / 100));
 
-  if (mapManager->_character.size() < 2)
-    return ;
-  Player *player =  static_cast<Player*>(mapManager->_character[0]);
+  player =  static_cast<Player*>(mapManager->_character[0]);
   
   hudTextBomb = static_cast<Ogre::TextAreaOverlayElement*>(this->_mOverlayManager->getOverlayElement("hudTextBomb1"));
   hudTextBomb->setPosition(170 * (percentWidth / 100), 325 * (percentHeight / 100));

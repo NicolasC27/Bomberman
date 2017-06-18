@@ -38,13 +38,12 @@ class GameManager
   MapManager		*_map;
   HudManager		*_hudManager;
 
-  float 		_timer = 120;
-
   State 		_state;
 
  public:
   
   Ogre::RenderWindow 	*_Window;
+  float 		_timer = 120;
   
   GameManager();
   virtual ~GameManager();
