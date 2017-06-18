@@ -6,12 +6,12 @@
 #include <OgreParticleSystemManager.h>
 #include "Objects/Explosion.hpp"
 
-Explosion::Explosion(MapManager *map, AGameObject::Object object, int isRoot, int Lenght,
-		     Ogre::Vector3 direction) : AGameObject(map, object, 1), _IsRoot(isRoot)
+Explosion::Explosion(MapManager *map, AGameObject::Object object, int isRoot, int Length,
+		     Ogre::Vector3 direction)
+	: AGameObject(map, object, 1), _IsRoot(isRoot), _Length(Length), _Direction(direction),
+	  _extend(false)
 {
   _obj = NULL;
-  _Length = Lenght;
-  _Direction = direction;
   lifeTimeRemaning = LIFE_DURATION;
   delayExtend = EXTEND_DELAY;
 }
@@ -23,7 +23,7 @@ Explosion::~Explosion()
 
 void 			Explosion::update(Ogre::Real dt)
 {
-  if(lifeTimeRemaning > 0)
+  if (lifeTimeRemaning > 0)
     lifeTimeRemaning-= dt;
   else
     {
@@ -32,12 +32,13 @@ void 			Explosion::update(Ogre::Real dt)
     }
 
   delayExtend -= dt;
-  if(delayExtend <= 0)
+  if (delayExtend <= 0)
     {
-      if(_Length > 0)
+      if (_Length > 0)
 	{
 	  if (_IsRoot)
 	    {
+	      checkVictim(_node->getPosition(), Ogre::Vector3::ZERO);
 	      extendFire(Ogre::Vector3::UNIT_X);
 	      extendFire(-Ogre::Vector3::UNIT_X);
 	      extendFire(Ogre::Vector3::UNIT_Z);
@@ -45,17 +46,39 @@ void 			Explosion::update(Ogre::Real dt)
 	    }
 	  else
 	    extendFire(_Direction);
+	  _extend = true;
 	}
     }
-
 }
 
-void 			Explosion::extendFire(Ogre::Vector3 direction)
+bool 			Explosion::checkVictim(Ogre::Vector3 const &pos, Ogre::Vector3 const &direction)
 {
-  Ogre::Vector3 position = (_node->getPosition()+direction*MapManager::boxWidth);
+  AGameObject		*obj = _map->getObjectFrom(pos);
+  MapManager::Character	victim = _map->getCharacterFrom(Ogre::Vector2(pos.x, pos.z));
+  bool 			ret = false;
 
-  _map->addObjects(Ogre::Vector2(position.x, position.z),
-		   new Explosion(_map, AGameObject::EXPLOSION, false, _Length-1, _Direction));
+  /*if (!_extend && obj != NULL && obj->getType() == AGameObject::EXPLOSION)
+    {
+      --_Length;
+      extendFire(direction + _Direction);
+      return (false);
+    }*/
+  if (!_extend && (obj == NULL || obj->getType() == AGameObject::ITEM))
+    ret = true;
+  for (unsigned int i = 0; i < victim.size() ; ++i)
+    victim[i]->destroy();
+  if (obj != NULL)
+    obj->destroy();
+  return (ret);
+}
+
+void 			Explosion::extendFire(Ogre::Vector3 const &direction)
+{
+  Ogre::Vector3 pos = (_node->getPosition() + direction * MapManager::boxWidth);
+
+  if (checkVictim(pos, direction))
+    _map->addObjects(Ogre::Vector2(pos.x, pos.z),
+		     new Explosion(_map, AGameObject::EXPLOSION, false, _Length - 1, direction));
 }
 
 void 			Explosion::createEntity()

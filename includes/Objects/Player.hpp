@@ -24,6 +24,8 @@ class Player : public ACharacter
   void			action(ActionKeyCode, const Ogre::FrameEvent &);
 
   void 			update(Ogre::Real);
+  virtual void 		destroy();
+  void		reset();
 
   const std::map<OIS::KeyCode, ActionKeyCode>	&getKeyCodeType() const;
 

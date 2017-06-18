@@ -113,6 +113,8 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 	{
 	  if (mKeyboard->isKeyDown(keyit->first))
 	      player->action(keyit->second, evt);
+	  else if (mKeyboard->isKeyDown(OIS::KC_J))
+	      game->reset();
 	  else if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
 	      return false;
 	}
@@ -126,7 +128,7 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 //
 //  mCamera->moveRelative(translate * evt.timeSinceLastFrame * mMovementspeed * 5);
 
-  game->update(_map, evt.timeSinceLastFrame);
+  game->update(evt.timeSinceLastFrame);
   return true;
 }
 

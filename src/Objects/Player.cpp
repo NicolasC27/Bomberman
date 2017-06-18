@@ -14,7 +14,7 @@ Player::Player(MapManager *map, AGameObject::Object object) :
 {
   keyCodeType.clear();
   setKey();
-  setPowerbomb(1);
+  setPowerbomb(6);
   setMovespeed(300);
   setBombmax(1);
   setDelaybomb(0);
@@ -69,11 +69,11 @@ bool			Player::Collide(Ogre::Vector3 &m)
 
   for (unsigned int i = 0; i < pos.size(); ++i)
     {
-      if ((ptr = _map->getObjectFrom(pos[i]/*_map->getPosFrom(pos[i])*/)) != NULL)
+      if ((ptr = _map->getObjectFrom(pos[i])) != NULL)
 	{
 	  if (i == 1 && ptr->getType() == AGameObject::ITEM)
 	    (this->*_powerUp[dynamic_cast<Item *>(ptr)->getUpgrade()])();
-	  else if (sphere.intersects(ptr->getObj()->getWorldBoundingBox(true)))
+	  else if (ptr->getObj() != NULL && sphere.intersects(ptr->getObj()->getWorldBoundingBox(true)))
 	    return (true);
 	}
     }
@@ -156,25 +156,43 @@ void			Player::action(ActionKeyCode action, const Ogre::FrameEvent &evt)
 	else
 	  if (action == Player::AT_FIRE)
 	    {
-	      this->fire();
+	      if (_map->getObjectFrom(_map->getPosFrom(_node->getPosition())) == NULL)
+	      	this->fire();
 	    }
 }
 
 void			Player::fire()
 {
-  if (getDelaybomb() <= 0)
-    {
+ // if (getDelaybomb() <= 0)
+   // {
       if (getBombmax() > 0)
 	{
 	  setBombmax(settings._bombmax - 1);
-	  _map->addObjects(_map->getMiddlePosFrom(Ogre::Vector2(_node->getPosition().x,
-								_node->getPosition().z)),
+	  _map->addObjects(_map->getPosFrom(Ogre::Vector2(_node->getPosition().x,
+				                          _node->getPosition().z)),
 			   new Bomb(this, _map, AGameObject::BOMB));
 	  setDelaybomb(1.5);
 	}
-    }
+    //}
 }
 const std::map<OIS::KeyCode, ACharacter::ActionKeyCode>	&Player::getKeyCodeType() const
 {
   return (keyCodeType);
+}
+
+void 			Player::destroy()
+{
+  _map->removeCharacter(this);
+  // save score ?
+  // drop powerup ?
+  // animation ?
+  // end of game ?
+}
+
+void 			Player::reset()
+{
+  setPowerbomb(1);
+  setMovespeed(300);
+  setBombmax(1);
+  setDelaybomb(0);
 }

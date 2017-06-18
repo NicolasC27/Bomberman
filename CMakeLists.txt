@@ -151,8 +151,8 @@ SET(SRCS
         includes/Objects/Bomb.hpp
         includes/Objects/Explosion.hpp
         includes/Objects/PlayerSettings.hpp
-	includes/Objects/Item.hpp
-	includes/MapManager.hpp
+    	includes/Objects/Item.hpp
+	    includes/MapManager.hpp
 #        includes/Collision.hpp
         )
 

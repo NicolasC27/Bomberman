@@ -20,7 +20,7 @@ class Explosion : public AGameObject
   void			createEntity();
 
   std::string 		getName() const;
-  AGameObject::State 		getState() const;
+  AGameObject::State 	getState() const;
   std::string		getMaterialName() const;
   Ogre::Vector3 	getScale() const;
   double		getPositionY() const;
@@ -31,7 +31,8 @@ class Explosion : public AGameObject
   std::string				getMeshName() const;
   std::string 				getNameExplosion() const;
 
-  void 					extendFire(Ogre::Vector3 direction);
+  void 					extendFire(Ogre::Vector3 const &);
+  bool 					checkVictim(Ogre::Vector3 const &, Ogre::Vector3 const &);
 
  private:
 
@@ -39,6 +40,7 @@ class Explosion : public AGameObject
 
   int 			_IsRoot;
   int 			_Length;
+  bool 			_extend;
   Ogre::Real 		delayExtend;
   Ogre::Real		lifeTimeRemaning;
   const float 		EXTEND_DELAY = 0.05;

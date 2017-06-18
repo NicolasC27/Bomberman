@@ -14,7 +14,6 @@ class AGameObject;
 #include <OgreNode.h>
 #include <OgreSceneNode.h>
 #include "MapManager.hpp"
-#include "Collision.hpp"
 #include <Ogre.h>
 #include <OgreAxisAlignedBox.h>
 
@@ -70,6 +69,7 @@ class AGameObject {
  public:
   Ogre::SceneNode *getNode() const;
 
+  virtual void 		destroy();
  public:
   virtual void		createEntity() = 0;
 
