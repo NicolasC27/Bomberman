@@ -37,11 +37,15 @@ class MapManager
   Character						_character;
 
 public:
-  AGameObject			   *getObjectFrom(Ogre::Vector2 const &) const;
-  AGameObject			   *getObjectFrom(Ogre::Vector3 const &) const;
+  AGameObject			   	*getObjectFrom(Ogre::Vector2 const &) const;
+  AGameObject				*getObjectFrom(Ogre::Vector3 const &) const;
+  Ogre::Vector2				getPosFrom(Ogre::Vector2 const &) const;
+  Ogre::Vector2				getPosFrom(Ogre::Vector3 const &) const;
+  Ogre::Vector2				getMiddlePosFrom(Ogre::Vector2 const &) const;
+  Character				getCharacterFrom(Ogre::Vector2 const &) const;
 
 private:
-  std::list<Ogre::Vector2> 			_spawns;
+  std::vector<Ogre::Vector2> 			_spawns;
   std::string 					_filename;
 
   int 						_size;
@@ -55,14 +59,14 @@ private:
 
   virtual ~MapManager();
 
-  void			generateObjects();
+  void			generateObjects(bool);
   void			generateSpawn();
   void			generatePlan();
 
-  void					setSize(int size);
+  void			setSize(int size);
 
-  int					getSize() const;
-  const std::vector<AGameObject *> &	getCharacter() const;
+  int			getSize() const;
+  const Character &	getCharacter() const;
 
   void 			addObjects(const Ogre::Vector2 &, AGameObject *);
   void 			addCharacter(const Ogre::Vector2 &vector);
@@ -72,15 +76,16 @@ private:
 
   bool 			getObject(Ogre::Vector2 vector);
   const 		Objects &getObjects() const;
-  Ogre::Vector2		&getPosFrom(Ogre::Vector2 &tmp) const;
 
-  Ogre::Vector2	const	getMiddlePosFrom(Ogre::Vector2 const &tmp) const;
   int			getIsdestructible() const;
 
   void 			setIsdestructible(int isdestructible);
 
   void 			remove(AGameObject *object);
   void 			removeObject(AGameObject *object);
+  void 			removeCharacter(AGameObject *object);
+
+  void 			reset();
 };
 
 #endif //BOMBERMAN_MAP_HPP

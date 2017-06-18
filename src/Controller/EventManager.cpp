@@ -140,6 +140,8 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
 			}
 		    }
 		}
+	  else if (mKeyboard->isKeyDown(OIS::KC_J))
+	      game->reset();
     }
   if (mKeyboard->isKeyDown(OIS::KC_ESCAPE))
     return false;
@@ -156,6 +158,14 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
   mCamera->yaw(Ogre::Radian(rotX));
   mCamera->pitch(Ogre::Radian(rotY));
   mCamera->moveRelative(translate * evt.timeSinceLastFrame * 400);
+
+
+//  float rotX = mMouse->getMouseState().X.rel * evt.timeSinceLastFrame * -1;
+//  float rotY = mMouse->getMouseState().Y.rel * evt.timeSinceLastFrame * -1;
+//  mCamera->yaw(Ogre::Radian(rotX));
+//  mCamera->pitch(Ogre::Radian(rotY));
+//
+//  mCamera->moveRelative(translate * evt.timeSinceLastFrame * mMovementspeed * 5);
 
   game->update(_map, evt.timeSinceLastFrame);
   return true;

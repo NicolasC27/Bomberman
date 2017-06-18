@@ -90,3 +90,13 @@ Ogre::SceneNode *AGameObject::getNode() const
 {
   return _node;
 }
+
+void 			AGameObject::destroy()
+{
+
+}
+
+Ogre::ParticleSystem *AGameObject::getParticleSystem() const
+{
+  return particleSystem;
+}

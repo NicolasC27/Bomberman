@@ -121,14 +121,15 @@ set(CEGUI_LIBS CEGUIBase-0 CEGUICommonDialogs-0 CEGUIOgreRenderer-0)
 SET(SRCS
         src/main.cpp
         src/MapManager.cpp
-        src/Collision.cpp
+#        src/Collision.cpp
         src/Objects/Wall.cpp
         src/Objects/AGameObject.cpp
         src/Objects/ACharacter.cpp
         src/Objects/Player.cpp
         src/Objects/PlayerSettings.cpp
         src/Objects/Bomb.cpp
-        src/Common/Manager/ConfigManager.cpp
+	src/Objects/Item.cpp
+	src/Common/Manager/ConfigManager.cpp
 #        src/Controller/KeyController.cpp
         src/Common/Manager/NodeManager.cpp
         src/Common/Manager/CameraManager.cpp
@@ -150,8 +151,9 @@ SET(SRCS
         includes/Objects/Bomb.hpp
         includes/Objects/Explosion.hpp
         includes/Objects/PlayerSettings.hpp
-        includes/MapManager.hpp
-        includes/Collision.hpp
+    	includes/Objects/Item.hpp
+	    includes/MapManager.hpp
+#        includes/Collision.hpp
         )
 
 set(HDRS ${SRCS})

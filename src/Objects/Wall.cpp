@@ -3,6 +3,7 @@
 //
 
 #include <Objects/Wall.hpp>
+#include <Objects/Item.hpp>
 
 Wall::Wall(MapManager *map, Wall::State type) : AGameObject(map, BLOCK), _state(type), _positionY(0)
 {
@@ -11,26 +12,34 @@ Wall::Wall(MapManager *map, Wall::State type) : AGameObject(map, BLOCK), _state(
 
 Wall::~Wall()
 {
-
+  _map->addObjects(Ogre::Vector2(_node->getPosition().x,
+				 _node->getPosition().z),
+  		   new Item(_map, AGameObject::ITEM));
 }
 
 void 			Wall::update(Ogre::Real dt)
 {
-  Ogre::Vector3		translateVector = _moveSpeed * dt * Ogre::Vector3(0, 1, 0);
-
   if (getPositionY() > 0)
     {
-      _node->setPosition(_node->getPosition().x,
-			 _node->getPosition().y - translateVector.y,
-			 _node->getPosition().z);
+      _node->setPosition(_node->getPosition() - (_moveSpeed * dt * Ogre::Vector3(0, 1, 0)));
       setPositionY(_node->getPosition().y);
+      if (getPositionY() < 50)
+	{
+	  Ogre::Vector2	pos(_map->getPosFrom(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z)));
+	  AGameObject		*obj = _map->getObjectFrom(pos);
+	  MapManager::Character	victim = _map->getCharacterFrom(pos);
+	  for (unsigned int i = 0; i < victim.size() ; ++i)
+	    victim[i]->destroy();
+	  if (obj != NULL)
+	    obj->destroy();
+	}
     }
-  else if (getPositionY() <= 0)
+  else if (getPositionY() < 0)
     {
+      setPositionY(0);
       _node->setPosition(_node->getPosition().x,
 			 0,
 			 _node->getPosition().z);
-      setPositionY(0);
     }
 }
 
@@ -96,4 +105,11 @@ double 		Wall::getPositionY() const
 void		Wall::setPositionY(int positionY)
 {
   _positionY = positionY;
+}
+
+void 		Wall::destroy()
+{
+  if (_state == BREAKABLE)
+    _map->removeObject(this);
+  // animation ?
 }

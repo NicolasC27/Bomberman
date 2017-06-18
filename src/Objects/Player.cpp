@@ -14,11 +14,18 @@ Player::Player(MapManager *map, AGameObject::Object object) :
 {
   keyCodeType.clear();
   setKey();
-  setPowerbomb(1);
+  setPowerbomb(6);
   setMovespeed(300);
-  setBombmax(5);
+  setBombmax(1);
   setDelaybomb(0);
-}
+  _powerUp.push_back(&Player::powerUp);
+  _powerUp.push_back(&Player::maxBombUp);
+  _powerUp.push_back(&Player::speedUp);
+  /*_powerUp.push_back(&Player::throwing);
+  _powerUp.push_back(&Player::pushing);
+  _powerUp.push_back(&Player::godmode);
+  _powerUp.push_back(&Player::ghostmode);
+*/}
 
 Player::~Player()
 {
@@ -53,19 +60,29 @@ void 				Player::setKey()
     }
 }
 
-bool			Player::Collide(Ogre::Vector3 &m) const
+bool			Player::Collide(Ogre::Vector3 &m)
 {
   Ogre::Vector2         mov(m.x, m.z);
   std::vector<Ogre::Vector2>	 pos = this->getFrontObstacle(mov);
   Ogre::Sphere	sphere(_obj->getWorldBoundingBox().getCenter() + m, radius);
   AGameObject		*ptr;
+  Ogre::AxisAlignedBox  aab2;
 
   for (unsigned int i = 0; i < pos.size(); ++i)
     {
-      if ((ptr = _map->getObjectFrom(pos[i]/*_map->getPosFrom(pos[i])*/)) != NULL)
+      if ((ptr = _map->getObjectFrom(pos[i])) != NULL)
 	{
-	  if (sphere.intersects(ptr->getObj()->getWorldBoundingBox(true)))
-	    return (true);
+	  if (i == 1 && ptr->getType() == AGameObject::ITEM)
+	    (this->*_powerUp[dynamic_cast<Item *>(ptr)->getUpgrade()])();
+	  else if (ptr->getObj() != NULL || ptr->getParticleSystem() != NULL)
+	    {
+	      if (ptr->getObj() != NULL)
+		aab2 = ptr->getObj()->getWorldBoundingBox(true);
+	      else
+		aab2 = ptr->getParticleSystem()->getWorldBoundingBox(true);
+              if (sphere.intersects(ptr->getObj()->getWorldBoundingBox(true)))
+		return (true);
+	    }
 	}
     }
   return (false);
@@ -147,25 +164,43 @@ void			Player::action(ActionKeyCode action, const Ogre::FrameEvent &evt)
 	else
 	  if (action == Player::AT_FIRE)
 	    {
-	      this->fire();
+	      if (_map->getObjectFrom(_map->getPosFrom(_node->getPosition())) == NULL)
+	      	this->fire();
 	    }
 }
 
 void			Player::fire()
 {
-  if (getDelaybomb() <= 0)
-    {
+ // if (getDelaybomb() <= 0)
+   // {
       if (getBombmax() > 0)
 	{
 	  setBombmax(settings._bombmax - 1);
-	  _map->addObjects(_map->getMiddlePosFrom(Ogre::Vector2(_node->getPosition().x,
-								_node->getPosition().z)),
+	  _map->addObjects(_map->getPosFrom(Ogre::Vector2(_node->getPosition().x,
+				                          _node->getPosition().z)),
 			   new Bomb(this, _map, AGameObject::BOMB));
 	  setDelaybomb(1.5);
 	}
-    }
+    //}
 }
 const std::map<OIS::KeyCode, ACharacter::ActionKeyCode>	&Player::getKeyCodeType() const
 {
   return (keyCodeType);
+}
+
+void 			Player::destroy()
+{
+  _map->removeCharacter(this);
+  // save score ?
+  // drop powerup ?
+  // animation ?
+  // end of game ?
+}
+
+void 			Player::reset()
+{
+  setPowerbomb(1);
+  setMovespeed(300);
+  setBombmax(1);
+  setDelaybomb(0);
 }

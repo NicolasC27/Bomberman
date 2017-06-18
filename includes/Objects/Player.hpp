@@ -24,6 +24,8 @@ class Player : public ACharacter
   void			action(ActionKeyCode, const Ogre::FrameEvent &);
 
   void 			update(Ogre::Real);
+  virtual void 		destroy();
+  void		reset();
 
   const std::map<OIS::KeyCode, ActionKeyCode>	&getKeyCodeType() const;
 
@@ -34,11 +36,12 @@ protected:
 private:
 
   PlayerSettings	settings;
+  std::vector<void (Player::*)(void)>	_powerUp;
 
   std::vector<Ogre::Vector2> const	getFrontObstacle(Ogre::Vector2 const &) const;
   Ogre::Vector2				&getPosFrom(Ogre::Vector2 &) const;
 
-  bool			Collide(Ogre::Vector3 &) const;
+  bool			Collide(Ogre::Vector3 &);
   void 			fire();
 
  public:
@@ -50,12 +53,24 @@ private:
   int 			getPowerbomb() const;
   float 		getMovespeed() const;
   float 		getProtectDelay() const;
+  int                   getAbility() const;
+  int                   getMode() const;
 
-  void 			setNextFireDelay(Ogre::Real nextFireDelay);
-  void 			setIntervFire(Ogre::Real intervFire);
-  void 			setDelaybomb(Ogre::Real delaybomb);
-  void 			setMovespeed(Ogre::Real movespeed);
-  void 			setBombmax(int bombmax);
-  void 			setPowerbomb(int powerbomb);
+  void 			setNextFireDelay(Ogre::Real);
+  void 			setIntervFire(Ogre::Real);
+  void 			setDelaybomb(Ogre::Real);
+  void 			setMovespeed(Ogre::Real);
+  void 			setBombmax(int);
+  void 			setPowerbomb(int);
+  void                  setAbility(int);
+  void                  setMode(int);
+
+  void	  		powerUp();
+  void			maxBombUp();
+  void  		speedUp();
+  void  		throwing();
+  void  		pushing();
+  void  		godmode();
+  void  		ghostmode();
 };
 #endif //BOMBERMAN_PLAYER_HPP

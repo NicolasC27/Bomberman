@@ -5,6 +5,8 @@
 #ifndef BOMBERMAN_PLAYERINFO_HPP
 #define BOMBERMAN_PLAYERINFO_HPP
 
+#include "Item.hpp"
+
 struct PlayerSettings
 {
   Ogre::Real	_nextFireDelay;
@@ -15,6 +17,8 @@ struct PlayerSettings
 
   int		_bombmax;
   int		_powerbomb;
+  int		_ability;
+  int		_mode;
   int 		_points;
 
   const float DEFAULT_PROTECTION_DELAY = 1;

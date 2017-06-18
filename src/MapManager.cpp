@@ -28,16 +28,20 @@ MapManager::~MapManager()
 
 void 		MapManager::update(Ogre::Real dt)
 {
-  Objects::iterator iteratorObject;
-  Character::iterator iteratorCharacter;
+  Objects::const_iterator iteratorObject;
+  Character::const_iterator iteratorCharacter;
+  AGameObject		  *tmp;
 
-  for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); iteratorObject++)
+  for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); )
     {
-      (*iteratorObject).first->update(dt);
+      tmp = iteratorObject->first;
+      ++iteratorObject;
+      tmp->update(dt);
     }
   for (iteratorCharacter = _character.begin(); iteratorCharacter != _character.end(); iteratorCharacter++)
     {
-      (*iteratorCharacter)->update(dt);
+      tmp = *iteratorCharacter;
+      tmp->update(dt);
     }
 }
 
@@ -72,7 +76,7 @@ void		MapManager::generatePlan()
   node->attachObject(plan);
 }
 
-void 		MapManager::generateObjects()
+void 		MapManager::generateObjects(bool res)
 {
   std::ifstream infile(_filename);
   std::string 	line;
@@ -102,24 +106,27 @@ void 		MapManager::generateObjects()
   if (count != (_size - 1))
     throw Ogre::Exception(Ogre::Exception::ERR_INVALID_STATE,
 			  ERR_NBLINEMAP, _filename);
-  addCharacter(Ogre::Vector2(100, 900));
-//  addCharacter(Ogre::Vector2(100, 100));
-  addBomb(Ogre::Vector2(900, 900));
-  generatePlan();
+  if (!res)
+  {
+    addCharacter(Ogre::Vector2(100, 900));
+    addCharacter(Ogre::Vector2(100, 100));
+    //addBomb(Ogre::Vector2(900, 900));
+    generatePlan();
+    generateSpawn();
+  }
 }
 
 void 		MapManager::generateSpawn()
 {
-  _spawns.push_front(Ogre::Vector2(boxWidth, boxWidth));
-  _spawns.push_front(Ogre::Vector2(boxWidth,
+  _spawns.push_back(Ogre::Vector2(boxWidth, boxWidth));
+  _spawns.push_back(Ogre::Vector2(
+	  (_size * boxWidth) - (boxWidth * 2),
+	  (_size * boxWidth) - (boxWidth * 2)));_spawns.push_back(Ogre::Vector2(boxWidth,
 				   (_size * boxWidth) -
 				   (boxWidth * 2)));
-  _spawns.push_front(Ogre::Vector2(
+  _spawns.push_back(Ogre::Vector2(
 	  (_size * boxWidth) - (boxWidth * 2),
 	  boxWidth));
-  _spawns.push_front(Ogre::Vector2(
-	  (_size * boxWidth) - (boxWidth * 2),
-	  (_size * boxWidth) - (boxWidth * 2)));
 }
 
 void 		MapManager::addCharacter(const Ogre::Vector2 &vector)
@@ -149,7 +156,7 @@ int 		MapManager::getSize() const
   return _size;
 }
 
-const std::vector<AGameObject *> &MapManager::getCharacter() const
+const MapManager::Character 		&MapManager::getCharacter() const
 {
   return _character;
 }
@@ -165,6 +172,20 @@ AGameObject			*MapManager::getObjectFrom(Ogre::Vector2 const &pos) const
       it++;
     }
   return (NULL);
+}
+
+MapManager::Character			MapManager::getCharacterFrom(Ogre::Vector2 const &pos) const
+{
+  MapManager::Character			in;
+  MapManager::Character::const_iterator	it = _character.begin();
+
+  while (it != _character.end())
+    {
+      if (getPosFrom((*it)->getNode()->getPosition()) == pos)
+	in.push_back(*it);
+      it++;
+    }
+  return (in);
 }
 
 AGameObject			*MapManager::getObjectFrom(Ogre::Vector3 const &pos) const
@@ -187,17 +208,18 @@ bool		MapManager::getObject(Ogre::Vector2 vector)
 
   while (it != _objects.end())
     {
-      if ((it->second.x == vector.x) && (it->second.y == vector.y))
-	return true;
+      if (it->second == vector)
+	return (true);
       it++;
     }
-  return false;
+  return (false);
 }
 
-Ogre::Vector2		&MapManager::getPosFrom(Ogre::Vector2 &tmp) const
+Ogre::Vector2		MapManager::getPosFrom(Ogre::Vector2 const &t) const
 {
-  float                 diffx = std::fmod(tmp.x, boxWidth);
-  float                 diffy = std::fmod(tmp.y, boxWidth);
+  Ogre::Vector2		tmp(t);
+  float                 diffx = std::fmod(t.x, boxWidth);
+  float                 diffy = std::fmod(t.y, boxWidth);
 
   tmp.x -= diffx;
   tmp.y -= diffy;
@@ -208,13 +230,24 @@ Ogre::Vector2		&MapManager::getPosFrom(Ogre::Vector2 &tmp) const
   return (tmp);
 }
 
-Ogre::Vector2 const	MapManager::getMiddlePosFrom(Ogre::Vector2 const &tmp) const
+Ogre::Vector2		MapManager::getPosFrom(Ogre::Vector3 const &t) const
 {
-  Ogre::Vector2 v(tmp);
-  v = this->getPosFrom(v);
-  v.x -= halfboxWidth;
-  v.y -= halfboxWidth;
+  Ogre::Vector2		tmp(t.x, t.z);
+  float                 diffx = std::fmod(t.x, boxWidth);
+  float                 diffy = std::fmod(t.z, boxWidth);
+
+  tmp.x -= diffx;
+  tmp.y -= diffy;
+  if (diffx > halfboxWidth)
+    tmp.x += boxWidth;
+  if (diffy > halfboxWidth)
+    tmp.y += boxWidth;
   return (tmp);
+}
+
+Ogre::Vector2 		MapManager::getMiddlePosFrom(Ogre::Vector2 const &tmp) const
+{
+  return (this->getPosFrom(tmp) - halfboxWidth);
 }
 
 int 		MapManager::getIsdestructible() const
@@ -234,6 +267,41 @@ const 		MapManager::Objects &MapManager::getObjects() const
 
 void 		MapManager::removeObject(AGameObject *object)
 {
+  if (object->getObj() != NULL)
+    object->getObj()->detachFromParent();
+  else
+    object->getParticleSystem()->clear();
   _objects.erase(object);
   delete object;
+}
+
+void 		MapManager::removeCharacter(AGameObject *object)
+{
+  MapManager::Character::const_iterator it = _character.begin();
+
+  for (; it != _character.end() && *it != object; ++it);
+  if (it != _character.end())
+    _character.erase(it);
+  delete object;
+}
+
+void 		MapManager::reset()
+{
+  unsigned int i;
+  MapManager::Objects::const_iterator iteratorObject;
+
+  for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); )
+    {
+      delete iteratorObject->first;
+      iteratorObject = _objects.erase(iteratorObject);
+    }
+  for (i = 0; i < _character.size(); ++i)
+    {
+      dynamic_cast<Player *>(_character[i])->reset();
+      _character[i]->setPosition(_spawns[i].x, 0, _spawns[i].y);
+    }
+  if (i < 2)
+    for (; i < 2; ++i)
+      addCharacter(_spawns[i]);
+  generateObjects(true);
 }
