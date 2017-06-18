@@ -16,7 +16,7 @@ particle_system Examples/Smoke
 	{
 		position 0 15 -15
 		angle 35
-		emission_rate 150
+		emission_rate 15
 		time_to_live 4
 		direction 0 1 0
 		velocity_min 50
