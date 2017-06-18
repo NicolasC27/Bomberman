@@ -123,9 +123,7 @@ void 			GameManager::nextFoundingPositionWallFalling()
 
 void 			GameManager::WallFalling(Ogre::Real dt)
 {
- // static int 		i = 0;
-
-  if (_timer <= 0 /*&& i == 0 &&  map->getIsdestructible() > 1*/)
+  if (_timer <= 0)
     {
       if (wallFalling.timer <= 0)
 	{
@@ -209,6 +207,15 @@ Ogre::RenderWindow*	GameManager::getWindow() const
 NodeManager*		GameManager::getNodes() const
 {
   return _nodes;
+}
+
+void 			GameManager::reset()
+{
+  _map->reset();
+  wallFalling.x = 0;
+  wallFalling.z = 0;
+  wallFalling.turn = 0;
+  wallFalling.timer = 60;
 }
 
 GameManager::State 	GameManager::getState() const

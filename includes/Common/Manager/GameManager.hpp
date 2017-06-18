@@ -79,6 +79,9 @@ class GameManager
   int			_boundary;
 
   void 			checkVictory();
+
+  State 		getState() const;
+  void 			setState(State state);
 };
 
 #endif //BOMBERMAN_GAMEMANAGER_HPP

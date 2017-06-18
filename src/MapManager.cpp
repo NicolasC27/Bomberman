@@ -245,11 +245,6 @@ Ogre::Vector2		MapManager::getPosFrom(Ogre::Vector3 const &t) const
   return (tmp);
 }
 
-Ogre::Vector2 		MapManager::getMiddlePosFrom(Ogre::Vector2 const &tmp) const
-{
-  return (this->getPosFrom(tmp) - halfboxWidth);
-}
-
 int 		MapManager::getIsdestructible() const
 {
   return 	_isdestructible;
