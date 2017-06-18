@@ -69,7 +69,7 @@ private:
   const Character &	getCharacter() const;
 
   void 			addObjects(const Ogre::Vector2 &, AGameObject *);
-  void 			addCharacter(const Ogre::Vector2 &vector);
+  void 			addCharacter(const Ogre::Vector2 &vector, int id = 0);
   void 			addBomb(const Ogre::Vector2 &vector);
 
   void 			update(Ogre::Real);

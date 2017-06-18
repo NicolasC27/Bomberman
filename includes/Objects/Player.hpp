@@ -24,7 +24,7 @@ class Player : public ACharacter
     GODMOD,
     GHOSTMODE
   };
-  Player(MapManager *map, Object object);
+  Player(MapManager *map, Object object, int id =_playerID);
   virtual ~Player();
 
   void 			move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt);
@@ -38,7 +38,7 @@ class Player : public ACharacter
 
   const std::map<OIS::KeyCode, ActionKeyCode>	&getKeyCodeType() const;
 
-protected:
+ protected:
   int			_ID;
   static int		_playerID;
 
@@ -64,7 +64,7 @@ private:
   float 		getProtectDelay() const;
   int                   getAbility() const;
   int                   getMode() const;
-
+  int 			getID() const;
   void 			setNextFireDelay(Ogre::Real);
   void 			setIntervFire(Ogre::Real);
   void 			setDelaybomb(Ogre::Real);

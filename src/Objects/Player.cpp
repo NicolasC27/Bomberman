@@ -7,12 +7,12 @@
 #include "Interfaces/ACharacter.hpp"
 #include "Objects/Player.hpp"
 
-int Player::_playerID = 0;
+int Player::_playerID = 1;
 
-Player::Player(MapManager *map, AGameObject::Object object)
-	: ACharacter(map, object, 35), _ID(++_playerID % 2 + 1)
+Player::Player(MapManager *map, AGameObject::Object object, int id)
+	: ACharacter(map, object, 35), _ID(id)
 {
-std::cout << "_ID player " << _ID << std::endl;
+  ++_playerID;
   keyCodeType.clear();
   setKey();
   setPowerbomb(1);
@@ -25,8 +25,8 @@ std::cout << "_ID player " << _ID << std::endl;
   /*_powerUp.push_back(&Player::throwing);
   _powerUp.push_back(&Player::pushing);
   _powerUp.push_back(&Player::godmode);
-  _powerUp.push_back(&Player::ghostmode);
-*/}
+  _powerUp.push_back(&Player::ghostmode);*/
+}
 
 Player::~Player()
 {
@@ -56,7 +56,6 @@ void 				Player::setKey()
 	    keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_W, AT_UP));
 	    keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_S, AT_DOWN));
 	    keyCodeType.insert(std::pair<OIS::KeyCode, ActionKeyCode>(OIS::KC_INSERT, AT_FIRE));
-
 	  }
     }
 }
