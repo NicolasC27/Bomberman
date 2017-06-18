@@ -89,13 +89,13 @@ void 			GameManager::update(Ogre::Real dt)
   if (_state == RESTART)
     reset();
   else if (_state == GAME)
-  {
-    _timer -= dt;
-    this->WallFalling(dt);
-    _map->update(dt);
-    checkVictory();
-  }
-      this->_hudManager->showHud(this->_map);
+      {
+	_timer -= dt;
+	this->WallFalling(dt);
+	_map->update(dt);
+	checkVictory();
+	this->_hudManager->showHud(this->_map);
+      }
 }
 
 void 			GameManager::nextFoundingPositionWallFalling()

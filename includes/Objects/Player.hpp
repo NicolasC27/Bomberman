@@ -42,6 +42,10 @@ class Player : public ACharacter
 protected:
   Ogre::Vector3 translateVector;
   int			_ID;
+ public:
+  int getID() const;
+
+ protected:
   static int		_playerID;
 
 private:

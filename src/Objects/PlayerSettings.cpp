@@ -144,7 +144,7 @@ void    Player::ghostmode()
   setMode(2);
 }
 
-int Player::getID() const
+int 	Player::getID() const
 {
   return _ID;
 }
