@@ -35,9 +35,7 @@ class Bomb : public AGameObject
   Ogre::SceneManager::PrefabType	getMeshPrefab() const;
   std::string				getMeshName() const;
 
-  std::string getNameExplosion() const;
-
-  void explode();
+  void 					explode();
 };
 
 #endif //BOMBERMAN_BOMB_HPP
