@@ -19,6 +19,11 @@ int 				Player::getBombmax() const
   return settings._bombmax;
 }
 
+int 				Player::getCurrBomb() const
+{
+  return settings._currBomb;
+}
+
 int 				Player::getDelaybomb() const
 {
   return settings._delaybomb;
@@ -70,6 +75,11 @@ void 				Player::setBombmax(int bombmax)
   settings._bombmax = bombmax;
 }
 
+void 				Player::setCurrBomb(int currBomb)
+{
+  settings._currBomb = currBomb;
+}
+
 void 				Player::setDelaybomb(Ogre::Real delaybomb)
 {
   settings._delaybomb = delaybomb;
@@ -113,7 +123,10 @@ void    Player::maxBombUp()
   int temp;
 
   if ((temp = getBombmax()) < 8)
-    setBombmax(temp + 1);
+    {
+      setBombmax(temp + 1);
+      setCurrBomb(temp + 1);
+    }
 }
 
 void    Player::speedUp()

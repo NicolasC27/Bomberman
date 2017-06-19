@@ -24,15 +24,16 @@ MapManager::MapManager(std::string const &filename, Ogre::SceneManager *SceneMan
 MapManager::~MapManager()
 {
   _spawns.clear();
+  delete engine;
   engine->removeSoundSource(general);
   engine->removeSoundSource(explosion);
-  engine->removeSoundSource(pause);
+  /*engine->removeSoundSource(pause);
   engine->removeSoundSource(winner);
   engine->removeSoundSource(confirm);
   engine->removeSoundSource(player_out);
   engine->removeSoundSource(getitem);
   engine->removeSoundSource(fall);
-  engine->removeSoundSource(wallOnGround);
+  engine->removeSoundSource(wallOnGround);*/
 }
 
 void		MapManager::setSound()
@@ -41,13 +42,13 @@ void		MapManager::setSound()
 
   general = engine->addSoundSourceFromFile("media/sound/Bomberman.wav");
   explosion = engine->addSoundSourceFromFile("media/sound/explosion.wav");
-  pause = engine->addSoundSourceFromFile("media/sound/pause.wav");
+  /*pause = engine->addSoundSourceFromFile("media/sound/pause.wav");
   winner = engine->addSoundSourceFromFile("media/sound/Winner.wav");
   confirm = engine->addSoundSourceFromFile("media/sound/confirm.wav");
   player_out = engine->addSoundSourceFromFile("media/sound/PLAYER_OUT.wav");
   getitem = engine->addSoundSourceFromFile("media/sound/ITEM_GET.wav");
   fall = engine->addSoundSourceFromFile("media/sound/BC_END.wav");
-  wallOnGround = engine->addSoundSourceFromFile("media/sound/BOS_JUMP.wav");
+  wallOnGround = engine->addSoundSourceFromFile("media/sound/BOS_JUMP.wav");*/
   engine->setSoundVolume(0.07f);
   engine->play2D("media/sound/Bomberman.wav");
 }
@@ -71,11 +72,26 @@ void 		MapManager::update(Ogre::Real dt)
       ++iteratorCharacter;
       tmp->update(dt);
     }
+  for (iteratorCharacter = _walls.begin(); iteratorCharacter != _walls.end(); )
+    {
+      tmp = *iteratorCharacter;
+      ++iteratorCharacter;
+      tmp->update(dt);
+    }
 }
 
 void 		MapManager::addObjects(const Ogre::Vector2 &vector, AGameObject *object)
 {
   _objects.insert(std::pair<AGameObject *, Ogre::Vector2>(object, vector));
+  object->setSceneManager(_SceneManager);
+  object->createEntity();
+  object->setPosition(vector.x, object->getPositionY(), vector.y);
+  object->AttachObject();
+}
+
+void 		MapManager::addWall(const Ogre::Vector2 &vector, AGameObject *object)
+{
+  _walls.push_back(object);
   object->setSceneManager(_SceneManager);
   object->createEntity();
   object->setPosition(vector.x, object->getPositionY(), vector.y);
@@ -205,6 +221,19 @@ AGameObject			*MapManager::getObjectFrom(Ogre::Vector2 const &pos) const
   return (NULL);
 }
 
+AGameObject			*MapManager::getWallFrom(Ogre::Vector2 const &pos) const
+{
+  std::vector<AGameObject*>::const_iterator	it = _walls.begin();
+
+  while (it != _walls.end())
+    {
+      if (getPosFrom((*it)->getNode()->getPosition()) == pos)
+	return (*it);
+      it++;
+    }
+  return (NULL);
+}
+
 MapManager::Character			MapManager::getCharacterFrom(Ogre::Vector2 const &pos) const
 {
   MapManager::Character			in;
@@ -302,6 +331,16 @@ void 		MapManager::removeObject(AGameObject *object)
     delete object;
 }
 
+void 		MapManager::removeWall(AGameObject *object)
+{
+  MapManager::Character::const_iterator it = _walls.begin();
+
+  for (; it != _walls.end() && *it != object; ++it);
+  if (it != _walls.end())
+    _walls.erase(it);
+  //delete object;
+}
+
 void 		MapManager::removeCharacter(AGameObject *object)
 {
   MapManager::Character::const_iterator it = _character.begin();
@@ -316,16 +355,22 @@ void 		MapManager::removeCharacter(AGameObject *object)
 void 		MapManager::reset()
 {
   unsigned int i;
-  MapManager::Objects::const_iterator iteratorObject;
   AGameObject	*tmp;
   int 		id = -1;
 
-  for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); )
+  for (MapManager::Objects::const_iterator  iteratorObject = _objects.begin(); iteratorObject != _objects.end(); )
     {
       tmp = iteratorObject->first;
       ++iteratorObject;
       removeObject(tmp);
     }
+  for (MapManager::Character::const_iterator  it = _walls.begin(); it != _walls.end(); )
+    {
+      delete *it;
+      ++it;
+      removeWall(tmp);
+    }
+  _walls.clear();
   for (i = 0; i < _character.size(); ++i)
     {
       dynamic_cast<Player *>(_character[i])->reset();

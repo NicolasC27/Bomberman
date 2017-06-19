@@ -26,7 +26,7 @@ class GameManager
     RESTART,
     GAME
   };
-
+ static const int GAME_TIME = 120;
  private:
   EventManager		*Listener;
 
@@ -43,7 +43,7 @@ class GameManager
  public:
   
   Ogre::RenderWindow 	*_Window;
-  float 		_timer = 120;
+  float 		_timer;
   
   GameManager();
   virtual ~GameManager();
@@ -55,6 +55,7 @@ class GameManager
   void 			setupScene();
   void 			setupLight();
 
+  void 			setWallFalling();
   void 			run();
 
   void 			update(Ogre::Real dt);
@@ -73,11 +74,11 @@ class GameManager
   void 			setState(State state);
 
   struct position {
-    int		x = 0;
-    int 	z = 0;
-    int		turn = 0;
-    int 	timer = 60;
-    int 	count = 0;
+    int		x;
+    int 	z;
+    int		turn ;
+    int 	timer;
+    //int 	count = 0;
   };
 
   position		wallFalling;

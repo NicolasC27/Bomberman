@@ -54,15 +54,21 @@ GameManager::~GameManager()
 {
 }
 
+void 			GameManager::setWallFalling()
+{
+  wallFalling.x = MapManager::boxWidth;
+  wallFalling.z = MapManager::boxWidth;
+  wallFalling.timer = 60;
+  wallFalling.turn = 0;
+}
+
 void 			GameManager::run()
 {
+  _timer = GAME_TIME;
   _map = new MapManager("media/map/map1", getSceneManager(), getNodes());
   _map->generateObjects(false);
   _boundary = (_map->getSize() - 2) * MapManager::boxWidth;
-  wallFalling.x = MapManager::boxWidth;
-  wallFalling.z = _boundary;
-
-
+  setWallFalling();
   Camera = new CameraManager(getSceneManager(), getWindow(), _map->getSize());
 
   Listener = new EventManager(this, _map, getWindow(), Camera->getCamera());
@@ -122,15 +128,15 @@ void 			GameManager::nextFoundingPositionWallFalling()
 
 void 			GameManager::WallFalling(Ogre::Real dt)
 {
-  if (_timer <= 0)
+  if (_timer <= GAME_TIME / 2)
     {
       if (wallFalling.timer <= 0)
 	{
 	  AGameObject *wall;
-	  wall = new Wall(_map, AGameObject::UNBREAKABLE_WALL);
-	  dynamic_cast<Wall *>(wall)->setPositionY(800);
-	  _map->addObjects(Ogre::Vector2(wallFalling.x, wallFalling.z), wall);
-	  while (_map->getObject(Ogre::Vector2(wallFalling.x, wallFalling.z)))
+	  wall = new Wall (_map, AGameObject::UNBREAKABLE_WALL);
+	  dynamic_cast<Wall*>(wall)->setPositionY(800);
+	  _map->addWall(Ogre::Vector2(wallFalling.x, wallFalling.z), wall);
+	  //while (_map->getObject(Ogre::Vector2(wallFalling.x, wallFalling.z)))
 	    nextFoundingPositionWallFalling();
 	  wallFalling.timer = 60;
 	}
@@ -176,11 +182,12 @@ void 			GameManager::reset()
 {
   _map->reset();
   _timer = 120;
-  wallFalling.x = 0;
+  setWallFalling();
+  /*wallFalling.x = 0;
   wallFalling.z = 0;
   wallFalling.turn = 0;
   wallFalling.timer = 60;
-  setState(GAME);
+  */setState(GAME);
 }
 
 Ogre::RenderWindow	*GameManager::getWindow() const

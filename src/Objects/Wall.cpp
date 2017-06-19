@@ -18,7 +18,7 @@ Wall::~Wall()
 
 void 			Wall::update(Ogre::Real dt)
 {
-  if (getPositionY() > 0)
+  if (_state == UNBREAKABLE_WALL && getPositionY() > 0)
     {
       _node->setPosition(_node->getPosition() - (_moveSpeed * dt * Ogre::Vector3(0, 1, 0)));
       setPositionY(_node->getPosition().y);
@@ -35,10 +35,13 @@ void 			Wall::update(Ogre::Real dt)
 	      tmp->destroy();
 	    }
 	  if (obj != NULL)
-	    obj->destroy();
+	    {
+	      obj->setStateUnbreakable();
+	      obj->destroy();
+	    }
 	}
     }
-  else if (getPositionY() < 0)
+  else if (_state == UNBREAKABLE_WALL && getPositionY() < 0)
     {
       setPositionY(0);
       _node->setPosition(_node->getPosition().x,
@@ -52,10 +55,10 @@ Wall::State 		Wall::getState() const
   return _state;
 }
 
-void 			Wall::setState(Wall::State state)
+/*void 			Wall::setState(Wall::State state)
 {
   _state = state;
-}
+}*/
 
 std::string 		Wall::getName() const
 {
@@ -113,6 +116,7 @@ void		Wall::setPositionY(int positionY)
 
 void 		Wall::destroy()
 {
+  std::cout << "Wall is destroyed, state : " << _state << std::endl;
   if (_state == BREAKABLE)
   {
     if (rand() % 3 == 2)

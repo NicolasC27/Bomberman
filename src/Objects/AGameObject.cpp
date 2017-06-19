@@ -78,6 +78,11 @@ void 			AGameObject::setType(AGameObject::Object type)
   _type = type;
 }
 
+void 			AGameObject::setStateUnbreakable()
+{
+  _state = UNBREAKABLE_BLOCK;
+}
+
 void 			AGameObject::setObj(Ogre::MovableObject *obj)
 {
   _obj = obj;

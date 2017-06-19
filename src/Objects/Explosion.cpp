@@ -12,7 +12,7 @@ Explosion::Explosion(MapManager *map, AGameObject::Object object, int isRoot, in
 	  _extend(false), _deleteDelay(1), _delete(false)
 {
   _obj = NULL;
-  lifeTimeRemaning = 1.0f;
+  lifeTimeRemaning = 0.5f;
   delayExtend = 0.1f;
 }
 

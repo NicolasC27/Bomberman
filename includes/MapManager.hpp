@@ -41,7 +41,9 @@ class MapManager
   typedef std::vector<AGameObject *>			Character;
   Character						_character;
 
+  Character						_walls;
 public:
+  AGameObject			   	*getWallFrom(Ogre::Vector2 const &) const;
   AGameObject			   	*getObjectFrom(Ogre::Vector2 const &) const;
   AGameObject				*getObjectFrom(Ogre::Vector3 const &) const;
   Ogre::Vector2				getPosFrom(Ogre::Vector2 const &) const;
@@ -75,6 +77,7 @@ private:
   const Character &	getCharacter() const;
 
   void 			addObjects(const Ogre::Vector2 &, AGameObject *);
+  void 			addWall(const Ogre::Vector2 &, AGameObject *);
   void 			addCharacter(const Ogre::Vector2 &vector, int id = 0);
   void 			addBomb(const Ogre::Vector2 &vector);
 
@@ -89,6 +92,7 @@ private:
 
   void 			remove(AGameObject *object);
   void 			removeObject(AGameObject *object);
+  void 			removeWall(AGameObject *object);
   void 			removeCharacter(AGameObject *object);
 
   void 			reset();
@@ -96,13 +100,13 @@ private:
  protected:
   irrklang::ISoundSource			*general;
   irrklang::ISoundSource			*explosion;
-  irrklang::ISoundSource			*pause;
+ /* irrklang::ISoundSource			*pause;
   irrklang::ISoundSource			*winner;
   irrklang::ISoundSource			*confirm;
   irrklang::ISoundSource			*player_out;
   irrklang::ISoundSource			*getitem;
   irrklang::ISoundSource			*fall;
-  irrklang::ISoundSource			*wallOnGround;
+  irrklang::ISoundSource			*wallOnGround;*/
 
  public:
   irrklang::ISoundSource 			*getExplosion() const;
