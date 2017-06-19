@@ -18,11 +18,7 @@ Player::Player(MapManager *map, AGameObject::Object object, int id)
   this->_vector = Ogre::Vector3::ZERO;
   keyCodeType.clear();
   setKey();
-  setPowerbomb(3);
-  setMovespeed(400);
-  setBombmax(1);
-  setPoints(0);
-  setDelaybomb(0);
+  setStat();
   _powerUp.push_back(&Player::powerUp);
   _powerUp.push_back(&Player::maxBombUp);
   _powerUp.push_back(&Player::speedUp);
@@ -31,6 +27,16 @@ Player::Player(MapManager *map, AGameObject::Object object, int id)
 Player::~Player()
 {
 
+}
+
+void 				Player::setStat()
+{
+  setPowerbomb(3);
+  setMovespeed(300);
+  setBombmax(1);
+  setCurrBomb(1);
+  setPoints(0);
+  setDelaybomb(0);
 }
 
 void 				Player::update(Ogre::Real dt)
@@ -70,17 +76,19 @@ bool			Player::Collide(Ogre::Vector3 &m)
 
   for (unsigned int i = 0; i < pos.size(); ++i)
     {
-      if ((ptr = _map->getObjectFrom(pos[i])) != NULL)
+      if ((ptr = _map->getObjectFrom(pos[i])) != NULL || (ptr = _map->getWallFrom(pos[i])) != NULL)
 	{
 	  if (ptr->getObj() != NULL)
 	    {
-              if (sphere.intersects(ptr->getObj()->getWorldBoundingBox(true)))
+              if (sphere.intersects(ptr->getObj()->getWorldBoundingBox()))
 		{
 		  if (ptr->getType() == AGameObject::ITEM)
 		    {
 		      (this->*_powerUp[dynamic_cast<Item *>(ptr)->getUpgrade()])();
 		      ptr->destroy();
+		      this->setPoints(this->getPoint() + 10);
 		    }
+		  // useless ?, pas de _translate si collision
 		  this->translateVector = Ogre::Vector3::ZERO;
 		  return (true);
 		}
@@ -148,6 +156,11 @@ void            			Player::tick()
 	  Ogre::Quaternion quat = src.getRotationTo(mDirection);
 	  _node->rotate(quat);
 	}
+      /*
+       * pk reset translate vector apres deplacement ?
+       * x et y toujours > 0
+       * reel position sur la map du personnage : _map->getPosFrom(_node>getPosition())
+       */
       int x = ((int) _node->getPosition()[0]) % 100;
       int y = ((int) _node->getPosition()[2]) % 100;
       if ((x < 8 && x > -8 && this->translateVector[0]) ||
@@ -194,9 +207,9 @@ void			Player::action(ActionKeyCode action, const Ogre::FrameEvent &evt)
 
 void			Player::fire()
 {
-  if (getBombmax() > 0)
+  if (getCurrBomb() > 0)
     {
-      setBombmax(settings._bombmax - 1);
+      setCurrBomb(settings._currBomb - 1);
       _map->addObjects(_map->getPosFrom(Ogre::Vector2(_node->getPosition().x,
 						      _node->getPosition().z)),
 		       new Bomb(this, _map, AGameObject::BOMB));
@@ -214,11 +227,9 @@ void 			Player::destroy()
 
 void 			Player::reset()
 {
-  setPowerbomb(1);
-  setMovespeed(300);
-  setBombmax(1);
-  setPoints(0);
-  setDelaybomb(0);
+  int 			oldPoints = getPoint();
+  setStat();
+  setPoints(oldPoints);
 }
 
 std::string Player::getMaterialName() const

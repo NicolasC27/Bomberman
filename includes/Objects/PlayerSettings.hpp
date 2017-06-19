@@ -16,6 +16,7 @@ struct PlayerSettings
   Ogre::Real 	_protectDelay;
 
   int		_bombmax;
+  int 		_currBomb;
   int		_powerbomb;
   int		_ability;
   int		_mode;

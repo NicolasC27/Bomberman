@@ -65,6 +65,7 @@ private:
   float 		getNextFireDelay() const;
   float 		getIntervFire() const;
   int 			getBombmax() const;
+  int 			getCurrBomb() const;
   int 			getDelaybomb() const;
   int 			getPowerbomb() const;
   float 		getMovespeed() const;
@@ -76,9 +77,11 @@ private:
 
   void 			setNextFireDelay(Ogre::Real);
   void 			setIntervFire(Ogre::Real);
+  void 			setStat();
   void 			setDelaybomb(Ogre::Real);
   void 			setMovespeed(Ogre::Real);
   void 			setBombmax(int);
+  void 			setCurrBomb(int);
   void 			setPoints(int);
   void 			setPowerbomb(int);
   void                  setAbility(int);

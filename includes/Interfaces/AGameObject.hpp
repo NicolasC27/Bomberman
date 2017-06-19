@@ -42,7 +42,7 @@ class AGameObject {
 
  private:
   Object 		_type;
-
+  State 		_state;
  public:
   void			setNode(Ogre::SceneNode *node);
   void 			setPosition(int x, int y, int z);
@@ -53,6 +53,7 @@ class AGameObject {
   Ogre::MovableObject 	*getObj() const;
 
   void 			setType(Object type);
+  void 			setStateUnbreakable();
   void 			setObj(Ogre::MovableObject *obj);
   void 			setSceneManager(Ogre::SceneManager *SceneManager);
 

@@ -47,7 +47,7 @@ void			Bomb::explode()
   _map->addObjects(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z),
 		   new Explosion(_map, AGameObject::EXPLOSION, true,
 				 _power, Ogre::Vector3::ZERO));
-  _player->setBombmax(_player->getBombmax() + 1);
+  _player->setCurrBomb(_player->getCurrBomb() + 1);
 }
 
 AGameObject::State 	Bomb::getState() const
