@@ -14,13 +14,14 @@ particle_system Examples/Smoke
 	// Area emitter
 	emitter Point
 	{
+
 		position 0 15 -15
-		angle 35
-		emission_rate 15
-		time_to_live 4
+		angle 180
+		emission_rate 300
+		time_to_live 1
 		direction 0 1 0
-		velocity_min 50
-		velocity_max 80    	
+		velocity 80
+		duration 1
 	}
 
 	affector ColourImage

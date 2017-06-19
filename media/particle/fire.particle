@@ -1,0 +1,23 @@
+particle_system Effects/Fire
+{
+    material Objects/Fire
+    point_rendering            false
+    particle_width             50
+    particle_height            50
+    cull_each                  false
+    quota                      50
+    billboard_type             point
+
+
+    emitter Box
+    {
+        name                    mainEmitter
+        angle                   180
+        emission_rate           10000
+        time_to_live            1
+        direction               0 1 0
+        velocity                80
+        duration                0.5
+        repeat_delay        	0.2
+    }
+}
