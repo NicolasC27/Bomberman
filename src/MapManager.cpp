@@ -42,6 +42,7 @@ void		MapManager::setSound()
 
   general = engine->addSoundSourceFromFile("media/sound/Bomberman.wav");
   explosion = engine->addSoundSourceFromFile("media/sound/explosion.wav");
+  explosion->setDefaultVolume(0.5f);
   pause = engine->addSoundSourceFromFile("media/sound/pause.wav");
   winner = engine->addSoundSourceFromFile("media/sound/Winner.wav");
   confirm = engine->addSoundSourceFromFile("media/sound/confirm.wav");
@@ -49,6 +50,7 @@ void		MapManager::setSound()
   getitem = engine->addSoundSourceFromFile("media/sound/ITEM_GET.wav");
   fall = engine->addSoundSourceFromFile("media/sound/BC_END.wav");
   wallOnGround = engine->addSoundSourceFromFile("media/sound/BOS_JUMP.wav");
+  wallOnGround->setDefaultVolume(0.5f);
   engine->setSoundVolume(0.07f);
   engine->play2D("media/sound/Bomberman.wav");
 }
