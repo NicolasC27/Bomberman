@@ -78,9 +78,10 @@ void 			GameManager::run()
 
 void			GameManager::checkVictory()
 {
-  if (_map->getCharacter().size() == 1)
+  if (_map->getCharacter().size() <= 1)
     {
-	reset();
+        _map->getEngine()->play2D(_map->getWinner());
+        reset();
     }
 }
 
@@ -130,6 +131,8 @@ void 			GameManager::WallFalling(Ogre::Real dt)
 {
   if (_timer <= GAME_TIME / 2)
     {
+      if (_timer + dt > GAME_TIME / 2)
+	_map->getEngine()->play2D(_map->getFall());
       if (wallFalling.timer <= 0 && _map->getWallFrom(Ogre::Vector2(wallFalling.x, wallFalling.z)) == NULL)
 	{
 	  AGameObject *wall;

@@ -26,13 +26,13 @@ MapManager::~MapManager()
   _spawns.clear();
   engine->removeSoundSource(general);
   engine->removeSoundSource(explosion);
-  /*engine->removeSoundSource(pause);
+  engine->removeSoundSource(pause);
   engine->removeSoundSource(winner);
   engine->removeSoundSource(confirm);
   engine->removeSoundSource(player_out);
   engine->removeSoundSource(getitem);
   engine->removeSoundSource(fall);
-  engine->removeSoundSource(wallOnGround);*/
+  engine->removeSoundSource(wallOnGround);
   delete engine;
 }
 
@@ -42,15 +42,50 @@ void		MapManager::setSound()
 
   general = engine->addSoundSourceFromFile("media/sound/Bomberman.wav");
   explosion = engine->addSoundSourceFromFile("media/sound/explosion.wav");
-  /*pause = engine->addSoundSourceFromFile("media/sound/pause.wav");
+  pause = engine->addSoundSourceFromFile("media/sound/pause.wav");
   winner = engine->addSoundSourceFromFile("media/sound/Winner.wav");
   confirm = engine->addSoundSourceFromFile("media/sound/confirm.wav");
   player_out = engine->addSoundSourceFromFile("media/sound/PLAYER_OUT.wav");
   getitem = engine->addSoundSourceFromFile("media/sound/ITEM_GET.wav");
   fall = engine->addSoundSourceFromFile("media/sound/BC_END.wav");
-  wallOnGround = engine->addSoundSourceFromFile("media/sound/BOS_JUMP.wav");*/
+  wallOnGround = engine->addSoundSourceFromFile("media/sound/BOS_JUMP.wav");
   engine->setSoundVolume(0.07f);
   engine->play2D("media/sound/Bomberman.wav");
+}
+
+irrklang::ISoundSource *MapManager::getWallOnGround() const
+{
+  return wallOnGround;
+}
+
+irrklang::ISoundSource *MapManager::getFall() const
+{
+  return fall;
+}
+
+irrklang::ISoundSource *MapManager::getGetitem() const
+{
+  return getitem;
+}
+
+irrklang::ISoundSource *MapManager::getPlayer_out() const
+{
+  return player_out;
+}
+
+irrklang::ISoundSource *MapManager::getConfirm() const
+{
+  return confirm;
+}
+
+irrklang::ISoundSource *MapManager::getWinner() const
+{
+  return winner;
+}
+
+irrklang::ISoundSource *MapManager::getPause() const
+{
+  return pause;
 }
 
 

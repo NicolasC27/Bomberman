@@ -32,11 +32,13 @@ void 			Wall::update(Ogre::Real dt)
 	    {
 	      tmp = *it;
 	      ++it;
+	      _map->getEngine()->play2D(_map->getWallOnGround());
 	      tmp->destroy();
 	    }
 	  if (obj != NULL)
 	    {
 	      obj->setStateUnbreakable();
+	      _map->getEngine()->play2D(_map->getWallOnGround());
 	      obj->destroy();
 	    }
 	}
