@@ -133,11 +133,10 @@ void 			GameManager::WallFalling(Ogre::Real dt)
       if (wallFalling.timer <= 0)
 	{
 	  AGameObject *wall;
-	  wall = new Wall (_map, AGameObject::UNBREAKABLE_WALL);
+	  wall = new Wall(_map, AGameObject::UNBREAKABLE_WALL);
 	  dynamic_cast<Wall*>(wall)->setPositionY(800);
 	  _map->addWall(Ogre::Vector2(wallFalling.x, wallFalling.z), wall);
-	  //while (_map->getObject(Ogre::Vector2(wallFalling.x, wallFalling.z)))
-	    nextFoundingPositionWallFalling();
+	  nextFoundingPositionWallFalling();
 	  wallFalling.timer = 60;
 	}
       wallFalling.timer -= dt;
@@ -183,11 +182,7 @@ void 			GameManager::reset()
   _map->reset();
   _timer = 120;
   setWallFalling();
-  /*wallFalling.x = 0;
-  wallFalling.z = 0;
-  wallFalling.turn = 0;
-  wallFalling.timer = 60;
-  */setState(GAME);
+  setState(GAME);
 }
 
 Ogre::RenderWindow	*GameManager::getWindow() const

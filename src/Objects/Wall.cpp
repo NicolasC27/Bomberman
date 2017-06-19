@@ -55,11 +55,6 @@ Wall::State 		Wall::getState() const
   return _state;
 }
 
-/*void 			Wall::setState(Wall::State state)
-{
-  _state = state;
-}*/
-
 std::string 		Wall::getName() const
 {
     return  "Wall_" + std::to_string(_id);

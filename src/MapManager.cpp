@@ -60,6 +60,7 @@ void 		MapManager::update(Ogre::Real dt)
 {
   Objects::const_iterator iteratorObject;
   Character::const_iterator iteratorCharacter;
+  Character::const_iterator iteratorWall;
 
   for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); ++iteratorObject)
     {
@@ -69,11 +70,9 @@ void 		MapManager::update(Ogre::Real dt)
     {
       (*iteratorCharacter)->update(dt);
     }
-  for (iteratorCharacter = _walls.begin(); iteratorCharacter != _walls.end(); )
+  for (iteratorWall = _walls.begin(); iteratorWall != _walls.end(); ++iteratorWall)
     {
-      tmp = *iteratorCharacter;
-      ++iteratorCharacter;
-      tmp->update(dt);
+      (*iteratorWall)->update(dt);
     }
 }
 
@@ -185,11 +184,6 @@ void 		MapManager::addCharacter(const Ogre::Vector2 &vector, int id)
   player->AttachObject();
 }
 
-void 		MapManager::addBomb(const Ogre::Vector2 &vector)
-{
-  (void)vector;
-}
-
 void 		MapManager::setSize(int size)
 {
   _size = size;
@@ -272,19 +266,6 @@ AGameObject			*MapManager::getObjectFrom(int id) const
   return (NULL);
 }
 
-bool		MapManager::getObject(Ogre::Vector2 vector)
-{
-  Objects::const_iterator it = _objects.begin();
-
-  while (it != _objects.end())
-    {
-      if (it->second == vector)
-	return (true);
-      it++;
-    }
-  return (false);
-}
-
 Ogre::Vector2		MapManager::getPosFrom(Ogre::Vector2 const &t) const
 {
   Ogre::Vector2		tmp(t);
@@ -313,21 +294,6 @@ Ogre::Vector2		MapManager::getPosFrom(Ogre::Vector3 const &t) const
   if (diffy > halfboxWidth)
     tmp.y += boxWidth;
   return (tmp);
-}
-
-int 		MapManager::getIsdestructible() const
-{
-  return 	_isdestructible;
-}
-
-void 		MapManager::setIsdestructible(int isdestructible)
-{
-  _isdestructible = isdestructible;
-}
-
-const 		MapManager::Objects &MapManager::getObjects() const
-{
-  return _objects;
 }
 
 void 		MapManager::removeObject(AGameObject *object)

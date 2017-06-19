@@ -19,7 +19,6 @@ class MapManager;
 #define NOT_FOUND	"File not found"
 #define FOLDER_MAP	"media/map/"
 #define CUBE_WIDTH	MapManager::boxWidth
-#define MAX_MAP		(map->getSize() * CUBE_WIDTH)
 
 class MapManager
 {
@@ -51,7 +50,7 @@ public:
   AGameObject				*getObjectFrom(Ogre::Vector3 const &) const;
   Ogre::Vector2				getPosFrom(Ogre::Vector2 const &) const;
   Ogre::Vector2				getPosFrom(Ogre::Vector3 const &) const;
-  Ogre::Vector2				getMiddlePosFrom(Ogre::Vector2 const &) const;
+
   Character				getCharacterFrom(Ogre::Vector2 const &) const;
 
 private:
@@ -82,18 +81,9 @@ private:
   void 			addObjects(const Ogre::Vector2 &, AGameObject *);
   void 			addWall(const Ogre::Vector2 &, AGameObject *);
   void 			addCharacter(const Ogre::Vector2 &vector, int id = 0);
-  void 			addBomb(const Ogre::Vector2 &vector);
 
   void 			update(Ogre::Real);
 
-  bool 			getObject(Ogre::Vector2 vector);
-  const 		Objects &getObjects() const;
-
-  int			getIsdestructible() const;
-
-  void 			setIsdestructible(int isdestructible);
-
-  void 			remove(AGameObject *object);
   void 			removeObject(AGameObject *object);
   void 			removeWall(AGameObject *object);
   void 			removeCharacter(AGameObject *object);
@@ -103,13 +93,6 @@ private:
  protected:
   irrklang::ISoundSource			*general;
   irrklang::ISoundSource			*explosion;
- /* irrklang::ISoundSource			*pause;
-  irrklang::ISoundSource			*winner;
-  irrklang::ISoundSource			*confirm;
-  irrklang::ISoundSource			*player_out;
-  irrklang::ISoundSource			*getitem;
-  irrklang::ISoundSource			*fall;
-  irrklang::ISoundSource			*wallOnGround;*/
 
  public:
   irrklang::ISoundSource 			*getExplosion() const;
