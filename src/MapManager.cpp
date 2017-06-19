@@ -24,7 +24,6 @@ MapManager::MapManager(std::string const &filename, Ogre::SceneManager *SceneMan
 MapManager::~MapManager()
 {
   _spawns.clear();
-  delete engine;
   engine->removeSoundSource(general);
   engine->removeSoundSource(explosion);
   /*engine->removeSoundSource(pause);
@@ -34,6 +33,7 @@ MapManager::~MapManager()
   engine->removeSoundSource(getitem);
   engine->removeSoundSource(fall);
   engine->removeSoundSource(wallOnGround);*/
+  delete engine;
 }
 
 void		MapManager::setSound()
