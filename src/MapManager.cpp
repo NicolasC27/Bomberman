@@ -13,6 +13,8 @@
 MapManager::MapManager(std::string const &filename, Ogre::SceneManager *SceneManager,
 	 NodeManager *node) : _filename(filename), _SceneManager(SceneManager), _nodes(node), _isdestructible(0)
 {
+  _objects.clear();
+  _waitDelete.clear();
   std::ifstream infile(filename);
 
   if (!(infile.good()))
@@ -57,19 +59,14 @@ void 		MapManager::update(Ogre::Real dt)
 {
   Objects::const_iterator iteratorObject;
   Character::const_iterator iteratorCharacter;
-  AGameObject		  *tmp;
 
-  for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); )
+  for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); ++iteratorObject)
     {
-      tmp = iteratorObject->first;
-      ++iteratorObject;
-      tmp->update(dt);
+      iteratorObject->first->update(dt);
     }
-  for (iteratorCharacter = _character.begin(); iteratorCharacter != _character.end(); )
+  for (iteratorCharacter = _character.begin(); iteratorCharacter != _character.end(); ++iteratorCharacter)
     {
-      tmp = *iteratorCharacter;
-      ++iteratorCharacter;
-      tmp->update(dt);
+      (*iteratorCharacter)->update(dt);
     }
 }
 
@@ -233,6 +230,19 @@ AGameObject			*MapManager::getObjectFrom(Ogre::Vector3 const &pos) const
   return (NULL);
 }
 
+AGameObject			*MapManager::getObjectFrom(int id) const
+{
+  Objects::const_iterator	it = _objects.begin();
+
+  while (it != _objects.end())
+    {
+      if (it->first->getId() == id)
+	return (it->first);
+      it++;
+    }
+  return (NULL);
+}
+
 bool		MapManager::getObject(Ogre::Vector2 vector)
 {
   Objects::const_iterator it = _objects.begin();
@@ -295,11 +305,8 @@ void 		MapManager::removeObject(AGameObject *object)
 {
   if (object->getObj() != NULL)
     object->getObj()->detachFromParent();
-  else
-    object->getParticleSystem()->clear();
-  _objects.erase(object);
-  if (object->getType() != AGameObject::BOMB)
-    delete object;
+
+  _waitDelete[object->getId()] = object;
 }
 
 void 		MapManager::removeCharacter(AGameObject *object)
@@ -310,7 +317,6 @@ void 		MapManager::removeCharacter(AGameObject *object)
   if (it != _character.end())
     _character.erase(it);
   object->getNode()->detachAllObjects();
-  delete object;
 }
 
 void 		MapManager::reset()
@@ -346,4 +352,19 @@ irrklang::ISoundEngine 		*MapManager::getEngine() const
 irrklang::ISoundSource 		*MapManager::getExplosion() const
 {
   return explosion;
+}
+
+void MapManager::deleteWaitObject()
+{
+    AGameObject * object;
+
+    Delete::const_iterator iter;
+    for( iter = _waitDelete.begin(); iter != _waitDelete.end(); iter++ ) {
+	object = iter->second;
+	 std::cout <<" deleting object " <<object->getName()<< std::endl;
+	_objects.erase(getObjectFrom(iter->first));
+	  delete object;
+      }
+    _waitDelete.clear();
+
 }

@@ -30,7 +30,7 @@ class GameManager
  private:
   EventManager		*Listener;
 
-  std::unique_ptr<Ogre::Root>	_Root;
+  Ogre::Root		*_Root;
   Ogre::SceneManager 	*_SceneManager;
   Ogre::Light 		*_Light;
   CameraManager		*Camera;
@@ -84,6 +84,8 @@ class GameManager
   int			_boundary;
 
   void 			checkVictory();
+
+  void deleteObject();
 };
 
 #endif //BOMBERMAN_GAMEMANAGER_HPP

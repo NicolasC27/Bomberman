@@ -38,6 +38,9 @@ class MapManager
   typedef std::map<AGameObject *, Ogre::Vector2> 	Objects;
   Objects						_objects;
 
+  typedef std::map<int, AGameObject *>			Delete;
+  Delete					 	_waitDelete;
+
   typedef std::vector<AGameObject *>			Character;
   Character						_character;
 
@@ -107,6 +110,9 @@ private:
  public:
   irrklang::ISoundSource 			*getExplosion() const;
 
+  void deleteWaitObject();
+
+  AGameObject *getObjectFrom(int id) const;
 };
 
 #endif //BOMBERMAN_MAP_HPP
