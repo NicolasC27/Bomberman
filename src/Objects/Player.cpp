@@ -88,7 +88,6 @@ bool			Player::Collide(Ogre::Vector3 &m)
 		      ptr->destroy();
 		      this->setPoints(this->getPoint() + 10);
 		    }
-		  // useless ?, pas de _translate si collision
 		  this->translateVector = Ogre::Vector3::ZERO;
 		  return (true);
 		}
@@ -156,11 +155,6 @@ void            			Player::tick()
 	  Ogre::Quaternion quat = src.getRotationTo(mDirection);
 	  _node->rotate(quat);
 	}
-      /*
-       * pk reset translate vector apres deplacement ?
-       * x et y toujours > 0
-       * reel position sur la map du personnage : _map->getPosFrom(_node>getPosition())
-       */
       int x = ((int) _node->getPosition()[0]) % 100;
       int y = ((int) _node->getPosition()[2]) % 100;
       if ((x < 8 && x > -8 && this->translateVector[0]) ||
