@@ -78,10 +78,10 @@ void 			GameManager::run()
 
 void			GameManager::checkVictory()
 {
-  /*if (_map->getCharacter().size() == 1)
+  if (_map->getCharacter().size() == 1)
     {
 	reset();
-    }*/
+    }
 }
 
 void 			GameManager::update(Ogre::Real dt)
@@ -128,7 +128,7 @@ void 			GameManager::nextFoundingPositionWallFalling()
 
 void 			GameManager::WallFalling(Ogre::Real dt)
 {
-  if (_timer <= 1200)//GAME_TIME / 2)
+  if (_timer <= GAME_TIME / 2)
     {
       if (wallFalling.timer <= 0 && _map->getWallFrom(Ogre::Vector2(wallFalling.x, wallFalling.z)) == NULL)
 	{
