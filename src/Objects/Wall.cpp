@@ -116,10 +116,9 @@ void		Wall::setPositionY(int positionY)
 
 void 		Wall::destroy()
 {
-  std::cout << "Wall is destroyed, state : " << _state << std::endl;
   if (_state == BREAKABLE)
   {
-    if (rand() % 3 == 2)
+    if (rand() % 5 >= 3)
       _map->addObjects(Ogre::Vector2(_node->getPosition().x,
 	                             _node->getPosition().z),
 		       new Item(_map, AGameObject::ITEM));

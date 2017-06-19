@@ -16,13 +16,14 @@ Item::~Item()
 
 void 			Item::update(Ogre::Real dt)
 {
-  _node->yaw(Ogre::Degree(5));
+  _node->yaw(Ogre::Degree(dt * 200));
 }
 
 void 			Item::createEntity()
 {
   _obj = SceneManager->createEntity(getName(),  getMeshName());
   dynamic_cast <Ogre::Entity*>(_obj)->setMaterialName(this->getMaterialName());
+  static_cast<Ogre::Entity*>(_obj)->getMesh()->_setBounds(Ogre::AxisAlignedBox(-40, 0.0, -40, 40, 40, 40));
 }
 
 AGameObject::State 	Item::getState() const
