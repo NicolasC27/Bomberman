@@ -62,6 +62,8 @@ class AGameObject {
   static int			objectId;
   int				_id;
 
+ protected:
+
   Ogre::MovableObject		*_obj;
   Ogre::ParticleSystem		*particleSystem;
  public:
@@ -88,6 +90,7 @@ class AGameObject {
 
   virtual void					update(Ogre::Real) = 0;
 
+  int 						getId() const;
 };
 
 #endif //BOMBERMAN_AGAMEOBJECT_HPP
