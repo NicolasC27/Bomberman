@@ -56,7 +56,7 @@ GameManager::~GameManager()
 void 			GameManager::setWallFalling()
 {
   wallFalling.x = MapManager::boxWidth;
-  wallFalling.z = MapManager::boxWidth;
+  wallFalling.z = _boundary;
   wallFalling.timer = 60;
   wallFalling.turn = 0;
 }
@@ -77,9 +77,10 @@ void 			GameManager::run()
 
 void			GameManager::checkVictory()
 {
-  if (_map->getCharacter().size() == 1)
+  if (_map->getCharacter().size() <= 1)
     {
-	reset();
+        _map->getEngine()->play2D(_map->getWinner());
+        reset();
     }
 }
 
@@ -130,14 +131,21 @@ void 			GameManager::WallFalling(Ogre::Real dt)
 {
   if (_timer <= GAME_TIME / 2)
     {
-      if (wallFalling.timer <= 0)
+      if (_timer + dt > GAME_TIME / 2)
+	_map->getEngine()->play2D(_map->getFall());
+      if (wallFalling.timer <= 0 && _map->getWallFrom(Ogre::Vector2(wallFalling.x, wallFalling.z)) == NULL)
 	{
 	  AGameObject *wall;
-	  wall = new Wall(_map, AGameObject::UNBREAKABLE_WALL);
-	  dynamic_cast<Wall*>(wall)->setPositionY(800);
-	  _map->addWall(Ogre::Vector2(wallFalling.x, wallFalling.z), wall);
+	  if ((wall = _map->getObjectFrom(Ogre::Vector2(wallFalling.x, wallFalling.z))) == NULL ||
+	      wall->getState() != AGameObject::UNBREAKABLE_BLOCK)
+	    {
+	      wall = new Wall(_map, AGameObject::UNBREAKABLE_WALL);
+	      dynamic_cast<Wall *>(wall)->setPositionY(800);
+	      _map->addWall(Ogre::Vector2(wallFalling.x, wallFalling.z), wall);
+	      //while (_map->getObject(Ogre::Vector2(wallFalling.x, wallFalling.z)))
+	      wallFalling.timer = 60;
+	    }
 	  nextFoundingPositionWallFalling();
-	  wallFalling.timer = 60;
 	}
       wallFalling.timer -= dt;
     }

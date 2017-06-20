@@ -32,11 +32,13 @@ void 			Wall::update(Ogre::Real dt)
 	    {
 	      tmp = *it;
 	      ++it;
+	      _map->getEngine()->play2D(_map->getWallOnGround());
 	      tmp->destroy();
 	    }
 	  if (obj != NULL)
 	    {
 	      obj->setStateUnbreakable();
+	      _map->getEngine()->play2D(_map->getWallOnGround());
 	      obj->destroy();
 	    }
 	}
@@ -111,11 +113,10 @@ void		Wall::setPositionY(int positionY)
 
 void 		Wall::destroy()
 {
-  std::cout << "Wall is destroyed, state : " << _state << std::endl;
   if (_state == BREAKABLE)
   {
-      if (rand() % 5 >= 3)
-	_map->addObjects(Ogre::Vector2(_node->getPosition().x,
+    if (rand() % 5 >= 3)
+      _map->addObjects(Ogre::Vector2(_node->getPosition().x,
 	                             _node->getPosition().z),
 		       new Item(_map, AGameObject::ITEM));
     _map->removeObject(this);

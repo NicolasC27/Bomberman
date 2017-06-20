@@ -106,10 +106,12 @@ bool 			EventManager::frameRenderingQueued(const Ogre::FrameEvent &evt)
       if (lastKey != OIS::KC_P && mKeyboard->isKeyDown(OIS::KC_P))
 	{
 	  game->setState(GameManager::PAUSE);
+	  _map->getEngine()->play2D(_map->getPause());
 	  lastKey = OIS::KC_P;
 	} else
 	if (mKeyboard->isKeyDown(OIS::KC_O))
 	  {
+	    _map->getEngine()->play2D(_map->getConfirm());
 	    game->setState(GameManager::GAME);
 	    lastKey = OIS::KC_O;
 	  }

@@ -32,7 +32,7 @@ Player::~Player()
 void 				Player::setStat()
 {
   setPowerbomb(3);
-  setMovespeed(400);
+  setMovespeed(300);
   setBombmax(1);
   setCurrBomb(1);
   setPoints(0);
@@ -86,6 +86,7 @@ bool			Player::Collide(Ogre::Vector3 &m)
 		    {
 		      (this->*_powerUp[dynamic_cast<Item *>(ptr)->getUpgrade()])();
 		      ptr->destroy();
+		      _map->getEngine()->play2D(_map->getGetitem());
 		      this->setPoints(this->getPoint() + 10);
 		    }
 		  this->translateVector = Ogre::Vector3::ZERO;
@@ -216,6 +217,7 @@ const std::map<OIS::KeyCode, ACharacter::ActionKeyCode>	&Player::getKeyCodeType(
 
 void 			Player::destroy()
 {
+  _map->getEngine()->play2D(_map->getPlayer_out());
   _map->removeCharacter(this);
 }
 
