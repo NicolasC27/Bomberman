@@ -65,7 +65,7 @@ void 			GameManager::setWallFalling()
 void 			GameManager::run()
 {
   _timer = GAME_TIME;
-  _map = new MapManager("media/map/map1", getSceneManager(), getNodes());
+  _map = new MapManager("media/map/map3", getSceneManager(), getNodes());
   _map->generateObjects(false);
   _boundary = (_map->getSize() - 2) * MapManager::boxWidth;
   setWallFalling();
