@@ -98,7 +98,12 @@ void 			AGameObject::destroy()
 
 }
 
-Ogre::ParticleSystem *AGameObject::getParticleSystem() const
+Ogre::ParticleSystem 	*AGameObject::getParticleSystem() const
 {
   return particleSystem;
+}
+
+int 			AGameObject::getId() const
+{
+  return _id;
 }

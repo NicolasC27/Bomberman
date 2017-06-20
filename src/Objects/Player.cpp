@@ -33,8 +33,8 @@ void 				Player::setStat()
 {
   setPowerbomb(3);
   setMovespeed(300);
-  setBombmax(8);
-  setCurrBomb(8);
+  setBombmax(1);
+  setCurrBomb(1);
   setPoints(0);
   setDelaybomb(0);
 }

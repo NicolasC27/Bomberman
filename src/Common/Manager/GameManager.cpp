@@ -19,7 +19,7 @@ GameManager::GameManager() : _state(GAME)
   mPluginsCfg = "plugins.cfg";
 #endif
 
-  _Root = std::unique_ptr<Ogre::Root>(new Ogre::Root(mPluginsCfg));
+  _Root = new Ogre::Root(mPluginsCfg);
 
   Ogre::ConfigFile cf;
   cf.load(mResourcesCfg);
@@ -40,10 +40,8 @@ GameManager::GameManager() : _state(GAME)
 		  archName, typeName, secName);
 	}
     }
-  if((*_Root).restoreConfig()  || (*_Root).showConfigDialog())
-    {
-      _Window = (*_Root).initialise(true, NAME_GAME);
-    }
+  if(_Root->restoreConfig()  || _Root->showConfigDialog())
+     createRenderWindow();
   initializeResources();
   setupScene();
   setupLight();
@@ -52,6 +50,7 @@ GameManager::GameManager() : _state(GAME)
 
 GameManager::~GameManager()
 {
+
 }
 
 void 			GameManager::setWallFalling()
@@ -72,8 +71,8 @@ void 			GameManager::run()
   Camera = new CameraManager(getSceneManager(), getWindow(), _map->getSize());
 
   Listener = new EventManager(this, _map, getWindow(), Camera->getCamera());
-  (*_Root).addFrameListener(Listener);
-  (*_Root).startRendering();
+  _Root->addFrameListener(Listener);
+  _Root->startRendering();
 }
 
 void			GameManager::checkVictory()
@@ -96,6 +95,7 @@ void 			GameManager::update(Ogre::Real dt)
 	  _timer = 0;
 	else
 	  _timer -= dt;
+	_map->deleteWaitObject();
 	this->WallFalling(dt);
 	_map->update(dt);
 	checkVictory();
@@ -153,7 +153,7 @@ void 			GameManager::WallFalling(Ogre::Real dt)
 
 void 			GameManager::createRenderWindow()
 {
-  _Window = (*_Root).initialise(true, NAME_GAME);
+  _Window = _Root->initialise(true, NAME_GAME);
 }
 
 void 			GameManager::initializeResources()
@@ -164,7 +164,7 @@ void 			GameManager::initializeResources()
 
 void 			GameManager::setupScene()
 {
-  _SceneManager = (*_Root).createSceneManager(Ogre::ST_GENERIC, "Bomberman Game");
+  _SceneManager = _Root->createSceneManager(Ogre::ST_GENERIC, "Bomberman Game");
   _SceneManager->setAmbientLight(Ogre::ColourValue(0.4f, 0.4f, 0.4f));
 }
 

@@ -19,7 +19,6 @@ class MapManager;
 #define NOT_FOUND	"File not found"
 #define FOLDER_MAP	"media/map/"
 #define CUBE_WIDTH	MapManager::boxWidth
-#define MAX_MAP		(map->getSize() * CUBE_WIDTH)
 
 class MapManager
 {
@@ -38,6 +37,9 @@ class MapManager
   typedef std::map<AGameObject *, Ogre::Vector2> 	Objects;
   Objects						_objects;
 
+  typedef std::map<int, AGameObject *>			Delete;
+  Delete					 	_waitDelete;
+
   typedef std::vector<AGameObject *>			Character;
   Character						_character;
 
@@ -48,7 +50,7 @@ public:
   AGameObject				*getObjectFrom(Ogre::Vector3 const &) const;
   Ogre::Vector2				getPosFrom(Ogre::Vector2 const &) const;
   Ogre::Vector2				getPosFrom(Ogre::Vector3 const &) const;
-  Ogre::Vector2				getMiddlePosFrom(Ogre::Vector2 const &) const;
+
   Character				getCharacterFrom(Ogre::Vector2 const &) const;
 
 private:
@@ -79,18 +81,9 @@ private:
   void 			addObjects(const Ogre::Vector2 &, AGameObject *);
   void 			addWall(const Ogre::Vector2 &, AGameObject *);
   void 			addCharacter(const Ogre::Vector2 &vector, int id = 0);
-  void 			addBomb(const Ogre::Vector2 &vector);
 
   void 			update(Ogre::Real);
 
-  bool 			getObject(Ogre::Vector2 vector);
-  const 		Objects &getObjects() const;
-
-  int			getIsdestructible() const;
-
-  void 			setIsdestructible(int isdestructible);
-
-  void 			remove(AGameObject *object);
   void 			removeObject(AGameObject *object);
   void 			removeWall(AGameObject *object);
   void 			removeCharacter(AGameObject *object);
@@ -110,21 +103,17 @@ private:
 
  public:
   irrklang::ISoundSource 			*getExplosion() const;
-
   irrklang::ISoundSource *getPause() const;
-
   irrklang::ISoundSource *getWinner() const;
-
   irrklang::ISoundSource *getConfirm() const;
-
   irrklang::ISoundSource *getPlayer_out() const;
-
   irrklang::ISoundSource *getGetitem() const;
-
   irrklang::ISoundSource *getFall() const;
-
   irrklang::ISoundSource *getWallOnGround() const;
 
+  void deleteWaitObject();
+
+  AGameObject *getObjectFrom(int id) const;
 };
 
 #endif //BOMBERMAN_MAP_HPP

@@ -1,0 +1,20 @@
+material Objects/Fire
+{
+  	technique
+ 	{
+	    pass
+	    {
+			scene_blend add
+			depth_write off
+
+			texture_unit
+			{
+				texture smoke.png
+				wave_xform scale_x sine 1 0.2 0.0 0.5
+				wave_xform scale_y sine 1 0.2 0.0 0.5
+			}
+	    }
+
+
+	}
+}

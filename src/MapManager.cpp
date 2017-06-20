@@ -13,6 +13,8 @@
 MapManager::MapManager(std::string const &filename, Ogre::SceneManager *SceneManager,
 	 NodeManager *node) : _filename(filename), _SceneManager(SceneManager), _nodes(node), _isdestructible(0)
 {
+  _objects.clear();
+  _waitDelete.clear();
   std::ifstream infile(filename);
 
   if (!(infile.good()))
@@ -95,25 +97,19 @@ void 		MapManager::update(Ogre::Real dt)
 {
   Objects::const_iterator iteratorObject;
   Character::const_iterator iteratorCharacter;
-  AGameObject		  *tmp;
+  Character::const_iterator iteratorWall;
 
-  for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); )
+  for (iteratorObject = _objects.begin(); iteratorObject != _objects.end(); ++iteratorObject)
     {
-      tmp = iteratorObject->first;
-      ++iteratorObject;
-      tmp->update(dt);
+      iteratorObject->first->update(dt);
     }
-  for (iteratorCharacter = _character.begin(); iteratorCharacter != _character.end(); )
+  for (iteratorCharacter = _character.begin(); iteratorCharacter != _character.end(); ++iteratorCharacter)
     {
-      tmp = *iteratorCharacter;
-      ++iteratorCharacter;
-      tmp->update(dt);
+      (*iteratorCharacter)->update(dt);
     }
-  for (iteratorCharacter = _walls.begin(); iteratorCharacter != _walls.end(); )
+  for (iteratorWall = _walls.begin(); iteratorWall != _walls.end(); ++iteratorWall)
     {
-      tmp = *iteratorCharacter;
-      ++iteratorCharacter;
-      tmp->update(dt);
+      (*iteratorWall)->update(dt);
     }
 }
 
@@ -225,11 +221,6 @@ void 		MapManager::addCharacter(const Ogre::Vector2 &vector, int id)
   player->AttachObject();
 }
 
-void 		MapManager::addBomb(const Ogre::Vector2 &vector)
-{
-  (void)vector;
-}
-
 void 		MapManager::setSize(int size)
 {
   _size = size;
@@ -299,17 +290,17 @@ AGameObject			*MapManager::getObjectFrom(Ogre::Vector3 const &pos) const
   return (NULL);
 }
 
-bool		MapManager::getObject(Ogre::Vector2 vector)
+AGameObject			*MapManager::getObjectFrom(int id) const
 {
-  Objects::const_iterator it = _objects.begin();
+  Objects::const_iterator	it = _objects.begin();
 
   while (it != _objects.end())
     {
-      if (it->second == vector)
-	return (true);
+      if (it->first->getId() == id)
+	return (it->first);
       it++;
     }
-  return (false);
+  return (NULL);
 }
 
 Ogre::Vector2		MapManager::getPosFrom(Ogre::Vector2 const &t) const
@@ -342,30 +333,12 @@ Ogre::Vector2		MapManager::getPosFrom(Ogre::Vector3 const &t) const
   return (tmp);
 }
 
-int 		MapManager::getIsdestructible() const
-{
-  return 	_isdestructible;
-}
-
-void 		MapManager::setIsdestructible(int isdestructible)
-{
-  _isdestructible = isdestructible;
-}
-
-const 		MapManager::Objects &MapManager::getObjects() const
-{
-  return _objects;
-}
-
 void 		MapManager::removeObject(AGameObject *object)
 {
   if (object->getObj() != NULL)
     object->getObj()->detachFromParent();
-  else
-    object->getParticleSystem()->clear();
-  _objects.erase(object);
-  if (object->getType() != AGameObject::BOMB)
-    delete object;
+
+  _waitDelete[object->getId()] = object;
 }
 
 void 		MapManager::removeWall(AGameObject *object)
@@ -386,7 +359,6 @@ void 		MapManager::removeCharacter(AGameObject *object)
   if (it != _character.end())
     _character.erase(it);
   object->getNode()->detachAllObjects();
-  delete object;
 }
 
 void 		MapManager::reset()
@@ -428,4 +400,19 @@ irrklang::ISoundEngine 		*MapManager::getEngine() const
 irrklang::ISoundSource 		*MapManager::getExplosion() const
 {
   return explosion;
+}
+
+void MapManager::deleteWaitObject()
+{
+    AGameObject * object;
+
+    Delete::const_iterator iter;
+    for( iter = _waitDelete.begin(); iter != _waitDelete.end(); iter++ ) {
+	object = iter->second;
+	 std::cout <<" deleting object " <<object->getName()<< std::endl;
+	_objects.erase(getObjectFrom(iter->first));
+	  delete object;
+      }
+    _waitDelete.clear();
+
 }
