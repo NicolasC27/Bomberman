@@ -23,7 +23,7 @@ struct PlayerSettings
   int 		_points;
 
   const float DEFAULT_PROTECTION_DELAY = 1;
-  static const int   BASIC_SPEED = 200;
+  static const int   BASIC_SPEED = 300;
 };
 
 #endif //BOMBERMAN_PLAYERINFO_HPP
