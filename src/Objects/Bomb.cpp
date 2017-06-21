@@ -7,8 +7,9 @@
 #include "Objects/Explosion.hpp"
 #include "Objects/Bomb.hpp"
 
-Bomb::Bomb(Player *player, MapManager *map, AGameObject::Object object) :
-	AGameObject(map, object, 1),  explosionDelay(3), _player(player), _power(player->getPowerbomb())
+Bomb::Bomb(Player *player, MapManager *map, AGameObject::Object object)
+	: AGameObject(map, object, 1),  explosionDelay(3), _player(player),
+	  _power(player->getPowerbomb()), _bombType(player->getBombType())
 {
 }
 
@@ -46,7 +47,7 @@ void			Bomb::explode()
 {
   _map->addObjects(Ogre::Vector2(_node->getPosition().x, _node->getPosition().z),
 		   new Explosion(_map, AGameObject::EXPLOSION, true,
-				 _power, Ogre::Vector3::ZERO));
+				 _power, _bombType, Ogre::Vector3::ZERO));
   _player->setCurrBomb(_player->getCurrBomb() + 1);
 }
 

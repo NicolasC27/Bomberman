@@ -3,6 +3,7 @@
 //
 
 #include <OgreSceneManager.h>
+#include <Objects/Player.hpp>
 #include "Objects/Wall.hpp"
 #include "Common/Manager/ConfigManager.hpp"
 #include "Common/Manager/GameManager.hpp"
@@ -77,9 +78,13 @@ void 			GameManager::run()
 
 void			GameManager::checkVictory()
 {
-  if (_map->getCharacter().size() <= 1)
+  MapManager::Character	charac = _map->getCharacter();
+
+  if (charac.size() <= 1)
     {
-        _map->getEngine()->play2D(_map->getWinner());
+      if (charac.size() == 1)
+	static_cast<Player *>(charac[0])->setPoints(static_cast<Player *>(charac[0])->getPoint() + 100);
+      _map->getEngine()->play2D(_map->getWinner());
         reset();
     }
 }
@@ -129,7 +134,7 @@ void 			GameManager::nextFoundingPositionWallFalling()
 
 void 			GameManager::WallFalling(Ogre::Real dt)
 {
-  if (_timer <= GAME_TIME / 2)
+  if (_timer <= 300)//GAME_TIME / 2)
     {
       if (_timer + dt > GAME_TIME / 2)
 	_map->getEngine()->play2D(_map->getFall());

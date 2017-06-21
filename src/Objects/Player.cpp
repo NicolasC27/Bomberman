@@ -22,6 +22,8 @@ Player::Player(MapManager *map, AGameObject::Object object, int id)
   _powerUp.push_back(&Player::powerUp);
   _powerUp.push_back(&Player::maxBombUp);
   _powerUp.push_back(&Player::speedUp);
+  _powerUp.push_back(&Player::skullBomb);
+  _powerUp.push_back(&Player::laserBomb);
 }
 
 Player::~Player()
@@ -31,17 +33,17 @@ Player::~Player()
 
 void 				Player::setStat()
 {
-  setPowerbomb(1);
-  setMovespeed(400);
+  setPowerbomb(3);
+  setMovespeed(PlayerSettings::BASIC_SPEED);
   setBombmax(1);
   setCurrBomb(1);
   setPoints(0);
-  setDelaybomb(0);
+  setBombType(LASERBOMB);
 }
 
 void 				Player::update(Ogre::Real dt)
 {
-  settings._delaybomb -= dt;
+
 }
 
 void 				Player::setKey()
@@ -87,7 +89,6 @@ bool			Player::Collide(Ogre::Vector3 &m)
 		      (this->*_powerUp[dynamic_cast<Item *>(ptr)->getUpgrade()])();
 		      ptr->destroy();
 		      _map->getEngine()->play2D(_map->getGetitem());
-		      this->setPoints(this->getPoint() + 10);
 		    }
 		  this->translateVector = Ogre::Vector3::ZERO;
 		  return (true);

@@ -19,10 +19,14 @@ class Player : public ACharacter
     POWERUP,
     MAXBOMBUP,
     SPEEDUP,
-    THROWING,
-    PUSHING,
-    GODMOD,
-    GHOSTMODE
+    BOMB,
+    UPNBR
+  };
+  enum {
+    NORMALBOMB,
+    SKULLBOMB,
+    LASERBOMB,
+    NBRBOMB
   };
   Player(MapManager *map, Object object, int id =_playerID);
   virtual ~Player();
@@ -55,44 +59,34 @@ private:
   std::vector<void (Player::*)(void)>	_powerUp;
 
   std::vector<Ogre::Vector2> const	getFrontObstacle(Ogre::Vector2 const &) const;
-  Ogre::Vector2				&getPosFrom(Ogre::Vector2 &) const;
 
   bool			Collide(Ogre::Vector3 &);
   void 			fire();
 
  public:
 
-  float 		getNextFireDelay() const;
-  float 		getIntervFire() const;
   int 			getBombmax() const;
   int 			getCurrBomb() const;
-  int 			getDelaybomb() const;
   int 			getPowerbomb() const;
-  float 		getMovespeed() const;
-  float 		getProtectDelay() const;
-  int                   getAbility() const;
-  int                   getMode() const;
+  int	 		getMovespeed() const;
   int			getPoint() const;
+  int 			getBombType() const;
   std::string		getMaterialName() const;
 
-  void 			setNextFireDelay(Ogre::Real);
-  void 			setIntervFire(Ogre::Real);
   void 			setStat();
-  void 			setDelaybomb(Ogre::Real);
+
   void 			setMovespeed(Ogre::Real);
   void 			setBombmax(int);
   void 			setCurrBomb(int);
   void 			setPoints(int);
   void 			setPowerbomb(int);
-  void                  setAbility(int);
-  void                  setMode(int);
+  void 			setBombType(int);
 
   void	  		powerUp();
   void			maxBombUp();
   void  		speedUp();
-  void  		throwing();
-  void  		pushing();
-  void  		godmode();
-  void  		ghostmode();
+  void 			skullBomb();
+  void 			laserBomb();
+
 };
 #endif //BOMBERMAN_PLAYER_HPP

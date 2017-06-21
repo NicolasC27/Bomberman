@@ -13,7 +13,8 @@ class AGameObject;
 class Explosion : public AGameObject
 {
  public:
-  Explosion(MapManager *map, AGameObject::Object object, int isRoot, int Lenght, Ogre::Vector3 direction);
+  Explosion(MapManager *map, AGameObject::Object object, int isRoot,
+	    int Lenght, int bombType, Ogre::Vector3 direction);
 
   virtual ~Explosion();
 
@@ -32,12 +33,9 @@ class Explosion : public AGameObject
   std::string 				getNameExplosion() const;
 
   void 					extendFire(Ogre::Vector3 const &);
-  bool 					checkVictim(Ogre::Vector3 const &, Ogre::Vector3 const &);
+  bool 					checkVictim(Ogre::Vector3 const &, Ogre::Vector3 const &) const;
 
  private:
-
-  std::string		_name;
-
   Ogre::Real 		delayExtend;
   Ogre::Real		lifeTimeRemaning;
   Ogre::Vector3 	_Direction;
@@ -47,7 +45,7 @@ class Explosion : public AGameObject
   bool 			_delete;
   int 			_IsRoot;
   int 			_Length;
-
+  int 			_bombType;
 };
 
 #endif //BOMBERMAN_EXPLOSION_HPP

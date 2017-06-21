@@ -5,9 +5,11 @@
 #include "Objects/Item.hpp"
 #include <iostream>
 
-Item::Item(MapManager *map, AGameObject::Object object) : AGameObject(map, object, 1)
+Item::Item(MapManager *map, AGameObject::Object object)
+	: AGameObject(map, object, 1)
 {
-  this->upgrade = rand() % 3;
+  this->upgrade = rand() % Player::UPNBR;
+  this->_bombType = rand() % (Player::NBRBOMB - 1) + 1;
 }
 
 Item::~Item()
@@ -38,12 +40,22 @@ std::string 		Item::getName() const
 
 std::string 		Item::getMaterialName() const
 {
-  if (this->upgrade == Player::SPEEDUP)
-    return "Mat";
-  else if (this->upgrade == Player::MAXBOMBUP)
-      return "Mat_gris";
-    else if (this->upgrade == Player::POWERUP)
+  switch (this->upgrade)
+    {
+      case Player::BOMB:
+	return (_bombType == 1) ? "mutant_M_red" : "mutant_M_red";
+        break;
+      case Player::MAXBOMBUP:
+	return "Mat_gris";
+        break;
+      case Player::POWERUP:
 	return "Mat_red";
+        break;
+      case Player::SPEEDUP:
+      default:
+	return "Mat";
+        break;
+    }
 }
 
 std::string Item::getMeshName() const

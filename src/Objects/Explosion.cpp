@@ -4,16 +4,17 @@
 #include <OgreParticleSystem.h>
 #include <OgreParticleSystemManager.h>
 #include <Interfaces/ACharacter.hpp>
+#include <Objects/Player.hpp>
 #include "Objects/Explosion.hpp"
 
 Explosion::Explosion(MapManager *map, AGameObject::Object object, int isRoot, int Length,
-		     Ogre::Vector3 direction)
+		     int bombType, Ogre::Vector3 direction)
 	: AGameObject(map, object, 1), _IsRoot(isRoot), _Length(Length), _Direction(direction),
-	  _extend(false), _deleteDelay(1), _delete(false)
+	  _extend(false), _deleteDelay(1), _delete(false), _bombType(bombType)
 {
   _obj = NULL;
   lifeTimeRemaning = 0.3f;
-  delayExtend = 0.05f;
+  delayExtend = 0.025f;
 }
 
 Explosion::~Explosion()
@@ -38,14 +39,15 @@ void 			Explosion::update(Ogre::Real dt)
 	{
 	  if (_Length > 0)
 	    {
-	      if (_IsRoot)
+	      if (_IsRoot || _bombType == Player::SKULLBOMB)
 		{
 		  checkVictim(_node->getPosition(), Ogre::Vector3::ZERO);
 		  extendFire(Ogre::Vector3::UNIT_X);
 		  extendFire(-Ogre::Vector3::UNIT_X);
 		  extendFire(Ogre::Vector3::UNIT_Z);
 		  extendFire(-Ogre::Vector3::UNIT_Z);
-		} else
+		}
+	      else
 		extendFire(_Direction);
 	      _extend = true;
 	    }
@@ -53,7 +55,7 @@ void 			Explosion::update(Ogre::Real dt)
     }
 }
 
-bool 			Explosion::checkVictim(Ogre::Vector3 const &pos, Ogre::Vector3 const &direction)
+bool 			Explosion::checkVictim(Ogre::Vector3 const &pos, Ogre::Vector3 const &direction) const
 {
   AGameObject		*obj = _map->getObjectFrom(pos);
   MapManager::Character	victim = _map->getCharacterFrom(Ogre::Vector2(pos.x, pos.z));
@@ -77,9 +79,10 @@ void 			Explosion::extendFire(Ogre::Vector3 const &direction)
 {
   Ogre::Vector3 pos = (_node->getPosition() + direction * MapManager::boxWidth);
 
-  if (checkVictim(pos, direction))
+  if (checkVictim(pos, direction) || _bombType == Player::LASERBOMB)
     _map->addObjects(Ogre::Vector2(pos.x, pos.z),
-		     new Explosion(_map, AGameObject::EXPLOSION, false, _Length - 1, direction));
+		     new Explosion(_map, AGameObject::EXPLOSION, false,
+				   _Length - 1, _bombType, direction));
 }
 
 void 			Explosion::createEntity()

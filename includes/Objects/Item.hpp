@@ -16,8 +16,8 @@
 
 class Item : public AGameObject
 {
-  std::string		_name;
   int			upgrade;
+  int 			_bombType;
 
  public:
   Item(MapManager *, Object object);
