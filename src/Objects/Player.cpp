@@ -2,7 +2,6 @@
 // Created by nicolas on 07/06/17.
 //
 
-#include <iostream>
 #include <Ogre.h>
 #include "Objects/Bomb.hpp"
 #include "Interfaces/ACharacter.hpp"
