@@ -3,6 +3,7 @@
 //
 
 #include <Ogre.h>
+#include <OgreSceneManager.h>
 #include "MapManager.hpp"
 #include "Objects/Wall.hpp"
 #include "Objects/Explosion.hpp"
@@ -35,6 +36,7 @@ MapManager::~MapManager()
   engine->removeSoundSource(getitem);
   engine->removeSoundSource(fall);
   engine->removeSoundSource(wallOnGround);
+  engine->drop();
   delete engine;
 }
 
@@ -146,11 +148,29 @@ void		MapManager::generatePlan()
 	  Ogre::Vector3::UNIT_Z);
 
   plan = _SceneManager->createEntity("ground");
-  plan->setMaterialName ("Objects/Ground/BumpyMetal");
+  plan->setMaterialName ("Objects/Ground/ice");
 
   Ogre::SceneNode *node = _SceneManager->getRootSceneNode()->createChildSceneNode();
   node->setPosition((_size * 100) / 2 - 50, -50, (_size * 100) / 2 - 55);
   node->attachObject(plan);
+
+  Ogre::Plane 		plane_outside(Ogre::Vector3::UNIT_Y, -2);
+
+  Ogre::MeshManager::getSingleton().createPlane(
+	  "ground_outside",
+	  Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+	  plane_outside,
+	  _size * 1000, _size * 1000, 20, 20,
+	  true,
+	  1, 5, 5,
+	  Ogre::Vector3::UNIT_Z);
+
+  plan = _SceneManager->createEntity("ground_outside");
+  plan->setMaterialName ("Objects/Ground/ice");
+
+  node->setPosition((_size * 100) / 2 - 50, -50, (_size * 100) / 2 - 55);
+  node->attachObject(plan);
+
 }
 
 void 		MapManager::generateObjects(bool res)
@@ -185,7 +205,7 @@ void 		MapManager::generateObjects(bool res)
 			  ERR_NBLINEMAP, _filename);
   if (!res)
   {
-    addCharacter(Ogre::Vector2(100, 900));
+    addCharacter(Ogre::Vector2((_size * 100) - 200, (_size * 100) - 200));
     addCharacter(Ogre::Vector2(100, 100));
     generatePlan();
     generateSpawn();
@@ -402,7 +422,7 @@ irrklang::ISoundSource 		*MapManager::getExplosion() const
   return explosion;
 }
 
-void MapManager::deleteWaitObject()
+void 				MapManager::deleteWaitObject()
 {
     AGameObject * object;
 
@@ -414,5 +434,4 @@ void MapManager::deleteWaitObject()
 	  delete object;
       }
     _waitDelete.clear();
-
 }
