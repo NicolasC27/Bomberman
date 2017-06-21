@@ -18,7 +18,7 @@ ACharacter::~ACharacter()
 
 void	 		ACharacter::update(Ogre::Real dt)
 {
-
+  (void)dt;
 }
 
 void 			ACharacter::createEntity()
