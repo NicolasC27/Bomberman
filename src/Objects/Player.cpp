@@ -14,6 +14,7 @@ Player::Player(MapManager *map, AGameObject::Object object, int id)
 	: ACharacter(map, object, 35),  _ID(id)
 {
   ++_playerID;
+  std::cout << "id player :" << id << std::endl;
   this->translateVector = Ogre::Vector3::ZERO;
   this->_vector = Ogre::Vector3::ZERO;
   keyCodeType.clear();
@@ -36,12 +37,11 @@ void 				Player::setStat()
   setBombmax(1);
   setCurrBomb(1);
   setPoints(0);
-  setDelaybomb(0);
 }
 
 void 				Player::update(Ogre::Real dt)
 {
-  settings._delaybomb -= dt;
+
 }
 
 void 				Player::setKey()
@@ -87,7 +87,6 @@ bool			Player::Collide(Ogre::Vector3 &m)
 		      (this->*_powerUp[dynamic_cast<Item *>(ptr)->getUpgrade()])();
 		      ptr->destroy();
 		      _map->getEngine()->play2D(_map->getGetitem());
-		      this->setPoints(this->getPoint() + 10);
 		    }
 		  this->translateVector = Ogre::Vector3::ZERO;
 		  return (true);

@@ -4,16 +4,6 @@
 
 #include "Objects/Player.hpp"
 
-Ogre::Real			Player::getNextFireDelay() const
-{
-  return settings._nextFireDelay;
-}
-
-Ogre::Real			Player::getIntervFire() const
-{
-  return settings._intervFire;
-}
-
 int 				Player::getBombmax() const
 {
   return settings._bombmax;
@@ -22,11 +12,6 @@ int 				Player::getBombmax() const
 int 				Player::getCurrBomb() const
 {
   return settings._currBomb;
-}
-
-int 				Player::getDelaybomb() const
-{
-  return settings._delaybomb;
 }
 
 int 				Player::getPowerbomb() const
@@ -39,36 +24,11 @@ int				Player::getPoint() const
   return settings._points;
 }
 
-Ogre::Real			Player::getMovespeed() const
+int			Player::getMovespeed() const
 {
   return settings._movespeed;
 }
 
-Ogre::Real			Player::getProtectDelay() const
-{
-  return settings._protectDelay;
-}
-
-int	                        Player::getAbility() const
-{
-  return settings._ability;
-}
-
-int                             Player::getMode() const
-{
-  return settings._mode;
-}
-
-
-void 				Player::setNextFireDelay(Ogre::Real nextFireDelay)
-{
-  settings._nextFireDelay = nextFireDelay;
-}
-
-void 				Player::setIntervFire(Ogre::Real intervFire)
-{
-  settings._intervFire = intervFire;
-}
 
 void 				Player::setBombmax(int bombmax)
 {
@@ -78,11 +38,6 @@ void 				Player::setBombmax(int bombmax)
 void 				Player::setCurrBomb(int currBomb)
 {
   settings._currBomb = currBomb;
-}
-
-void 				Player::setDelaybomb(Ogre::Real delaybomb)
-{
-  settings._delaybomb = delaybomb;
 }
 
 void 				Player::setPowerbomb(int powerbomb)
@@ -95,19 +50,9 @@ void 				Player::setMovespeed(Ogre::Real movespeed)
   settings._movespeed = movespeed;
 }
 
-void				Player::setAbility(int	ability)
-{
-  settings._ability = ability;
-}
-
 void				Player::setPoints(int	points)
 {
   settings._points = points;
-}
-
-void                            Player::setMode(int  mode)
-{
-  settings._mode = mode;
 }
 
 void	Player::powerUp()
@@ -137,27 +82,17 @@ void    Player::speedUp()
     setMovespeed(temp + PlayerSettings::BASIC_SPEED / 4);
 }
 
-void    Player::throwing()
-{
-  setAbility(1);
-}
-
-void    Player::pushing()
-{
-  setAbility(2);
-}
-
-void    Player::godmode()
-{
-  setMode(1);
-}
-
-void    Player::ghostmode()
-{
-  setMode(2);
-}
-
 int 	Player::getID() const
 {
   return _ID;
+}
+
+int PlayerSettings::getBombType() const
+{
+  return _bombType;
+}
+
+void PlayerSettings::setBombType(int bombType)
+{
+  _bombType = bombType;
 }

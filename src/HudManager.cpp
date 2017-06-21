@@ -215,6 +215,7 @@ void					HudManager::showHud(MapManager *mapManager)
   double				percentHeight;
   double				percentWidth;
   Player				*player;
+  int 					id;
 
   hudTextTimer = static_cast<Ogre::TextAreaOverlayElement*>(this->_mOverlayManager->getOverlayElement("hudTextTimer"));
   percentHeight = ((this->_gameManager->_Window->getHeight() * 100) / this->_sizeHeight);
@@ -239,39 +240,40 @@ void					HudManager::showHud(MapManager *mapManager)
   hudPanelPlayerTwo->setPosition(this->_gameManager->_Window->getWidth() - (281 * (percentWidth / 100)), 0);
   hudPanelPlayerTwo->setDimensions(281.0 * (percentWidth / 100), 627.0 * (percentHeight / 100));
 
-  player =  static_cast<Player*>(mapManager->_character[0]);
+  id = static_cast<Player*>(mapManager->_character[0])->getID();
+  player =  static_cast<Player*>(mapManager->_character[(id == 1) ? 0 : 1]);
   
   hudTextBomb = static_cast<Ogre::TextAreaOverlayElement*>(this->_mOverlayManager->getOverlayElement("hudTextBomb1"));
   hudTextBomb->setPosition(170 * (percentWidth / 100), 325 * (percentHeight / 100));
   hudTextBomb->setCharHeight(64 * (percentHeight / 100));
-  hudTextBomb->setCaption(std::to_string((int)player->getBombmax()));
+  hudTextBomb->setCaption(std::to_string(player->getBombmax()));
 
   hudTextSpeed = static_cast<Ogre::TextAreaOverlayElement*>(this->_mOverlayManager->getOverlayElement("hudTextSpeed1"));
   hudTextSpeed->setPosition(170 * (percentWidth / 100), 425 * (percentHeight / 100));
   hudTextSpeed->setCharHeight(64 * (percentHeight / 100));
-  hudTextSpeed->setCaption(std::to_string((int)player->getMovespeed()));
+  hudTextSpeed->setCaption(std::to_string(player->getMovespeed()));
 
   hudTextScore = static_cast<Ogre::TextAreaOverlayElement*>(this->_mOverlayManager->getOverlayElement("hudTextScore1"));
   hudTextScore->setPosition(170 * (percentWidth / 100), 525 * (percentHeight / 100));
   hudTextScore->setCharHeight(64 * (percentHeight / 100));
-  hudTextScore->setCaption(std::to_string((int)player->getPoint()));
+  hudTextScore->setCaption(std::to_string(player->getPoint()));
 
-  player =  static_cast<Player*>(mapManager->_character[1]);
+  player =  static_cast<Player*>(mapManager->_character[(id == 2) ? 0 : 1]);
   
   hudTextBomb = static_cast<Ogre::TextAreaOverlayElement*>(this->_mOverlayManager->getOverlayElement("hudTextBomb2"));
   hudTextBomb->setPosition(20 * (percentWidth / 100), 325 * (percentHeight / 100));
   hudTextBomb->setCharHeight(64 * (percentHeight / 100));
-  hudTextBomb->setCaption(std::to_string((int)player->getBombmax()));
+  hudTextBomb->setCaption(std::to_string(player->getBombmax()));
 
   hudTextSpeed = static_cast<Ogre::TextAreaOverlayElement*>(this->_mOverlayManager->getOverlayElement("hudTextSpeed2"));
   hudTextSpeed->setPosition(20 * (percentWidth / 100), 425 * (percentHeight / 100));
   hudTextSpeed->setCharHeight(64 * (percentHeight / 100));
-  hudTextSpeed->setCaption(std::to_string((int)player->getMovespeed()));
+  hudTextSpeed->setCaption(std::to_string(player->getMovespeed()));
 
   hudTextScore = static_cast<Ogre::TextAreaOverlayElement*>(this->_mOverlayManager->getOverlayElement("hudTextScore2"));
   hudTextScore->setPosition(20 * (percentWidth / 100), 525 * (percentHeight / 100));
   hudTextScore->setCharHeight(64 * (percentHeight / 100));
-  hudTextScore->setCaption(std::to_string((int)player->getPoint()));
+  hudTextScore->setCaption(std::to_string(player->getPoint()));
   
   this->_mOverlay->show();
 }
