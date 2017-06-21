@@ -44,7 +44,6 @@ GameManager::GameManager() : _state(GAME)
      createRenderWindow();
   initializeResources();
   setupScene();
-  setupLight();
   this->_hudManager = new HudManager(this);
 }
 
@@ -64,8 +63,9 @@ void 			GameManager::setWallFalling()
 void 			GameManager::run()
 {
   _timer = GAME_TIME;
-  _map = new MapManager("media/map/map1", getSceneManager(), getNodes());
+  _map = new MapManager("media/map/map2", getSceneManager(), getNodes());
   _map->generateObjects(false);
+  setupLight();
   _boundary = (_map->getSize() - 2) * MapManager::boxWidth;
   setWallFalling();
   Camera = new CameraManager(getSceneManager(), getWindow(), _map->getSize());
@@ -178,11 +178,13 @@ void 			GameManager::setupLight()
   Ogre::Light *_Light = _SceneManager->createLight("Light1");
   _Light->setType(Ogre::Light::LT_POINT);
 
-  _Light->setPosition(Ogre::Vector3(550, 1192, -200));
+  _Light->setPosition(Ogre::Vector3((_map->getSize() * 100) / 2,
+				    (_map->getSize() * 100) + (_map->getSize() * 100) / 10,
+				    -(_map->getSize() * 100) / 5));
   _Light->setDiffuseColour(Ogre::ColourValue::White);
   _Light->setSpecularColour(Ogre::ColourValue::White);
 
-  _Light->setAttenuation(2000,1,0.000,0);
+  _Light->setAttenuation((_map->getSize() * 100) * 2,1,0.000,0);
 }
 
 void 			GameManager::reset()
