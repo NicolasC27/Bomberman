@@ -25,8 +25,8 @@ CameraManager::~CameraManager()
 
 void 			CameraManager::setCamera(Ogre::SceneManager *SceneManager)
 {
-  _Camera = SceneManager->createCamera("PlayerCam");
-  _Camera->setPosition(Ogre::Vector3(550, 1192 , -200));
+  _Camera = SceneManager->createCamera("Cam");
+  _Camera->setPosition(Ogre::Vector3((_sizemap * 100) / 2, (_sizemap * 100) + (_sizemap / 10) , -((_sizemap * 100)/ 4)));
   _Camera->lookAt(Ogre::Vector3((_sizemap * 100) / 2, 0, (_sizemap * 100) / 2));
   _Camera->setNearClipDistance(5);
 }
