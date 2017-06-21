@@ -16,10 +16,6 @@ struct PlayerSettings
   int 		_points;
   int 		_bombType;
 
-  int getBombType() const;
-
-  void setBombType(int bombType);
-
   const float DEFAULT_PROTECTION_DELAY = 1;
   static const int   BASIC_SPEED = 300;
 };

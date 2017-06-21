@@ -18,6 +18,7 @@ class Bomb : public AGameObject
   std::string		_name;
   float			explosionDelay;
   int 			_power;
+  int 			_bombType;
 
  public:
   Bomb(Player *player, MapManager *map, Object object);

@@ -95,7 +95,7 @@ Ogre::SceneNode *AGameObject::getNode() const
 
 void 			AGameObject::destroy()
 {
-
+  _map->removeObject(this);
 }
 
 Ogre::ParticleSystem 	*AGameObject::getParticleSystem() const

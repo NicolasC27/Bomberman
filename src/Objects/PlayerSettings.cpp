@@ -29,6 +29,15 @@ int			Player::getMovespeed() const
   return settings._movespeed;
 }
 
+int 				Player::getBombType() const
+{
+  return settings._bombType;
+}
+
+void 				Player::setBombType(int bombType)
+{
+  settings._bombType = bombType;
+}
 
 void 				Player::setBombmax(int bombmax)
 {
@@ -82,17 +91,18 @@ void    Player::speedUp()
     setMovespeed(temp + PlayerSettings::BASIC_SPEED / 4);
 }
 
+void 	Player::skullBomb()
+{
+  setBombType(Player::SKULLBOMB);
+}
+
+void 	Player::laserBomb()
+{
+  setBombType(Player::LASERBOMB);
+}
+
 int 	Player::getID() const
 {
   return _ID;
 }
 
-int PlayerSettings::getBombType() const
-{
-  return _bombType;
-}
-
-void PlayerSettings::setBombType(int bombType)
-{
-  _bombType = bombType;
-}

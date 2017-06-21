@@ -134,7 +134,7 @@ void 			GameManager::nextFoundingPositionWallFalling()
 
 void 			GameManager::WallFalling(Ogre::Real dt)
 {
-  if (_timer <= GAME_TIME / 2)
+  if (_timer <= 300)//GAME_TIME / 2)
     {
       if (_timer + dt > GAME_TIME / 2)
 	_map->getEngine()->play2D(_map->getFall());

@@ -17,7 +17,7 @@
 class Item : public AGameObject
 {
   int			upgrade;
-  int 			bombType;
+  int 			_bombType;
 
  public:
   Item(MapManager *, Object object);

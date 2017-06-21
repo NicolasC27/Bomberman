@@ -10,6 +10,7 @@ class MapManager;
 #include <OgreVector2.h>
 #include <OgreException.h>
 #include <map>
+#include <algorithm>
 #include <irrKlang/ik_ISoundEngine.h>
 #include "Interfaces/AGameObject.hpp"
 #include "Common/Manager/NodeManager.hpp"

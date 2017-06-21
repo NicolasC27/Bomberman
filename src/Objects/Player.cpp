@@ -14,7 +14,6 @@ Player::Player(MapManager *map, AGameObject::Object object, int id)
 	: ACharacter(map, object, 35),  _ID(id)
 {
   ++_playerID;
-  std::cout << "id player :" << id << std::endl;
   this->translateVector = Ogre::Vector3::ZERO;
   this->_vector = Ogre::Vector3::ZERO;
   keyCodeType.clear();
@@ -23,6 +22,8 @@ Player::Player(MapManager *map, AGameObject::Object object, int id)
   _powerUp.push_back(&Player::powerUp);
   _powerUp.push_back(&Player::maxBombUp);
   _powerUp.push_back(&Player::speedUp);
+  _powerUp.push_back(&Player::skullBomb);
+  _powerUp.push_back(&Player::laserBomb);
 }
 
 Player::~Player()
@@ -32,11 +33,12 @@ Player::~Player()
 
 void 				Player::setStat()
 {
-  setPowerbomb(1);
-  setMovespeed(400);
+  setPowerbomb(3);
+  setMovespeed(PlayerSettings::BASIC_SPEED);
   setBombmax(1);
   setCurrBomb(1);
   setPoints(0);
+  setBombType(LASERBOMB);
 }
 
 void 				Player::update(Ogre::Real dt)

@@ -70,7 +70,7 @@ private:
   int 			getPowerbomb() const;
   int	 		getMovespeed() const;
   int			getPoint() const;
-
+  int 			getBombType() const;
   std::string		getMaterialName() const;
 
   void 			setStat();
@@ -80,6 +80,7 @@ private:
   void 			setCurrBomb(int);
   void 			setPoints(int);
   void 			setPowerbomb(int);
+  void 			setBombType(int);
 
   void	  		powerUp();
   void			maxBombUp();

@@ -338,27 +338,23 @@ void 		MapManager::removeObject(AGameObject *object)
   if (object->getObj() != NULL)
     object->getObj()->detachFromParent();
 
-  _waitDelete[object->getId()] = object;
+    _waitDelete[object->getId()] = object;
 }
 
 void 		MapManager::removeWall(AGameObject *object)
 {
-  MapManager::Character::const_iterator it = _walls.begin();
+  MapManager::Character::const_iterator it;
 
-  for (; it != _walls.end() && *it != object; ++it);
-  if (it != _walls.end())
-    _walls.erase(it);
-  //delete object;
+  it = std::find(_walls.begin(), _walls.end(), object);
+  //_waitDelete[(*it)->getId()] = *it;
 }
 
 void 		MapManager::removeCharacter(AGameObject *object)
 {
-  MapManager::Character::const_iterator it = _character.begin();
+  MapManager::Character::const_iterator it;
 
-  for (; it != _character.end() && *it != object; ++it);
-  if (it != _character.end())
-    _character.erase(it);
-  object->getNode()->detachAllObjects();
+  it = std::find(_character.begin(), _character.end(), object);
+  _waitDelete[(*it)->getId()] = *it;
 }
 
 void 		MapManager::reset()
@@ -404,15 +400,19 @@ irrklang::ISoundSource 		*MapManager::getExplosion() const
 
 void MapManager::deleteWaitObject()
 {
-    AGameObject * object;
+  Character::const_iterator	it;
+  AGameObject * object;
 
-    Delete::const_iterator iter;
-    for( iter = _waitDelete.begin(); iter != _waitDelete.end(); iter++ ) {
-	object = iter->second;
-	 std::cout <<" deleting object " <<object->getName()<< std::endl;
-	_objects.erase(getObjectFrom(iter->first));
-	  delete object;
-      }
-    _waitDelete.clear();
-
+  Delete::const_iterator iter;
+  for( iter = _waitDelete.begin(); iter != _waitDelete.end(); iter++ ) {
+       object = iter->second;
+    if (_objects.find(object) != _objects.end())
+      _objects.erase(getObjectFrom(iter->first));
+    else if ((it = std::find(_walls.begin(), _walls.end(), object)) != _walls.end())
+      _walls.erase(it);
+    else if ((it = std::find(_character.begin(), _character.end(), object)) != _character.end())
+      _character.erase(it);
+    delete object;
+  }
+  _waitDelete.clear();
 }
