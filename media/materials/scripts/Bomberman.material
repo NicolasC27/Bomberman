@@ -77,13 +77,39 @@ material Objects/Cube/UNBREAKABLE_BLOCK
         }
 }
 
-material Objects/Ground/BumpyMetal
+material Objects/Ground/ice
 {
 	technique
 	{
 		pass
 		{
-			ambient 0.25 0.25 0.25
+		                ambient 0.800000011920929 0.800000011920929 0.800000011920929 1.0
+                                                    diffuse 0.6400000190734865 0.6400000190734865 0.6400000190734865 1.0
+                                                    specular 0.5 0.5 0.5 1.0 12.5
+                                                    emissive 0.0 0.0 0.0 1.0
+
+			cull_hardware none
+			cull_software none
+
+			texture_unit
+			{
+				texture ground.png
+			}
+		}
+	}
+}
+
+material Objects/Ground/iceoutside
+{
+	technique
+	{
+		pass
+		{
+		                ambient 0.800000011920929 0.800000011920929 0.800000011920929 1.0
+                                                    diffuse 0.6400000190734865 0.6400000190734865 0.6400000190734865 1.0
+                                                    specular 0.5 0.5 0.5 1.0 12.5
+                                                    emissive 0.0 0.0 0.0 1.0
+
 			cull_hardware none
 			cull_software none
 
