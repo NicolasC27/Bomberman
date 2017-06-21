@@ -17,7 +17,7 @@ struct PlayerSettings
   int 		_bombType;
 
   const float DEFAULT_PROTECTION_DELAY = 1;
-  static const int   BASIC_SPEED = 300;
+  static const int   BASIC_SPEED = 400;
 };
 
 #endif //BOMBERMAN_PLAYERINFO_HPP

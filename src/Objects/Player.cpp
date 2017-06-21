@@ -33,7 +33,7 @@ Player::~Player()
 
 void 				Player::setStat()
 {
-  setPowerbomb(3);
+  setPowerbomb(1);
   setMovespeed(PlayerSettings::BASIC_SPEED);
   setBombmax(1);
   setCurrBomb(1);
