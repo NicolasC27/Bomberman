@@ -28,7 +28,7 @@ class Player : public ACharacter
     LASERBOMB,
     NBRBOMB
   };
-  Player(MapManager *map, Object object, int id =_playerID);
+  Player(MapManager *map, Object object, int id);
   virtual ~Player();
 
   void 			move(Ogre::Vector3 const &vector, const Ogre::FrameEvent &evt);
@@ -48,9 +48,6 @@ protected:
   int			_ID;
  public:
   int getID() const;
-
- protected:
-  static int		_playerID;
 
 private:
   Ogre::Vector3 _vector;

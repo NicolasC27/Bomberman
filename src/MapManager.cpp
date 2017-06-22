@@ -169,10 +169,10 @@ void 		MapManager::generateObjects(bool res)
 			  ERR_NBLINEMAP, _filename);
   if (!res)
   {
-    addCharacter(Ogre::Vector2((_size * 100) - 200, (_size * 100) - 200));
-    addCharacter(Ogre::Vector2(100, 100));
-    generatePlan();
     generateSpawn();
+    addCharacter(/*Ogre::Vector2(100, 900)*/_spawns[0], 1);
+    addCharacter(/*Ogre::Vector2(100, 100)*/_spawns[1], 2);
+    generatePlan();
   }
 }
 
@@ -194,10 +194,7 @@ void 		MapManager::addCharacter(const Ogre::Vector2 &vector, int id)
 {
   AGameObject	*player;
 
-  if (id == 0)
-    player = new Player(this, AGameObject::CHARACTER);
-  else
-    player = new Player(this, AGameObject::CHARACTER, id);
+  player = new Player(this, AGameObject::CHARACTER, id);
   _character.push_back(player);
   player->setSceneManager(_SceneManager);
   player->createEntity();

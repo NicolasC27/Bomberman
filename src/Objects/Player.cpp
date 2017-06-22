@@ -7,12 +7,9 @@
 #include "Interfaces/ACharacter.hpp"
 #include "Objects/Player.hpp"
 
-int Player::_playerID = 1;
-
 Player::Player(MapManager *map, AGameObject::Object object, int id)
 	: ACharacter(map, object, 35),  _ID(id)
 {
-  ++_playerID;
   this->translateVector = Ogre::Vector3::ZERO;
   this->_vector = Ogre::Vector3::ZERO;
   keyCodeType.clear();
@@ -37,7 +34,7 @@ void 				Player::setStat()
   setBombmax(1);
   setCurrBomb(1);
   setPoints(0);
-  setBombType(LASERBOMB);
+  setBombType(NORMALBOMB);
 }
 
 void 				Player::update(Ogre::Real dt)
@@ -87,6 +84,7 @@ bool			Player::Collide(Ogre::Vector3 &m)
 		    {
 		      (this->*_powerUp[dynamic_cast<Item *>(ptr)->getUpgrade()])();
 		      ptr->destroy();
+		      setPoints(getPoint() + 1);
 		      _map->getEngine()->play2D(_map->getGetitem());
 		    }
 		  this->translateVector = Ogre::Vector3::ZERO;

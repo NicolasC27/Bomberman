@@ -80,7 +80,7 @@ private:
 
   void 			addObjects(const Ogre::Vector2 &, AGameObject *);
   void 			addWall(const Ogre::Vector2 &, AGameObject *);
-  void 			addCharacter(const Ogre::Vector2 &vector, int id = 0);
+  void 			addCharacter(const Ogre::Vector2 &vector, int id);
 
   void 			update(Ogre::Real);
 
