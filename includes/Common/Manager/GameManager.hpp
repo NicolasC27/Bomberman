@@ -27,13 +27,13 @@ class GameManager
     GAME
   };
  static const int GAME_TIME = 120;
+
  private:
   EventManager		*Listener;
 
   Ogre::Root		*_Root;
   Ogre::SceneManager 	*_SceneManager;
   CameraManager		*Camera;
-  NodeManager 		*_nodes;
   MapManager		*_map;
   HudManager		*_hudManager;
 
@@ -62,7 +62,6 @@ class GameManager
 
   Ogre::SceneManager 	*getSceneManager() const;
   Ogre::RenderWindow 	*getWindow() const;
-  NodeManager 		*getNodes() const;
   State 		getState() const;
 
   void 			WallFalling(Ogre::Real dt);

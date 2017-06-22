@@ -11,8 +11,7 @@
 #include "Objects/Bomb.hpp"
 
 
-MapManager::MapManager(std::string const &filename, Ogre::SceneManager *SceneManager,
-	 NodeManager *node) : _filename(filename), _SceneManager(SceneManager), _nodes(node), _isdestructible(0)
+MapManager::MapManager(std::string const &filename, Ogre::SceneManager *SceneManager) : _filename(filename), _SceneManager(SceneManager), _isdestructible(0)
 {
   _objects.clear();
   _waitDelete.clear();
@@ -170,8 +169,8 @@ void 		MapManager::generateObjects(bool res)
   if (!res)
   {
     generateSpawn();
-    addCharacter(/*Ogre::Vector2(100, 900)*/_spawns[0], 1);
-    addCharacter(/*Ogre::Vector2(100, 100)*/_spawns[1], 2);
+    addCharacter(_spawns[0], 1);
+    addCharacter(_spawns[1], 2);
     generatePlan();
   }
 }
@@ -327,7 +326,6 @@ void 		MapManager::removeWall(AGameObject *object)
   MapManager::Character::const_iterator it;
 
   it = std::find(_walls.begin(), _walls.end(), object);
-  //_waitDelete[(*it)->getId()] = *it;
 }
 
 void 		MapManager::removeCharacter(AGameObject *object)

@@ -11,9 +11,8 @@ class MapManager;
 #include <OgreException.h>
 #include <map>
 #include <algorithm>
-#include <irrKlang/ik_ISoundEngine.h>
+#include "irrKlang/ik_ISoundEngine.h"
 #include "Interfaces/AGameObject.hpp"
-#include "Common/Manager/NodeManager.hpp"
 
 #define ERR_MAPSIZE	"Size map too big"
 #define ERR_NBLINEMAP	"The number of rows does not match the number of rows in the map."
@@ -30,7 +29,6 @@ class MapManager
  private:
   irrklang::ISoundEngine			* engine;
 
-  NodeManager 					*_nodes;
   Ogre::SceneManager 				*_SceneManager;
 
 public:
@@ -63,8 +61,7 @@ private:
  public:
 
   MapManager(std::string const &filename = "media/map/map1",
-      Ogre::SceneManager *SceneManager = NULL,
-      NodeManager *node = NULL);
+      Ogre::SceneManager *SceneManager = NULL);
 
   virtual ~MapManager();
 

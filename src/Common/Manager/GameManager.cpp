@@ -63,7 +63,7 @@ void 			GameManager::setWallFalling()
 void 			GameManager::run()
 {
   _timer = GAME_TIME;
-  _map = new MapManager("media/map/map2", getSceneManager(), getNodes());
+  _map = new MapManager("media/map/map2", getSceneManager());
   _map->generateObjects(false);
   setupLight();
   _boundary = (_map->getSize() - 2) * MapManager::boxWidth;
@@ -201,11 +201,6 @@ void 			GameManager::reset()
 Ogre::RenderWindow	*GameManager::getWindow() const
 {
   return _Window;
-}
-
-NodeManager*		GameManager::getNodes() const
-{
-  return _nodes;
 }
 
 GameManager::State 	GameManager::getState() const

@@ -98,7 +98,6 @@ Ogre::Vector3 		Wall::getScale() const
 {
     return (Ogre::Vector3(1.0, 1.0, 1.0));
 
-
 }
 
 double 		Wall::getPositionY() const
