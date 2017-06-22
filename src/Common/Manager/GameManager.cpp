@@ -5,7 +5,6 @@
 #include <OgreSceneManager.h>
 #include <Objects/Player.hpp>
 #include "Objects/Wall.hpp"
-#include "Common/Manager/ConfigManager.hpp"
 #include "Common/Manager/GameManager.hpp"
 
 GameManager::GameManager() : _state(GAME)
@@ -85,7 +84,7 @@ void			GameManager::checkVictory()
       if (charac.size() == 1)
 	static_cast<Player *>(charac[0])->setPoints(static_cast<Player *>(charac[0])->getPoint() + 100);
       _map->getEngine()->play2D(_map->getWinner());
-        reset();
+      reset();
     }
 }
 
@@ -134,7 +133,7 @@ void 			GameManager::nextFoundingPositionWallFalling()
 
 void 			GameManager::WallFalling(Ogre::Real dt)
 {
-  if (_timer <= 300)//GAME_TIME / 2)
+  if (_timer <= GAME_TIME / 2)
     {
       if (_timer + dt > GAME_TIME / 2)
 	_map->getEngine()->play2D(_map->getFall());
@@ -147,7 +146,6 @@ void 			GameManager::WallFalling(Ogre::Real dt)
 	      wall = new Wall(_map, AGameObject::UNBREAKABLE_WALL);
 	      dynamic_cast<Wall *>(wall)->setPositionY(800);
 	      _map->addWall(Ogre::Vector2(wallFalling.x, wallFalling.z), wall);
-	      //while (_map->getObject(Ogre::Vector2(wallFalling.x, wallFalling.z)))
 	      wallFalling.timer = 60;
 	    }
 	  nextFoundingPositionWallFalling();

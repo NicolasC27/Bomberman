@@ -32,7 +32,6 @@ class GameManager
 
   Ogre::Root		*_Root;
   Ogre::SceneManager 	*_SceneManager;
-  Ogre::Light 		*_Light;
   CameraManager		*Camera;
   NodeManager 		*_nodes;
   MapManager		*_map;
@@ -61,7 +60,6 @@ class GameManager
   void 			update(Ogre::Real dt);
   void 			reset();
 
-  //Ogre::Root 		*getRoot() const;
   Ogre::SceneManager 	*getSceneManager() const;
   Ogre::RenderWindow 	*getWindow() const;
   NodeManager 		*getNodes() const;
@@ -78,15 +76,12 @@ class GameManager
     int 	z;
     int		turn ;
     int 	timer;
-    //int 	count = 0;
   };
 
   position		wallFalling;
   int			_boundary;
 
   void 			checkVictory();
-
-  void deleteObject();
 };
 
 #endif //BOMBERMAN_GAMEMANAGER_HPP
