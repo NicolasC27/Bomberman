@@ -111,8 +111,8 @@ void				HudManager::setupHudPlayerOne()
   hudTextTimer->setCaption("Time remaining : " + std::to_string((int)this->_gameManager->_timer) + " s");
   hudTextTimer->setCharHeight(64);
   hudTextTimer->setFontName("Vera");
-  hudTextTimer->setColourBottom(Ogre::ColourValue(0.3, 0.5, 0.3));
-  hudTextTimer->setColourTop(Ogre::ColourValue(0.5, 0.7, 0.5));
+  hudTextTimer->setColourBottom(Ogre::ColourValue(1, 0, 0, 1));
+  hudTextTimer->setColourTop(Ogre::ColourValue(1, 0, 0, 1));
   hudPanelTimer->addChild(hudTextTimer);
   
   hudTextBomb->setMetricsMode(Ogre::GMM_PIXELS);

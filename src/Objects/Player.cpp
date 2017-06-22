@@ -2,7 +2,6 @@
 // Created by nicolas on 07/06/17.
 //
 
-#include <iostream>
 #include <Ogre.h>
 #include "Objects/Bomb.hpp"
 #include "Interfaces/ACharacter.hpp"
@@ -31,7 +30,7 @@ Player::~Player()
 void 				Player::setStat()
 {
   setPowerbomb(1);
-  setMovespeed(400);
+  setMovespeed(PlayerSettings::BASIC_SPEED);
   setBombmax(1);
   setCurrBomb(1);
   setPoints(0);

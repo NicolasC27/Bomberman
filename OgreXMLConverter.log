@@ -1,22 +1,18 @@
-23:36:22: Creating resource group General
-23:36:22: Creating resource group Internal
-23:36:22: Creating resource group Autodetect
-23:36:22: Registering ResourceManager for type Mesh
-23:36:22: Registering ResourceManager for type Material
-23:36:22: Registering ResourceManager for type Skeleton
-23:36:22: XMLSkeletonSerializer: reading XML data from media/models/MutantMesh.skeleton.xml...
-23:36:22: XMLSkeletonSerializer: Reading Bones name...
-23:36:22: XMLSkeletonSerializer: Reading Hierarchy data...
-23:36:22: XMLSkeletonSerializer: Reading Bones data...
-23:36:22: XMLSkeletonSerializer: Reading Animations data...
-23:36:22: XMLSkeletonSerializer: Finished. Running SkeletonSerializer...
-23:36:22: Exporting bones..
-23:36:22: Bones exported.
-23:36:22: Exporting animations, count=2
-23:36:22: Exporting animation: idle
-23:36:22: Animation exported.
-23:36:22: Exporting animation: running
-23:36:22: Animation exported.
-23:36:22: Unregistering ResourceManager for type Skeleton
-23:36:22: Unregistering ResourceManager for type Material
-23:36:22: Unregistering ResourceManager for type Mesh
+19:30:24: Creating resource group General
+19:30:24: Creating resource group Internal
+19:30:24: Creating resource group Autodetect
+19:30:24: Registering ResourceManager for type Mesh
+19:30:24: Registering ResourceManager for type Material
+19:30:24: Registering ResourceManager for type Skeleton
+19:30:24: XMLSkeletonSerializer: reading XML data from media/models/pingouin.skeleton.xml...
+19:30:24: XMLSkeletonSerializer: Reading Bones name...
+19:30:24: XMLSkeletonSerializer: Reading Hierarchy data...
+19:30:24: XMLSkeletonSerializer: Reading Bones data...
+19:30:24: XMLSkeletonSerializer: Reading Animations data...
+19:30:24: XMLSkeletonSerializer: Finished. Running SkeletonSerializer...
+19:30:24: Exporting bones..
+19:30:24: Bones exported.
+19:30:24: Exporting animations, count=0
+19:30:24: Unregistering ResourceManager for type Skeleton
+19:30:24: Unregistering ResourceManager for type Material
+19:30:24: Unregistering ResourceManager for type Mesh

@@ -24,7 +24,7 @@ int				Player::getPoint() const
   return settings._points;
 }
 
-int			Player::getMovespeed() const
+int				Player::getMovespeed() const
 {
   return settings._movespeed;
 }
@@ -64,17 +64,17 @@ void				Player::setPoints(int	points)
   settings._points = points;
 }
 
-void	Player::powerUp()
+void			Player::powerUp()
 {
-  int temp;
+  int 			temp;
 
   if ((temp = getPowerbomb()) < 8)
     setPowerbomb(temp + 1);
 }
 
-void    Player::maxBombUp()
+void  			Player::maxBombUp()
 {
-  int temp;
+  int 			temp;
 
   if ((temp = getBombmax()) < 8)
     {
@@ -83,25 +83,25 @@ void    Player::maxBombUp()
     }
 }
 
-void    Player::speedUp()
+void    		Player::speedUp()
 {
-  int temp;
+  int 			temp;
 
   if ((temp = getMovespeed()) < PlayerSettings::BASIC_SPEED * 2)
     setMovespeed(temp + PlayerSettings::BASIC_SPEED / 4);
 }
 
-void 	Player::skullBomb()
+void			Player::skullBomb()
 {
   setBombType(Player::SKULLBOMB);
 }
 
-void 	Player::laserBomb()
+void			Player::laserBomb()
 {
   setBombType(Player::LASERBOMB);
 }
 
-int 	Player::getID() const
+int			Player::getID() const
 {
   return _ID;
 }
