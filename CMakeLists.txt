@@ -128,7 +128,6 @@ SET(SRCS
         src/main.cpp
         src/MapManager.cpp
         src/HudManager.cpp
-#        src/Collision.cpp
         src/Objects/Wall.cpp
         src/Objects/AGameObject.cpp
         src/Objects/ACharacter.cpp
@@ -136,21 +135,17 @@ SET(SRCS
         src/Objects/PlayerSettings.cpp
         src/Objects/Bomb.cpp
 	    src/Objects/Item.cpp
-#        src/Controller/KeyController.cpp
         src/Common/Manager/NodeManager.cpp
         src/Common/Manager/CameraManager.cpp
         src/Common/Manager/GameManager.cpp
-        #        src/Common/Manager/ConfigManager.cpp
         src/Controller/EventManager.cpp
         src/Objects/Explosion.cpp
         includes/Common/Manager/GameManager.hpp
         includes/Common/Manager/NodeManager.hpp
         includes/Common/Manager/CameraManager.hpp
-        #        includes/Common/Manager/ConfigManager.hpp
         includes/Controller/EventManager.hpp
         includes/Interfaces/AGameObject.hpp
         includes/Interfaces/ACharacter.hpp
-#        includes/Controller/KeyController.hpp
         includes/Objects/Player.hpp
         includes/Objects/Wall.hpp
         includes/Objects/Bomb.hpp
@@ -158,8 +153,8 @@ SET(SRCS
         includes/Objects/PlayerSettings.hpp
     	includes/Objects/Item.hpp
 	    includes/MapManager.hpp
-#        includes/Collision.hpp
         includes/irrKlang/irrKlang.h
+        includes/HudManager.hh
         )
 
 set(HDRS ${SRCS})
