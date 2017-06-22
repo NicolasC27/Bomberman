@@ -135,13 +135,11 @@ SET(SRCS
         src/Objects/PlayerSettings.cpp
         src/Objects/Bomb.cpp
 	    src/Objects/Item.cpp
-        src/Common/Manager/NodeManager.cpp
         src/Common/Manager/CameraManager.cpp
         src/Common/Manager/GameManager.cpp
         src/Controller/EventManager.cpp
         src/Objects/Explosion.cpp
         includes/Common/Manager/GameManager.hpp
-        includes/Common/Manager/NodeManager.hpp
         includes/Common/Manager/CameraManager.hpp
         includes/Controller/EventManager.hpp
         includes/Interfaces/AGameObject.hpp

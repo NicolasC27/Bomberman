@@ -39,3 +39,18 @@ receive_shadows on
     }
 }
 
+
+material BombTexture_head : BombTexture
+{
+	technique
+	{
+		pass
+		{
+	            texture_unit {
+        	    	texture head_texture.jpg
+            		}
+
+		}
+	}
+}
+
