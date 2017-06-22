@@ -59,42 +59,6 @@ void		MapManager::setSound()
   engine->play2D("media/sound/Bomberman.wav");
 }
 
-irrklang::ISoundSource *MapManager::getWallOnGround() const
-{
-  return wallOnGround;
-}
-
-irrklang::ISoundSource *MapManager::getFall() const
-{
-  return fall;
-}
-
-irrklang::ISoundSource *MapManager::getGetitem() const
-{
-  return getitem;
-}
-
-irrklang::ISoundSource *MapManager::getPlayer_out() const
-{
-  return player_out;
-}
-
-irrklang::ISoundSource *MapManager::getConfirm() const
-{
-  return confirm;
-}
-
-irrklang::ISoundSource *MapManager::getWinner() const
-{
-  return winner;
-}
-
-irrklang::ISoundSource *MapManager::getPause() const
-{
-  return pause;
-}
-
-
 void 		MapManager::update(Ogre::Real dt)
 {
   Objects::const_iterator iteratorObject;
@@ -323,11 +287,11 @@ AGameObject			*MapManager::getObjectFrom(int id) const
   return (NULL);
 }
 
-Ogre::Vector2		MapManager::getPosFrom(Ogre::Vector2 const &t) const
+Ogre::Vector2			MapManager::getPosFrom(Ogre::Vector2 const &t) const
 {
-  Ogre::Vector2		tmp(t);
-  float                 diffx = std::fmod(t.x, boxWidth);
-  float                 diffy = std::fmod(t.y, boxWidth);
+  Ogre::Vector2			tmp(t);
+  float                 	diffx = std::fmod(t.x, boxWidth);
+  float                 	diffy = std::fmod(t.y, boxWidth);
 
   tmp.x -= diffx;
   tmp.y -= diffy;
@@ -338,11 +302,11 @@ Ogre::Vector2		MapManager::getPosFrom(Ogre::Vector2 const &t) const
   return (tmp);
 }
 
-Ogre::Vector2		MapManager::getPosFrom(Ogre::Vector3 const &t) const
+Ogre::Vector2			MapManager::getPosFrom(Ogre::Vector3 const &t) const
 {
-  Ogre::Vector2		tmp(t.x, t.z);
-  float                 diffx = std::fmod(t.x, boxWidth);
-  float                 diffy = std::fmod(t.z, boxWidth);
+  Ogre::Vector2			tmp(t.x, t.z);
+  float                 	diffx = std::fmod(t.x, boxWidth);
+  float                 	diffy = std::fmod(t.z, boxWidth);
 
   tmp.x -= diffx;
   tmp.y -= diffy;
@@ -435,4 +399,39 @@ void 				MapManager::deleteWaitObject()
     delete object;
   }
   _waitDelete.clear();
+}
+
+irrklang::ISoundSource		*MapManager::getWallOnGround() const
+{
+  return wallOnGround;
+}
+
+irrklang::ISoundSource		*MapManager::getFall() const
+{
+  return fall;
+}
+
+irrklang::ISoundSource		*MapManager::getGetitem() const
+{
+  return getitem;
+}
+
+irrklang::ISoundSource		*MapManager::getPlayer_out() const
+{
+  return player_out;
+}
+
+irrklang::ISoundSource		*MapManager::getConfirm() const
+{
+  return confirm;
+}
+
+irrklang::ISoundSource		*MapManager::getWinner() const
+{
+  return winner;
+}
+
+irrklang::ISoundSource		*MapManager::getPause() const
+{
+  return pause;
 }

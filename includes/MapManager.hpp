@@ -27,32 +27,31 @@ class MapManager
   static const int 				boxWidth = 100;
   static const int 				halfboxWidth = 50;
 
- public:
+ private:
   irrklang::ISoundEngine			* engine;
-
-  irrklang::ISoundEngine 			*getEngine() const;
 
   NodeManager 					*_nodes;
   Ogre::SceneManager 				*_SceneManager;
 
+public:
   typedef std::map<AGameObject *, Ogre::Vector2> 	Objects;
-  Objects						_objects;
 
   typedef std::map<int, AGameObject *>			Delete;
-  Delete					 	_waitDelete;
-
   typedef std::vector<AGameObject *>			Character;
-  Character						_character;
 
+  Objects						_objects;
+  Delete					 	_waitDelete;
+  Character						_character;
   Character						_walls;
-public:
+
   AGameObject			   	*getWallFrom(Ogre::Vector2 const &) const;
   AGameObject			   	*getObjectFrom(Ogre::Vector2 const &) const;
   AGameObject				*getObjectFrom(Ogre::Vector3 const &) const;
   Ogre::Vector2				getPosFrom(Ogre::Vector2 const &) const;
   Ogre::Vector2				getPosFrom(Ogre::Vector3 const &) const;
+  irrklang::ISoundEngine		*getEngine() const;
 
-  Character				getCharacterFrom(Ogre::Vector2 const &) const;
+  Character						getCharacterFrom(Ogre::Vector2 const &) const;
 
 private:
   std::vector<Ogre::Vector2> 			_spawns;
@@ -104,13 +103,13 @@ private:
 
  public:
   irrklang::ISoundSource 			*getExplosion() const;
-  irrklang::ISoundSource *getPause() const;
-  irrklang::ISoundSource *getWinner() const;
-  irrklang::ISoundSource *getConfirm() const;
-  irrklang::ISoundSource *getPlayer_out() const;
-  irrklang::ISoundSource *getGetitem() const;
-  irrklang::ISoundSource *getFall() const;
-  irrklang::ISoundSource *getWallOnGround() const;
+  irrklang::ISoundSource 			*getPause() const;
+  irrklang::ISoundSource 			*getWinner() const;
+  irrklang::ISoundSource 			*getConfirm() const;
+  irrklang::ISoundSource 			*getPlayer_out() const;
+  irrklang::ISoundSource 			*getGetitem() const;
+  irrklang::ISoundSource 			*getFall() const;
+  irrklang::ISoundSource 			*getWallOnGround() const;
 
   void deleteWaitObject();
 

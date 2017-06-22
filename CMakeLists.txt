@@ -136,7 +136,6 @@ SET(SRCS
         src/Objects/PlayerSettings.cpp
         src/Objects/Bomb.cpp
 	    src/Objects/Item.cpp
-	    src/Common/Manager/ConfigManager.cpp
 #        src/Controller/KeyController.cpp
         src/Common/Manager/NodeManager.cpp
         src/Common/Manager/CameraManager.cpp
@@ -152,7 +151,6 @@ SET(SRCS
         includes/Interfaces/AGameObject.hpp
         includes/Interfaces/ACharacter.hpp
 #        includes/Controller/KeyController.hpp
-        includes/Common/Manager/ConfigManager.hpp
         includes/Objects/Player.hpp
         includes/Objects/Wall.hpp
         includes/Objects/Bomb.hpp

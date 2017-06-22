@@ -5,7 +5,6 @@
 #include <OgreSceneManager.h>
 #include <Objects/Player.hpp>
 #include "Objects/Wall.hpp"
-#include "Common/Manager/ConfigManager.hpp"
 #include "Common/Manager/GameManager.hpp"
 
 GameManager::GameManager() : _state(GAME)
@@ -134,9 +133,9 @@ void 			GameManager::nextFoundingPositionWallFalling()
 
 void 			GameManager::WallFalling(Ogre::Real dt)
 {
-  if (_timer <= GAME_TIME / 2)
+  if (_timer <= 0)
     {
-      if (_timer + dt > GAME_TIME / 2)
+      if (_timer + dt > 0)
 	_map->getEngine()->play2D(_map->getFall());
       if (wallFalling.timer <= 0 && _map->getWallFrom(Ogre::Vector2(wallFalling.x, wallFalling.z)) == NULL)
 	{
