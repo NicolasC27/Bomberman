@@ -14,10 +14,11 @@ INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT )
 int main(int argc, char **argv)
 #endif
 {
-  GameManager app;
 
   try
     {
+
+      GameManager app;
       app.run();
     }
   catch (Ogre::Exception &e) {

@@ -43,7 +43,7 @@ std::string 		Item::getMaterialName() const
   switch (this->upgrade)
     {
       case Player::BOMB:
-	return (_bombType == 1) ? "mutant_M_red" : "mutant_M_red";
+	return (_bombType == 1) ? "Mat_skull" : "Mat_laser";
         break;
       case Player::MAXBOMBUP:
 	return "Mat_gris";

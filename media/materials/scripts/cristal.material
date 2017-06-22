@@ -63,3 +63,31 @@ material Mat_gris : Mat
 		}
 	}
 }
+
+material Mat_skull : Mat
+{
+	technique
+	{
+		pass
+		{
+            texture_unit {
+            	texture skull.jpg
+            	}
+
+		}
+	}
+}
+
+material Mat_laser : Mat
+{
+	technique
+	{
+		pass
+		{
+            texture_unit {
+            	texture laser.jpg
+            	}
+
+		}
+	}
+}

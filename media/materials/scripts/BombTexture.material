@@ -39,18 +39,31 @@ receive_shadows on
     }
 }
 
-
-material BombTexture_head : BombTexture
+material Bomb_skull : BombTexture
 {
 	technique
 	{
 		pass
 		{
-	            texture_unit {
-        	    	texture head_texture.jpg
-            		}
+            texture_unit {
+            	texture skull.jpg
+            	}
 
 		}
 	}
 }
 
+
+material Bomb_laser : BombTexture
+{
+	technique
+	{
+		pass
+		{
+            texture_unit {
+            	texture laser.jpg
+            	}
+
+		}
+	}
+}

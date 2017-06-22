@@ -63,7 +63,12 @@ std::string 		Bomb::getName() const
 
 std::string 		Bomb::getMaterialName() const
 {
-  return "BombTexture";
+  if (_bombType == 0)
+    return "BombTexture";
+  if (_bombType == 1)
+    return "Bomb_skull";
+  if (_bombType == 2)
+    return "Bomb_laser";
 }
 
 std::string Bomb::getMeshName() const
