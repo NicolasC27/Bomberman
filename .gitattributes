@@ -1,2 +1,0 @@
-media filter=lfs diff=lfs merge=lfs -text
-INSTALL filter=lfs diff=lfs merge=lfs -text
